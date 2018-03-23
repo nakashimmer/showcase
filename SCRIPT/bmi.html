@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name=viewport content="width=device-width">
+<title>BMI</title>
+<style>
+	*{margin:0;padding:0;font-size:25px;}
+	#wrap{width:320px;margin:0 auto;}
+	h1{text-align:center;font-size:1.3em;margin:1em auto;}
+	input{width:150px;margin:0 0.5em;text-align:right;}
+	button{width:100%;margin:1em auto;}
+</style>
+
+<div id=wrap>
+	<h1>Body Mass Index</h1>
+	<p>身長：<input type="text" id="h">cm</p>
+	<p>体重：<input type="text" id="w">kg</p>
+	<button onclick="cal();" id="result">計算する</button>
+</div>
+
+<script>
+
+function cal(){
+	//入力
+	var h=$id("h").value;
+	var w=$id("w").value;
+
+	//数字に変換
+	h=parseInt(h);
+	w=parseInt(w);
+
+	//計算
+	var bmi=w/(h/100*h/100);
+	bmi =Math.round(bmi*10)/10;
+
+	//メッセージ
+	if(bmi<18.5){var msg="低体重かも";}
+	else if(25<bmi){var msg="重いかも";}
+	else{var msg="ちょうどいいかも";}
+
+	//表示
+	$id("result").innerHTML="あなたの<br>BMIは"+bmi+"。<br>"+msg;
+}
+
+function $id(id){return document.getElementById(id);}
+
+</script>
