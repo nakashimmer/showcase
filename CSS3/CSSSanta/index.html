@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CSSサンタ</title>
+		<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+		
+		<!-- ※基本共通設定 -->
+		<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+		<meta property="og:title" content="CSSでサンタ" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://springreen.jp/SHOWCASE/CSS3/CSSSanta/" />
+		<meta property="og:image" content="http://springreen.jp/SHOWCASE/CSS3/CSSSanta/xmas.png" />
+		<meta property="og:site_name" content="CSSでサンタ" />
+		<meta property="og:description" content="CSSだけでサンタを作ってみた" />
+		
+		<style>
+			*{margin:0;padding:0;}
+			body{background-color:black;}
+			#bg{
+				width:800px;height:500px;margin:50px auto;
+				position:relative;
+				background:linear-gradient(blue,black);
+				overflow:hidden;
+			}
+
+			#santa{
+				width:400px;height:160px;
+				position:absolute;top:300px;left:380px;
+				animation:story1 4s linear 0s infinite normal;
+				animation-fill-mode:both;
+			}
+			
+			@keyframes story1{
+				0%{top:300px;transform:rotate(0deg);}
+				15%{transform:rotate(3deg);}
+				35%{transform:rotate(3deg);}
+				50%{top:100px;transform:rotate(0deg);}
+				65%{transform:rotate(-3deg);}
+				85%{transform:rotate(-3deg);}
+				100%{top:300px;transform:rotate(0deg);}
+			}
+			
+			#bg h1{
+				font-size:90px;text-align:center;color:white;
+				font-family: 'Alex Brush', cursive;
+			}
+			#bg p{
+				position:absolute;width:300px;left:10px;
+				font-size:20px;text-align:center;color:white;
+				font-family:serif;
+			}
+			
+			#santa{display:flex;}
+			#tonakai{width:200px;height:160px;position:relative;}
+			#sled{width:200px;height:160px;position:relative;}
+			
+			#snows{
+				width:1600px;height:500px;
+				position:absolute;top:0;
+				border:1px solid gray;
+			}
+			.snow{
+				width:30px;height:30px;
+				position:absolute;
+				border-radius:50%;
+				background-color:rgba(255,255,255,0.5);
+				box-shadow:0px 0px 20px white;
+				animation:storySnow 4s linear 0s infinite normal;
+				animation-fill-mode:both;
+			}
+			
+			@keyframes storySnow{
+				0%{left:-50px;}
+				100%{left:810px;}
+			}
+			
+			div.snow:nth-of-type(1){top:100px;animation-delay:0s;}
+			div.snow:nth-of-type(2){top:300px;animation-delay:0.8s;}
+			div.snow:nth-of-type(3){top:200px;animation-delay:1.3s;}
+			div.snow:nth-of-type(4){top:400px;animation-delay:2.5s;}
+			div.snow:nth-of-type(5){top:350px;animation-delay:3.2s;}
+			
+			.inner{position:relative;}
+
+			#sled *,#tonakai *{position:absolute;}
+			#bousi{
+				width:0;height:0;top:-30px;left:80px;
+				border:75px solid red;
+				border-top-width:0px;
+				border-left-width:55px;border-left-color:transparent;
+				border-right-width:5px;border-right-color:transparent;
+				transform:rotate(20deg);
+			}
+			
+			#bousi-huchi{
+				width:70px;height:20px;top:30px;left:65px;
+				background-color:white;
+				transform:rotate(20deg);
+			}
+
+			#face{
+				width:60px;height:30px;top:40px;left:70px;
+				background-color:#f0ddc3;
+			}
+			
+			#hige{
+				width:0px;height:0px;top:60px;left:70px;
+				border:60px solid transparent;
+				border-top-color:white;
+				border-left-width:0px;
+			}
+
+			#body{
+				width:70px;height:70px;top:60px;left:70px;
+				background-color:red;
+				border-radius:0 10px 0 0;
+			}
+			
+			#sori{
+				width:200px;height:50px;top:110px;left:0px;
+				background-color:brown;
+				border-radius:10px 85px 5px 80px/10px 45px 5px 30px;
+			}
+			
+			#present{
+				width:120px;height:100px;top:50px;left:80px;
+				background-color:white;
+				border-radius:50%;
+				transform:rotate(-40deg);
+			}
+			#eye1{
+				width:10px;height:3px;top:50px;left:70px;
+				background-color:black;
+				border-radius:100% 0 0 0;
+				transform:rotate(-10deg);
+			}
+			
+			#eye2{
+				width:10px;height:3px;top:50px;left:85px;
+				background-color:black;
+				border-radius:0 100% 0 0;
+				transform:rotate(20deg);
+			}
+			
+			#kao{
+				width:100px;height:50px;top:15px;left:0px;
+				background-color:#c39143;
+				border-radius:0 0 10% 90%;
+				transform:rotate(0deg);
+				border-bottom:1px solid black;
+			}
+			
+			#kubi1{
+				width:40px;height:61px;top:30px;left:60px;
+				background-color:#c39143;
+				transform:skew(-16deg);
+				transform-origin:top;
+			}
+			
+			#kubi2{
+				width:40px;height:70px;top:30px;left:60px;
+				background-color:#c39143;
+				transform:skew(0deg);
+				transform-origin:top;
+			}
+			
+			#doutai{
+				width:140px;height:60px;top:90px;left:43px;
+				background-color:#c39143;
+				border-radius:0 0 50% 50%/0 0 100% 100%;
+				border-bottom:1px solid black;
+			}
+			
+			#maeashi{
+				width:10px;height:50px;top:100px;left:50px;
+				background-color:#c39143;
+				transform:rotate(30deg);
+				transform-origin:top left;
+				animation:story3 4s linear 0s infinite normal;
+				animation-fill-mode:both;
+				border-bottom:10px solid white;
+			}
+			
+			@keyframes story3{
+				0%{transform:rotate(30deg);}
+				50%{transform:rotate(120deg);}
+				100%{transform:rotate(30deg);}
+			}
+			
+			#ushiroashi{
+				width:10px;height:50px;top:100px;left:150px;
+				background-color:#c39143;
+				transform:rotate(30deg);
+				transform-origin:top left;
+				animation:story4 4s linear 0s infinite normal;
+				animation-fill-mode:both;
+				border-bottom:10px solid white;
+				
+			}
+			
+			@keyframes story4{
+				0%{transform:rotate(30deg);}
+				50%{transform:rotate(-60deg);}
+				100%{transform:rotate(30deg);}
+			}
+
+			#hana{
+				width:10px;height:10px;
+				background-color:red;
+				border-radius:100%;
+				box-shadow:0px 0px 10px white,0px 0px 10px white;
+			}
+
+			#me{
+				width:10px;height:3px;top:30px;left:70px;
+				background-color:black;
+				border-radius:100% 0 0 0;
+				transform:rotate(20deg);
+			}
+			
+			#tuno1{
+				width:100px;height:100px;top:-80px;left:60px;
+				border:10px solid transparent;
+				border-left-color:yellow;
+				border-bottom-color:yellow;
+				border-radius:50%;
+				transform:rotate(-10deg);
+			}
+			#tuno2{
+				width:50px;height:50px;top:-30px;left:75px;
+				border:8px solid transparent;
+				border-left-color:yellow;
+				border-bottom-color:yellow;
+				border-radius:50%;
+				transform:rotate(-10deg);
+			}
+			
+			.msg{opacity:0;
+				animation:storyMsg 1s linear 0s 1 normal;
+				animation-fill-mode:both;
+			}
+			#msg2{animation-delay:2s;}
+			#msg3{animation-delay:3s;}
+			#msg4{animation-delay:4s;}
+			#msg5{animation-delay:5s;}
+			#msg6{animation-delay:6s;}
+			#msg7{animation-delay:8s;}
+			
+			@keyframes storyMsg{
+				0%{opacity:0;}
+				100%{opacity:1;}
+			}
+
+			p{color:white;margin:10px;text-align:center;}
+			small a{color:white;}
+		</style>
+	</head>
+	<body>
+		<div id=bg>
+			<h1>Merry Xmas</h1>
+			<p>
+				<span id=msg1 class=msg>みなさん今年一年、</span><br>
+				<span id=msg2 class=msg>HTML5を楽しみました?</span><br>
+				<span id=msg3 class=msg>来年もよいことがいっぱいあるに違いありません。</span><br>
+				<span id=msg4 class=msg>メリークリスマス</span><br>
+				<span id=msg5 class=msg>＆ハッピーニューイヤ〜</span><br>
+				<span id=msg6 class=msg>from なかしまぁサンタ</span><br>
+				<span id=msg7 class=msg>この画面はCSSだけで<br>作っています</span>
+			</p>
+			<div class=snow></div>
+			<div class=snow></div>
+			<div class=snow></div>
+			<div class=snow></div>
+			<div class=snow></div>
+			<div id=santa>
+				<div id=tonakai>
+					<div id=tuno1></div>
+					<div id=tuno2></div>
+					<div id=kubi1></div>
+					<div id=kubi2></div>
+					<div id=kao></div>
+					<div id=maeashi></div>
+					<div id=ushiroashi></div>
+					<div id=doutai></div>
+					<div id=hana></div>
+					<div id=me></div>
+				</div>
+				
+				<div id=sled>
+					<div class=inner>
+						<div id=present></div>
+						<div id=face></div>
+						<div id=body></div>
+						<div id=bousi></div>
+						<div id=bousi-huchi></div>
+						<div id=hige></div>
+						<div id=eye1></div>
+						<div id=eye2></div>
+						<div id=sori></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p><small>感謝：BGMは「<a href="http://www.music-note.jp/">著作権フリーの無料音楽素材ダウンロードサイト「ミュージックノート」</a>からいただきました</small></p>
+		<audio src="thatsaXmas.mp3" autoplay loop></audio>
+	</body>
+</html>

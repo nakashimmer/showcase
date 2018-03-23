@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>xmas</title>
+<meta property="og:title" content="Xmas" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://springreen.jp/SHOWCASE/CSS3/animation/xmastree/" />
+<meta property="og:image" content="http://springreen.jp/SHOWCASE/CSS3/animation/xmastree/xmastree.png" />
+<meta name=viewport content="width=device-width">
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+<style>
+	body{
+		background-color:black;
+	}
+	#wrap{
+		transform-style:preserve-3d;
+		margin:100px auto;
+		width:0px;height:0px;
+		animation:xmas 50s linear 0s infinite normal;
+	}
+	@keyframes xmas{
+		0%{transform:rotateX(-30deg) rotateY(0deg);}
+		25%{transform:rotateX(-30deg) rotateY(-90deg);}
+		50%{transform:rotateX(-30deg) rotateY(-180deg);}
+		75%{transform:rotateX(-30deg) rotateY(-270deg);}
+		100%{transform:rotateX(-30deg) rotateY(-360deg);}
+	}
+
+	.plane{
+		position:relative;
+		transform-style:preserve-3d;
+	}
+	#plane0{transform:rotateY(0deg);}
+	#plane1{transform:rotateY(60deg);}
+	#plane2{transform:rotateY(120deg);}
+
+
+	.star{
+		transform-origin:center bottom;
+		position:absolute;
+		width:0px;height:0px;
+		border-left:10px solid transparent;
+		border-right:10px solid transparent;
+		left:-10px;
+border-bottom:50px solid rgba(215,215,0,1);
+		animation:star 5s ease-in-out 0s infinite alternate;
+	}
+	
+	@keyframes star{
+		0%{border-bottom:50px solid rgba(215,215,0,0.1);}
+		100%{border-bottom:50px solid rgba(215,215,0,1);}
+	}
+	
+	.star0{transform:rotate(0deg);}
+	.star1{transform:rotate(72deg);}
+	.star2{transform:rotate(144deg);}
+	.star3{transform:rotate(216deg);}
+	.star4{transform:rotate(298deg);}
+	
+	.tree{
+		position:absolute;
+		transform-style:preserve-3d;
+		border-style:solid;
+		border-color:transparent;
+		height:0px;
+		border-bottom-color:rgba(0,215,0,0.4);
+	}
+	
+	.tree0{
+		top:80px;left:-100px;width:0px;
+		border-width:0px 100px 100px 100px;
+	}
+	
+	.tree1{
+		top:180px;left:-200px;width:100px;
+		border-width:0px 150px 300px 150px;
+	}
+	
+	.tree2{
+		top:480px;left:-200px;width:300px;
+		border-width:0px 50px 100px 50px;
+	}
+	
+	.pot{
+		position:absolute;top:580px;left:-25px;
+		background-color:rgba(215,215,0,0.4);
+		width:50px;height:50px;
+	}
+	#ground{
+		position:absolute;top:480px;left:-150px;
+		width:300px;height:300px;
+		background-color:rgba(215,215,215,0.5);
+		transform:rotateX(90deg);
+		border-radius:50%;
+	}
+	.msg{
+		position:absolute;
+		top:300px;
+		color:white;
+		font-size:30px;
+		width:300px;
+		left:-150px;
+		text-align:center;
+		font-family: 'Lobster', cursive;
+	}
+	#msg0{transform:rotateY(0deg) translateZ(200px);margin:0 auto;}
+	#msg1{transform:rotateY(120deg) translateZ(200px);}
+	#msg2{transform:rotateY(240deg) translateZ(200px);}
+
+	.snow{
+		position:absolute;
+		top:0;padding:0;
+		color:white;
+		width:2px;height:2px;
+		border-radius:50%;
+		background-color:white;
+		box-shadow:0px 0px 1px 1px white;
+	}
+</style>
+
+<div id=wrap></div>
+<audio src=oHolyNight.mp3 autoplay></audio>
+
+<script>
+	var html="";
+	for(var i=0;i<3;i++){
+		html+='<div id=plane'+i+' class=plane>';
+		for(var j=0;j<5;j++){
+			html+='<div class="star'+j+' star"></div>';
+		}
+		for(var k=0;k<3;k++){
+			html+='<div class="tree'+k+' tree"></div>';
+		}
+		for(var l=0;l<1;l++){
+			html+='<div class="pot'+l+' pot"></div>';
+		}
+		html+="</div>";
+	}
+	html+="<div id=ground></div>";
+	html+="<div id=msg0 class=msg>May your Christmas</div>";
+	html+="<div id=msg1 class=msg>be merry</div>";
+	html+="<div id=msg2 class=msg>and happy</div>";
+	var snowNo=100;
+	for(var m=0;m<snowNo;m++){
+		html+='<div id=snow'+m+' class=snow></div>';
+	}
+		
+	document.getElementById("wrap").innerHTML=html;
+	
+	var snow=new Array();
+	for(var i=0;i<snowNo;i++){
+		var x=Math.floor(Math.random()*300)-150;
+		var y=Math.floor(Math.random()*500);
+		var z=Math.floor(Math.random()*300)-150;
+		var r=Math.floor(Math.random()*180);
+		snow[i]={x:x,y:y,z:z,r:r};
+		document.getElementById("snow"+i).style.transform
+		=	'translateX('+snow[i].x+'px) '+
+			'translateY('+snow[i].y+'px) '+
+			'translateZ('+snow[i].z+'px) '+
+			'rotateY('+snow[i].r+'deg)';
+	}
+	
+	setInterval(drawSnow,50);
+	
+	function drawSnow(){
+		for(var i=0;i<snowNo;i++){
+			snow[i].x-=Math.floor(Math.random()*3)-1;
+			snow[i].y+=1;if(500<snow[i].y){snow[i].y=-10;}
+			document.getElementById("snow"+i).style.transform
+			=	'translateX('+snow[i].x+'px) '+
+				'translateY('+snow[i].y+'px) '+
+				'translateZ('+snow[i].z+'px) '+
+				'rotateY('+snow[i].r+'deg)';
+		}
+	}
+</script>

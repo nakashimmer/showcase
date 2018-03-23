@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>アニメーションサンプル</title>
+		<style>
+			#wrap{
+				/*センタ配置*/
+				position:absolute;
+				top:0;right:0;bottom:0;left:0;margin:auto;
+				width:0px;height:0px;
+				/*枠線*/
+				border:1px solid red;
+			}
+		
+			#inner{
+				position:relative;
+				width:0px;height:0px;
+				/*3次元化*/
+				transform-style:preserve-3d;
+				/*奥行き感*/
+				perspective:200px;
+				/*距離感*/
+				transform:translateZ(50px);
+
+			}
+			.box{
+				/*共通CSS*/
+				position:absolute;
+				width:100px;height:100px;
+				border:50px double gray;
+				top:-100px;left:-100px;
+				/*共通アニメーション*/
+				animation-duration:8s;	/*周期*/
+				animation-direction:normal;
+				animation-iteration-count:infinite;	/*繰返回数*/
+				animation-timing-function:linear;	/*遷移の状態*/
+			}
+			
+			#box0{
+				animation-name:box0;
+				animation-delay:0s;	/*遅延*/
+				border-color:rgba(255,0,0,0.5);	/*半透明色*/
+			}
+			@keyframes box0{
+				100%{transform:rotateX(360deg);}
+			}
+			
+			#box1{
+				animation-name:box1;
+				animation-delay:0.1s;
+				border-color:rgba(0,255,0,0.5);
+			}
+			@keyframes box1{
+				100%{transform:rotateY(360deg);}
+			}
+			
+			#box2{
+				animation-name:box2;
+				animation-delay:0.2s;
+				border-color:rgba(0,0,255,0.5);
+			}
+			@keyframes box2{
+				100%{transform:rotateZ(360deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="inner">
+				<div id="box0" class="box"></div>
+				<div id="box1" class="box"></div>
+				<div id="box2" class="box"></div>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>schoo</title>
+	<style>
+		
+		*{margin:0;padding:0;}
+		 #style{
+			 margin:5px;padding:5px;
+			 white-space:pre;
+			 
+			 border:2px dotted gray;
+			 display:block;
+			 
+			 box-sizing:border-box;
+			 tab-size:1;
+			 font-size:20px;
+			 
+		 }
+		 #left{
+			 padding:10px;
+			 font-size:20px;
+			 width:58%;height:600px;
+			 overflow:scroll;
+			 float:left;
+			 background-color:white;
+			 box-sizing:border-box;
+			 border:2px solid gray;
+		 }
+		 #right{
+			 float:right;width:40%;box-sizing:border-box;
+		 }
+		 small{display:block;}
+		 .center{text-align:center;}
+		 .red{color:red;}
+		 #box{-webkit-transition:all 1s ease-in-out;}
+		 #box{
+			 border:0px solid gray;
+			 width:100%;
+			 height:0px;
+			 margin:0px;
+		 }
+	</style>
+</head>
+
+<body>
+	
+<div id=left>
+&lt;DOCTYPE html&gt;<br>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+&lt;meta charset="utf-8"&gt;<br>
+&lt;title&gt;CSS演習&lt;/title&gt;<br>
+<span class=red>&lt;style&gt;</span><br>
+<style scoped contenteditable id=style>#box{margin:1em;}
+ul,dl{margin:1em 0;}
+li,dt,dd{border:1px solid gray;width:5em;margin:0.2em;}
+
+/* of-typeとchildの違い*/
+/* 最初と最後
+li:first-of-type{background-color:blue;}
+li:last-of-type{background-color:red;}
+
+dt:first-of-type{background-color:blue;}
+dt:last-of-type{background-color:red;}
+*/
+/* 最初から、最後から何番目
+li:nth-of-type(1){background-color:blue;}
+li:nth-last-of-type(1){background-color:red;}
+
+dt:nth-of-type(1){background-color:blue;}
+dt:nth-last-of-type(1){background-color:red;}
+*/
+/* 奇数偶数
+li:nth-of-type(odd){background-color:blue;}
+li:nth-of-type(even){background-color:red;}
+
+dt:nth-of-type(odd){background-color:blue;}
+dt:nth-of-type(even){background-color:red;}
+*/
+
+/*隣接セレクタ(+)と間接セレクタ(~)
+li:first-of-type{background-color:blue;}
+li:first-of-type+li{background-color:red;}
+*/
+
+</style>
+<span class=red>&lt;/style&gt;</span><br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&lt;div id=box&gt;<br>
+&lt;ul&gt;<br>
+　&lt;li&gt;l1&lt;/li&gt;<br>
+　&lt;li&gt;l2&lt;/li&gt;<br>
+　&lt;li&gt;l3&lt;/li&gt;<br>
+&lt;/ul&gt;<br>
+
+&lt;dl&gt;<br>
+　&lt;dt&gt;dt1&lt;/dt&gt;&lt;dd&gt;dd1&lt;/dd&gt;<br>
+　&lt;dt&gt;dt2&lt;/dt&gt;&lt;dd&gt;dd2&lt;/dd&gt;<br>
+　&lt;dt&gt;dt3&lt;/dt&gt;&lt;dd&gt;dd3&lt;/dd&gt;<br>
+&lt;/ul&gt;<br>
+
+&lt;/div&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+</div>
+
+
+<div id=right>
+	<div id="wrap">
+		<h1>擬似クラス</h1>
+		<div id=box>
+			<ul>
+				<li>l1</li>
+				<li>l2</li>
+				<li>l3</li>
+			</ul>
+			
+			<dl>
+				<dt>dt1</dt><dd>dd1</dd>
+				<dt>dt2</dt><dd>dd2</dd>
+				<dt>dt3</dt><dd>dd3</dd>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+<script>
+var pass=false;
+window.onkeydown=function(){
+	if(window.event.keyCode == 13){
+		if(window.event.shiftKey==true){
+			return true;
+		}else{
+			return false;
+		}
+	return true;
+	}
+};
+
+</script>
+
+</html>

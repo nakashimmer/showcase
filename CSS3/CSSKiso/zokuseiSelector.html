@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<style>
+	*:not(ul){margin:0;padding:0;}
+	#title{margin:1em;}
+	.contentcss{
+		display:block;
+		border:1px dotted black;
+		min-height:2em;
+		margin:2px;
+		line-height:2em;
+		white-space:pre;
+		font-size:20px;
+		font-family:menlo;
+		resize:both;
+		overflow:scroll;
+		tab-size:1;
+		text-indent:1em;
+	}
+	div>div{border:1px solid gray;margin:0.5em;font-size:30px;}
+</style>
+<body>
+<h1 id=title>属性セレクタ</h1>
+<div style="border:3px double green;margin:2em;">
+<style scoped contenteditable class="contentcss">div[class="class1"]{color:red;}</style>
+</div>
+
+
+<p style="font-size:16px;font-weight:normal;">class属性の値によってCSSを適用させる</p>
+<ul>
+	<li>div[class="class1"]{/*完全一致*/}
+	<li>div[class~="class1"]{/*複数のCSSの中にある*/}
+	<li>div[class^="class"]{/*〜で始まる*/}
+	<li>div[class$="s1"]{/*〜で終わる*/}
+	<li>div[class*="ss"]{/*〜を含む*/}
+</ul>
+
+<div>
+<div class="class1">class="class1"</div>
+<div class="class1 class3">class="class1 class3"</div> 
+<div class="class2">class="class2"</div>
+<div class="abcde1">classはabcde1</div>
+</div>

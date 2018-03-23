@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>じっと見てると不思議な感覚に・・・</title>
+<meta name=viewport content="width=502">
+
+<style>
+
+body{
+	background-color:black;
+}
+#wrap{
+	width:500px;height:500px;
+	margin:100px auto;
+	border:1px solid gray;
+	transform-style:preserve-3d;
+	perspective:800px;
+
+}
+#packman{
+	width:0px;height:0px;
+	margin:250px auto;
+	border:1px solid red;
+	position:relative;
+	transform-style:preserve-3d;
+	animation:story 60s infinite 0s linear normal;
+
+}
+
+@keyframes story{
+	0%{transform:rotateX(0deg) rotateY(0deg);}
+	100%{transform:rotateX(-360deg) rotateY(1440deg);}
+}
+
+</style>
+
+<div id=wrap>
+	<div id=packman></div>
+</div>
+<script>
+	var packman=document.getElementById("packman");
+	var y="rgba(215,215,0,0.2)";
+	var s=50;
+	var maxR=100;
+	var num=[1,4,8,4,1];
+	var k=0;
+	for(var j=-maxR;j<=maxR;j+=s){
+		r=maxR*Math.cos(j/(maxR)/2*Math.PI);
+		for(var i=0;i<360;i+=360/num[k]){
+		
+		//myDiv(辺,		前,		横,		縦,	水平回転,	垂直回転,	半径,	色)
+			myDiv( s,	  0,	 0,		 0+j,			0,			0,	r,	y);	//前面
+			myDiv( s, 	s,	 0,		 0+j,			0,			0,	r,	y);	//背面
+			myDiv( s,	s/2,	 0,	-s/2+j,		 90,			0,	r,	y);	//上面
+			myDiv( s,	s/2,	 0,	 s/2+j,		 90,			0,	r,	y);	//下面
+			myDiv( s,	s/2, s/2,		 0+j,			0,		-90,	r,	y);	//右面
+			myDiv( s,	s/2,-s/2,		 0+j,			0,		-90,	r,	y);	//左面
+		}
+		k++;
+	}
+
+	
+	function myDiv(side,traZ,traX,traY,rotX,rotY,radius,color){
+		var attr ="width:"+side+"px;height:"+side+"px;"+
+		"position:absolute;"+
+		"background-color:"+color+";"+
+		"border:1px solid rgba(215,215,215,0.95);"+
+		"transform:"+
+		"translateZ("+(Math.sin(i/180*Math.PI)*radius+traZ-s/2)+"px) "+
+		"translateX("+(Math.cos(i/180*Math.PI)*radius-side/2+traX)+"px) "+
+		"translateY("+(-side/2+traY)+"px) "+
+		"rotateY("+rotY+"deg) "+
+		"rotateX("+rotX+"deg);";
+		var div=document.createElement("div");
+		div.setAttribute("style",attr);
+		packman.appendChild(div);
+	}
+	
+
+
+</script>

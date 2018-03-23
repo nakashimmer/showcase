@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<head>
+
+<link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet" />
+<meta charset=utf-8>
+<meta property="og:title" content="今年は戌年2018" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://tokyoappwork.shop/SHOWCASE/CSS3/dogYear/" />
+<meta property="og:description" content="CSSアニメーションで戌年。あけましておめでとうございます！" />
+<meta property="og:image" content="https://tokyoappwork.shop/SHOWCASE/CSS3/dogYear/dog2018.png" />
+<title>2018</title>
+<meta name=viewport content="width=550">
+<style>
+	*{	margin:0;padding:0;
+		transform-origin:center;
+		font-family: "Mplus 1p";
+		font-weight:bold;
+	}
+	
+	body{
+		background-color:#eee;
+	}
+	
+	#wrap{
+		position:relative;
+		width:500px;height:700px;margin:10px auto;
+		border:1px solid #efefef;
+		background-color:white;
+		box-shadow:5px 5px 5px 2px rgba(0,0,0,0.2);
+	}
+	#kinga{
+		position:absolute;
+		width:500px;
+		text-align:center;line-height:200px;
+		color:red;font-size:80px;
+		opacity:0;
+	}
+	
+	#origami{
+		width:419px;height:200px;margin:0px auto 0px ;
+		transform-origin:bottom;
+		overflow:hidden;
+	}
+
+	#origami .inner{
+		width:270px;height:270px;margin:65px auto;
+		transform:rotate(45deg);
+		background:orange;
+	}
+	
+	#dog{
+		position:relative;
+		width:229px;height:300px;margin:0px auto;
+	}
+	
+	#head{
+		position:absolute;z-index:1;
+		width:229px;height:150px;
+	}
+
+	#face{
+		position:absolute;
+		top:-1px;
+		width:230px;height:151px;
+		overflow:hidden;
+	}
+	#face .inner{
+		width:162px;height:162px;margin:-6px auto;
+		transform:rotate(45deg);
+		background-color:orange;
+	}
+	
+	.ear{
+		position:absolute;z-index:1;
+		width:106px;height:106px;
+		top:23px;
+	}
+	#earL{
+		transform-origin:left;
+		background:linear-gradient(-45deg,transparent 49%,orange 49%);
+	}
+	
+	#earR{
+		transform-origin:right;
+		background:linear-gradient(45deg,transparent 49%,orange 49%);
+	}
+
+	#mouth{
+		position:absolute;z-index:3;
+		left:75px;bottom:1px;
+		width:80px;height:40px;
+		overflow:hidden;
+		
+	}
+
+	#mouth .inner{
+		margin:0 auto;
+		width:62px;height:62px;
+		transform:translate(0px,11px) rotate(45deg);
+		background-color:orange;
+		border:2px solid white;
+	}
+
+	.eye{
+		position:absolute;z-index:5;
+		top:70px;
+		width:15px;height:15px;
+		background-color:#666;
+		border-radius:50%;
+	}
+	#eyeL{left:85px;}
+	#eyeR{right:85px;}
+	
+	#nose{
+		position:absolute;z-index:3;
+		width:10px;height:10px;
+		transform:translate(110px,95px) rotate(45deg);
+		background-color:#666;
+	}
+
+	#body{
+		position:absolute;z-index:-1;top:150px;
+		width:229px;height:150px;
+	}
+
+	#stomach{
+		position:absolute;z-index:-1;top:0px;
+		width:185px;height:130px;
+		transform-origin:bottom;
+		transform:skew(-40deg);
+		border-left:3px solid white;
+		overflow:hidden;
+		
+	}
+	#stomach .inner{
+		width:500px;height:500px;
+		background-color:orange;
+		transform-origin:center;
+		transform:translate(-315px,0) rotate(40deg);
+	}
+	
+	#tail{
+		position:absolute;z-index:-2;
+		height:50px;width:185px;
+		transform-origin:bottom;
+		transform:translate(3px,80px) skew(-40deg) scale(1,-1);
+		background:linear-gradient(-165deg,transparent 50%,orange 50%);
+	}
+
+	#msg{
+		position:absolute;top:510px;
+		width:500px;
+		font-size:30px;
+		text-align:center;
+		opacity:1;
+	}
+	p{
+		text-align:center;
+	}
+
+/*アニメーション*/
+	#wrap{animation:wrapkf 1s ease-in-out 1  0s normal;animation-fill-mode:both;}
+	@keyframes wrapkf{
+		0%{	opacity:0;}
+		80%{	opacity:1;}
+	}
+	
+	#origami{animation:origamikf 1s ease-in-out 1  2s normal;animation-fill-mode:both;}
+	@keyframes origamikf{
+		0%{	transform:rotateX(0deg);}
+		90%{	opacity:1;transform:rotateX(180deg);}
+		95%{	opacity:0;}
+		100%{	opacity:0;transform:rotateX(0deg);}
+	}
+	
+	#head{animation:headkf 1s ease-in-out 1 12s normal;animation-fill-mode:both;}
+	@keyframes headkf{
+		0%{	transform:rotate(0deg);}
+		100%{	transform:rotate(-10deg);}
+	}
+	
+	#earL{animation:earLkf 1s ease-in-out 1  3s normal;animation-fill-mode:both;}
+	@keyframes earLkf{
+		0%{	transform: translate(39px,-38px) rotate(-135deg) rotateY(0deg) skew(0,0);}
+		60%{	background:linear-gradient(-45deg,transparent 50%,orange 50%);}
+		100%{	transform: translate(39px,-38px) rotate(-135deg) rotateY(-170deg) skew(0,-10deg);
+			background:linear-gradient(-45deg,transparent 48%,white 48%,white 50%,orange 50%);}
+	}
+	
+	#earR{animation:earRkf 1s ease-in-out 1  4s normal;animation-fill-mode:both;}
+	@keyframes earRkf{
+		0%{	transform: translate(85px,-38px) rotate(135deg) rotateY(0deg) skew(0,0);}
+		60%{	background:linear-gradient(45deg,transparent 50%,orange 50%);}
+		100%{	transform: translate(85px,-38px) rotate(135deg) rotateY(170deg) skew(0,10deg);
+				background:linear-gradient(45deg,transparent 48%,white 48%,white 50%,orange 50%);
+		}
+	}
+	
+	#mouth{
+		animation:mouthkf 1s ease-in-out 1  6s normal;
+		animation-fill-mode:both;
+		transform-origin:bottom;
+	}
+	
+	@keyframes mouthkf{
+		0%{	transform:rotateX(180deg);}
+		50%{	border-bottom:0px;bottom:0px;}
+		100%{	transform:rotateX(-10deg);border-bottom:3px solid white;bottom:-3px;}
+	}
+		
+	.eye{
+		animation:eyekf 1s ease-in-out 1  12s normal;
+		animation-fill-mode:both;
+	}
+	
+	@keyframes eyekf{
+		0%{	opacity:0;}
+		100%{	opacity:1;}
+	}
+	
+	#nose{animation:eyekf 1s ease-in-out 1  12s normal;animation-fill-mode:both;}
+	@keyframes eyekf{
+		0%{	opacity:0;}
+		100%{	opacity:1;}
+	}
+	
+	#body{animation:bodykf 1s ease-in-out 1  9s normal;animation-fill-mode:both;}
+	
+	@keyframes bodykf{
+		0%{	opacity:0;}
+		100%{	opacity:1;}
+	}
+	
+	#tail{animation:tailkf 1s ease-in-out 1  10s normal;animation-fill-mode:both;}
+	
+	@keyframes tailkf{
+		100%{	transform: translate(0px,80px) skew(30deg) scale(1,1);}
+	}
+	
+	#msg{animation:msgkf 1s ease-in-out 1  11s normal;animation-fill-mode:both;}
+	@keyframes msgkf{
+		0%{	opacity:0;}
+		100%{	opacity:1;}
+	}
+	
+	#kinga{animation:kingakf 1s ease-in-out 1  12s normal;animation-fill-mode:both;}
+	@keyframes kingakf{
+		0%{	opacity:0;}
+		100%{	opacity:1;}
+	}
+/*-----------------*/
+	
+	
+</style>
+</head>
+<body>
+<div id=wrap>
+	<div id=kinga>謹賀新年</div>
+	
+	<div id=origami>
+		<div class=inner></div>
+	</div>
+
+	<div id=dog>
+	
+		<div id=head>
+			<div class=inner>
+				<div id=face>
+					<div class=inner></div>
+				</div>
+				
+				<div id=earL class=ear></div>
+				<div id=earR class=ear></div>
+		
+				<div id=eyeL class=eye></div>
+				<div id=eyeR class=eye></div>
+				
+				<div id=mouth>
+					<div class=inner></div>
+				</div>
+				
+				<div id=nose></div>
+			</div>
+		</div>
+		
+		<div id=body>
+			<div class=inner>
+				<div id=stomach>
+					<div class=inner></div>
+				</div>
+				<div id=tail></div>
+			</div>
+		</div>
+		
+	</div>
+		
+	<div id=msg>
+		<p>あけましておめでとうございます<br>
+		ことしもよろしくおねがいします</p>
+		<p>2018年 元旦</p>
+		<p>なかしまぁせんせい</p>
+	</div>
+	
+</div>
+
+<p><small>PC版google chromeでご覧ください</small></p>
+<script>
+	var wrap=document.getElementById("wrap");
+	var sound=new Audio();
+	sound.src="wan.mp3";
+	setTimeout(function(){
+		sound.play();
+	},13000);
+	wrap.addEventListener("click",function(){
+		sound.play();
+	});
+</script>
+</body>

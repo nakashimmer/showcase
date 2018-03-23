@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<meta name=viewport content="width=320px,user-scalable=no">
+		<title>入力フォーム</title>
+		<style>
+			*{margin:0;padding:0;
+				text-decoration:none;
+				list-style:none;
+				color:black;
+				font-size:15px;
+			}
+			body{text-align:center;background-color:#eee;}
+			#wrap{width:320px;margin:0 auto;text-align:left;background-color:white;}
+			h1{
+				text-align:center;
+				font-size:20px;
+				text-shadow:0px 0px 10px white;
+			}
+			li{
+				margin:10px 5px;
+				height:40px;
+			}
+			main section h1{
+				background:-webkit-gradient(
+					linear,left top,left bottom,from(white),to(gray));
+				margin:5px 0;
+				padding:5px;
+				text-shadow:-1px -1px 1px white;
+			}
+			main section p{
+				margin:5px;
+				line-height:1.5em;
+			}
+			footer h1{
+				background-color:gray;
+				color:white;
+				font-size:0.7em;
+				padding:5px;
+				text-align:center;
+			}
+			input{width:140px;padding:2px;height:2em;margin:2px;}
+			input[type="submit"],button{
+				margin:5px;padding:3px;
+				width:3em;
+				border:1px solid gray;
+				border-radius:1em;
+				background:#eee;
+				}
+		</style>
+		<script>
+		function $(id){return document.getElementById(id);}
+		</script>
+	</head>
+
+	<body>
+		<div id=wrap>
+			<main>
+				<section>
+					<h1>入力フォーム</h1>
+					<ol>
+						<li>テキスト<input type="text" id="inputText" placeholder=従来の入力フォーム><button onclick="alert($('inputText').value)">送信</button></li>
+						<li>日　付　<input type="date" id=inputDate><button onclick="alert($('inputDate').value)">送信</button></li>
+						<li>時　刻　<input type="time" id=inputTime><button onclick="alert($('inputTime').value)">送信</button></li>
+
+						<li>レンジ　<input type="range" id=inputRange><button onclick="alert($('inputRange').value)">送信</button></li>
+						<li>色　　　<input type="color" id=inputColor><button onclick="alert($('inputColor').value)">送信</button></li>
+
+						<li>数　字　<input type="number" min="0" max="10" step="3" id=inputNumber><button onclick="alert($('inputNumber').value)">送信</button></li>
+						<li>検　索　<input type="search" id=inputSearch><button onclick="alert($('inputSearch').value)">送信</button></li>
+						<li>URL　　<input type="url" id=inputUrl><button onclick="alert($('inputUrl').value)">送信</button></li>
+
+						<li><form action="javascript:void(0);">メール　<input type="email" id=inputEmail><input type="submit" value="送信" javascript:void(0) style="margin:0"></form></li>
+						<li>電　話　<input type="tel" id=inputTel><button onclick="location.href='tel:'+document.getElementById('inputTel').value">送信</button></li>
+						
+					</ol>
+				</section>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>schoo</title>
+	<style>
+		
+		*{margin:0;padding:0;}
+		 #style{
+			 margin:5px;padding:5px;
+			 white-space:pre;
+			 
+			 border:2px dotted gray;
+			 display:block;
+			 
+			 box-sizing:border-box;
+			 tab-size:1;
+			 font-size:20px;
+			 
+		 }
+		 #left{
+			 padding:10px;
+			 font-size:20px;
+			 width:58%;height:600px;
+			 overflow:scroll;
+			 float:left;
+			 background-color:white;
+			 box-sizing:border-box;
+			 border:2px solid gray;
+		 }
+		 #right{
+			 float:right;width:40%;box-sizing:border-box;
+		 }
+		 small{display:block;}
+		 .center{text-align:center;}
+		 .red{color:red;}
+		 #box{-webkit-transition:all 1s ease-in-out;}
+		 #box{
+			 border:0px solid gray;
+			 width:100%;
+			 height:0px;
+			 margin:0px;
+		 }
+	</style>
+</head>
+
+<body>
+<small>「<b>CSS3演習君</b>」は手軽にCSS3の効果を確認できるようにと制作しました。
+改行はシフトキーを押しながらreturn(enter)を押してください。
+Tabキーは無効です。コピペはNG、コードを書きましょう</small>
+	
+<div id=left>
+&lt;DOCTYPE html&gt;<br>
+&lt;html&gt;<br>
+&lt;head&gt;<br>
+&lt;meta charset="utf-8"&gt;<br>
+&lt;title&gt;CSS演習&lt;/title&gt;<br>
+<span class=red>&lt;style&gt;</span><br>
+<style scoped contenteditable id=style>#box{
+/* border:1px solid gray; */
+/* width:100px; */
+/* height:100px; */
+/* margin:0 auto; */
+}
+	
+/* 影
+#box{
+box-shadow:2px 2px 2px gray;
+}
+*/
+	
+/* 角丸
+#box{
+border-radius:10px;
+}
+*/
+	
+/* グラデーション
+#box{
+background:linear-gradient(45deg,white,red);
+}
+*/
+
+/* リフレクト
+#box{
+background-image:url(mL.png);
+background-size:100%;
+-webkit-box-reflect:below 10px;
+}
+*/
+	
+	
+</style>
+<span class=red>&lt;/style&gt;</span><br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&lt;div id=box&gt;&lt;/div&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+</div>
+
+
+<div id=right>
+	<div id="wrap">
+		<h1 class=center>&lt;div id=box&gt;&lt;/div&gt;</h1>
+		
+		<div id=box></div>
+		
+		
+		
+	</div>
+</div>
+
+
+</body>
+
+<script>
+var pass=false;
+window.onkeydown=function(){
+	if(window.event.keyCode == 13){
+		if(window.event.shiftKey==true){
+			return true;
+		}else{
+			return false;
+		}
+	return true;
+	}
+};
+
+</script>
+
+</html>

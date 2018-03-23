@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8>
+<title>ピカチュウ</title>
+<meta name="viewport" content="width=device-width">
+
+<style type="text/css">
+*{margin:0;padding:0;border:0;}
+body{}
+
+.kao{
+	position:relative;	margin:100px auto;
+	width:500px;height:350px;
+	background-color:yellow;
+}
+
+.eye{
+	position:absolute;top:80px;
+	width:100px;height:100px;
+	background-color:black;
+	border-radius:50px;
+}
+#eye1{left:80px;}
+#eye2{right:80px;}
+.eyelight{
+	margin:13px 0 0 13px;
+	width:30px;height:30px;
+	background-color:white;
+	border-radius:15px;}
+
+.hoho{
+	position:absolute;top:190px;
+	width:80px;height:80px;
+	background-color:rgb(238,155,149);
+	border-radius:40px;
+}
+#hoho1{left:20px;}
+#hoho2{right:20px;}
+
+#hana{
+	position:absolute;left:210px;top:200px;
+	width:0;height:0;
+	border-top:30px solid black;
+	border-left:30px solid transparent;	
+	border-right:30px solid transparent;
+}
+
+#kuchi,#kuchi2{
+	position:absolute;top:250px;
+	width:80px;height:30px;
+	background-color:yellow;
+	box-shadow:-6px 8px 0 black,6px 8px 0 black;
+}
+#kuchi{
+	left:155px;
+	border-radius:0 0 60px 40px/0 0 30px 30px;
+}
+#kuchi2{
+	left:245px;
+	border-radius:0 0 40px 60px/0 0 30px 30px;
+}
+
+.eye{
+	animation: pachipachi 16s linear 1s infinite;
+}
+@keyframes pachipachi{
+	50%{transform:scale(1,1);}
+	51%{transform:scale(1,0);}
+	52%{transform:scale(1,1);}
+	70%{transform:scale(1,1);}
+	71%{transform:scale(1,0);}
+	72%{transform:scale(1,1);}
+	80%{transform:scale(1,1);}
+	81%{transform:scale(1,0);}
+	82%{transform:scale(1,1);}
+}
+</style>
+
+<div class=kao>	
+	<div class=eye id=eye1>	
+		<div class=eyelight></div>
+	</div>
+	
+	<div class=eye id=eye2>
+		<div class=eyelight></div>
+	</div>
+	
+	<div class=hoho id=hoho1></div>
+	<div class=hoho id=hoho2></div>
+
+	<div id=hana></div>		
+	<div id=kuchi></div>
+	<div id=kuchi2></div>
+</div>

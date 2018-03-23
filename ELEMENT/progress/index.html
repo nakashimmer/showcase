@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>meter</title>
+<meta name=viewport content="width=320px,user-scalable=no">
+<style>
+*{font-size:38px;}
+#wrap{width:320px;margin:0 auto;}
+#progress{width:300px;border:1px;height:38px;}
+#btn{width:300px;height:300px;line-height:300px;
+	border-radius:50%;border:1px solid gray;outline:0px none black;
+	background-color:pink;
+	box-shadow:5px 5px 5px gray;
+}
+</style>
+<div id=wrap>
+	<progress value=0 min=0 max=50 id=progress></progress><br>
+	<button id=btn>押すべし！</button> 
+</div>
+<script>
+	function $(id){return document.getElementById(id);}
+	var j=0,start;
+	var audio=new Audio();
+	audio.src="audio.mp3"
+	
+	var audio2=new Audio();
+	audio2.src="fanfare.mp3"
+	
+	$("btn").addEventListener("touchstart",osu);
+	$("btn").addEventListener("mousedown",osu);
+	$("btn").addEventListener("touchend",hanasu);
+	$("btn").addEventListener("mouseup",hanasu);
+	function osu(){
+		$("btn").style.boxShadow="1px 1px 1px gray";
+		audio.pause();
+		audio.currentTime=0;
+		audio.play();
+		j++;
+		$("progress").value = j;
+		if(j==1){
+			var now=new Date();
+			start=now.getTime();
+		}
+		if(j==50){
+			audio2.play();
+			var now=new Date();
+			var time=Math.floor((start-now.getTime())/10)/100;
+			$("btn").innerHTML=(-time)+"秒";
+		}
+	}
+	function hanasu(){
+		$("btn").style.boxShadow="5px 5px 5px gray";
+	}
+</script>

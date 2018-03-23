@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>CSS3</title>
+		<meta name=viewport content="width=320px,user-scalable=no">
+		<style>
+			*{margin:0;padding:0;}
+			body{
+				text-align:center;background-color:#eee;
+			}
+			.box{
+				background: url("mL.png");background-size:cover;
+				box-sizing:border-box;
+				margin:50px auto 50px auto;
+				width:200px;
+				height:200px;
+				height:200px;
+				line-height:200px;
+				font-size:50px;
+				transition:
+					transform 4s ease-in-out,
+					background 2s ease-in-out,
+					border 2s ease-in-out,
+					box-shadow 2s ease-in-out,
+					border-radius 2s ease-in-out,
+					box-reflect 2s ease-in-out;
+			}
+			.photo{
+				border:none;
+				background: url("mL.png");background-size:cover;
+			}
+			.waku{
+				border:3px solid black;
+			}
+		/*1.影*/
+			.shadow{
+				box-shadow:10px 10px 10px gray;
+			}
+		/*2.角丸*/
+			.radius{
+				border-radius:50px;
+			}
+		/*3.球*/
+			.kyu{
+				box-shadow:inset -20px -20px 50px gray;
+				border-radius:100px;
+			}
+		/*4.グラデーション*/
+			.gra{
+				background:
+				-webkit-gradient(linear,left top,left bottom,from(red),to(white));
+			}
+		/*5.反射*/
+			.reflect{
+				-webkit-box-reflect:below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(white)); 
+			}
+		/*6.変形*/
+			.henkei{
+				-webkit-transform:rotate(0deg) ;
+			}
+		/*7.3次元*/
+			body{
+				perspective:100px;
+				transform-style:preserve-3d;
+			}
+			.d3{
+				transform:translateZ(-200px) rotateX(720deg) rotateY(360deg);
+			}
+			button{
+				font-size:20px;height:40px;
+				padding:0px;width:3em;
+				border:0px solid gray;
+				margin-left:4px;margin-top:4px;
+				float:left;background-color:gray;color:white;
+			}
+			.control{width:320px;margin:0 auto;margin:20px auto;}
+			#border,#shadow,#radius,#henkei{display:none;}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box photo"></div>
+		<div class=control>
+			<button onclick=cgclass("d3")>３D</button>
+			<!--
+			<a href="index3d2.html"><button>３D(2)</button></a>
+			<a href="css3animation.html"><button>３D(3)</button></a>-->
+			<div style="clear:both;"></div>
+		</div>
+		<div class=control>
+		
+			<input class=range type=range id=border min=0 max=100 step=10 value=0>
+			<input class=range type=range id=shadow min=-50 max=50 step=10 value=0>
+			<input class=range type=range id=radius min=0 max=100 step=10 value=0>
+			<input class=range type=range id=henkei min=-360 max=360 step=0 value=0>
+			
+			<script>
+				window.addEventListener("change",function(e){
+					e.preventDefault();
+					$("box").style.border=$("border").value+"px solid black";
+					$("box").style.boxShadow=$("shadow").value+"px "+$("shadow").value+"px "+Math.abs($("shadow").value)+"px gray";
+					$("box").style.borderRadius=$("radius").value+"px";
+					$("box").style.webkitTransform ="rotate("+$("henkei").value+"deg";
+				});
+				
+			</script>
+
+
+		</div>
+		<script>
+		function $(id){return document.getElementById(id);}
+		
+			var fshadow=false;
+			var fradius=false;
+			var fkyu=false;
+			var fwaku=false;
+			var fgra=false;
+			var freflect=false;
+			var fhenkei=false;
+			var fd3=false;
+			var fphoto=false;
+			$("box").className="box ";
+			
+			function cgclass(f){
+				if(f=="shadow"){
+					if(!fshadow){$("box").className+="shadow ";fshadow=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)shadow(?!\S)/g,'');fshadow=false;}
+					ctrl("shadow");
+				}
+				if(f=="radius"){
+					if(!fradius){$("box").className+="radius ";fradius=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)radius(?!\S)/g,'');fradius=false;}
+					ctrl("radius");
+				}
+				if(f=="gra"){
+					if(!fgra){$("box").className+="gra ";fgra=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)gra(?!\S)/g,'');fgra=false;}
+				}
+				if(f=="kyu"){
+					if(!fkyu){$("box").className+="kyu ";fkyu=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)kyu(?!\S)/g,'');fkyu=false;}
+					
+				}
+				if(f=="reflect"){
+					if(!freflect){$("box").className+="reflect ";freflect=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)reflect(?!\S)/g,'');freflect=false;}
+					ctrl("reflect");
+				}
+				if(f=="henkei"){
+					if(!fhenkei){$("box").className+="henkei ";fhenkei=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)henkei(?!\S)/g,'');fhenkei=false;}
+					ctrl("henkei");
+				}
+				if(f=="d3"){
+					if(!fd3){
+						$("box").className= $("box").className.replace ( /(?:^|\s)henkei(?!\S)/g,'')
+						$("box").className+="d3 ";fd3=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)d3(?!\S)/g,'');fd3=false;}
+					ctrl("d3");
+				}
+				if(f=="photo"){
+					if(!fphoto){$("box").className+="photo ";fphoto=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)photo(?!\S)/g,'');fphoto=false;}
+					ctrl("photo");
+				}
+				if(f=="waku"){
+					if(!fwaku){$("box").className+="waku ";fwaku=true;
+					}else{$("box").className= $("box").className.replace ( /(?:^|\s)waku(?!\S)/g,'');fwaku=false;}
+					ctrl("border");
+				}
+			}
+			
+			
+			function ctrl(id){
+				$("border").style.display="none";
+				$("shadow").style.display="none";
+				$("radius").style.display="none";
+				$("henkei").style.display="none";
+				$(id).style.display="block";
+			}
+		</script>
+	</body>
+</html>

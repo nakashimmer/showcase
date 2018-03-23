@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>CSS3ドミノ</title>
+
+	
+<style>
+*{margin:0;padding:0;}
+/*位置を設定*/
+#wrap{position:absolute;width:150px;height:150px;
+	margin:auto;top:0;left:0;right:0;bottom:0;
+}
+
+/*ベースの要素*/
+#grandParent{
+	background-color:rgba(255,0,0,0.8);
+	animation:grandParent 6s linear 0s infinite normal;
+	position:relative;
+	perspective:510px;
+}
+@keyframes grandParent{
+	0%{transform:rotateX(0deg) rotateY(0deg);}
+	100%{transform:rotateX(360deg) rotateY(360deg);}
+}
+/*動く要素*/
+#parent2{animation:parent 2s ease 0s infinite alternate;position:absolute;}
+#parent3{animation:parent 3.3s ease 0s infinite alternate;position:absolute;}
+@keyframes parent{
+	0%{transform:translateZ(-300px);}
+	100%{transform:translateZ(300px);}
+}
+.parent{
+	width:150px;height:150px;
+	transform-style:preserve-3d;
+	position:absolute;
+}
+
+#parent1 .child{background-color:rgba(255,255,255,0.8);}
+#parent2 .child{background-color:rgba(0,255,0,0.8);}
+#parent3 .child{background-color:rgba(0,0,255,0.8);}
+
+.child1{left:0px;top:0px;}
+.child2{left:50px;top:50px;}
+.child3{left:100px;top:100px;}
+.child{
+	position:absolute;
+	width:50px;height:50px;
+	animation:child 3s linear 0s infinite alternate;
+}
+@keyframes child{
+	0%{border-radius:0px;}
+	100%{border-radius:100px;}
+}
+</style>
+
+<div id=wrap class=parent>
+	<div id=grandParent class=parent>
+		<div id=parent1 class=parent>
+			<div class="child1 child"></div>
+			<div class="child2 child"></div>
+			<div class="child3 child"></div>
+		</div>
+		
+		<div id=parent2 class=parent>
+			<div class="child1 child"></div>
+			<div class="child2 child"></div>
+			<div class="child3 child"></div>
+		</div>
+		
+		<div id=parent3 class=parent>
+			<div class="child1 child"></div>
+			<div class="child2 child"></div>
+			<div class="child3 child"></div>
+		</div>
+	</div>
+</div>

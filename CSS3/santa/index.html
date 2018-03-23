@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>サンタ</title>
+		<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+		<style>
+			*{margin:0;padding:0;}
+			#bg{
+				width:800px;height:500px;
+				margin:5px auto;
+				position:relative;
+				background-image:url(bg.png);
+			}
+			#santa{
+				width:400px;height:160px;
+				position:absolute;top:200px;left:400px;
+				background-image:url(santa.png);
+			}
+			#title{font-size:60px;text-align:center;color:white;}
+			.msg{font-size:20px;text-align:center;color:white;font-family:serif;}
+			#style{
+				margin:5px;padding:5px;
+				white-space:pre;
+				
+				border:2px dotted gray;
+				display:block;
+				margin:5px auto;
+				
+				box-sizing:border-box;
+				tab-size:3;
+				font-size:18px;
+				height:200px;
+				overflow:scroll;
+				width:800px;
+				resize:vertical;
+			}
+		</style>
+	</head>
+	<body>
+
+<style scoped contenteditable id=style>/* ① サンタをアニメーション*/
+#santa{animation:santaStory 4s linear 0s infinite normal; animation-fill-mode:both;}
+@keyframes santaStory{
+	0%{-top:200px; -opacity:0; -left:800px; -transform:rotate(-30deg) scale(0,0);}
+	25%{-top:100px;}
+	50%{-top:200px; -opacity:1; -transform:rotate(10deg) scale(1.5,1.5);}
+	75%{-top:300px;}
+	100%{-top:200px; -opacity:0; -left:-400px; -transform:rotate(-30deg) scale(0,0);}
+}
+			
+/* ② 背景をアニメーション*/
+#bg{animation:bgStory 6s linear 0s infinite normal; animation-fill-mode:both;}
+@keyframes bgStory{
+	0%{-background-position:0px;}
+	100%{-background-position:800px;}
+}
+
+/* ③ あぶれ処理*/
+#bg{-overflow:hidden;}
+
+/* ④ Webフォント */
+#title{ -font-family: 'Alex Brush', cursive;}
+</style>
+
+		<div id="bg">
+			<h1 id="title" contenteditable>Merry Xmas</h1><!-- ⑦ -->
+			<p class="msg"  contenteditable>サンタさんプレゼント待ってます！</p>
+			<div id="santa" onclick="audio.play();"></div>
+		</div>
+		<audio id=audio src="audio.mp3"></audio>
+		
+		<script>
+			var santa=document.getElementById("audio");
+		</script>
+	</body>
+</html>

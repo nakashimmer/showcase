@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>xmas</title>
+<meta property="og:title" content="Xmas" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://springreen.jp/SHOWCASE/CSS3/animation/xmastree/" />
+<meta property="og:image" content="http://springreen.jp/SHOWCASE/CSS3/animation/xmastree/xmastree.png" />
+<meta name=viewport content="width=device-width">
+<style>
+	body{
+		background-color:black;
+	}
+	#wrap{
+		transform-style:preserve-3d;
+		margin:100px auto;
+		width:0px;height:0px;
+		animation:xmas 30s linear 0s infinite normal;
+	}
+	@keyframes xmas{
+		0%{transform:rotateX(-30deg) rotateY(0deg);}
+		50%{transform:rotateX(-30deg) rotateY(-180deg);}
+		100%{transform:rotateX(-30deg) rotateY(-360deg);}
+	}
+
+	.plane{
+		position:relative;
+		transform-style:preserve-3d;
+	}
+	#plane0{transform:rotateY(0deg);}
+	#plane1{transform:rotateY(60deg);}
+	#plane2{transform:rotateY(120deg);}
+
+
+	.star{
+		transform-origin:center bottom;
+		position:absolute;
+		width:0px;height:0px;
+		border-left:10px solid transparent;
+		border-right:10px solid transparent;
+		left:-10px;
+border-bottom:50px solid rgba(215,215,0,1);
+		animation:star 5s ease-in-out 0s infinite alternate;
+	}
+	
+	@keyframes star{
+		0%{border-bottom:50px solid rgba(215,215,0,0.1);}
+		100%{border-bottom:50px solid rgba(215,215,0,1);}
+	}
+	
+	.star0{transform:rotate(0deg);}
+	.star1{transform:rotate(72deg);}
+	.star2{transform:rotate(144deg);}
+	.star3{transform:rotate(216deg);}
+	.star4{transform:rotate(298deg);}
+	
+	.tree{
+		position:absolute;
+		transform-style:preserve-3d;
+		border-style:solid;
+		border-color:transparent;
+		height:0px;
+		border-bottom-color:rgba(0,215,0,0.4);
+	}
+	
+	.tree0{
+		top:80px;left:-100px;width:0px;
+		border-width:0px 100px 100px 100px;
+	}
+	
+	.tree1{
+		top:180px;left:-200px;width:100px;
+		border-width:0px 150px 300px 150px;
+	}
+	
+	.tree2{
+		top:480px;left:-200px;width:300px;
+		border-width:0px 50px 100px 50px;
+	}
+	
+	.pot{
+		position:absolute;top:580px;left:-25px;
+		background-color:rgba(215,215,0,0.4);
+		width:50px;height:50px;
+	}
+	#ground{
+		position:absolute;top:480px;left:-150px;
+		width:300px;height:300px;
+		background-color:rgba(215,215,215,0.5);
+		transform:rotateX(90deg);
+		border-radius:50%;
+	}
+	.msg{
+		position:absolute;
+		top:300px;
+		color:red;
+		font-size:30px;
+		width:300px;
+		left:-150px;
+		text-align:center;
+		border:1px solid rgba(0,0,0,0);
+		background-color:rgba(0,0,0,0);
+	}
+	#msg0{transform:rotateY(0deg) translateZ(200px);margin:0 auto;}
+	#msg1{transform:rotateY(120deg) translateZ(200px);}
+	#msg2{transform:rotateY(240deg) translateZ(200px);}
+
+</style>
+
+<div id=wrap></div>
+<audio src=oHolyNight.mp3 autoplay></audio>
+
+<script>
+	var html="";
+	for(var i=0;i<3;i++){
+		html+='<div id=plane'+i+' class=plane>';
+		for(var j=0;j<5;j++){
+			html+='<div class="star'+j+' star"></div>';
+		}
+		for(var k=0;k<3;k++){
+			html+='<div class="tree'+k+' tree"></div>';
+		}
+		for(var l=0;l<1;l++){
+			html+='<div class="pot'+l+' pot"></div>';
+		}
+		html+="</div>";
+	}
+	html+="<div id=ground></div>";
+	html+="<div id=msg0 class=msg>Merry Xmas!</div>";
+	html+="<div id=msg1 class=msg>O Holy Night!</div>";
+	html+="<div id=msg2 class=msg>Hallelujah!</div>";
+	document.getElementById("wrap").innerHTML=html;
+</script>

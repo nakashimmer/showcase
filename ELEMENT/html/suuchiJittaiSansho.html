@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<style>
+	*{margin:0;padding:0;font-size:16px;}
+	#output{width:500px;}
+	#input{text-align:right;color:red;}
+	.item{border:1px solid gray;float:left;text-align:center;height:3em;width:5em;line-height:1.5em;font-size:8px;}
+</style>
+<h1>数値実体参照(10進数)</h1>
+<p><input type=text id=input value=0>から500件
+<button onclick="display();">表示</button>する。
+「127344」あたりから絵文字多数</p>
+
+<output id=output>表示</output>
+<script>
+
+function display(){
+	
+	var input=parseInt(document.getElementById("input").value);
+	var output=document.getElementById("output");
+	output.innerHTML="";
+	
+	for(var n1=input;n1<=input+500;n1++){
+		output.innerHTML +="<div class=item>"+n1+"</br>&#"+n1+";</div>";
+	}
+	document.getElementById("input").value = input+500;
+}
+</script>

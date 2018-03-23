@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>まる子ちゃん</title>
+<meta name="viewport" content="width=device-width">
+
+<style>
+*{margin:0;padding:0;border:0;}
+body{}
+
+#sotowaku{
+	position:relative;
+	margin:30px auto;width:200px;height:200px;
+	background-color:rgb(252,219,200);
+	border:3px solid black;border-radius:30px;
+	overflow:hidden;
+	transform:scale(2,2) translate(0,50px);
+}
+
+.hana{
+	position:absolute;left:50px;
+	width:100px;height:200px;
+	background-color:rgb(233,177,94);
+	border-radius:50px/100px;
+}
+#hana1{transform:rotate(0);}
+#hana2{transform:rotate(45deg);}
+#hana3{transform:rotate(90deg);}
+#hana4{transform:rotate(135deg);}
+
+#hair{
+	position:absolute;left:17px;top:20px;
+	width:160px;height:110px;
+	background-color:rgb(19,35,51);
+	border:5px solid white;
+	border-radius:120px 120px 0 0/180px 180px 0 0;
+	transform:rotate(-5deg);
+}
+
+.kao{
+	position:absolute;left:43px;top:50px;
+	width:120px;height:120px;
+	background-color:rgb(252,219,200);
+	border-radius:75px 75px 70px 70px/50px 50px 70px 70px;
+	border:2px solid black;transform:rotate(-5deg);
+}
+.shirowaku{
+	left:40px;top:49px;
+	border:5px solid white;
+}
+.mayu{
+	position:absolute;width:27px;height:15px;
+	border-width:1px 0 0 0;
+	border-top:1px solid black;
+	border-radius:15px 15px 3px 3px;
+	transform:rotate(-10deg);}
+#mayu1{left:17px;top:20px;}
+#mayu2{left:72px;top:20px;}
+
+.eye{
+	position:absolute;top:45px;width:16px;
+	height:16px;
+	background-color:black;
+	border-radius:8px;
+}
+#eye1{left:30px;}
+#eye2{left:75px;}
+.eyelight{
+	margin:2px 0 0 7px;width:7px;height:7px;
+	background-color:white;
+	border-radius:3px;
+}
+
+.hoho{
+	position:absolute;top:75px;
+	width:15px;height:15px;
+	background-color:rgb(238,155,149);
+	border-radius:8px;
+}
+#hoho1{left:5px;}
+#hoho2{left:99px;}
+
+#kuchi{
+	position:absolute;left:45px;top:85px;
+	width:30px;height:15px;
+	background-color:rgb(200,105,101);
+	border:2px solid black;
+	border-radius:0 0 15px 15px;
+	transform:rotate(-5deg);
+}
+
+.maegami{
+	position:absolute;z-index:1;
+	width:0;height:0;
+	border-top:30px solid black;
+	border-style:solid solid none solid;
+	border-color:rgb(19,35,51) transparent transparent transparent;
+}
+#maegami1{
+	left: 43px;top:71px;
+	border-width:18px 7px 0 7px;
+	transform:rotate(-10deg);
+}
+#maegami2{
+	left:47px;top:60px;
+	border-width:25px 12px 0 12px;
+	transform:rotate(-10deg);
+}
+#maegami3{
+	left:64px;top:53px;
+	border-width:30px 15px 0 15px;
+	transform:rotate(-10deg);
+}
+#maegami4{
+	left: 87px;top:48px;
+	border-width:35px 17px 0 17px;
+	transform:rotate(-5deg);
+}
+#maegami5{
+	left:112px;top:50px;
+	border-width:30px 15px 0 15px;
+	transform:rotate(10deg);
+}
+#maegami6{
+	left:132px;top:55px;
+	border-width:25px 12px 0 12px;
+	transform:rotate(5deg);
+}
+#maegami7{
+	left:147px;top:64px;
+	border-width:20px  8px 0  8px;
+	transform:rotate(10deg);
+}
+
+#mimi{
+	position:absolute;left:37px;top:100px;
+	width:135px;height:30px;
+	background-color:rgb(252,219,200);
+	border-radius:10px 10px 20px 20px; 
+	transform:rotate(-5deg);
+}
+
+#hana{
+	width:200px;height:200px;
+	animation: kurukuru 16s ease 0s infinite;
+	transform-origin:center;
+}
+@keyframes kurukuru{
+	0%{transform:rotate(0deg);}
+	100%{transform:rotate(360deg);}
+}
+
+.eye{animation:pachipachi 16s linear 1s infinite;}
+@keyframes pachipachi{
+	50%{transform:scale(1,1);}
+	51%{transform:scale(1,0);}
+	52%{transform:scale(1,1);}
+	70%{transform:scale(1,1);}
+	71%{transform:scale(1,0);}
+	72%{transform:scale(1,1);}
+	80%{transform:scale(1,1);}
+	81%{transform:scale(1,0);}
+	82%{transform:scale(1,1);}
+}
+</style>
+
+<div id=sotowaku>
+	<div id=hana>
+		<div class=hana id=hana1></div>
+		<div class=hana id=hana2></div>
+		<div class=hana id=hana3></div>
+		<div class=hana id=hana4></div>
+	</div>
+	
+	<div class="kao shirowaku"></div>
+	<div id=hair></div>
+	<div class=maegami id=maegami1></div>
+	<div class=maegami id=maegami2></div>
+	<div class=maegami id=maegami3></div>
+	<div class=maegami id=maegami4></div>
+	<div class=maegami id=maegami5></div>
+	<div class=maegami id=maegami6></div>
+	<div class=maegami id=maegami7></div>
+	<div id=mimi></div>
+	
+	<div class=kao>
+		<div class=mayu id=mayu1></div>
+		<div class=mayu id=mayu2></div>
+		<div class=eye id=eye1>
+			<div class=eyelight></div>
+		</div>
+		<div class=eye id=eye2>
+			<div class=eyelight></div>
+		</div>
+		<div class=hoho id=hoho1></div>
+		<div class=hoho id=hoho2></div>
+		<div id=kuchi></div>
+	</div>
+</div>
+
+

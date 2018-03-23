@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>ワクワク君</title>
+<meta name=viewport content="width=device-width;">
+<style>
+*{	margin:0px;padding:0px;
+	font-size:13px;
+}
+#wrap{
+	width:100%;
+	margin:0 auto;
+}
+
+.box{
+	width:500px;
+	margin:0 auto;
+	background-color:rgba(255,255,255,0.8);
+	/*border:1px solid gray;*/
+}
+#box{
+	margin:50px auto;
+	border:10px solid #6666ff;
+	width:200px;height:200px;
+	transition:all 1s ease;
+	background-image:url(mL.png);
+	background-size:100% 100%;
+}
+.control{
+	width:50%;float:left;
+	margin:0;
+	text-align:center;
+	border-collapse:collapse;
+	background-color:rgba(255,255,255,0.7);
+}
+th{background-color:#eee;}
+th,td{border:1px solid gray;padding:0px;height:2.5em;box-sizing:border-box;}
+
+#tableArea:after{
+	content:"";
+	display:block;
+	clear:both;
+}
+h1{
+	background-color:black;color:white;
+	text-align:center;
+	font-size:1.5em;
+}
+.range{width:95%;height:2em;margin:0;padding:0;border:none;}
+
+@media(max-width:500px){
+	.control{width:100%;}
+	.box{
+		width:100%;
+	}
+
+}
+</style>
+<body>
+<div id=wrap>
+	<h1>枠で遊ぼう「ワクワク君」</h1>
+
+	<div id=tableArea>
+		<table class=control>
+			<tr>
+				<th colspan=6>CSS</th>
+			</tr>
+			<tr>
+				<th colspan=2>div要素</th>
+				<th colspan=4>border-width</th>
+			</tr>
+	
+			<tr>
+				<th>横幅</th>
+				<th>縦幅</th>
+				<th>上</th>
+				<th>右</th>
+				<th>下</th>
+				<th>左</th>
+			</tr>
+			<tr class=vle>
+				<td id=widthPx>200px</td>
+				<td id=heightPx>200px</td>
+				<td id=topPx>10px</td>
+				<td id=rightPx>10px</td>
+				<td id=bottomPx>10px</td>
+				<td id=leftPx>10px</td>
+			</tr>
+			
+			<tr>
+				<td><input class=range type=range min=0 max=500 value=200 step=10  id=width>	</td>
+				<td><input class=range type=range min=0 max=500 value=200 step=10  id=height>	</td>
+				<td><input class=range type=range min=0 max=100 value=10 step=10 id=top>		</td>
+				<td><input class=range type=range min=0 max=100 value=10 step=10  id=right>	</td>
+				<td><input class=range type=range min=0 max=100 value=10 step=10  id=bottom>	</td>
+				<td><input class=range type=range min=0 max=100 value=10 step=10 id=left>	</td>
+			</tr>
+			
+			<tr>
+				<td colspan=2><input class=range type=color id=bgColor value="#ffffff"></td>
+				<td><input class=range type=color id=topColor value=#6666ff></td>
+				<td><input class=range type=color id=rightColor value=#6666ff></td>
+				<td><input class=range type=color id=bottomColor value=#6666ff></td>
+				<td><input class=range type=color id=leftColor value=#6666ff></td>
+			</tr>
+		</table>
+		
+		<table class=control id=table2>
+			<tr>
+				<th colspan=9>CSS3</th>
+			</tr>
+			<tr>
+				<th colspan=4 rowspan=2>border-radius</th>
+				<th colspan=5>transform</th>
+			</tr>
+			<tr>
+				<th colspan=2>skew</th>
+				<th>rotate</th>
+				<th colspan=2>scale</th>
+			</tr>
+			<tr>
+				<th>左上</th>
+				<th>右上</th>
+				<th>右下</th>
+				<th>左下</th>
+				<th>横方向</th>
+				<th>縦方向</th>
+				<th>角度</th>
+				<th>横倍率</th>
+				<th>縦倍率</th>
+			</tr>
+			<tr class=vle>
+				<td id=leftTopPx>0%</td>
+				<td id=rightTopPx>0%</td>
+				<td id=rightBottomPx>0%</td>
+				<td id=leftBottomPx>0%</td>
+				<td id=skewXPx>0deg</td>
+				<td id=skewYPx>0deg</td>
+				<td id=rotateDeg>0deg</td>
+				<td id=scaleXN>1倍</td>
+				<td id=scaleYN>1倍</td>
+			</tr>
+			
+			<tr>
+				<td rowspan=2><input class=range type=range min=0 max=100 value=0 step=10  id=leftTop>		</td>
+				<td rowspan=2><input class=range type=range min=0 max=100 value=0 step=10  id=rightTop>		</td>
+				<td rowspan=2><input class=range type=range min=0 max=100 value=0 step=10  id=rightBottom>		</td>
+				<td rowspan=2><input class=range type=range min=0 max=100 value=0 step=10  id=leftBottom>		</td>
+				<td rowspan=2><input class=range type=range min=-90 max=90 value=0 step=10  id=skewX>		</td>
+				<td rowspan=2><input class=range type=range min=-90 max=90 value=0 step=10  id=skewY>		</td>
+				<td rowspan=2><input class=range type=range min=-180 max=180 value=0 step=10  id=rotate>		</td>
+				<td rowspan=2><input class=range type=range min=-3 max=5 value=1 step=1  id=scaleX>		</td>
+				<td rowspan=2><input class=range type=range min=-3 max=5 value=1 step=1  id=scaleY>		</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class=box>
+		<div id=box></div>
+	</div>
+	
+</div>
+
+<script>
+	function $(id){return document.getElementById(id);}
+	
+	//borderWidth
+	$("top").addEventListener("mousemove",borderWidthChange);
+	$("right").addEventListener("mousemove",borderWidthChange);
+	$("left").addEventListener("mousemove",borderWidthChange);
+	$("bottom").addEventListener("mousemove",borderWidthChange);
+	$("top").addEventListener("change",borderWidthChange);
+	$("right").addEventListener("change",borderWidthChange);
+	$("left").addEventListener("change",borderWidthChange);
+	$("bottom").addEventListener("change",borderWidthChange);
+	
+	function borderWidthChange(){
+		$("box").style.borderWidth
+			=$("top").value+"px " 		+$("right").value+"px "
+			+$("bottom").value+"px " 	+$("left").value+"px";
+		$("topPx").innerHTML=$("top").value+"px";
+		$("rightPx").innerHTML=$("right").value+"px";
+		$("bottomPx").innerHTML=$("bottom").value+"px";
+		$("leftPx").innerHTML=$("left").value+"px";
+	};
+	
+	//borderColor
+	$("topColor").addEventListener("change",borderColorChange);
+	$("rightColor").addEventListener("change",borderColorChange);
+	$("leftColor").addEventListener("change",borderColorChange);
+	$("bottomColor").addEventListener("change",borderColorChange);
+
+	function borderColorChange(){
+		$("box").style.borderColor
+			=$("topColor").value+" "		+$("rightColor").value+" "
+			+$("bottomColor").value+" "	+$("leftColor").value;
+	}
+	
+	//width,height
+	$("width").addEventListener("mousemove",boxSizeChange);
+	$("height").addEventListener("mousemove",boxSizeChange);
+		$("width").addEventListener("change",boxSizeChange);
+	$("height").addEventListener("change",boxSizeChange);
+	
+	function boxSizeChange(){
+		$("box").style.width=$("width").value+"px";
+		$("box").style.height=$("height").value+"px";
+		$("widthPx").innerHTML=$("width").value+"px";
+		$("heightPx").innerHTML=$("height").value+"px";
+	}
+
+	//bgColor
+	$("bgColor").addEventListener("change",bgColorChange);
+	function bgColorChange(){
+		$("box").style.backgroundColor=$("bgColor").value;
+	}
+	
+	//borderRadius
+	$("leftTop").addEventListener("mousemove",borderRadiusChange);
+	$("rightTop").addEventListener("mousemove",borderRadiusChange);
+	$("rightBottom").addEventListener("mousemove",borderRadiusChange);
+	$("leftBottom").addEventListener("mousemove",borderRadiusChange);
+	$("leftTop").addEventListener("change",borderRadiusChange);
+	$("rightTop").addEventListener("change",borderRadiusChange);
+	$("rightBottom").addEventListener("change",borderRadiusChange);
+	$("leftBottom").addEventListener("change",borderRadiusChange);
+	
+	function borderRadiusChange(){
+		$("box").style.borderRadius
+			=$("leftTop").value+"% "
+			+$("rightTop").value+"% "
+			+$("rightBottom").value+"% "
+			+$("leftBottom").value+"% ";
+		$("leftTopPx").innerHTML=$("leftTop").value+"%";
+		$("rightTopPx").innerHTML=$("rightTop").value+"%";
+		$("rightBottomPx").innerHTML=$("rightBottom").value+"%";
+		$("leftBottomPx").innerHTML=$("leftBottom").value+"%";
+	}
+	
+	//---transform---
+	$("rotate").addEventListener("mousemove",transformChange);
+	$("skewX").addEventListener("mousemove",transformChange);
+	$("skewY").addEventListener("mousemove",transformChange);
+	$("scaleX").addEventListener("mousemove",transformChange);
+	$("scaleY").addEventListener("mousemove",transformChange);
+	$("rotate").addEventListener("change",transformChange);
+	$("skewX").addEventListener("change",transformChange);
+	$("skewY").addEventListener("change",transformChange);
+	$("scaleX").addEventListener("change",transformChange);
+	$("scaleY").addEventListener("change",transformChange);
+	
+	function transformChange(){
+		$("box").style.transform
+		= "skew("+$("skewX").value+"deg,"+$("skewY").value+"deg) " 
+		+ "rotate("+$("rotate").value+"deg) "
+		+ "scale("+$("scaleX").value+","+$("scaleY").value+")";
+		
+		$("rotateDeg").innerHTML=$("rotate").value+"deg";
+		$("skewXPx").innerHTML=$("skewX").value+"deg";
+		$("skewYPx").innerHTML=$("skewY").value+"deg";
+		$("scaleXN").innerHTML=$("scaleX").value+"倍";
+		$("scaleYN").innerHTML=$("scaleY").value+"倍";
+	}
+</script>

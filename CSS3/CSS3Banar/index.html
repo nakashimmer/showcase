@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>3次元バナー</title>
+<style>
+	#wrap{
+		transform-style:preserve-3d;
+		perspective: 500px;
+		width:521px;
+		height:0px;
+		margin:-100px auto;
+  }
+	.banar{
+		width:300px;
+		height:200px;
+		line-height:200px;
+		font-size:200px;
+		overflow:hidden;
+		position:absolute;
+		margin:0 auto;
+		background-color:#f91;
+	}
+	
+	#child1{
+		transform-origin:left bottom;
+		transform:translateY(150px) rotateY(-30.05deg);
+		border-right:none;
+	}
+	
+	#child2{
+		right:0;
+		transform-origin:right bottom;
+		transform:translateY(150px) rotateY(30.05deg);
+		border-left:none;
+	}
+	
+	#str1{
+		animation:childAnime 5s linear -6s infinite normal;
+		text-indent:3.8em;
+	}
+
+	#str2{
+		animation:childAnime 5s linear 0s infinite normal;
+	}
+	
+	.str{width:14em;}
+	.str:before{content:"Hello CSS3"}
+
+	@keyframes childAnime{
+		0%{transform:translate(300px,0px);}
+		100%{transform:translate(-1800px,0px);}
+	}
+</style>
+
+<div id=wrap>
+
+	<div id=child1 class=banar>
+		<div id=str1 class=str></div>
+	</div>
+
+	<div id=child2 class=banar>
+		<div id=str2 class=str></div>
+	</div>
+
+</div>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>schoo</title>
+	<style>
+		 #style{
+			 margin:0:padding:0;
+			 white-space:pre;
+			 overflow:scroll;
+			 border:1px solid pink;
+			 display:block;
+			 
+			 float:left;
+			 width:58%;
+			 height:600px;
+			 box-sizing:border-box;
+			 tab-size:1;
+			 font-size:20px;
+			 font-family:sans-serif;
+		 }
+		 #right{
+			 float:right;width:40%;box-sizing:border-box;
+		 }
+		 small{display:block;}
+	</style>
+</head>
+
+<body>
+	<small>「<b>CSS3演習君</b>」は手軽にCSS3の効果を確認できるようにと制作しました。
+	各プロパティの前にある「-」は、「CSS3演習君」中だけでのプロパティを無効にするための特別な記号であり、
+	CSSのオフィシャルな記号ではないのでご注意ください</small>
+	<style scoped contenteditable id=style> 
+	li{		/*リスト*/
+		border-top:1px solid gray;			/*上の枠線*/
+		border-right:1px solid gray;		/*右の枠線*/
+		border-left:1px solid gray;		/*左の枠線*/
+		line-height:48px;					/*上下まんなか揃え*/
+		text-indent:1em;					/*字下げ*/
+		position:relative;				/*擬似要素絶対値指定*/
+	}
+	
+	#wrap *{		/*リセットCSS*/
+		list-style:none;												/*リスト記号リセット*/
+		text-decoration:none;		/*下線リセット*/
+		margin:0; padding:0;			/*余白リセット*/
+		font-family:serif;									/*文字関連リセット*/
+		color:black; font-size:15px;		/* */
+	}
+	
+	#wrap{		/* 外枠*/
+		width:320px; margin:48px auto;		/* */
+	}
+	
+	a{
+		display:block;height:48px;	/*li全体にリンク*/
+	}
+	
+	li:first-of-type{		/*最初のli要素*/
+		border-radius:10px 10px 0 0;	/*上角を丸くする*/
+	}
+	
+	li:last-of-type{		/*最後のli要素*/
+		border-bottom:1px solid gray;	/*下の枠線*/
+		border-radius:0 0 10px 10px;		/*下角を丸く*/
+	}
+	
+	li:nth-of-type(even){					/*li何番目*/
+		background-color:#eee;			/*背景色*/
+	}
+	
+	a:after{
+		-position:absolute;				/*位置を絶対値にする*/
+		-content:""; display:block;		/*擬似要素を作る*/
+		-background-image:url(arrow.png);	/*背景画像*/
+		-width:40px; height:40px;			/*大きさ40x40*/
+		-top:4px; right:1em;				/*絶対値*/
+	}
+	
+	</style>
+	<div id=right>
+		<div id="wrap">
+			<h1><a href="sample3.html">SCHOO</a></h1>
+			<nav>
+				<ul>
+					<li><a href="#">トップ</a></li>
+					<li><a href="https://schoo.jp/class/2265">デザイン学部</a></li>
+					<li><a href="#">プログラミング学部</a></li>
+					<li><a href="#">マーケティング学部</a></li>
+					<li><a href="#">スタートアップ学部</a></li>
+					<li><a href="https://schoo.jp/class/2265">今日の授業</a></li>
+					<li><a href="https://schoo.jp/class/2265">受けたいボタンを押す</a></li>
+					<li><a href="https://schoo.jp/class/2265">受け忘れた授業</a></li>
+					<li><a href="https://schoo.jp/class/2265">おすすめの授業</a></li>
+					<li><a href="#">運営会社</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</body>
+</html>

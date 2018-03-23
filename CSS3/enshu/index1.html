@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>擬似要素の練習</title>
+	<style>
+		
+		 #style{
+			 margin:0:padding:0;
+			 white-space:pre;
+			 overflow:scroll;
+			 border:3px solid pink;
+			 display:block;
+			 
+			 float:left;
+			 width:40%;
+			 height:600px;
+			 box-sizing:border-box;
+			 tab-size:1;
+			 font-size:30px;
+			 font-family:sans-serif;
+			 
+			 resize:both;
+		 }
+		 #right{
+			 float:right;width:50%;box-sizing:border-box;
+		 }
+		 #right *{font-size:30px;}
+		 h1{font-size:30px;}
+		 small{display:block;}
+		 #wrap{
+			 transition:all 1s ease;
+		 }
+	</style>
+</head>
+
+<body>
+	<style scoped contenteditable id=style
+	>/* 外枠*/
+	#wrap{		
+		-width:320px;
+		-margin:10px auto;
+	}
+	
+	
+	/*リスト*/
+	li{
+		/*枠線*/
+		-border-top:3px solid gray;
+		-border-right:3px solid gray;
+		-border-left:3px solid gray;
+		/*行高*/
+		-line-height:49px;
+		/*字下*/
+		-text-indent:0.5em;
+	}
+	
+	
+	/*リセットCSSほか*/
+	#wrap *{
+		-margin:0px; padding:0px;
+		-list-style:none;
+		-text-decoration:none;
+		-font-family:serif;
+		-color:black;
+	}
+
+
+	/*リンクのエリアを広げる*/
+	a{
+		-display:block;
+	}
+
+
+	/*最初のli要素*/
+	li:first-of-type{
+		-border-radius:30px 30px 0 0;
+	}
+
+
+	/*最後のli要素*/
+	li:last-of-type{
+		-border-bottom:3px solid gray;
+		-border-radius:0 0 30px 30px;
+	}
+
+
+	/*奇数番目のli要素*/
+	li:nth-of-type(odd){
+		-background-color:#ccc;
+	}
+	
+	</style>
+	<div id=right>
+		<div id="wrap">
+			<h1>Web講座</h1>
+			<nav>
+				<ul>
+					<li><a href="#">トップ</a></li>
+					<li><a href="#">新着情報</a></li>
+					<li><a href="#">Webグラフィック</a></li>
+					<li><a href="#">Webマーケティング</a></li>
+					<li><a href="#">Webプログラミング</a></li>
+					<li><a href="#">スマホアプリ</a></li>
+					<li><a href="#">よくあるご質問</a></li>
+					<li><a href="#">お問い合わせ</a></li>
+					<li><a href="#">運営会社</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+	<small>「<b>CSS3演習君</b>」は手軽にCSS3の効果を確認できるようにと制作しました。
+	各プロパティの前にある「-」は、「CSS3演習君」中だけでのプロパティを無効にするための特別な記号であり、
+	CSSのオフィシャルな記号ではないのでご注意ください</small>
+</body>
+</html>

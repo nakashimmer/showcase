@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DOM</title>
+	<meta name=viewport content="width=device-width">
+	<style>
+		*{
+			margin:0;padding:0;
+			font-size:20px;
+			-webkit-transition:all 0.1s linear;
+		}
+		body{
+			-webkit-transform-style:preserve-3d;
+			-webkit-perspective:1000px;
+			position:relative;
+		}
+		#wrap{
+			-webkit-transform-style:preserve-3d;
+			width:50px;
+			height:50px;
+			border:0px solid red;
+			margin:300px auto;position:relative;
+		}
+		p{position:absolute;top:0;left:0;}
+	</style>
+</head>
+
+<body>
+	
+	<div id="wrap"></div>
+	<p>←(左)<br>↑(上)<br>↓(下)<br>→(右)<br>F(前)B(後)</p>
+</body>
+
+<script>
+	var wa = new Array();
+	var wrap = document.getElementById("wrap");
+	
+	for(var i=0;i<24;i++){
+		wa[i] = document.createElement("div");
+		wa[i].style.webkitTransform
+			="scaleX(0.1) scaleY(0.1) "
+			+"rotateY("+(i*15+Math.PI)+"deg) "
+			+"translateX(500px)";
+		wa[i].style.width="500px";
+		wa[i].style.height="500px";
+		wa[i].style.top="-225px";
+		wa[i].style.left="-225px";
+		wa[i].style.boxSizing="border-box";
+		wa[i].style.border="10px solid black";
+		wa[i].style.backgroundColor="rgba(150,150,150,0.1)";
+		wa[i].style.borderRadius="10%";
+		wa[i].style.position="absolute";
+		wrap.appendChild(wa[i]);
+	}
+	
+	setInterval(anime,100);
+	var count=0;
+	var tx=0;		//translateZ
+	var ty=0;		//translateX
+	var tz=5000;	//perspective
+	
+	function anime(){
+		for(var i=0;i<24;i++){
+			wa[i].style.webkitTransform
+			="scaleX(0.1) scaleY(0.1) "
+			+"rotateY("+(i*15+Math.PI+count*2)+"deg) "
+			+"translateX(500px)";
+		}
+		
+		if(tx<-1000){tx=-1000};if(1000<tx){tx=1000;}
+		if(ty<-200){ty=-200};if(200<ty){ty=200;}
+		if(tz<-1000){tz=-1000;};if(5000<tz){tz=5000;}
+		wrap.style.webkitTransform
+			=	"translateX("+Math.floor(tx)+"px) "
+			+	"translateY("+Math.floor(ty)+"px) "
+			+	"rotateX("+(-ty*5/180*Math.PI)+"deg)";
+		wrap.style.webkitPerspective=tz+"px";
+		count++;
+	}
+
+	window.addEventListener("keydown",function(e){
+		console.log(e.keyCode+" "+tz);
+		if(e.keyCode==70){	//Forard
+			e.preventDefault();	tz -=150;
+		}
+		if(e.keyCode==66){	//Back
+			e.preventDefault();	tz +=150;
+		}
+		if(e.keyCode==37){	//←
+			e.preventDefault();	tx -=5;
+		}
+		if(e.keyCode==39){	//→
+			e.preventDefault();	tx +=5;
+		}
+		if(e.keyCode==38){ //↑
+			e.preventDefault();	ty -=15;
+		}
+		
+		if(e.keyCode==40){ //↓
+			e.preventDefault();	ty +=15;
+		}
+		
+	});
+</script>
+</html>
