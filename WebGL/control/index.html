@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>three.js</title>
+	
+	<style>
+		*{margin:0;padding:0;}
+		body{background-color:#eee;}
+		canvas{display:block;margin:0 auto;}
+		ul{display:flex;list-style:none;}
+	</style>
+	
+	<script src="three.js"></script>
+	
+</head>
+<body>
+<div id=controls>
+<p>ローテーション
+	<button onclick="rotationX(0.01);">X</button>
+	<button onclick="rotationY(0.01);">Y</button>
+	<button onclick="rotationZ(0.01);">Z</button>
+	<button onclick="rotationX(-0.01);">-X</button>
+	<button onclick="rotationY(-0.01);">-Y</button>
+	<button onclick="rotationZ(-0.01);">-Z</button>
+</p>
+
+<p>伸縮
+	<button onclick="scaleX(0.01);">X</button>
+	<button onclick="scaleY(0.01);">Y</button>
+	<button onclick="scaleZ(0.01);">Z</button>
+	<button onclick="scaleX(-0.01);">-X</button>
+	<button onclick="scaleY(-0.01);">-Y</button>
+	<button onclick="scaleZ(-0.01);">-Z</button>
+</p>
+
+<p>伸縮
+	<button onclick="scaleX(0.01);">X</button>
+	<button onclick="scaleY(0.01);">Y</button>
+	<button onclick="scaleZ(0.01);">Z</button>
+	<button onclick="scaleX(-0.01);">-X</button>
+	<button onclick="scaleY(-0.01);">-Y</button>
+	<button onclick="scaleZ(-0.01);">-Z</button>
+</p>
+
+<p>移動
+	<button onclick="positionX(0.01);">X</button>
+	<button onclick="positionY(0.01);">Y</button>
+	<button onclick="positionZ(0.01);">Z</button>
+	<button onclick="positionX(-0.01);">-X</button>
+	<button onclick="positionY(-0.01);">-Y</button>
+	<button onclick="positionZ(-0.01);">-Z</button>
+</p>
+
+<p>色の変更
+	<button onclick="colorChange('0xff0000');">red</button>
+	<button onclick="colorChange('0x00ff00');">green</button>
+	<button onclick="colorChange('0x0000ff');">blue</button>
+</p>
+
+<!--p>テクスチャ
+	<button onclick="txtr();">png1</button>
+</p-->
+</div>
+<script>
+
+// レンダラー(表示するための機能)生成
+	var renderer = new THREE.WebGLRenderer({antialias:true});
+	renderer.setSize(500,500);
+	renderer.setClearColor(0x000000,0);
+	document.body.appendChild(renderer.domElement);
+
+//2 シーン(3次元空間)生成
+	var scene=new THREE.Scene();
+	
+//3 カメラ生成
+	var camera=new THREE.PerspectiveCamera(50,500/500);
+	camera.position=new THREE.Vector3(1,3,5);
+	camera.lookAt(new THREE.Vector3(0,0,0));
+	scene.add(camera);
+	
+//4.ライト
+	//4-1ライトの色
+	var light = new THREE.DirectionalLight(0xaaaaaa);
+
+	//4-2 ライト位置
+	light.position = new THREE.Vector3(0,1,1);
+	
+	//4-3ライトをシーンに追加
+	scene.add(light);
+	
+	//4-4照り返し
+	var ambient = new THREE.AmbientLight(0x333333);
+	
+	//4-5照り返しをシーンに追加
+	scene.add(ambient);
+	
+//5. 補助軸線
+	var axis = new THREE.AxisHelper(1000);   
+	scene.add(axis);
+	
+	
+	
+//6.トーラス----------------------------------------------
+	
+	//1 形を生成：トーラス(半径、輪の幅、輪の分割、円の分割、弧の角)
+	var geometry =new THREE.TorusGeometry(1, 0.2, 20, 8, Math.PI * 2 );
+	
+	//2 質感を生成
+	var material = new THREE.MeshPhongMaterial({
+		color:0xff88ff,            //物体の色
+		ambient:0xee77ee,            //影の色
+		specular:0xffffff,            //ハイライト色
+		shininess:50,                //ハイライトの大きさ
+		metal:true                //金属質感true/false
+	});
+	
+	//3 物体の生成
+	var mesh = new THREE.Mesh(geometry, material);
+	mesh.position=new THREE.Vector3(1,0,0)
+			
+	//5-3-4物体をシーンに追加
+	scene.add(mesh);
+	
+//6 ここまで---------------------------------------------------
+
+	//6 レンダラー
+	function render() {
+		requestAnimationFrame(render);
+		renderer.render(scene, camera);
+	}
+	render();
+
+	
+	function rotationX(i){mesh.rotation.x+=i;}
+	function rotationY(i){mesh.rotation.y+=i;}
+	function rotationZ(i){mesh.rotation.z+=i;}
+	
+	function scaleX(i){mesh.scale.x+=i;}
+	function scaleY(i){mesh.scale.y+=i;}
+	function scaleZ(i){mesh.scale.z+=i;}
+	
+	function positionX(i){mesh.position.x+=i;}
+	function positionY(i){mesh.position.y+=i;}
+	function positionZ(i){mesh.position.z+=i;}
+	
+	function colorChange(color){
+		mesh.material.color.setHex(color);
+	}
+
+
+	function txtr(){
+		mesh.material.map=THREE.ImageUtils.loadTexture('txtr1.png');
+	}
+
+</script>

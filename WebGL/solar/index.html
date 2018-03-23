@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>太陽系</title>
+<meta name="viewport" content="width=device-width">
+
+<style>
+body{background-color:black;text-align:center;}
+</style>
+
+<body>
+<audio src="http://springreen.jp/INDEX/themes/ShunsuiKobo/bg/zarathustra.mp3" autoplay>
+</audio>
+
+<script src="../threeJs/three.js"></script>
+
+<script>
+//1.レンダラ			
+var renderer = new THREE.WebGLRenderer({ antialias:true });    //1-1レンダラの初期化			
+renderer.setSize(1200, 700);                                                    //1-2描画領域の幅と高さ			
+renderer.setClearColorHex(0x000000,1);                                    //1-3クリア色（0x16進数）			
+document.body.appendChild(renderer.domElement);                //1-4renderer設置
+//2.シーン			
+var scene = new THREE.Scene();                                                //2-1シーンの作成
+	
+//3.カメラ
+var camera = new THREE.PerspectiveCamera(45, 1200/700);    //3-1 奥行の深さと画面の縦横比を設定			
+camera.position = new THREE.Vector3(0, 10, 100);                    //3-2 カメラ位置（x,y,z）			
+camera.lookAt(new THREE.Vector3(0, 0, 0));                            //3-3 回転の中心			
+scene.add(camera);                                                                    //3-4 シーンに追加
+			
+//4.ライト
+var light = new THREE.PointLight(0xffffff);                                //4-1ライトの色
+light.position = new THREE.Vector3(0, 0, 0);                            //4-2 ライト位置			
+scene.add(light);		                                                                //4-3ライトをシーンに追加			
+var ambient = new THREE.AmbientLight(0x333333);            //4-4照り返し		
+scene.add(ambient);                                                                    //4-5照り返しをシーンに追加
+    
+//星のデータ
+var starData=new Array();
+starData[0]={r:1.5, color:0xffffff,         ambient:0xeeeeee,     specular:0xffffff, distance:0,     dur:1};
+starData[1]={r:0.1, color:0x0000ff,     ambient:0xdddddd,    specular:0xffffff, distance:2,     dur:1};
+starData[2]={r:0.2, color:0x00ffff,       ambient:0xcccccc,     specular:0xffffff, distance:3,     dur:1/2.2};
+starData[3]={r:0.3, color:0x0055ff,     ambient:0xbbbbbb,    specular:0xffffff, distance:5,     dur:1/3.2};
+starData[4]={r:0.5, color:0xff0000,     ambient:0xaaaaaa,      specular:0xffffff, distance:7,     dur:1/4.2};
+starData[5]={r:1.0, color:0x336699,    ambient:0x999999,  specular:0xffffff, distance:11,    dur:1/5.2};
+starData[6]={r:1.3, color:0x333399,    ambient:0x888888,  specular:0xffffff, distance:13,     dur:1/6.2};
+starData[7]={r:0.5, color:0xff0fff,        ambient:0x777777,  specular:0xffffff,  distance:15,     dur:1/7.2};
+starData[8]={r:0.5, color:0xff00ff,        ambient:0x666666,  specular:0xffffff, distance:17,     dur:1/8.2};
+
+//星のオブジェクト            
+var star=new Array();        
+for(var i=0;i<9;i++){            
+    
+    //5-1球体(半径、横分割数、縦分割数)           
+    var geometry = new THREE.SphereGeometry(starData[i].r, 32, 32);	
+                 
+    //5-2物体の質感
+    var material;	       
+    if(i!==0){    //惑星
+        material = new THREE.MeshPhongMaterial({
+            color:starData[i].color, 			        //物体の色	        
+            ambient:starData[i].ambient,			//影の色	        
+            specular:starData[i].specular, 			//ハイライト色	        
+            shininess:5,					                //ハイライトの大きさ	        
+            metal:true,				                        //金属質感 
+            map:THREE.ImageUtils.loadTexture('skin.png'),
+              bumpMap:THREE.ImageUtils.loadTexture('skin.png'),
+            bumpScale: 0.1
+        });	         
+    }else{	          //太陽  
+        material = new THREE.MeshPhongMaterial({	        
+            color:0, 			        
+            ambient:0,				       
+            specular:0, 			        
+            shininess:5,					      
+            emissive:0xff0000,            
+            metal:true,    
+            bumpMap:THREE.ImageUtils.loadTexture('skin.png'),
+            bumpScale: 0.5,
+            map:THREE.ImageUtils.loadTexture('skin.png')
+        });	       
+    }	
+	            
+    //5-3物体を生成		   
+    star[i] = new THREE.Mesh(geometry, material);
+	            
+    //5-4物体をシーンに追加
+    scene.add(star[i]);            
+};
+  
+
+//6.レンダリング		
+render();	
+var baseTime = new Date();
+function render() {           
+    requestAnimationFrame(render);	//アニメーション化
+                         
+    for(var i=0;i<starData.length;i++){
+        var rad=Math.PI*(new Date()-baseTime)* starData[i].dur /3000;
+        star[i].position.x=starData[i].distance*Math.sin(rad);		
+        star[i].position.z=starData[i].distance*Math.cos(rad);
+        star[i].rotation.y = -rad/starData[i].dur;
+    }
+    
+    if(new Date()-baseTime<90*1000){
+        var rad2=Math.PI*(new Date()-baseTime)/60000	;
+        camera.position.x=-2*Math.sin(rad2);		    
+        camera.position.y=2*Math.cos(rad2);            
+        camera.position.z=30*Math.cos(2.4*rad2)+40;  
+        camera.rotation.z=0.1*Math.sin(rad2*2);	
+    }else{          
+        camera.position.z+=0.2;            
+    }
+    
+    renderer.render(scene, camera);			
+}
+			
+            
+
+</script>
+</body>
+</html>

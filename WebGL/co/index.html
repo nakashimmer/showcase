@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8" />
+<title>一酸化炭素</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+<style>
+body{background-color:#eee;}
+canvas{display:block;margin:0 auto;}
+</style>
+
+<body>
+<script src="../threeJs/three.js"></script>
+
+<script>
+
+//1
+	var renderer = new THREE.WebGLRenderer(
+		{ antialias:true }
+	);
+	renderer.setSize(500,500);
+	renderer.setClearColor(0x000000,0);
+	document.body.appendChild(renderer.domElement);
+	
+	
+//2
+	var scene=new THREE.Scene();
+	
+//3
+	var camera=new THREE.PerspectiveCamera(15,500/500);
+	camera.position=new THREE.Vector3(0,0,15);
+	camera.lookAt(new THREE.Vector3(0,0,0));
+	scene.add(camera);
+	
+//4.ライト
+	//4-1ライトの色
+			var light = new THREE.DirectionalLight(0xaaaaaa);
+	//4-2 ライト位置
+			light.position = new THREE.Vector3(1, 1, 1);
+	//4-3ライトをシーンに追加
+			scene.add(light);		
+	//4-4照り返し
+			var ambient = new THREE.AmbientLight(0x333333);
+	//4-5照り返しをシーンに追加
+			scene.add(ambient);
+	
+//5.物体
+	//5-1球体(半径、横分割数、縦分割数)
+			var geometry = new THREE.SphereGeometry(1, 32, 32);		
+	//5-2物体の質感
+			var material = new THREE.MeshPhongMaterial({
+				color:0x8888ff,			//物体の色
+				ambient:0xffffff,			//影の色
+				specular:0xffffff,			//ハイライト色
+				shininess:50,					//ハイライトの大きさ
+				metal:false                //金属質感true/false
+			});
+	//5-3物体を生成
+			var mesh = new THREE.Mesh(geometry, material);
+	//5-4物体をシーンに追加
+			scene.add(mesh);
+			
+	//5-3物体を生成
+			material = new THREE.MeshPhongMaterial({
+				color:0xff8888,            //物体の色
+				ambient:0xffffff,            //影の色
+				specular:0xffffff,            //ハイライト色
+				shininess:50,                //ハイライトの大きさ
+				metal:true                //金属質感true/false
+			});
+	
+			var mesh1 = new THREE.Mesh(geometry, material);
+			
+	//5-4物体をシーンに追加
+			scene.add(mesh1);
+	
+	//6
+			var baseTime = new Date();
+			function render() {
+				requestAnimationFrame(render);	//アニメーション化
+				var t=((new Date()-baseTime)/1000)*Math.PI;
+				mesh.rotation.y = 0.5*Math.PI/10*t;
+				mesh.position.x = 0.5*Math.sin(t);
+				mesh.position.y = 0.5*Math.cos(t);
+				mesh.position.z = 0.5*Math.cos(t);
+				mesh1.position.x = -0.5*Math.sin(t);
+				mesh1.position.y = -0.5*Math.cos(t);
+				mesh1.position.z = -0.5*Math.cos(t);
+				renderer.render(scene, camera);
+			}
+			render();	
+</script>
