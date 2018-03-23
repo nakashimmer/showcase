@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>入力フォームのHTML5</title>
+		<meta name=viewport content="width=device-width,user-scalable=no">
+		<style>
+			*{margin:0;padding:0;}
+			ul{list-style:none;}
+			li{margin:5px auto;width:100px;float:left;}
+			button{width:100px;height:44px;line-height:44px;}
+		</style>
+
+	</head>
+	<body>
+		<div id="wrap">
+			<main>
+				<audio id="myaudio">
+					<source src="audio.mp3">
+				</audio>
+				
+				<p id=info>情報</p>
+				
+				<ul>
+				<li><button onclick="sound.play();">再生</button>
+				<li><button onclick="sound.pause();">停止</button>
+				<li><button onclick="sound.volume+=0.1;">音を大きく</button>
+				<li><button onclick="sound.volume-=0.1;">音を小さく</button>
+				<li><button onclick="sound.playbackRate+=0.1;">早く</button>
+				<li><button onclick="sound.playbackRate-=0.1;">遅く</button>
+				</ul>
+			</main>
+		</div>
+		
+		<script>
+			var sound = document.getElementById("myaudio");
+			var info = document.getElementById("info");
+			
+			function short(n){
+				return Math.floor(n*10)/10;
+			}
+			
+			sound.addEventListener("timeupdate",function(e){ 
+				info.innerHTML = 
+					"再生位置" + short(sound.currentTime)+ 
+					"<br>長さ" + short(sound.duration )+
+					"<br>音量" + short(sound.volume )+
+					"<br>スピード" + short(sound.playbackRate);
+			});
+			
+		</script>
+	</body>
+</html>
