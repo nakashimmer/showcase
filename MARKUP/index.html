@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html manifest="markup.appcache">
+<head>
+	<meta charset="utf-8">
+	<title>静的ページサンプル</title>
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+	<link rel="stylesheet" href="css.css">
+	<style>
+		#wrap{width:400px;margin:0 auto;}
+		header{position:relative;}
+		body *:hover{border:2px solid red;margin:15px;content:attr()}
+		body *{transition:all 1s linear 0s;}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<header>
+			<h1>HTML5</h1>
+		</header>
+		<nav>
+			<ul>
+				<li><a href="index.html"  class=select>トップ</a></li>
+				<li><a href="input.html">入力</a></li>
+				<li><a href="mm.html">音声映像</a></li>
+				<li><a href="meter.html">進捗測定</a></li>
+			</ul>
+		</nav>
+		<main>
+			<section>
+				<h1>Welcome to HTML5</h1>
+				<p>HTML5の世界へようこそ</p>
+			</section>
+			
+			<section>
+				<h1>HTML5とは</h1>
+				<p>狭義のHTML5はマークアップです。広義のHTML5はマークアップのほか、CSS3、JavaScript、APIを含んだとても広い仕様です。</p>
+			</section>
+			
+			<section>
+				<h1>本日の実演内容</h1>
+				<p>HTMLとCSS、JavaScriptの仕様を実際にコードを見ながらご紹介します</p>
+			</section>
+			
+			<section>
+				<h1>お願い</h1>
+				<p>新要素の追加、廃止要素・属性、意味の変わった要素をソースを見ながら確認してください。</p>
+			</section>
+			
+		</main>
+		<footer>
+			<small>(C)2015 Nakashima.</small>
+		</footer>
+	</div>
+</body>
+</html>
