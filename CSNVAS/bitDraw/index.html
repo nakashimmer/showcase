@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ビット描画</title>
+	<style>
+		*{margin:0px;padding:0px;}
+		#canvas1{
+			border:1px solid gray;
+		}
+	</style>
+</head>
+<body>
+	<h1>ビット描画</h1>
+	<p><canvas id="canvas1" width="400" height="500"></canvas></p>
+	<p>
+		<input type="range" id="input1" min="10" max="100" step="10">
+		<span id="input1Value">50px</span>
+		<input type="color" id="input2">
+	</p>
+	<p id="pos1">座標</p>
+
+
+	<script>
+		function $id(id){return document.getElementById(id);}
+
+		//道具箱(cは道具箱とだけ認識してください)
+		var c=$id("canvas1").getContext("2d");
+
+		//初期値設定
+		var x=0;							//座標xの設定
+		var y=0;							//座標yの設定
+		var size=50;					//図形の大きさ
+		var draw=false;				//描画の可否
+
+		//イベント設定（〜したら〜する）
+		$id("canvas1").addEventListener("mousemove",move1);
+		$id("canvas1").addEventListener("mousedown",down1);
+		$id("canvas1").addEventListener("mouseup",up1);
+		$id("input1").addEventListener("mousemove",size1);
+
+		//関数設定（move1,down1,up1の動作を設定）
+		function move1(e){
+			var rect = e.target.getBoundingClientRect();
+			x = Math.floor((e.clientX-rect.left)/size)*size;
+			y = Math.floor((e.clientY-rect.top)/size)*size;
+			size = $id("input1").value;
+			color = $id("input2").value;
+			if(draw){
+				c.fillStyle=color;
+				c.fillRect(x,y,size,size);
+			}
+			$id("pos1").innerHTML = "x=" +x+ " y="+y;
+		}
+
+		function down1(){draw=true;}
+		function up1(){draw=false;}
+		function size1(){
+			$id("input1Value").innerHTML = $id("input1").value+"px";
+		}
+		
+
+	
+	</script>
+</body>
+</html>

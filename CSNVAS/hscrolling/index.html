@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>横スクロールアクションゲーム</title>
+	<meta name=viewport content="width=device-width">
+	<style>
+		*{margin:0;padiing:0;}
+		body{text-align:center;background-color:black;}
+		canvas{background-image:url(bg.png);
+			margin:100px auto;
+			-webkit-animation:bgframe 20s linear infinite normal;
+		}
+		@-webkit-keyframes bgframe{
+			0%{background-position:0px 0px;}
+			100%{background-position:-500px 0px;}
+		}
+	</style>
+</head>
+
+<body>
+
+	<canvas id="canvas1" width="500" height="300"></canvas>
+<script>
+	//canvas 最初の設定
+	var canvas1 = document.getElementById("canvas1");
+	var c = canvas1.getContext("2d");
+
+	//マウスの座標
+	var mouse = {x:100,y:150};
+	//得点
+	var point = 0;
+	
+	//音
+	var bgm = new Audio();
+	bgm.src="bgm.mp3";
+
+	var pon = new Audio();
+	pon.src="pon.mp3";
+	
+	
+	setInterval(anime,50);
+	bgm.play();
+	
+	
+	//敵UFO
+	var ufo = new Array();
+	ufoCount=150;
+	for(var i=0;i<ufoCount;i++){
+		ufo[i] = {
+			x:500+i*30,
+			y:Math.floor(Math.random()*9)*30+30,
+			color:"blue"
+		}; 
+	}
+
+	
+	
+	function anime(){
+		//画面消去
+		c.clearRect(0,0,500,300);
+		//敵キャラ描画
+		for(var i=0;i<ufoCount;i++){
+			if(ufo[i].x==100 && ufo[i].y==mouse.y){
+				ufo[i].color="red";
+				point++;
+				pon.currentTime = 0
+				pon.play();
+			}
+			c.fillStyle=ufo[i].color;
+			c.fillRect(ufo[i].x-10,ufo[i].y-10,20,20);
+			ufo[i].x -=5;
+		}
+		//自分キャラ描画
+		
+		c.beginPath();
+		c.moveTo(mouse.x,mouse.y);
+		c.arc(100,mouse.y,10,0,2*Math.PI,false);
+		c.closePath();
+		c.fillStyle="yellow";
+		c.fill();
+		c.fillStyle="gray";
+		c.font="20px sans-serif";
+		c.fillText(point,100,mouse.y-10);
+	}
+	
+	canvas1.addEventListener("mousemove",function(e){
+		//2.マウスが動いたら座標値を取得
+		var rect = e.target.getBoundingClientRect();
+		mouse.x = Math.floor((e.clientX-rect.left)/30)*30;
+		mouse.y = Math.floor((e.clientY-rect.top)/30)*30;
+	});
+	
+
+</script>
+</body>
+</html>
