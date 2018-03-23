@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>自然時計</title>
+<meta name=viewport content="width=device-width">
+
+<canvas id=canvas width=500 height=500></canvas>
+<div id=data></div>
+
+<script src="js.js"></script>
+<script>
+var hour,minite,sec;
+getGeo();
+function main(){
+	setInterval(anime,50);
+}
+
+var canvas=document.getElementById('canvas');
+var c= canvas.getContext('2d');
+function anime(){
+	
+	getSerialDate();
+	getSerialSun();
+	getSerialNatureTime();
+	
+
+	c.globalAlpha=0.3;
+	c.clearRect(0,0,canvas.width,canvas.height);
+	c.globalAlpha=1;
+	document.getElementById('data').innerHTML = hour+'時'+ minite +"分";
+
+	//昼の領域
+	c.beginPath();
+	c.fillStyle='#ccc';
+	c.arc(250,250,230,0,Math.PI,true);
+	c.fill();
+	//夜の領域
+	c.beginPath();
+	c.fillStyle='#333';
+	c.arc(250,250,230,0,Math.PI,false);
+	c.fill();
+	//太陽
+	var sun={
+		x:250+150*Math.sin((hour+minite/60)/24*2*Math.PI),
+		y:250+150*Math.cos((hour+minite/60)/24*2*Math.PI)
+	}
+	c.beginPath();
+	c.fillStyle='#aaa';
+	c.arc(sun.x,sun.y,80,0,2*Math.PI,false);
+	c.fill();
+	
+	var sunH = {
+		x:sun.x+80*Math.sin((minite+sec/60)/60*2*Math.PI),
+		y:sun.y-80*Math.cos((minite+sec/60)/60*2*Math.PI)
+	}
+	c.beginPath();
+	c.moveTo(sun.x,sun.y);
+	c.lineTo(sunH.x,sunH.y);
+	c.closePath();
+	c.strokeStyle='#999';
+	c.lineWidth=10;	
+	
+	c.stroke();
+	
+	c.beginPath();
+	c.moveTo(sunH.x,sunH.y);
+	c.lineTo(sunH.x+30*Math.sin(sec/60*2*Math.PI),sunH.y-30*Math.cos(sec/60*2*Math.PI));
+	c.closePath();
+	c.strokeStyle='#666';
+	c.lineWidth=10;
+	c.stroke();
+}
+
+</script>
+
+

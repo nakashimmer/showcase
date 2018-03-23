@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=320,user-scalable=no">
+	<title>体重記録帳</title>	
+	<style>
+		*{margin:0px;padding:0px;}
+		#wrap{width:320px;margin:0 auto;}
+		h1{font-size:25px;text-align:center;color:white;background-color:gray;}
+		p{font-size:28px;}
+		input{font-size:28px;width:280px;text-align:right;}
+		#button{text-align:center;}
+		button{font-size:28px;width:157px;margin:3px 0 3px 3px;}
+		table{width:100%;border:1px solid gray;border-collapse:collapse;margin-bottom:3px;}
+		th,td{width:50%;border:1px solid gray;font-size:20px;padding:5px;}
+		th{background-color:#eee;}
+		td{text-align:right;}
+		canvas{background-color:#eee;}
+	</style>
+</head>
+
+<body>
+	<div id="wrap">
+		<h1>Weight Record Note</h1>
+		<!-- ①入力欄 -->
+		<p><span id="today">今日</span>の体重</p>
+		<p><input id="input">kg</p>
+		
+		<!-- ②ボタン -->
+		<p id="button">
+			<button onclick="setData();">保存</button><button onclick="getData();">読出</button>
+		</p>
+		
+		<!-- ③出力欄 -->
+		<p id="output">ここにデータが表示されます</p>
+		
+		<!-- ④グラフ欄 -->
+		<canvas id="canvas" width="320" height="320"></canvas>
+	</div>
+
+<script>
+	//⑤日付を取得(today)
+	var now=new Date();
+	var today="weightrecordnote"+now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
+	document.getElementById("today").innerHTML=today.substr(16);
+	
+	//⑥入力の値(input)の取得と保存
+	function setData(){
+		var input = document.getElementById("input").value;
+		localStorage.setItem(today,input);
+	}
+	
+	//⑦データを呼出す関数を定義
+	function getData(){
+		//⑧初期設定
+		var key=new Array();
+		var item=new Array();
+		var length=0;
+		var output = "<table><th>日にち</th><th>体重</th>";
+		
+		//⑨localStorageのデータを繰り返し呼び出す
+		for(var i=localStorage.length-1;0<=i;i--){
+		
+			//⑩keyのリストを順次呼び出す
+			key[i]=localStorage.key(i);
+
+			//⑪個々のkeyに紐付いた値(item)を得る
+			item[i]=parseFloat(localStorage.getItem(key[i]));
+			
+			//⑫定めた接頭辞があれば記述
+			if(key[i].indexOf("weightrecordnote")==0){
+				output += "<tr><th>" +key[i].substr(16)+ "</th><td>" +item[i]+ "</td></tr>";
+				length++;
+			}
+		}
+		output+="</table>";
+		document.getElementById("output").innerHTML = output;
+		
+		//⑬描画
+		var canvas = document.getElementById("canvas");
+		var c=canvas.getContext("2d");
+		var dx=320/length;
+		c.clearRect(0,0,320,320);
+		var n=0;
+		for(var i=0;i<localStorage.length;i++){
+			c.fillStyle="#0f0";
+			if(key[i].indexOf("weightrecordnote")==0){
+				c.fillRect(dx*n,320-320*item[i]/100,dx,320*item[i]/100);
+				n++;
+			}
+		}
+	}
+</script>
+</body>
+</html>
