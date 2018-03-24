@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>センサゲーム</title>
+<meta name="viewport" content="width=320,user-scalable=no">
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+	
+	body{
+		text-align:center;background-color:12px 12px auto auto;
+	}
+	#stealth{
+		margin:0 auto;width:320px;
+		background:url("startBG.png") center top no-repeat;
+	}
+</style>
+
+<canvas id="stealth" width="320" height="460"  onclick="start()">
+</canvas>
+
+<script>
+var canvas = document.getElementById("stealth");
+var c = canvas.getContext("2d");
+var frame=0;
+var wave=0;
+var stealth={x:160,y:300};
+var rival_kosu=100;
+var rival=new Array(rival_kosu);
+for(var i=0;i<rival_kosu;i++){
+	rival[i]={
+		x:Math.floor(Math.random()*14)*20+40,
+		y:-i*100-50,
+		dy:Math.floor(Math.random()*5)+2
+	};
+}
+var point=0;
+var acc={x:0,y:0,z:0};
+var gra={x:0,y:0,z:0};
+var rat={a:0,b:0,g:0};
+var jouge=0;
+var sound=new Audio('bgm.mp3');
+var userAgent = window.navigator.userAgent.toLowerCase();
+var kishu=userAgent.indexOf("mac");
+var startlock=true;
+var timer;
+
+function start(){
+
+		if(startlock){
+			sound.currentTime=0.7;
+			sound.play();
+			timer=setInterval(anime,50);
+			startlock=false;
+		}
+	
+}
+	
+function anime(){
+	frame++;
+	end();
+	bg();
+	waves();
+	target();
+	player();
+	remain();
+	bgm();
+}
+
+function end(){
+	if(frame>50*20){
+		clearInterval(timer);
+		startlock=true;
+		sound.pause();
+	}
+}
+
+function bg(){
+	c.globalAlpha=1;
+	c.fillStyle="black";
+	c.fillRect(0,0,320,460);
+}
+	
+function waves(){
+	for(var i=0;i<48;i++){
+		wave = frame*6%200;
+		c.beginPath();
+		c.moveTo(0,i*200+wave);
+		c.lineTo(320,i*200+wave);
+		c.strokeStyle="silver";
+		c.lineWidth=1;
+		c.stroke();
+	}
+}
+
+var tmp;
+var soundPos;
+var soundStart=false;
+function crash(){
+	if((Math.abs(rival[i].x-stealth.x) < 30) &&
+	(Math.abs(rival[i].y-stealth.y) < 10)){
+		if(!soundStart){
+			tmp=sound.currentTime;
+			soundStart=true;
+			sound.currentTime=0;
+			sound.play();
+			soundPos=0;
+			c.beginPath();
+			c.arc(rival[i].x,rival[i].y,50,0,2*Math.PI,true);
+			c.fillStyle="pink";
+			c.fill();
+			point++;
+			rival[i].x=320-rival[i].x;
+			rival[i].y=-20;
+		}
+	}
+}
+function bgm(){
+	if(soundStart){
+		soundPos +=0.05;
+		if(0.4<soundPos){
+			sound.pause();
+			sound.currentTime=tmp+0.4;
+			sound.volume=0;
+			sound.play();
+			soundStart=false;
+		}
+	}else if(sound.volume<=0.9){
+		sound.volume+=0.1;
+	}
+}
+
+
+function target(){
+	for(i=0;i<rival_kosu;i++){
+		if((rival[i].y>-30)&&(rival[i].y<480)){
+			c.beginPath();
+			c.arc(rival[i].x,rival[i].y+5,15,0,2*Math.PI,false);
+			c.fillStyle="#555";
+			c.fill();
+			c.beginPath();
+			c.arc(rival[i].x,rival[i].y,15,0,2*Math.PI,false);
+			c.fillStyle="yellow";
+			c.fill();
+			crash();
+		}
+		rival[i].y+=rival[i].dy;
+	}
+}
+	
+function player(){
+	//shadow
+	c.beginPath();
+	c.moveTo(stealth.x,stealth.y+8);
+	c.lineTo(stealth.x-30,stealth.y+30+8-gra.x*3);
+	c.lineTo(stealth.x+30,stealth.y+30+8+gra.x*3);
+	c.closePath();
+	c.fillStyle="#666";
+	c.fill();
+	//real
+	c.beginPath();
+	c.moveTo(stealth.x,stealth.y);
+	c.lineTo(stealth.x-30,stealth.y+30-gra.x*3);
+	c.lineTo(stealth.x+30,stealth.y+30+gra.x*3);
+	c.closePath();
+	c.fillStyle="lightgreen";
+	c.fill();
+	c.font='40px "Times roman"';
+	c.fillText(point,stealth.x-10,stealth.y+80);
+}
+
+function remain(){
+	c.fillStyle="white"; 
+	c.font='30px "Times roman"';
+	c.fillText(gra.x+'Time:'+(50-Math.floor(frame/20)),0,460);
+}
+
+window.addEventListener('deviceorientation', function(e) {
+	gra.x = e.alpha; //x方向の傾き重力加速度
+	gra.y = e.beta; //y方向の傾き重力加速度
+	gra.z = -e.gamma; //z方向の傾き重力加速度
+
+	if(kishu>0){
+		   stealth.x += Math.floor(gra.x)*5;
+		   stealth.y -= Math.floor(gra.y+5)*5;
+	}else{
+		   stealth.x -= Math.floor(gra.x)*5;
+		   stealth.y += Math.floor(gra.y+5)*5-50;
+	}
+	
+	if(stealth.x<0)stealth.x=0;
+	if(stealth.x>320)stealth.x=320;
+
+	if(stealth.y<0)stealth.y=0;
+	if(stealth.y>460)stealth.y=460;
+
+});
+
+
+
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>packman</title>
+<style>
+body{background-color:black;}
+#wrap{position:relative;}
+canvas{position:absolute;}
+</style>
+
+<div id=wrap>
+	<canvas width=700 height=700 id=canvas>
+	</canvas>
+		<canvas width=700 height=700 id=mesh>
+	</canvas>
+</div>
+
+<audio src=music.wav autoplay></audio>
+
+<script>
+
+var canvas=document.getElementById("canvas");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+var c=canvas.getContext("2d");
+setInterval(anime,10);
+
+var flame=-200;
+var flame2=100;
+
+var r=100;
+function anime(){
+	c.clearRect(0,0,canvas.width,canvas.height);
+	var deg=Math.abs(Math.sin(flame/180*Math.PI)*40);
+	packman(flame,window.innerHeight/2,r,deg);
+	flame+=1;if(canvas.width+r<flame){flame=-r;}
+	var d=Math.abs(Math.floor(flame2/100)%2);
+	invador(flame2,window.innerHeight/2,d*40);
+	
+	flame2+=1;if(canvas.width+r<flame2){flame2=-r;}
+}
+
+function packman(x,y,r,deg){
+	myarc(x,y,r,deg,"yellow");
+	myarc(x+r/4,y-r/1.6,r/6,-20,"black");
+}
+
+function myarc(x,y,r,deg,color){
+	c.beginPath();
+	c.moveTo(x,y);
+	if(0<=deg){
+		var rad=deg/180*Math.PI
+		c.arc(x,y,r,-rad,rad,true);
+	}else{
+		c.arc(x,y,r,(180+deg)/180*Math.PI,(180-deg)/180*Math.PI,true);
+	}
+	c.closePath();
+	c.fillStyle=color;
+	c.fill();
+}
+
+function invador(x,y,d){
+	myrect(x-10,y-80,40);
+	myrect(x-60,y-60,140);
+	myrect(x-80,y-40,180);
+	myrect(x-80,y-20,40);myrect(x-10,y-20,40);myrect(x+60,y-20,40);
+	myrect(x-80,y-0,180);
+	myrect(x-40,y+20,30);myrect(x+30,y+20,30);
+	myrect(x-60,y+40,20);myrect(x-10,y+40,40);myrect(x+60,y+40,20);
+	myrect(x-80+d,y+60,20);myrect(x+80-d,y+60,20);
+}
+
+function myrect(x,y,w){
+	c.fillStyle="lightgreen";
+	c.fillRect(x-11,y-11,w+2,22);
+}
+	
+var mesh=document.getElementById("mesh");
+mesh.width=window.innerWidth;
+mesh.height=window.innerHeight;
+var c_mesh=mesh.getContext("2d");
+
+for(var x=1;x<mesh.width;x+=8){
+	c_mesh.beginPath();
+	c_mesh.moveTo(x,0);
+	c_mesh.lineTo(x,mesh.height);
+	c_mesh.lineWidth=0.5;
+	c_mesh.strokeStyle="black";
+	c_mesh.stroke();
+}
+for(var y=1;y<mesh.height;y+=8){
+	c_mesh.beginPath();
+	c_mesh.moveTo(0,y);
+	c_mesh.lineTo(mesh.width,y);
+	c_mesh.lineWidth=0.5;
+	c_mesh.strokeStyle="black";
+	c_mesh.stroke();
+}
+
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>canvas</title>
+	<meta name=viewport content="width=device-width">
+	<style>
+		#canvas1{background-color:#eee;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="300" height="300"></canvas>
+
+
+<script>
+	var canvas1 = document.getElementById("canvas1");
+	var c = canvas1.getContext("2d");
+	
+
+	
+	var pos=0;
+	bar(10);
+	bar(60);
+	bar(110);
+	bar(160);
+	bar(210);
+	bar(260);
+	
+	function bar(data){
+		c.fillStyle="blue";
+		c.fillRect(pos,300-data,50,data);
+		pos+=50;
+	}
+
+</script>
+</body>
+</html>
