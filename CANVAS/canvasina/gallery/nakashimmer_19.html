@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>ginkgo leaves falling created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="ginkgo leaves falling created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_19.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		ginkgo leaves falling
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_19.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_19.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_19.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+canvasina.style.background="-webkit-gradient(linear,left top,left bottom,from(red),to(blue))";
+function r(i){return Math.floor(Math.random()*i);}
+	
+var pi=Math.PI;
+var frame=0;
+var color=["green","yellow","brown","pink","blue","orange"];
+
+var momiji = new Array(color.length);
+for(var i=0;i<momiji.length;i++){
+	momiji[i]={
+		x:r(500),
+		y:r(500),
+		color:color[r(3)],	//葉っぱの色を決める
+		katamuki:r(360),
+		dy:1+r(3),
+		add:0,
+		frame:0
+	};
+}
+	
+function yubi(){
+	c.beginPath();
+	c.bezierCurveTo(0,0,-50,-75,0,-150);
+	c.bezierCurveTo(0,-150,50,-75,0,0);
+	c.closePath();
+	c.fill();
+}
+
+setInterval(anime,40);
+	
+function anime(){
+	c.clearRect(0,0,canvas.width,canvas.height);
+	for(var i=0;i<momiji.length;i++){
+		//i番目の葉っぱ
+		c.save();
+		c.translate(momiji[i].x,momiji[i].y);
+		c.rotate(momiji[i].frame/360*pi+momiji[i].katamuki);
+		c.fillStyle=color[i];
+	
+			//葉っぱ
+			c.save();yubi();c.restore();
+			c.save();c.rotate(0.15*pi);c.scale(0.8,0.8);yubi();c.restore();
+			c.save();c.rotate(-0.15*pi);c.scale(0.8,0.8);yubi();c.restore();
+			c.save();c.rotate(-0.30*pi);c.scale(0.7,0.75);yubi();c.restore();   
+			c.save();c.rotate(0.30*pi);c.scale(0.7,0.75);yubi();c.restore();
+			c.save();c.rotate(-0.50*pi);c.scale(0.3,0.4);yubi();c.restore();
+			c.save();c.rotate(0.50*pi);c.scale(0.3,0.4);yubi();c.restore();
+	
+			//茎
+			c.save();
+			c.beginPath();
+			c.moveTo(0,0);
+			c.quadraticCurveTo(0,50,-30,50);
+			c.lineWidth=10;
+			c.strokeStyle=color[i];
+			c.stroke();
+			c.restore();
+		c.restore();
+
+		//移動計算
+		momiji[i].y +=momiji[i].dy;
+		if(momiji[i].y>600){
+			momiji[i].y=-200+r(50);
+			momiji[i].x=r(500);
+			momiji[i].dy=2+r(1);
+		}
+		momiji[i].frame+=momiji[i].add;
+	}
+	
+}
+
+canvas.addEventListener("mousemove",kaiten);
+function kaiten(e){
+	var rect=e.target.getBoundingClientRect();
+	var mouse={
+		x:e.clientX-rect.left,
+		y:e.clientY-rect.top
+	}
+	for(var i=0;i<momiji.length;i++){
+		if(Math.pow(
+		Math.pow(momiji[i].x-mouse.x,2)+Math.pow(momiji[i].y-mouse.y,2),1/2)<30){
+			momiji[i].add+=0.1;
+		}
+	}
+}
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

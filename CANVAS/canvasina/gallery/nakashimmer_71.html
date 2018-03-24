@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Snow  created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Snow  created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_71.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Snow 
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_71.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_71.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_71.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+function r(n){return Math.floor(Math.random()*n);}
+var frame=0;
+var mouse={x:-100,y:-100};
+var snow=new Array(100);
+var color=["#ffffff"];
+
+var gradient=c.createLinearGradient(0,0,0,canvas.height*2);
+gradient.addColorStop(0,black);
+gradient.addColorStop(1,gray);
+
+for(var i=0;i<snow.length;i++){
+    snow[i]={
+        x:r(500), 
+        y:r(500), 
+        r:Math.floor(3/snow.length*i+1),
+        color:color[r(color.length)] ,
+        alpha:Math.floor(i/snow.length*10)/8,
+        delay:r(360),
+        rev:0
+    };
+}
+
+
+setInterval(anime,50);
+function anime(){
+c.fillStyle=gradient;
+    c.fillRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<snow.length;i++){
+/*
+        c.beginPath();
+        c.arc(snow[i].x+snow[i].r*10*
+                Math.sin(frame/5000*Math.PI+snow[i].delay),
+                snow[i].y,
+                snow[i].r*3,
+                0,2*Math.PI,false);
+        c.closePath();
+        c.fillStyle=snow[i].color;
+        c.globalAlpha=snow[i].alpha;
+        c.fill();
+*/
+        c.fillStyle=snow[i].color;
+        c.font=Math.floor(snow[i].r*20)+"px sans-serif";
+c.save();
+c.translate(snow[i].x+snow[i].r*10*
+                Math.sin(frame/5000*Math.PI+snow[i].delay),
+                snow[i].y);
+c.rotate((frame/100+snow[i].rev)/18000*Math.PI);
+        c.fillText("*",0,0);
+c.restore();
+        frame++;
+        snow[i].y+=snow[i].r/4-snow[i].rev;
+        if(550<snow[i].y){snow[i].x=r(500), snow[i].y-=600;}
+        if(Math.pow(snow[i].x-mouse.x,2)+Math.pow(snow[i].y-mouse.y,2)<1400){
+            snow[i].rev=snow[i].r*5;
+        }
+        if(0<snow[i].rev){snow[i].rev--;}
+    }
+}
+
+
+canvas.addEventListener("mousemove",function(e){
+ 
+    var rect = e.target.getBoundingClientRect(); 
+    mouse.x=e.clientX - rect.left;
+    mouse.y=e.clientY - rect.top;	    
+});
+
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Halloween Ghost created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Halloween Ghost created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_03.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Halloween Ghost
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_03.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_03.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_03.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+window.onload=function(){setInterval(anime,50);}
+var frame=0;
+var obake={x:300,y:200,dx:-1};
+var wink = 0;
+c.lineJoin="round";
+var g=c.createLinearGradient(0,0,0,500);
+g.addColorStop(0,"purple");
+g.addColorStop(0.5,"purple");
+g.addColorStop(1,"black");
+c.lineWidth=3;
+
+function anime(){
+ frame++;    
+ obake.x+=obake.dx;
+ if(obake.x<100||obake.x >400){
+  obake.dx*=-1;wink=1;}
+ obake.y= 350-abs(sin(frame)*270); 
+ obakeDraw(obake.x,obake.y);   
+}
+
+function obakeDraw(x,y){
+ $cls(g);
+ body(obake.x+90,obake.y+90,"orange");
+ if(random(10)<9.9){wink = 0;}else{wink=1;} 
+ if(obake.y>=340 || obake.x<100 || obake.x>400){
+  wink=1;
+}
+ me(obake.x-50,obake.y-30);	
+ me(obake.x,obake.y-30);
+ kuchi(obake.x-60,obake.y+10);
+ te(obake.x+20,obake.y+60,"orange");
+ te(obake.x-50,obake.y+60,"orange");
+ c.globalAlpha=1;
+}
+
+function body(x,y,color){
+ //wing
+ var d=frame*90;
+ c.beginPath();
+ c.arc(x-170,y-160+sin(d)*5,60,0*pi,1*pi,false);
+ c.arc(x-210,y-100+sin(d)*5,50,1.3*pi,0.7*pi,true);
+ c.arc(x-220,y-60+sin(d)*5,20,1*pi,1.8*pi,false);
+ c.closePath();
+ c.fillStyle="black"; 
+ c.fill();
+ c.stroke();
+    
+ c.beginPath();
+ c.arc(x-10,y-140+sin(d)*5,60,1*pi,0*pi,true);
+ c.arc(x+30,y-80+sin(d)*5,50,1.7*pi,0.3*pi,false);
+ c.arc(x+40,y-40+sin(d)*5,20,1.8*pi,1*pi,true);
+ c.closePath();
+ c.fillStyle="black"; 
+ c.fill();
+ c.stroke();
+    
+//face  
+ c.beginPath();
+ c.moveTo(x,y);
+ c.quadraticCurveTo(x-40,y+20,x-110,y);
+ c.arc(x-90,y-100,100,0.6*pi,0.3*pi,false);
+ c.quadraticCurveTo(x-60,y,x,y);
+ c.closePath();
+ c.fillStyle=color; 
+ c.fill();
+ c.stroke();     
+
+//hat
+ c.save();
+ c.translate(x-80,y-170);
+ c.beginPath();
+ c.rotate(20/180*Math.PI);
+ c.scale(1,0.2);
+ c.arc(0,0,130,1.75*pi,1.3*pi,false);	
+ c.lineTo(50,-1000);
+ c.closePath();
+ c.fillStyle="black"; 
+ c.fill();
+ c.restore();
+ c.stroke(); 
+}
+
+function kuchi(x,y){
+ c.beginPath();
+ c.moveTo(x,y);
+ c.quadraticCurveTo(x+30,y+70,x+70,y);
+ c.quadraticCurveTo(x+30,y+10,x,y);
+ c.closePath();
+
+ c.fillStyle="black";
+ c.fill();
+ c.stroke();
+    
+ c.beginPath();
+ c.moveTo(x+3,y);
+ c.lineTo(x+6,y+10);
+ c.lineTo(x+14,y+3); 
+ c.closePath();
+ c.fillStyle="white";
+ c.fill();
+    
+ c.beginPath();
+ c.moveTo(x+55,y+3);
+ c.lineTo(x+60,y+13);
+ c.lineTo(x+68,y); 
+ c.closePath();
+ c.fillStyle="white";
+ c.fill();
+}
+
+function me(x,y){		
+ c.beginPath();   
+ c.fillStyle="black";
+ if(wink===0){
+  c.arc(x,y,10,0,2*pi,false);  
+  c.fill();
+ }else{
+  c.fillRect(x-5,y+5,10,2);
+ }
+}
+
+function te(x,y,color){
+ c.beginPath();
+ c.moveTo(x,y);
+ c.lineTo(x-30,y);
+ c.arc(x-30,y+10,10,1.5*pi,pi,true);
+ c.lineTo(x-40,y+30);
+ c.arc(x-35,y+30,5,pi,2*pi,true);
+ c.lineTo(x-30,y+15);
+ c.arc(x-25,y+25,5,pi,2*pi,true);
+ c.lineTo(x-20,y+15);
+ c.arc(x-15,y+20,5,pi,2*pi,true);
+ c.lineTo(x-10,y+10);
+ c.lineTo(x+10,y+10);
+ c.fillStyle=color;
+ c.fill();
+ c.strokeStyle="black";
+ c.lineWidth=3;
+ c.stroke();
+}
+
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

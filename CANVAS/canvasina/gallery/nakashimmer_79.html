@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>6th Anniversary ShunsuiKobo created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="6th Anniversary ShunsuiKobo created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_79.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		6th Anniversary ShunsuiKobo
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_79.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_79.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_79.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+canvas.style.backgroundColor="pink";
+
+setInterval(anime,50);
+
+function anime(){
+ c.clearRect(0,0,canvas.width,canvas.height);
+ dish();
+ sponji();
+ ichigo(250,100,0);
+ ichigo(130,140,-30);
+ ichigo(370,140,30); 
+ card();
+ ichigo(170,220,-20);
+ ichigo(330,220,20);
+}
+
+function card(){
+c.save();
+c.translate(250,120);
+c.rotate(-3/180*pi);
+c.fillStyle="white";
+c.fillRect(-150,-50,300,100);
+c.strokeStyle="gray";
+c.strokeRect(-150,-50,300,100);
+c.fillStyle="black";
+c.font="40px fantasy";
+c.textAlign="center";
+c.fillText("6th Anniversary",0,0);
+c.fillText("春翠工房",0,40);
+
+rosoku(-100,"white");
+rosoku(-60,"#aaa");
+rosoku(-20,"skyblue");
+rosoku(20,"lightgreen");
+rosoku(60,"red");
+rosoku(100,"green");
+c.restore();
+}
+var f=0;
+function rosoku(x,color){
+c.beginPath();
+c.lineWidth=10;
+c.moveTo(x,-50);
+c.lineTo(x,-70);
+c.strokeStyle=color;
+c.stroke();
+c.moveTo(x+Math.floor(Math.random()*3)-1+f,-85);
+c.arc(x,-75,5,0,pi,false);
+c.closePath();
+c.fillStyle="yellow";
+c.fill();
+if(f!=0){f-=Math.abs(f)/f;}
+}
+
+function dish(){
+ c.save();
+ c.translate(250,300);
+ c.scale(1,0.5);
+ c.beginPath();
+ c.arc(0,0,250,0,2*pi,false);
+ c.closePath();
+ c.fillStyle="white";
+ c.fill();
+ c.lineWidth=5;
+ c.strokeStyle="skyblue";
+ c.stroke();
+ c.restore();
+}
+
+function sponji(){
+ c.save();
+ c.translate(250,300);
+ c.scale(1,0.5);
+ c.beginPath();
+ c.arc(0,0,200,0,pi,false);
+ c.arc(0,-100,200,pi,0,true);
+ c.closePath();
+ c.fillStyle="#bb8855";
+ c.fill();
+ c.restore();
+
+ c.save();
+ c.translate(250,300);
+ c.scale(1,0.5);
+ c.beginPath();
+ c.arc(0,-150,200,0,pi,false);
+ c.arc(0,-250,200,pi,0,true);
+ c.closePath();
+ c.fillStyle="#bb8855";
+ c.fill();
+ c.restore();
+
+ c.save();
+ c.translate(250,300);
+ c.scale(1,0.5);
+ c.beginPath();
+ c.arc(0,-250,200,0,2*pi,false);
+ c.closePath();
+ c.fillStyle="white";
+ c.fill();
+ c.restore();
+}
+
+
+function ichigo(x,y,katamuki){
+c.save();
+c.translate(x,y);
+c.rotate(katamuki/180*Math.PI);
+c.beginPath();
+c.moveTo(-50,0);
+c.bezierCurveTo(-30,-130,30,-130,50,0);
+c.bezierCurveTo(50,50,-50,50,-50,0);
+c.closePath();
+c.fillStyle="red";
+c.fill();
+c.restore();
+}
+
+var x=0,xx=-1;
+canvas.addEventListener("mousemove",function(e){
+var rect=e.target.getBoundingClientRect();
+x=e.clientX-rect.left;
+if(xx==-1)xx=x;
+f=x-xx;
+xx=x;
+})
+
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

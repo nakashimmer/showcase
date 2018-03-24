@@ -1,0 +1,94 @@
+var frame=0;
+var snow=new Array(40);
+for(var i=0;i<40;i++){snow[i]={
+  x:floor(random(500)),y:-i*10};
+}
+window.onload=function(){setInterval(anime,50);}
+function anime(){
+ $cls(black);
+//幹を描画
+$4(225,400,50,50,'brown');
+//treeを描画
+$3(250,150,100,400,400,400,'green'); 
+$3(250,100,130,300,370,300,'green');
+$3(250,50,	180,180,320,180,'green');
+//丸い玉
+ maru(250,130,10,'lightgreen',0);
+ maru(230,180,10,'yellow',0);
+ maru(210,230,10,'red',0);
+ maru(230,300,10,'lightblue',0);
+ maru(205,330,10,'purple',0);
+ maru(180,360,10,'violet',0);
+ maru(260,155,10,'yellow',120);
+ maru(290,255,10,'lightgreen',120);
+ maru(290,305,10,'red',240);
+ maru(320,355,10,'purple',240);
+ maru(275,355,10,'lightblue',240);
+ //絵文字で飾り
+ moji('❆',250,240,'white'); 
+ moji('❅',180,300,'white');
+ moji('♪',320,320,'white');
+//細長いベジエ曲線
+ curve(200,180,250,300,340,250,'white',5);
+ curve(340,250,250,400,160,300,'white',5);
+ curve(250,50,100,200,0,150,'yellow',5);  
+ curve(250,50,400,200,500,150,'yellow',5);
+ curve(250,50,100,300,0,250,'yellow',5);  
+ curve(250,50,400,300,500,250,'yellow',5);
+//星
+ $txt('★', 250,60, 50,'yellow', 'serif');
+//ベル 
+ bell(250,270);
+//雪
+ for(var j=0;j<snow.length;j++){
+  c.globalAlpha=0.7;
+  yuki('●',snow[j].x,snow[j].y,'white');
+  c.globalAlpha=1;
+  snow[j].y++;
+  if(snow[j].y>500)snow[j].y=0;        
+  snow[j].x+=Math.floor(Math.random()*3)-1;
+ }
+ frame++;
+}
+// original func ----------------------------
+function maru(x,y,r,color,delay){
+ c.globalAlpha=
+ abs(sin((frame+delay)));
+ $1(x,y, r,color);
+ c.globalAlpha=1;
+}
+ function moji(str,x,y,color){
+ c.globalAlpha=
+  abs(sin(frame));
+  c.textAlign='center';
+  $txt(str, x,y,40,color, 'serif');
+  c.globalAlpha=1;
+}
+function curve(x,y,x1,y1,x2,y2,color,w){
+ c.beginPath();
+ c.moveTo(x,y);
+ c.quadraticCurveTo(x1,y1,x2,y2);
+ c.strokeStyle=color;
+ c.lineWidth=w;
+ c.globalAlpha='0.8';
+ c.stroke();
+ c.globalAlpha=1;
+}
+
+function bell(x,y){
+ c.save();
+ c.translate(x,y);
+ c.rotate(Math.sin(frame/20)/4*Math.PI);
+ c.beginPath();
+ c.arc(0,0,10,0,2*Math.PI,false);
+ c.moveTo(10,0);c.lineTo(15,20);
+ c.lineTo(-15,20);c.lineTo(-10,0);
+ c.closePath();
+ c.fillStyle="yellow";c.fill();
+ c.restore();
+}
+
+function yuki(str,x,y,color){
+ c.textAlign='center';
+ $txt(str, x,y,8,color, 'serif');
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<meta charset=utf-8>
+<title>ホワイトボード</title>
+<meta name=viewport content="width=device-width,user-scalable=no">
+
+<style>
+	*{margin:0;padding:0;font-family:menlo;list-style:none;}
+	p,button{font-size:15px;text-align:center;}
+	canvas{position:absolute;}
+	#wrap{
+		position:relative;
+	}
+	
+	button{
+		width:3em;
+		border:none;
+		padding:0;
+		height:25px;
+		background-color:#aaa;
+	}
+	#control{
+		background-color:white;
+		display:table;
+		width:100%;
+	}
+	#control ul{
+		display:flex;
+		vertical-align:middle;
+	}
+	#control ul li{
+		flex:auto;
+		background-color:gray;
+	}
+	#textarea{
+		width:calc(100% - 18px);
+		left:15px;
+		top:15px;
+		border:none;
+		position:absolute;font-size:40px;
+		background-color:transparent;
+		text-align:center;
+		outline: 0;
+		
+	}
+	#textarea{color:black;}
+	#canvas{
+		display:block;
+		outline: 0;
+		
+	}
+</style>
+
+
+
+<div id=control>
+	<ul>
+		<li>太さ<input type=range min=0 max=30 value=10 id=lineWidth></li>
+		<li>透明<input type=range min=0 max=10 value=10 id=Alpha></li>
+		<li><button onclick="btn('black');">黒</button></li>
+		<li><button onclick="btn('red');">赤</button></li>
+		<li><button onclick="btn('green');">緑</button></li>
+		<li><button onclick="btn('blue');">青</button></li>
+		<li><button onclick="c.clearRect(0,0,canvas.width,canvas.height);">クリア</button></li>
+		<li><button onclick="txt();">文字</button></li>
+		<li><button onclick="align();">揃え</button></li>
+		<li><button onclick="spch();">話す</button></li>
+	</ul>
+</div>
+
+<div id=wrap>
+	<canvas id=canvas></canvas>
+	<div id=textarea contenteditable=true></div>
+</div>
+
+<script>
+	function $(id){return document.getElementById(id)}
+	
+	var canvas = $("canvas");
+	var c = canvas.getContext("2d");
+	
+	//1.PC(マウス)で操作
+	var mouse = {x:0,y:0,x1:0,y1:0,color:"black"};
+	var myDraw = false;
+	//1-1マウスが動いたら描画
+	canvas.addEventListener("mousemove",function(e){
+		c.lineWidth = $("lineWidth").value;
+		c.globalAlpha = $("Alpha").value/10;
+		var rect = e.target.getBoundingClientRect();
+		mouse.x = e.clientX - rect.left;
+		mouse.y = e.clientY - rect.top;
+		c.strokeStyle=mouse.color;
+		
+		//1-2ただしmyDrawがtrueの場合のみ
+		if(myDraw){
+			c.beginPath();
+			c.moveTo(mouse.x1,mouse.y1);
+			c.lineTo(mouse.x,mouse.y);
+			c.lineCap="round";
+			c.stroke();
+			mouse.x1=mouse.x;
+			mouse.y1=mouse.y;
+		}
+	});
+	
+	//1-2.マウスを押している間、描画を許可(myDrawをtrue)
+	canvas.addEventListener("mousedown",function(e){
+		myDraw=true; mouse.x1=mouse.x; mouse.y1=mouse.y
+	});
+	
+	//1-2.マウスを話すと、描画を禁止(myDrawをfalse)
+	canvas.addEventListener("mouseup",function(e){
+		myDraw=false;
+	});
+
+	//ボタンで色操作
+	function btn(color){
+		mouse.color=color;
+		$("textarea").style.zIndex=-1;
+		$("canvas").style.zIndex=0;
+	}
+
+	var z=0;
+	function txt(){
+		$("textarea").style.zIndex="0";
+	}
+	
+	var algn="center";
+	function align(){
+		algn=(algn=="center")?"left":"center";
+		$("textarea").style.textAlign=algn;
+	}
+
+</script>
+
+<script>
+function spch(){
+	var mySelect = window.getSelection();
+//	alert(mySelect);
+	var input = new SpeechSynthesisUtterance(mySelect);
+	input.lang = "ja-JP";
+	var voices = speechSynthesis.getVoices();
+	speechSynthesis.speak(input);
+};
+</script>
+
+<script>
+sizeChange();
+
+function sizeChange(){
+	var bw = document.body;
+	var dw = document.documentElement;
+	$("canvas").width=Math.max(
+		bw.clientWidth,bw.scrollWidth,
+		dw.scrollWidth,dw.clientWidth
+	);
+	$("canvas").height=Math.max(
+		bw.clientHeight,bw.scrollHeight,
+		dw.scrollHeight,dw.clientHeight
+	)-35;
+	
+	$("textarea").style.height=($("canvas").height-10)+"px";
+	$("wrap").style.height=$("canvas").height+"px";
+	console.log($("textarea").style.height);
+};
+</script>
+
+</html>

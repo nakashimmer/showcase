@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>座標を取得するサンプル</title>
+	<meta name=viewport content="width=device-width">
+	<style>
+		body{text-align:center;}
+		canvas{background-color:#eee;}
+	</style>
+</head>
+
+<body>
+	<h1>座標を取得するサンプル</h1>
+	<canvas id="canvas1" width="500" height="300"></canvas>
+	<div id="info">座標の値</div>
+<script>
+	//canvas 最初の設定
+	var canvas1 = document.getElementById("canvas1");
+	var c = canvas1.getContext("2d");
+
+	//1.PC(マウス)で操作
+	var mouse = {x:0,y:0,x1:0,y1:0,color:"black"};
+	var myDraw = false;
+
+	canvas1.addEventListener("mousemove",function(e){
+		
+		//2.マウスが動いたら座標値を取得
+		var rect = e.target.getBoundingClientRect();
+		mouse.x = e.clientX - rect.left;
+		mouse.y = e.clientY - rect.top;
+		
+		//3.情報をinfoに出力
+		document.getElementById("info").innerHTML = 
+		" rect.left=" + Math.floor(rect.left) + "px" +
+		" rect.top=" + Math.floor(rect.top) + "px" +
+		" myDraw=" + myDraw + "<br>" +
+		" x座標=" + Math.floor(mouse.x) + "px" +
+		" y座標=" +Math.floor(mouse.y) + "px";
+		
+		//4.myDrawがtrueのとき描画
+		if(myDraw){
+			c.beginPath();
+			c.moveTo(mouse.x1,mouse.y1);
+			c.lineTo(mouse.x,mouse.y);
+			c.lineCap="round";
+			c.strokeStyle=mouse.color;
+			c.stroke();
+			mouse.x1=mouse.x;
+			mouse.y1=mouse.y;
+		}
+	});
+	
+	//5.マウスを押したら、描画OK(myDrawをtrue)
+	canvas1.addEventListener("mousedown",function(e){
+		myDraw=true; mouse.x1=mouse.x; mouse.y1=mouse.y;
+	});
+	
+	//6.マウスを上げたら、描画禁止(myDrawをfalse)
+	canvas1.addEventListener("mouseup",function(e){
+		myDraw=false;
+	});
+
+</script>
+</body>
+</html>

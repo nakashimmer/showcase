@@ -1,0 +1,49 @@
+#outer{
+    width:500px;height:500px;
+    background:-webkit-gradient(linear,left top,left bottom,from(red),to(yellow));
+    -webkit-perspective:800px;
+    overflow:hidden;
+    margin:0px auto;
+}
+
+#divart,#divart:before{
+    position:absolute;
+    background-color:#701d00;
+    height:200px;width:200px;
+    border-radius:100%  0 100% 0;
+    -webkit-transform-origin:bottom left;
+}
+
+#divart{
+    -webkit-transform:rotate(0deg);
+    left:200px;top:100px;
+    -webkit-animation:hirahira 5s linear 0 infinite normal;
+}
+
+#divart:before{
+    content:"";position:absolute;
+    -webkit-transform:rotate(-45deg) scale(1,1.3);
+    -webkit-box-reflect:below -150px;
+    top:100px;left:50px;
+}
+
+#divart:after{
+    content:"";position:absolute;
+    height:150px;width:100px;
+    top:40px;left:10px;
+    border-bottom:5px solid #701d00;
+    border-right:5px solid #701d00;
+    border-radius:100%  0 100% 0;
+    -webkit-transform-origin:bottom left;
+    -webkit-transform:rotate(150deg) ;
+}
+
+@-webkit-keyframes hirahira{
+    0%{
+        -webkit-transform-origin:top;
+        -webkit-transform:translate(0,-450px) rotateY(0) rotateX(-90deg) translateZ(50px); 
+    }
+      
+    100%{-webkit-transform:translate(0,700px) rotateY(360deg) rotateX(90deg) translateZ(50px);
+    }
+}

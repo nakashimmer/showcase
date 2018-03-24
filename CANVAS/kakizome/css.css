@@ -1,0 +1,96 @@
+/*共通*/
+
+*{margin:0;padding:0;text-decoration:none;font-family:serif;}
+body{font-size:20px;
+	text-align:center;
+	background-color:black;color:white;
+/*	background:white url('img/bg.jpg');*/
+	-moz-background-size:100% auto;
+	background-size:100% 100%;
+	background-position:center bottom;
+	background-repeat:no-repeat;
+	background-attachment:fixed; 
+}
+#wrap		{margin:0 auto;text-align:left;padding:5px;width:850px;}
+header		{float:left;width:590px;}
+header p	{font-size:14px;}
+header a	{font-size:60px;}
+footer		{margin:40px 0;}
+footer h1	{font-size:15px}
+.cl			{clear:both;}
+a			{color:white;}
+h1			{font-size:1.5em;text-align:center;}
+p			{margin:0.5em 0;}
+li			{margin:0.5em 2em;}
+small		{font-size:11px;}
+canvas{display:block;}
+#ad img	{border-radius:10px;}
+
+/*head*/
+#head{width:840px;margin:0 auto;}
+#head iframe{float:right;width:236px;height:100px;padding:3px;margin:3px;border:1px solid #aaa;border-radius:5px;background-color:rgba(215,215,215,0.5);}
+/*index*/
+.index #header2	{text-align:center;}
+.index #msg		{width:550px;float:left;font-size:22px;}
+.index nav		{width:250px;float:right;}
+.index button	{width:250px;font-size:15px;padding:3px;border-radius:8px;box-shadow:2px 2px 2px gray;margin-bottom:15px;}
+.index #btn1	{background-color:#faa;}	
+.index #btn2 	{background-color:ivory;}
+.index #btn1:hover{background-color:#aaf;}	
+.index #btn2:hover{background-color:#aaa;}	
+
+/*list*/
+
+#list		{text-align:left;
+	border:1px solid #aaa;
+	background-color:rgba(215,215,215,0.5);
+	border-radius:10px;
+	padding:10px auto;}
+
+#list h1	{font-size:15px;}
+
+#list .item{float:left;width:100px;height:125px;overflow:hidden;
+			margin:0 0 18px 18px;box-shadow:0 2px 5px black;
+			text-align:left;position:relative;}
+#list .item img{width:100px;height:125px;}
+#list .hanamaru{position:absolute;top:70px;left:50px;width:50px;height:50px;background-image:url('img/hanamaru.png')}
+#list .Sign{position:absolute;top:110px;left:0px;width:100px;height:10px;color:red;font-size:14px;}
+
+/*draw*/
+
+.draw #msg	{margin:10px;}
+.draw #canvas{float:left;width:400px;height:500px;border:1px solid gray;bakcground-color:white;}
+.draw .right{float:right;width:400px;}
+
+.draw button{width:400px;
+	margin:0 8px;
+	font-size:15px;
+	padding:10px 10px;
+	border-radius:10px;
+	
+	margin-bottom:15px;}
+
+.draw .btn1	{background-color:#faa;}
+.draw .btn2	{background-color:ivory;}
+.draw .btn1:hover{background-color:#aaf;}	
+.draw .btn2:hover{background-color:#aaa;}	
+
+
+/*tnx*/
+.tnx #msg		{margin:10px}
+.tnx #art		{float:left;width:400px;margin:10px;}
+.tnx .right		{text-align:left;float:right;width:400px;}
+.tnx .right li	{height:120px;font-size:15px;}
+.tnx #share		{width:5em;text-align:center;height:1em;line-height:1em;border:1px solid gray;border-radius:5px;background-color:#5555ff;display:block;}
+.tnx .iine		{width:400px;margin:0 auto;height:80px;}
+.tnx a:hover,.tnx iframe:hover	{background-color:#faa;}
+
+/*support*/
+.support	{font-size:15px;}
+.support section{margin-bottom:20px;}
+.support dt	{font-weight:bold;}
+.support dd	{margin:0 0 1em 1em;}
+.support p	{margin:0 0 1em 1em;}
+
+/*ad*/
+#ad{margin:10px auto;font-size:12px;}

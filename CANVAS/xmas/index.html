@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>HTML5が開く新しい未来</title>
+<meta name=viewport content="width=980px,user-scalable=no">
+
+<style>
+body{background-color:black;}
+#wrap{width:660px;margin:0 auto;}
+canvas{float:left;width:400px;height:400px;}
+#srccode{width:260px;height:400;color:white;float:right;font-size:19px;}
+
+</style>
+
+<div id=wrap>
+	<canvas id=canvas width=400 height=400 onclick="ord();"></canvas>
+	<div id=srccode></div>
+</div>
+
+<script>
+
+function $(id){return document.getElementById(id);}
+//雪の準備
+function ord(){order++;}
+snow_init(40);
+var order=0;
+setInterval(anime,50);
+var audio=new Audio();
+audio.src="xmas.mp3";
+
+var canvas = document.getElementById("canvas");
+var c = canvas.getContext("2d");
+var l=new Array();
+for(var i=1;i<=11;i++){l[i]=true;}
+function anime(){
+console.log(order);
+	ord();
+	clr();//消去
+	if(1<=order){shikaku(176,350,50,50,"brown");}			if(1==order && l[1]){l[1]=false;$("srccode").innerHTML='ctx.fillStyle=color // 塗色<br>ctx.fillRect(x,y,w,h); // 矩形塗る';}
+	if(2<=order){sankaku(200,50,150,150,250,150,"green");}	if(2==order && l[2]){l[2]=false;$("srccode").innerHTML='ctx.beginPath(); // パスの始まり<br>ctx.moveTo(x1,y1); // 始点<br>'}
+	if(3<=order){sankaku(200,100,100,250,300,250,"green");}	if(3==order && l[3]){l[3]=false;$("srccode").innerHTML+='ctx.lineTo(x2,y2); // 通過点<br>ctx.lineTo(x3,y3); // 通過点<br>ctx.closePath(); // 閉じる<br>';}
+	if(4<=order){sankaku(200,150,50,350,350,350,"green");}	if(4==order && l[4]){l[4]=false;$("srccode").innerHTML+='ctx.fillStyle = color; // 塗色<br>ctx.fill(); // 塗る;';}	
+	if(5<=order){maru(200,200,10,"red");}			 	if(5==order && l[5]){l[5]=false;$("srccode").innerHTML='ctx.beginPath();// パスの始まり<br>';}	
+	if(6<=order){maru(150,300,10,"blue");}					if(6==order && l[6]){l[6]=false;$("srccode").innerHTML+='ctx.arc(x,y,r,strt,end,false);<br>';}
+	if(7<=order){maru(250,300,10,"white");}					if(7==order && l[7]){l[7]=false;$("srccode").innerHTML+='ctx.closePath();<br>';}
+	if(8<=order){maru(200,50,30,"yellow");}					if(8==order && l[8]){l[8]=false;$("srccode").innerHTML+='fillStyle=color<br>fill();';}
+	if(9<=order){snow_draw();	}							if(9==order && l[9]){l[9]=false;$("srccode").innerHTML='for(var j=0;j&lt;snow.length;j++){<br>moji("・",snow[j].x, snow[j].y,20,"white");<br>snow[j].x+=Math.floor(Math.random()*3)-1;<br>snow[j].y++;<br>if(snow[j].y>450){snow[j].y=0;}<br>}';}
+	if(10<=order){audio.play();}							if(10==order && l[10]){l[10]=false;$("srccode").innerHTML='sound.play();';}
+	if(11<=order){moji("Merry Xmas",200,200,50,"white");}	if(11==order && l[11]){l[11]=false;$("srccode").innerHTML='ctx.fillStyle = color;// 塗色<br>ctx.textAlign = "center"; // 真中揃え<br>ctx.font = size+"px serif "; // フォント指定<br>ctx.fillText("Merry Xmas",200,400);	// 文字表示';}
+}
+
+
+
+//矩形の設計図
+function shikaku(x,y,w,h,color){
+	c.fillStyle = color   				// 塗色
+	c.fillRect(x,y,w,h); 				// 矩形塗る
+}
+
+//三角の設計図
+function sankaku(x1,y1,x2,y2,x3,y3,color){
+	c.beginPath();             			// パスの始まり
+	c.moveTo(x1,y1);        			// 始点 
+	c.lineTo(x2,y2);    				// 通過点
+	c.lineTo(x3,y3);    				// 通過点
+	c.closePath();              		// 閉じる
+	c.fillStyle = color;  				// 塗色
+	c.fill();   						// 塗る
+}
+
+//文字の設計図
+function moji(str,x,y,size,color){
+	c.fillStyle = color;				// 塗色
+	c.textAlign = "center";				// 真中揃え
+	c.font = size+"px serif ";			// フォント指定
+	c.fillText(str,x,y);				// 文字表示
+}
+
+//丸の設計図
+function maru(x,y,r,color){
+	c.beginPath(); 
+	c.arc(x,y,r,0,2*Math.PI,false); 	// 円弧の描画
+	c.fillStyle = color; 					// 塗色
+	c.fill(); 			   					// 塗る
+}
+
+//雪の準備
+var snow;
+function snow_init(n){
+	snow=new Array();
+	for(var i=0;i<n;i++){
+		snow[i]={x:Math.floor(Math.random()*400), y:-i*10};
+	}
+}
+//雪の表示
+function snow_draw(n){
+	for(var j=0;j<snow.length;j++){
+		moji("・",snow[j].x, snow[j].y,20,"white");
+		snow[j].x+=Math.floor(Math.random()*3)-1; 
+		snow[j].y++;
+	  if(snow[j].y>450){snow[j].y=0;} 
+	}
+}
+
+//画面消去
+function clr(){
+	c.clearRect(0,0,canvas.width,canvas.height);
+}
+
+
+</script>

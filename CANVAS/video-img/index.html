@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>動画から静止画を切り出す</title>
+<style>
+	*{margin:0;padding:0;font-size:16px;}
+	canvas{border:1px solid #eee;width:300px;height:180px;margin:1px 1px 0 0;}
+	video{width:300px;height:180px;}
+	
+</style>
+<script>
+
+</script>
+
+<section>
+	<h1>オリジナルの動画</h1>
+	<p><video id=video src="video.mp4" controls></video></p>
+</section>
+
+<section>
+	<h1>切り出した静止画</h1>
+	<div id=imgs></div>
+</section>
+
+<script>
+	
+	//とりあえず100個のcanvasを生成
+	for(var i=0;i<100;i++){
+		$id("imgs").innerHTML+="<canvas id=canvas"+i+" width=100 height=100></canvas>"
+	}
+	
+	//ビデオ取り込み
+	var video=document.getElementById("video");
+	video.play();
+	video.volume=0;				//とりあえず音はなしで。
+	video.playbackRate=5;		//倍速。
+	
+	//とり込み開始
+	var timer=setInterval(anime,1000);	//とりあえず1秒ごとですけど、倍速してるので、5秒ごと。たぶん。これをいじれば２分とかできないことはないと思われ。
+	var i=0;
+	function anime(){
+		var c=document.getElementById("canvas"+i).getContext("2d").drawImage(video,0,0,100,100);
+		i++;
+		if(100<i){clearInterval(timer);}
+	}
+	function $id(id){return document.getElementById(id);}
+</script>

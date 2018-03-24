@@ -1,0 +1,36 @@
+*{	margin:0;padding:0;	/*リセットCSS*/
+	font-size:16px;		/*全体の文字の大きさ*/
+}
+#wrap{
+	width:320px;		/*横幅を320pxに*/
+	margin:0 auto;		/*上下の余白を0、左右を均等に*/
+	border:1px solid gray;	/*1px灰色の枠線*/
+}
+header h1{
+	text-align:center;	/*文字を左右の真ん中に*/
+	line-height:2em;	/*文字高を2文字分*/
+	font-size:1.5em;	/*文字の大きさを1.5倍*/
+	background-color:#eee;	/*文字の色を明るい灰色に*/
+}
+nav ul{
+	display:flex;	/*メニューを横並べ*/
+	list-style:none;	/*リストの記号を消す*/
+}
+nav li{
+	width:100%;	/*横幅を100%に*/
+	text-align:center;/*文字を左右の真ん中に*/
+	border:1px solid gray;	/*1px灰色の枠線*/
+	margin:2px;	/*外余白を2pxに*/
+}
+section{
+	border:1px solid gray;	/*1px灰色の枠線*/
+	margin:2px;	/*外余白を2pxに*/
+}
+footer{
+	text-align:center;	/*文字を左右の真ん中に*/
+	background-color:#222;	/*背景色を暗い灰色に*/
+	color:#eee;	/*文字の色を明るい灰色に*/
+}
+footer small{
+	font-size:0.5em;	/*文字の大きさを半分に*/
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Hinamatsuri created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Hinamatsuri created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_39.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Hinamatsuri
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_39.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_39.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_39.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+var pi=Math.PI;
+var frame=0;
+canvas.style.backgroundColor="pink";
+
+setInterval(anime,50);
+
+function anime(){
+c.clearRect(0,0,canvas.width,canvas.height);
+frame++;
+var f=Math.cos(frame/180*pi)*5-5;
+//おひなさま
+c.save();
+c.translate(350,180);
+
+//後ろ髪
+c.beginPath();
+c.moveTo(-50,0);
+c.lineTo(-30,80);
+c.lineTo(30,80);
+c.lineTo(50,0);
+c.closePath();
+c.fillStyle="black";
+c.fill();
+     
+
+//服
+c.beginPath();
+c.arc(-37,100,30,0.5*pi,1.3*pi,false);
+c.arc(0,80,50,1.1*pi,1.9*pi,false);
+c.arc(37,100,30,1.7*pi,0.5*pi,false);
+c.closePath();
+c.fillStyle="red";
+c.fill();
+
+//かお
+maru(0,0,35,0,2*pi,"#FFE6CE");  //顔の輪郭
+maru(0,0,50,pi,2*pi,"black");//前髪
+maru(-20,8,5,0,2*pi,"black");//目
+maru(20,8,5,0,2*pi,"black");
+c.lineWidth=1;
+wa(0,10,15,1/3*pi,2/3*pi,"red");	//口 
+txt("★",-25,-20,"yellow",50);//★
+
+//扇
+c.beginPath();
+c.moveTo(0,100+f);
+c.arc(0,80+f,50,pi,2*pi,false);
+c.closePath();
+c.fillStyle="yellow";
+c.fill();
+//手
+maru(0,100+f,8,0,2*pi,"#FFE6CE");
+
+c.restore();
+
+
+
+
+//だいりさま
+c.save();
+c.translate(180,180);
+
+c.beginPath();//冠
+c.moveTo(0,0);
+c.arc(0,-90,10,pi,2*pi,false);
+c.closePath();
+c.fillStyle="darkblue";
+c.fill();
+shikaku(-15,-45,30,15,"darkblue");
+
+//服
+c.beginPath();
+c.arc(-50,100,30,0.5*pi,1.3*pi,false);
+c.arc(0,80,50,1.1*pi,1.9*pi,false);
+c.arc(50,100,30,1.7*pi,0.5*pi,false);
+c.closePath();
+c.fillStyle="darkblue";
+c.fill();
+
+sankaku(0,45,20,-20,"#FFE6CE");    //襟
+
+//笏
+c.beginPath();
+c.moveTo(0,100);
+c.arc(0,55,10,pi,2*pi,false);
+c.closePath();
+c.fillStyle="yellow";
+c.fill();
+
+//手
+maru(0,100,8,0,2*pi,"#FFE6CE");
+
+
+//顔
+maru(0,0,39,0,2*pi,"#FFE6CE");  //顔の輪郭
+maru(0,0,40,pi,2*pi,"black"); //髪
+maru(-20,8,5,0,2*pi,"black");//目
+maru(20,8,5,0,2*pi,"black");
+c.lineWidth=1;
+wa(0,10,15,1/3*pi,2/3*pi,"red");//口 
+   
+c.restore();
+
+
+//台
+c.save();
+c.translate(80,300);
+
+for(var i=0;i<340;i+=40){
+    c.fillStyle="green";
+    c.fillRect(i,0,10,30);
+    c.fillStyle="red";
+    c.fillRect(i+10,0,20,30);
+    c.fillStyle="yellow";
+    c.fillRect(i+30,0,10,30);
+}
+c.restore();
+}
+function sen(x,y,x1,y1,w,color){  
+    c.beginPath();
+    c.moveTo(x,y);
+    c.lineTo(x1,y1);
+    c.lineWidth=w;
+    c.strokeStyle=color;
+    c.stroke();
+}
+
+function txt(str,x,y,color,px){
+    c.beginPath();
+    c.fillStyle=color;
+    c.font=px+"px 'arial'";
+    c.fillText(str,x,y);
+    c.closePath();
+}
+function shikaku(x,y,w,h,color){  
+    c.fillStyle=color;
+    c.fillRect(x,y,w,h);
+}
+function sankaku(x,y,w,h,color){  
+    c.beginPath();
+    c.moveTo(x,y);
+    c.lineTo(x+w,y+h);
+    c.lineTo(x-w,y+h);
+    c.closePath();
+    c.fillStyle=color;
+    c.fill();
+}
+
+function wa(x,y,r,startAngle,endAngle,color){
+    c.beginPath();
+    c.arc(x,y,r,startAngle,endAngle,false);    
+
+        c.strokeStyle=color;
+    c.stroke();
+  c.closePath();    
+}
+    
+function maru(x,y,r,startAngle,endAngle,color){
+    c.beginPath();
+    c.arc(x,y,r,startAngle,endAngle,false);    
+      c.closePath();
+        c.fillStyle=color;
+        c.fill(); 
+}
+
+function ransu(x){
+    return Math.floor(Math.random()*x);
+}
+
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

@@ -1,0 +1,56 @@
+var ball=new Array(50);
+for(var i=0;i<ball.length;i++){
+ ball[i] ={
+  x:random(50)+225,
+  y:random(50)+200,
+  dx:Math.random()*6-3,
+  dy:Math.random()*6-3,
+  color:"rgb("+random(256)+","
+  +random(256)+","
+  +random(256)+")"
+ };
+};
+
+var l={x:0,y:0};
+var temp={dx:0,dy:0};
+$("canvasina").style.boxShadow
+="inset 0px 0px 250px #666";
+
+setInterval(anime,10); 	
+
+function anime(){
+color(black);
+box(0,0,width,height);				 
+ //消去
+ for(var i=0;i<ball.length;i++){							 
+  //描画
+  circle(ball[i].x,ball[i].y,4);
+  fill(ball[i].color);
+
+  ball[i].x += ball[i].dx;//計算
+  ball[i].y += ball[i].dy;
+
+  if(ball[i].x<4) {ball[i].dx *= -1;ball[i].x=4;}
+  if(496<ball[i].x){ball[i].dx *= -1;ball[i].x=496;}
+  if(ball[i].y<4) {ball[i].dy *= -1;ball[i].y=4;}
+  if(446<ball[i].y){ball[i].dy *= -1;ball[i].y=446;}
+
+
+
+  for(var j=0;j<ball.length;j++){
+   if(i!=j){
+    l.x=ball[i].x-ball[j].x;
+    l.y=ball[i].y-ball[j].y;
+    if(Math.floor(Math.sqrt(
+    Math.pow(l.x,2)+Math.pow(l.y,2)))<=4){
+     temp.dx=ball[i].dx;
+     temp.dy=ball[i].dy;
+     ball[i].dx=ball[j].dx;
+     ball[i].dy=ball[j].dy;
+     ball[j].dx=temp.dx;
+     ball[j].dy=temp.dy;  
+     }
+    }else{}
+  }
+ }
+}

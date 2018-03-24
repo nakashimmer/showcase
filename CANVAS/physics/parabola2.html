@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>放物線</title>
+	<meta name=viewport content="width=device-width">
+	<style>
+	
+		/*⑤レンジの大きさを設定★*/
+		#range{width:100px;}
+		
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas" width="800" height="300" onclick="start();"></canvas>
+
+
+	<!-- ⑥レンジを取り付ける★ -->
+	<p><input type="range" id="range" max="500" value="150" step="1"></p>
+
+
+<script>
+
+	//canvasの要素とcontextを取得する。
+	var canvas=document.getElementById("canvas");
+	var c=canvas.getContext("2d");
+
+	//⑦音を鳴らすため
+	var sound=new Audio("pon.mp3");
+	
+	//⑧初期の背景色
+	c.fillStyle="black";
+	c.fillRect(0,0,800,300);
+	c.globalAlpha=0.5;
+	c.fillStyle="blue";
+	c.fillRect(500,0,50,300);
+	
+	//①canvasの座標の原点を左上から左下へ移動、およびy軸を反転して描画
+	c.translate(0,300);
+	c.scale(1,-1);
+	
+	//⑨初期設定=================================
+	var v = 700;										//打上初速
+	var g = 1000;										//重力
+	var dx;
+	var ball;
+	var interval = 0.005;					//1フレームの間隔 0.2s=200ms
+	var t;
+	var timer;
+	
+	//⑩canvasをonclickしてスタート
+	function start(){
+		dx=parseFloat(document.getElementById("range").value);
+																//レンジの値を取得
+		ball = {x:0, y:0}						//初期座標
+		t=0;												//時間
+		bound=0;										//バウンドの回数
+		clearInterval(timer);				//タイマーキャンセル
+		timer=setInterval(anime,interval*1000);
+	}
+
+	
+	function anime(){
+		//⑪消去(前回より若干修正しています)=============
+		c.globalAlpha=0.1;
+		c.fillStyle="black";
+		c.fillRect(0, 0, canvas.width, canvas.height);
+		c.fillStyle="blue";
+		c.fillRect(500,0,50,300);
+
+		//③白の丸を描画(canvasの授業を参照してください)
+		c.globalAlpha=1;
+		c.beginPath();
+		c.arc(ball.x, ball.y, 10, 0, 2*Math.PI, false);
+		c.closePath();
+		c.fillStyle="white";
+		c.fill();
+
+
+		//④計算================
+		ball.x += dx*interval;				//xに一コマ毎の移動距離を加算してxを算出
+		ball.y = v*t-1/2*g*t*t;				//物を上に打ち上げた時の位置の公式でyを算出
+		t += interval;								//時間を加算
+
+		/* ⑫衝突判定 */
+		if(ball.y<0){
+			t=0;
+			bound++;
+			if(500<ball.x && ball.x<550 && bound==1){
+				sound.play();
+			}
+		}
+	}
+</script>
+</body>
+</html>

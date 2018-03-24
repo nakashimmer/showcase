@@ -1,0 +1,66 @@
+function r(n){return Math.floor(Math.random()*n);}
+var frame=0;
+var mouse={x:-100,y:-100};
+var snow=new Array(100);
+var color=["#ffffff"];
+
+var gradient=c.createLinearGradient(0,0,0,canvas.height*2);
+gradient.addColorStop(0,black);
+gradient.addColorStop(1,gray);
+
+for(var i=0;i<snow.length;i++){
+    snow[i]={
+        x:r(500), 
+        y:r(500), 
+        r:Math.floor(3/snow.length*i+1),
+        color:color[r(color.length)] ,
+        alpha:Math.floor(i/snow.length*10)/8,
+        delay:r(360),
+        rev:0
+    };
+}
+
+
+setInterval(anime,50);
+function anime(){
+c.fillStyle=gradient;
+    c.fillRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<snow.length;i++){
+/*
+        c.beginPath();
+        c.arc(snow[i].x+snow[i].r*10*
+                Math.sin(frame/5000*Math.PI+snow[i].delay),
+                snow[i].y,
+                snow[i].r*3,
+                0,2*Math.PI,false);
+        c.closePath();
+        c.fillStyle=snow[i].color;
+        c.globalAlpha=snow[i].alpha;
+        c.fill();
+*/
+        c.fillStyle=snow[i].color;
+        c.font=Math.floor(snow[i].r*20)+"px sans-serif";
+c.save();
+c.translate(snow[i].x+snow[i].r*10*
+                Math.sin(frame/5000*Math.PI+snow[i].delay),
+                snow[i].y);
+c.rotate((frame/100+snow[i].rev)/180*Math.PI);
+        c.fillText("*",-snow[i].r/2,-snow[i].r*3);
+c.restore();
+        frame++;
+        snow[i].y+=snow[i].r/4-snow[i].rev;
+        if(550<snow[i].y){snow[i].x=r(500), snow[i].y-=600;}
+        if(Math.pow(snow[i].x-mouse.x,2)+Math.pow(snow[i].y-mouse.y,2)<1400){
+            snow[i].rev=snow[i].r*5;
+        }
+        if(0<snow[i].rev){snow[i].rev--;}
+    }
+}
+
+
+canvas.addEventListener("mousemove",function(e){
+ 
+    var rect = e.target.getBoundingClientRect(); 
+    mouse.x=e.clientX - rect.left;
+    mouse.y=e.clientY - rect.top;	    
+});

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Trick or HTML5? created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Trick or HTML5? created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_24.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Trick or HTML5?
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_24.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_24.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_24.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+WebFontConfig={google:{families:[ 'Griffy::latin']}};
+(function(){
+ var wf = document.createElement('script');
+ wf.src = ('https:' == document.location.protocol ? 'https' : 'http')+ '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+ wf.type = 'text/javascript';
+ wf.async = 'true';
+ var s = 
+ document.getElementsByTagName('script')[0];
+ s.parentNode.insertBefore(wf, s);})(); 
+
+var canvas=document.getElementById('canvasina');
+var c=canvas.getContext('2d');
+
+//アニメーション本体
+setInterval(anime,50);
+var frame=0;
+function anime(){
+ frame++;
+ bgDraw();
+ batDraw(1);batDraw(2);
+ batDraw(3);batDraw(4);batDraw(5);    
+ jackDraw();
+ msgDraw();
+ if(blink>0){
+  blink++;
+  if(blink>300){jack();}
+  }
+}
+
+//初期設定
+var pi = Math.PI;
+var bat=new Array(5);
+bat[1]={x:250,y:30};
+bat[2]={x:300,y:80};
+bat[3]={x:350,y:50};
+bat[4]={x:400,y:80};
+bat[5]={x:450,y:100};
+jackInnerColor='black';
+bgTopColor='purple';
+batColor='black';
+trickColor="red";
+var blink=0;
+var voice=new Audio();
+voice.src='http://springreen.jp/INDEX/themes/ShunsuiKobo/bg/halloween.wav';
+
+function bgDraw(){//背景
+ var grad  = c.createLinearGradient(0,0, 0,500);
+ grad.addColorStop(0,bgTopColor);
+ grad.addColorStop(0.5,'purple');
+ grad.addColorStop(1,'black');
+ c.fillStyle=grad;
+ c.fillRect(0,0,canvas.width,canvas.height);    
+}
+
+function pumpFace(x,y){//顔のひな形
+ c.save();
+ c.translate(x,y);
+ c.scale(0.6,1);
+ c.beginPath();
+ c.arc(0,0,150,0,2*pi,false);
+ c.closePath();
+ c.fill();
+ c.restore();
+}
+
+function pumpEye(x,y){//目のひな形
+ c.beginPath();
+ c.moveTo(x,y);
+ c.lineTo(x-40,y+80);
+ c.lineTo(x+40,y+80);
+ c.closePath();
+ c.fill();
+}
+
+function jackDraw(){//かぼちゃ茎//
+ c.fillStyle='#070';
+ c.fillRect(200,100,100,100);
+ //かぼちゃ顔//
+ c.fillStyle='orange';
+ pumpFace(150,300); //かぼちゃ顔左
+ pumpFace(350,300);//かぼちゃ顔右
+ pumpFace(250,300);//かぼちゃ顔真中
+ //かぼちゃ目と口////////////////////
+ c.fillStyle=jackInnerColor;
+ if(frame%20<(4+Math.random()*5))c.fillStyle="black";
+ pumpEye(190,220);//左目
+ pumpEye(310,220);//左目
+
+//口
+ c.beginPath();
+ c.arc(250,250,160,0.2*pi,0.8*pi,false);
+ c.closePath();
+ c.fill();
+  
+//帽子
+ c.fillStyle="black";
+//帽子つば  
+ c.save();
+ c.translate(130,180);
+ c.rotate(-30/180*pi);
+ c.scale(1,0.3);
+ c.beginPath();
+ c.arc(0,0,100,0,2*pi,false);
+ c.closePath();
+ c.fill();
+ c.restore();
+//帽子
+ c.beginPath();
+ c.moveTo(60,220);
+ c.lineTo(210,150);
+ c.lineTo(100,60);
+ c.fill();
+}
+
+function batDraw(i){
+ c.save();
+ c.translate(bat[i].x,bat[i].y);
+ c.scale(1.5,1);
+ c.fillStyle=batColor;
+ c.beginPath();
+ c.arc(0,0, 20,pi,1.2*pi,false);   
+ c.arc(0,-15,10,pi,2*pi,true);
+ c.arc(0,0, 20,1.8*pi,0,false);
+ c.arc(10,10,10,2*pi,pi,true);
+ c.arc(-10,10,10,0,pi,true);
+ c.closePath();
+ c.fill();
+ c.restore();
+    
+ bat[i].x+=Math.floor(Math.random()*3)-1;
+ bat[i].y+=Math.floor(Math.random()*3)-1;
+}
+
+function msgDraw(){
+ c.fillStyle=trickColor;
+ c.font='50px Griffy';
+ c.textAlign="center";
+ c.fillText('TRICK or HTML5?',250,430);
+}
+
+canvas.addEventListener("mouseover",
+function(){
+ jackInnerColor = (jackInnerColor=='red')?"black":"red";
+ bgTopColor = (bgTopColor=='purple')?"black":"purple";  
+ batColor = (batColor=='black')?"white":"black";  
+ if(jackInnerColor=='red'){voice.play();}
+ blink=1;
+ trickColor="white";
+});
+
+canvas.addEventListener("mouseout",function(){
+ jackInnerColor='black';
+ bgTopColor='purple';
+ batColor='black';
+ voice.pause();
+ trickColor="red";
+});
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

@@ -1,0 +1,45 @@
+	animeLoop(50);
+	var frame=0;
+	function anime(){
+		$cls('#fdd');
+	c.lineWidth=10;
+	c.save();
+	c.translate(250,200);
+	c.transform(1,0.2,0,1,0,0);
+	shadow();
+	$2(-100,200, -50,-150, brown);
+	$2(100,200, 50,-150, brown);
+	$2(0,0, 40,170, '#780000');
+	$2(-90,120, 90,120, brown);
+	$4(-146,-102,300,200,gray); 
+	$4(-150,-100,300,200,white); 
+	c.lineWidth=1;
+	c.strokeStyle=gray;
+	c.strokeRect(-150,-100,300,200);
+
+	c.globalAlpha=1-abs(sin(frame));
+	$1(-75,-50,45,'#f33');
+	c.globalAlpha=1-abs(sin(frame-45));
+	c.lineWidth=5;
+	$2(5,-95,120,5,'#3f3');
+	c.globalAlpha=1-abs(sin(frame-135));
+	$3(-120,5, -5,5, -75,90,'#33f');
+	c.globalAlpha=1-abs(sin(frame-90));
+	$4(5,5,120,85,'#ff3');
+	c.globalAlpha=1;
+	$txt('Canvasina',0,25,53,'#333',serif);
+	c.restore();
+	frame++;
+}
+
+function shadow(){
+	c.save();
+	c.translate(20,190);
+	c.scale(1,0.2);
+	var gra=c.createRadialGradient(0,0,0,0,0,100);
+	gra.addColorStop(0.6,'#bbb');
+	gra.addColorStop(1,'#fdd');
+	$1(0,0,100,gra);
+	c.restore();
+}
+	

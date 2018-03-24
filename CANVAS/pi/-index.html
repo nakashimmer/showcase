@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width">
+<title>PI</title>
+<style>
+	body{background-color:#eee;}
+	#wrap{width:400px;margin:100px auto;}
+	canvas{
+		display:block;
+		position:absolute;
+		top:0;left:0;
+	}
+	#info{
+		position:absolute;
+		top:400px;left:0px;
+	}
+</style>
+
+<div id=wrap>
+	<canvas id=canvas width=400 height=400></canvas>
+	<canvas id=canvas1 width=400 height=400></canvas>
+	<div id=info></div>
+</div>
+
+<script>
+var canvas=document.getElementById("canvas");
+var c=canvas.getContext("2d");
+
+var total=0;
+var p=0;
+var limit=1;
+var info=document.getElementById("info");
+setInterval(anime,50);
+
+function anime(){
+ for(var i=0;i<limit;i++){
+  var x=Math.floor(Math.random()*400);
+  var y=Math.floor(Math.random()*400);
+   
+  c.beginPath;
+  c.fillStyle="#000";
+  c.beginPath();
+  c.arc(Math.floor(x),Math.floor(y),1,0,2*Math.PI,false);
+  c.closePath();
+  c.fill();
+  total++;
+  if(Math.pow(x-200,2)+Math.pow(y-200,2)<Math.pow(200,2)){
+   p++;
+  }
+  info.innerHTML = "円周率π:" +p/total*4+"<br>=4 * "+p+" / "+total+"";
+ }
+ limit++;
+}
+</script>
+
+<script>
+var canvas1=document.getElementById("canvas1");
+var c1=canvas1.getContext("2d");
+c1.beginPath();
+c1.arc(200,200,200,0,2*Math.PI);
+c1.lineWidth=5;
+c1.strokeStyle="white";
+c1.stroke();
+</script>

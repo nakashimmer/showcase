@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>akino yuhini teruyama momiji created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="akino yuhini teruyama momiji created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<style>
+#outer{
+    width:500px;height:500px;
+    background:-webkit-gradient(linear,left top,left bottom,from(red),to(yellow));
+    -webkit-perspective:800px;
+    overflow:hidden;
+    margin:0px auto;
+}
+
+#divart,#divart:before{
+    position:absolute;
+    background-color:#701d00;
+    height:200px;width:200px;
+    border-radius:100%  0 100% 0;
+    -webkit-transform-origin:bottom left;
+}
+
+#divart{
+    -webkit-transform:rotate(0deg);
+    left:200px;top:100px;
+    -webkit-animation:hirahira 5s linear 0 infinite normal;
+}
+
+#divart:before{
+    content:"";position:absolute;
+    -webkit-transform:rotate(-45deg) scale(1,1.3);
+    -webkit-box-reflect:below -150px;
+    top:100px;left:50px;
+}
+
+#divart:after{
+    content:"";position:absolute;
+    height:150px;width:100px;
+    top:40px;left:10px;
+    border-bottom:5px solid #701d00;
+    border-right:5px solid #701d00;
+    border-radius:100%  0 100% 0;
+    -webkit-transform-origin:bottom left;
+    -webkit-transform:rotate(150deg) ;
+}
+
+@-webkit-keyframes hirahira{
+    0%{
+        -webkit-transform-origin:top;
+        -webkit-transform:translate(0,-450px) rotateY(0) rotateX(-90deg) translateZ(50px); 
+    }
+      
+    100%{-webkit-transform:translate(0,700px) rotateY(360deg) rotateX(90deg) translateZ(50px);
+    }
+}
+
+</style>
+
+<div id=wrap>
+
+	<main id=outer>
+		<div id=divart width=500 height=450>
+		</div>
+	</main>
+
+	<header>
+		akino yuhini teruyama momiji
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="../" ><h1>DIV ART</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/EVENT/devart/gallery/nakashimmer_05.html" target="_blank">Share</a>
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/EVENT/devart/gallery/nakashimmer_05.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</div>
+
+
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

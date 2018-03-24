@@ -1,0 +1,14 @@
+#outer{
+    -webkit-transform-style:preserve-3d;
+    -webkit-perspective:305px;
+}
+#divart{width:100px;height:100px;background-color:red;margin:150px auto;
+    -webkit-animation:anime 5s linear 0 infinite normal}
+@-webkit-keyframes anime{
+
+0%{ -webkit-transform:rotateX(0deg) rotateY(0) translateZ(0);}
+
+50%{ -webkit-transform:rotateX(180deg) rotateY(180deg) translateZ(600px);}
+
+100%{ -webkit-transform:rotateX(360deg) rotateY(360deg) translateZ(0px);}
+}

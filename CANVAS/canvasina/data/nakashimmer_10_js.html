@@ -1,0 +1,101 @@
+var pi = Math.PI;
+
+function r(i){return Math.floor(Math.random()*i);}
+function sin(w){return Math.sin(frame*4/180*pi)*w;}
+function sinSlow(w){return Math.sin(frame*3/180*pi)*w-10;}
+function cos(w){return Math.cos(frame*4/180*pi)*w;}
+var frame=1;
+
+if($("canvasina").getBoundingClientRect().left>0){
+var sound= new Audio('http://springreen.jp/INDEX/themes/ShunsuiKobo/bg/furin.mp3');
+}
+
+window.onload=function(){
+setInterval(anime,20);
+sound.play();
+}
+function anime(){    
+    frame++;
+    bgDraw();	
+c.save();
+c.scale(0.75,0.75);
+furinShadow();	himoDraw();
+    kamiShadow();	
+    kamiDraw();	furinDraw();    himoUeDraw();
+c.restore();
+}
+function bgDraw(){
+	//背景   
+    c.globalAlpha=0.9;
+    c.fillStyle="#ffffd1";c.fillRect(0,0,500,700);
+    c.globalAlpha=1;
+}
+
+function HIMO(s,e,dx){
+    c.beginPath();
+    c.moveTo(250,s);c.lineTo(250+dx,e);
+	c.strokeStyle="white";c.lineWidth=4;c.stroke();
+	c.closePath();
+}
+function himoUeDraw(){	//上のヒモ
+   c.shadowBlur=3;	c.shadowColor="#999";	c.shadowOffsetX=1;	c.shadowOffsetY=0;
+	HIMO(0,60,0);
+	c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;
+}
+function himoDraw(){	//ヒモ
+    c.shadowBlur=3;	c.shadowColor="#999";	c.shadowOffsetX=1;	c.shadowOffsetY=1;
+    HIMO(60,250-sin(10),-sin(30)-30+sinSlow(20));
+	c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;
+}
+function FURIN(b){
+    c.save();
+	c.translate(250,150);c.scale(1,0.9);
+	c.beginPath();
+    c.arc(0,0,100,0.2*pi,0.8*pi,true);
+   	c.restore(); 
+    
+    c.save();
+    c.translate(250,201);c.scale(1,0.2);
+    c.arc(0,0,78,0.9*pi,0.1*pi,b);
+    c.closePath();
+    c.restore();
+}
+function furinDraw(){
+      //風鈴    
+    c.globalAlpha=0.5;
+    g = c.createLinearGradient(100,100,100,300);g.addColorStop(0,"white");g.addColorStop(1,"#00f");
+	FURIN(false);
+    c.fillStyle=g;c.fill();
+	c.strokeStyle="#a9f";c.lineWidth=1;c.stroke();
+    c.globalAlpha=1;
+}  
+    
+function furinShadow(){    
+    //風鈴の影
+    c.shadowBlur=20;c.shadowColor="#ccc";c.shadowOffsetX=50;c.shadowOffsetY=70;
+	FURIN(true);
+    c.fillStyle="white";c.fill();
+    c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;
+} 
+function KAMI(){
+    c.beginPath();
+	c.moveTo(250-sin(30)-30	+sin(30)+sinSlow(20),	250-sin(10)-cos(10));
+	c.lineTo(250-sin(80)-80	+sin(30)+sinSlow(40),	550-sin(10)-cos(10));
+	c.lineTo(250-sin(80)-80	-sin(30)+sinSlow(40),	550-sin(10)+cos(10));
+	c.lineTo(250-sin(30)-30	-sin(30)+sinSlow(20),	250-sin(10)+cos(10));
+	c.closePath();
+}
+function kamiDraw(){
+    //かみ
+	g = c.createLinearGradient(200,250,300,450);g.addColorStop(0,"white");g.addColorStop(1,"pink");
+    KAMI();
+	c.strokeStyle="#999";c.lineWidth=2;c.stroke();
+	c.fillStyle=g;c.fill();
+}
+ function kamiShadow(){
+     //かみ影
+     c.shadowBlur=20;c.shadowColor="#ccc";c.shadowOffsetX=50;c.shadowOffsetY=70;
+     KAMI();
+     c.fillStyle="white";c.fill();
+     c.shadowBlur=0;c.shadowOffsetX=0;c.shadowOffsetY=0;      
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Halloween created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Halloween created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_25.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Halloween
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_25.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_25.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_25.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+//変数の設定と初期化
+var frame = 0; 
+var target = {x:250, y:100, dir:1};
+var player = {x:250, y:400};
+var ballMax=50;
+var ball = new Array(ballMax);
+for(var i=0;i<ballMax;i++){
+	ball[i]={x:-10, y:-10};
+}
+var ballNo=0;
+var point = 0;
+var g=c.createLinearGradient(0,0,5,5);
+g.addColorStop(0,"yellow");
+g.addColorStop(1,"red");
+
+var bg=c.createLinearGradient(0,0,0,canvas.height);
+bg.addColorStop(0,"black");
+bg.addColorStop(1,"purple");
+	
+setInterval(anime,50);
+
+function anime(){	
+	frame++;						
+
+	//画面をクリア
+	c.fillStyle=bg;
+	c.fillRect(0,0,canvas.width,canvas.height);
+
+	//targetを描画
+	c.fillStyle = "white";
+	c.beginPath();
+	c.arc(target.x,target.y-5,30,0,2*Math.PI,false);
+	c.fill();
+		
+	c.strokeStyle="white";
+	c.lineWidth=60;
+	c.beginPath();
+	c.moveTo(target.x,target.y-5);
+	c.lineTo(target.x-target.dir*10,target.y+50);
+	c.stroke();
+
+	c.fillStyle="black";
+	c.fillRect(target.x-15,target.y-5,10,10);
+	c.fillRect(target.x+5,target.y-5,10,10);
+		
+	//得点表示
+	c.fillStyle = "white";
+	c.font = "20px sans-serif ";
+	c.fillText(point,target.x,target.y-55);
+
+	//playerを描画
+	drawPlayer();
+		
+	//ballを描画
+	drawBall();
+
+	//移動計算
+	target.x += target.dir;
+	for(var i=0;i<ballMax;i++){
+		ball[i].y -= 5;
+	}
+	//壁衝突計算
+	if(target.x < 25 || canvas.width-25 < target.x)target.dir *= -1; 
+	
+	//得点ゲット
+	for(var i=0;i<ballMax;i++){
+		if ((100 == ball[i].y) &&
+		 (Math.abs(target.x - ball[i].x)<25)){
+			point++;
+ 			ball[i].y-=130;
+			}
+		}
+	}
+	
+	//シュートする関数
+	canvas.addEventListener("mousedown",function(e){
+		ball[ballNo].x = player.x;
+		ball[ballNo].y = player.y;
+		ballNo++;
+		if(ballMax<=ballNo){ballNo=0;} 
+	});
+	
+	canvas.addEventListener("mousemove",function(e){
+		var rect = e.target.getBoundingClientRect();
+		player.x = e.clientX - rect.left;					
+	//	player.y = e.clientY- rect.top;	
+	});
+	
+	
+	function drawPlayer(){
+		playerpart(player.x,player.y-5);
+		playerpart(player.x-20,player.y-5);
+		playerpart(player.x+20,player.y-5);
+		c.fillStyle="black";
+		c.fillRect(player.x-15,player.y-15,10,10);
+		c.fillRect(player.x+5,player.y-15,10,10);
+		c.fillRect(player.x-5,player.y+5,10,5);
+	}
+	
+	function playerpart(x,y){
+		c.fillStyle = "orange";
+		c.save();
+		c.translate(x,y);
+		c.scale(0.5,1);
+		c.beginPath();
+		c.arc(0,0,30,0,2*Math.PI,false);
+		c.fillStyle = "orange";
+		c.fill();
+		c.restore();
+	}
+	
+	function drawBall(){
+		for(var i=0;i<ballMax;i++){
+		c.save();
+		c.translate(ball[i].x-5,ball[i].y-5);
+		c.beginPath();
+		c.fillStyle = g;
+		c.arc(0,0,10,0,2*Math.PI,false);
+		c.fill();	
+		c.beginPath();
+		c.moveTo(-10,0);
+		c.lineTo(-20,-10);
+		c.lineTo(-25,10);
+		c.fill();
+		
+		c.beginPath();
+		c.moveTo(10,0);
+		c.lineTo(25,-10);
+		c.lineTo(20,10);
+		c.fill();
+		c.restore();
+		}
+	}
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

@@ -1,0 +1,206 @@
+//初期設定
+var frame=0;
+var yuki = new Array();
+for(i=0;i<100;i++){
+	yuki[i]={
+		x:Math.floor(Math.random()*500),
+		y:-i*5
+	};
+}
+var sound=new Audio("http://springreen.jp/INDEX/themes/ShunsuiKobo/kiyoshi.mp3");
+if(canvas.getBoundingClientRect().left>0){
+sound.play();
+}
+var bg=c.createLinearGradient(0,0,0,canvas.height);
+bg.addColorStop(0,"black");
+bg.addColorStop(1,"white");
+
+  WebFontConfig = {
+    google: { families: [ 'Redressed::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+
+//メインプログラム
+setInterval(anime,100);
+function anime(){
+	frame+=3;
+	//クリア
+	c.fillStyle="white";
+	c.fillRect(0,0,canvas.width,canvas.height);
+	//描画
+	
+	trunk(250,350);
+
+	branch(250,150, 250-50-150,350, 250+50+150,350);
+	branch(250,100, 250-50- 70,250, 250+50+ 70,250);
+	branch(250, 50, 250-50-  0,130, 250+50+  0,130);
+
+	
+	star(250,13,0,1,"gold",0);
+
+	
+	ball(200,200,10,"blue");
+	ball(250,290,10,"blue");
+	ball(330,250,10,"blue");
+
+	ball(200-30,200+20,10,"red");
+	ball(250-20,290+30,10,"red");
+	ball(330-30,250+20,10,"red");
+
+	ball(200+20,200+30,10,"yellow");
+	ball(250+30,290+20,10,"yellow");
+	ball(330+20,250+30,10,"yellow");
+
+	star(150,290,10,0.5,"pink",120);
+	star(270,190,-10,0.5,"skyblue",120);
+	star(350,300,0,0.5,"red",120);
+
+	moll(140,260,210,320,330,200);
+
+	//snow();
+//	msg("Merry Xmas to all",250,160);
+
+
+}
+
+//関数定義
+
+
+function branch(x,y,x1,y1,x2,y2){ //多角形
+
+	var branchColor=c.createLinearGradient(x,y,x,y1);
+	branchColor.addColorStop(0.5,"#006600");
+	branchColor.addColorStop(1,"#33aa33");
+	c.beginPath();
+	c.moveTo(x,y);
+	c.lineTo(x1,y1);
+	c.lineTo(x2,y2);
+	c.closePath();
+	c.fillStyle=branchColor;
+	c.globalAlpha=1;
+	c.fill();
+}
+
+function trunk(x,y){		    //矩形
+	c.fillStyle = "brown";
+	c.fillRect(x-50,y-50,100,100);
+}
+
+function snow(){
+	for(i=0;i<yuki.length;i++){   //円弧
+		c.beginPath();
+		c.arc(yuki[i].x,yuki[i].y,
+			3,0,2*Math.PI,true);
+		c.fillStyle="white";
+		c.fill();
+		//計算
+		yuki[i].x +=Math.floor(
+			Math.random()*3)-1;
+		yuki[i].y +=1+Math.floor(
+			Math.random()*2);
+		if(canvas.height+5<yuki[i].y)
+			{yuki[i].y=-5;}
+	}
+}
+
+
+function msg(str,x,y){			//テキスト
+	c.fillStyle="white";
+	c.font="50px Redressed";
+	c.textAlign="center";
+	c.fillText(str,x,y);
+	c.globalAlpha=1;
+}
+
+function wreath(x,y,r){		      //円
+	c.beginPath();
+	c.arc(x,y,r,0,2*Math.PI,false);
+	c.closePath();
+	c.lineWidth=100;
+	c.strokeStyle="green"
+	c.stroke();
+}
+
+function star(x,y,deg,s,color,delay){	     //変形+多角形
+	c.save();
+	c.translate(x,y);
+	c.rotate(deg/180*Math.PI);
+	c.scale(s,s)
+	c.beginPath();
+	c.moveTo(0,0);
+	c.lineTo(-20,50);
+	c.lineTo(30,20);
+	c.lineTo(-30,20);
+	c.lineTo(20,50);
+	c.fillStyle=color;
+	c.globalAlpha = Math.abs(Math.sin((frame+delay)/180*Math.PI))+0.4;
+	c.fill();
+	c.restore();
+}
+
+function ball(x,y,r,color){	     //円
+	c.beginPath();
+	c.arc(x,y,r,0,2*Math.PI,false);
+	c.closePath();
+c.globalAlpha = Math.abs(Math.sin((frame+240)/180*Math.PI))+0.4;
+	c.fillStyle=color;
+
+	c.fill();
+c.globalAlpha=1;
+}
+
+
+function ribbon(x,y){	     //多角形+矩形
+	c.beginPath();
+	c.moveTo(x-60,y-30);
+	c.lineTo(x-60,y+30);
+	c.lineTo(x+60,y-30);
+	c.lineTo(x+60,y+30);
+	c.closePath();
+	c.fillStyle="red";
+	c.lineWidth=1;
+	c.strokeStyle="white";
+	c.fill();
+	c.stroke();
+	c.fillRect(x-25,y-15,50,30);
+	c.strokeRect(x-25,y-15,50,30);
+}
+function bell(x,y){	     //変形+多角形
+	c.save();
+	c.translate(x,y);
+	c.rotate(80*Math.sin(
+		frame/10)/180*Math.PI);
+	c.beginPath();
+	c.moveTo(0,0);
+	c.lineTo(-20,15);
+	c.lineTo(-40,75);
+	c.lineTo(40,75);
+	c.lineTo(20,15);
+	c.closePath();
+	c.fillStyle="Gold";
+	c.fill();
+	c.lineWidth=1;
+	c.strokeStyle="white";
+	c.stroke();
+	c.restore();
+}
+
+function moll(x,y,x1,y1,x2,y2){
+	c.beginPath();
+	c.moveTo(x,y);
+	c.quadraticCurveTo(x1,y1,x2,y2);
+	c.strokeStyle="white";
+	c.lineWidth=10;
+	c.lineCap="round";
+	c.globalAlpha=0.7;
+	c.stroke();
+	c.globalAlpha=1;
+}

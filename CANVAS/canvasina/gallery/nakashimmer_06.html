@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Offce Lady created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Offce Lady created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_06.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Offce Lady
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		<a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_06.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_06.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+var dy,de,dm;
+window.onload=function(){
+setInterval(anime,50);
+}
+
+function anime(){
+    $cls(white);
+c.save();
+c.translate(100,0);
+	//頭
+
+	//後髪
+	c.save();
+	c.translate(150,200);
+	c.scale(0.8,1);
+	c.fillStyle="#333";
+	c.beginPath();
+	c.arc(0,0,110,0.95*Math.PI,0.05*Math.PI,false);
+	c.lineTo(80,110);
+	c.lineTo(-80,110);
+	c.closePath();
+	c.fill();
+	c.restore();
+
+	
+    //肩
+    c.save();
+	c.translate(150,300+33);
+	c.scale(1,0.5);
+	c.fillStyle="#223a70";
+	c.beginPath();
+	c.arc(0,0,65,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+   
+    //服
+	c.fillStyle="#223a70";
+	c.beginPath();
+	c.moveTo(150,300);
+	c.lineTo(150-65,300+30);
+	c.lineTo(150-45,300+130);
+	c.lineTo(150+45,300+130);
+	c.lineTo(150+65,300+30);
+	c.closePath();
+	c.fill();
+
+	c.fillStyle="white";
+	c.beginPath();
+	c.moveTo(150,308);
+	c.lineTo(150-8,310);
+	c.lineTo(150-20,300+50);
+	c.lineTo(150-5,300+50);   
+	c.lineTo(150-5,300+55);    
+	c.lineTo(150+20,300+55);
+	c.lineTo(150+8,310);
+	c.closePath();
+	c.fill();
+
+    //手
+    
+    c.save();
+	c.translate(150+5,300+105);
+	c.scale(1,0.7);
+	c.fillStyle="#fce2c4";
+	c.beginPath();
+	c.arc(0,0,20,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+
+	c.save();
+	c.translate(150-5,300+100);
+	c.scale(1,0.7);
+	c.fillStyle="#fce2c4";
+	c.beginPath();
+	c.arc(0,0,20,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+    
+	//輪郭
+	c.save();
+	c.translate(150,200);
+	c.scale(0.8,1);
+	c.fillStyle="#fce2c4";
+	c.beginPath();
+	c.arc(0,0,100,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+
+	//前髪
+	c.save();
+	c.translate(150,200);
+	//c.rotate(30/180*Math.PI);
+	c.scale(0.8,1);
+	c.fillStyle="#333";
+	c.beginPath();
+	c.arc(0,0,110,1*Math.PI,1.9*Math.PI,false);
+	c.fill();
+	c.restore();
+
+	//まゆげ
+    var y=Math.random()*5;
+	if(y>4.8){dy=2;}else{dy=0;}
+    
+	c.save();
+	c.translate(150-40,200);
+	c.rotate((5+dy)/180*Math.PI);
+	c.fillStyle="#222";
+	c.fillRect(-25,-5,50,3);
+	c.restore();
+
+	c.save();
+	c.translate(150+40,200);
+	c.rotate((-5-dy)/180*Math.PI);
+	c.fillStyle="black";
+	c.fillRect(-25,-5,50,3);
+	c.restore();
+
+	//目
+	if(Math.random()*6>5.7){de=0.4;}else{de=1;}
+    
+	c.save();
+	c.translate(150+40,220);
+	c.scale(0.8,de);
+	c.fillStyle="black";
+	c.beginPath();
+	c.arc(0,0,10,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+
+	c.save();
+	c.translate(150-40,220);
+	c.scale(0.8,de);
+	c.fillStyle="black";
+	c.beginPath();
+	c.arc(0,0,10,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+
+    //ほお
+	c.globalAlpha=0.9;
+	c.save();
+	c.translate(150+40,250);
+	c.rotate(-70/180*Math.PI);
+	c.scale(0.5,1);
+	c.fillStyle="pink";
+	c.beginPath();
+	c.arc(0,0,10,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+
+	c.save();
+	c.translate(150-40,250);
+	c.rotate(70/180*Math.PI);
+	c.scale(0.5,1);
+	c.fillStyle="pink";
+	c.beginPath();
+	c.arc(0,0,10,0,2*Math.PI,false);
+	c.fill();
+	c.restore();
+    
+	//口 
+	c.globalAlpha=0.7;
+	if(Math.random()*5>4.8){dm=-1;}else{dm=1;}
+    
+	c.save();
+	c.translate(150,270);
+	c.scale(0.8,0.8);
+	c.fillStyle="#F4899C";
+	c.fillRect(-10,-7+dm,20,5);
+	c.beginPath();
+	c.arc(0,0,10,0,Math.PI,false);
+	c.fill();
+	c.restore();	
+    c.globalAlpha=1;
+c.restore();
+}
+
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

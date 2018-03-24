@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>canvasina created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="canvasina created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_20.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		canvasina
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		<a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_20.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_20.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+	animeLoop(50);
+	var frame=0;
+	function anime(){
+		$cls('#fdd');
+	c.lineWidth=10;
+	c.save();
+	c.translate(250,200);
+	c.transform(1,0.2,0,1,0,0);
+	shadow();
+	$2(-100,200, -50,-150, brown);
+	$2(100,200, 50,-150, brown);
+	$2(0,0, 40,170, '#780000');
+	$2(-90,120, 90,120, brown);
+	$4(-146,-102,300,200,gray); 
+	$4(-150,-100,300,200,white); 
+	c.lineWidth=1;
+	c.strokeStyle=gray;
+	c.strokeRect(-150,-100,300,200);
+
+	c.globalAlpha=1-abs(sin(frame));
+	$1(-75,-50,45,'#f33');
+	c.globalAlpha=1-abs(sin(frame-45));
+	c.lineWidth=5;
+	$2(5,-95,120,5,'#3f3');
+	c.globalAlpha=1-abs(sin(frame-135));
+	$3(-120,5, -5,5, -75,90,'#33f');
+	c.globalAlpha=1-abs(sin(frame-90));
+	$4(5,5,120,85,'#ff3');
+	c.globalAlpha=1;
+	$txt('Canvasina',0,25,53,'#333',serif);
+	c.restore();
+	frame++;
+}
+
+function shadow(){
+	c.save();
+	c.translate(20,190);
+	c.scale(1,0.2);
+	var gra=c.createRadialGradient(0,0,0,0,0,100);
+	gra.addColorStop(0.6,'#bbb');
+	gra.addColorStop(1,'#fdd');
+	$1(0,0,100,gra);
+	c.restore();
+}
+	
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

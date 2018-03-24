@@ -1,0 +1,135 @@
+//初期設定
+var sound	=new Audio('http://jsrun.it/assets/l/b/b/5/lbb5C.wav');
+var mario	={x:250,y:300,dy:0};
+var dokan	={x:500,y:280};
+var coin	={x:600,y:100};
+var zoom	=3;
+var frame	=0;
+var point	=0;
+var koma	=50;
+var timeLimit	=120;
+
+//描画
+timerId = setInterval(anime,koma);
+function anime(){    
+    frame++;
+    if(frame>timeLimit/koma*1000){
+        clearInterval(timerId);
+    }
+    //空
+    c.fillStyle="skyblue";
+    c.fillRect(0,0,512,384);
+    //得点表示
+    c.fillStyle="white";
+    c.fillText("POINT:"+point,10,40);
+    c.fillText("POWER:"+zoom,10,50);
+    c.fillText("TIME:"+Math.floor(frame/(1000/koma)),10,60);  
+    //マリオ
+    marioDraw(mario.x,mario.y);
+    mario.y+=mario.dy;
+    if(mario.y==160)mario.dy=10;
+    if(mario.y==300)mario.dy=0;
+    //道
+    for(var i=0;i<530;i+=20)roadDraw(i-frame%10*2,305);
+    //ドカン
+    dokanDraw(dokan.x,dokan.y);
+    dokan.x--;
+    if(dokan.x<-20)dokan.x=500;
+    if(mario.y==300 && dokan.x == mario.x+10 ){
+        sound.play();point--;zoom-=1;
+        if(zoom===0){
+           c.fillStyle="red";
+           c.fillText("NO POWER!!  END",10,30);
+           clearInterval(timerId);
+        }
+    }
+    //コイン
+    coinDraw(coin.x,coin.y);
+    coin.x-=2;
+    if(coin.x<-20)coin.x=500;
+    if(mario.y==160 && Math.abs(coin.x-20 - mario.x)<30 ){
+        sound.play();
+        point++;zoom+=1;coin.x=600;
+    }
+}
+//ジャンプ
+canvas.addEventListener("mousedown",function(e){
+    if(mario.dy===0)mario.dy=-10;
+});
+//道描画
+function roadDraw(x,y){
+    c.fillStyle="Brown";
+    c.strokeStyle="white";
+    c.fillRect(x,y,20,20);
+    c.lineWidth=3;
+    c.strokeRect(x,y,20,20);
+}
+//ドカン描画
+function dokanDraw(x,y){
+    c.fillStyle="gray";
+    c.strokeStyle="black";
+    c.fillRect(x,y,20,20);
+    c.lineWidth=1;
+    c.strokeRect(x,y,20,20);
+    c.strokeStyle="black";
+    c.fillRect(x-2,y-5,24,5);
+    c.lineWidth=1;
+    c.strokeRect(x-2,y-5,24,5);
+}    
+//コイン描画
+function coinDraw(x,y){
+    c.save();
+    c.beginPath();
+    c.translate(x,y);
+    c.scale(Math.sin(frame/180*4*Math.PI),1);
+    c.arc(0,0,10,0,2*Math.PI,true);
+    c.closePath();
+    c.fillStyle="gold";c.fill();
+    c.strokeStyle="black";c.lineWidth=1;c.stroke();
+    c.restore();
+}
+
+
+//マリオ描画
+var r 	="red";
+var g	="green";
+var o	="orange";
+var s	="skyblue";
+var marioColor = new Array(
+    s,s,r,r,r,r,r,s,s,s,s,s,s,s,s,s,
+    s,s,r,r,r,r,r,r,r,r,r,s,s,s,s,s,
+    s,s,g,g,g,o,o,g,o,s,s,s,s,s,s,s,
+    s,g,o,g,o,o,o,g,o,o,o,s,s,s,s,s,
+    s,g,o,g,g,o,o,o,g,o,o,o,s,s,s,s,
+    s,g,g,g,o,o,o,g,g,g,g,s,s,s,s,s,
+    s,s,s,o,o,o,o,o,o,o,s,s,s,s,s,s,
+    s,s,g,g,r,g,g,g,s,s,s,s,s,s,s,s,
+    s,g,g,g,r,g,g,r,g,g,g,s,s,s,s,s,
+    g,g,g,g,r,r,r,r,g,g,g,g,s,s,s,s,
+    o,o,g,r,o,r,r,o,r,g,o,o,s,s,s,s,
+    o,o,o,r,r,r,r,r,r,o,o,o,s,s,s,s,
+    o,o,r,r,r,r,r,r,r,r,o,o,s,s,s,s,
+    s,s,r,r,r,s,s,r,r,r,s,s,s,s,s,s,
+    s,g,g,g,s,s,s,s,g,g,g,s,s,s,s,s,
+    g,g,g,s,s,s,s,s,s,g,g,g,s,s,s,s
+);
+   
+function marioDraw(x,y){
+	for(var yy=0;yy<16;yy++){
+    	for(var xx=0;xx<16;xx++){
+        	if(marioColor[xx+(16-yy)*16]!==0){
+            	dot(xx,yy,marioColor[xx+(15-yy)*16]); 
+        	}    
+    	}        
+	}
+}
+function dot(x,y,color){
+    c.fillStyle=color;
+    c.fillRect(mario.x+x*zoom,mario.y-y*zoom,zoom,zoom);
+}
+
+                           
+    
+    
+    
+    

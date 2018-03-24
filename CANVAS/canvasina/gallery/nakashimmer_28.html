@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>Merry Xmas created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="Merry Xmas created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_28.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		Merry Xmas
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		
+		<a id=share href="https://www.facebook.com/sharer/sharer.php?u=http://canvasina.com/gallery/nakashimmer_28.html" target="_blank">Share</a>
+
+		<!-- a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_28.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script -->
+		
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_28.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+//関数定義
+function star(){c.beginPath();c.moveTo(0,0);
+ c.lineTo(-20,50); c.lineTo(30,20);
+ c.lineTo(-30,20); c.lineTo(20,50);
+ fill(white);
+}
+
+var bell=new Audio("http://springreen.jp/INDEX/themes/ShunsuiKobo/bell.mp3");
+if($("canvasina").getBoundingClientRect().left>0){
+bell.play();
+}
+setInterval(anime,50);
+var frame=0;
+function anime(){
+
+frame++;
+c.clearRect(0,0,canvas.width,canvas.height);
+c.save();
+c.translate(50,0);
+// wreath
+circle(200,200,100);lineWidth(100);stroke(green);
+
+//ball
+circle(100,140,15);fill(blue);
+circle(200,270,15);fill(blue);
+circle(300,170,15);fill(blue);
+circle(120,190,15);fill(red);
+circle(230,310,15);fill(red);
+circle(330,210,15);fill(red);
+circle(70,180,15);fill(yellow);
+circle(170,310,15);fill(yellow);
+circle(270,210,15);fill(yellow);
+
+//star
+c.save();c.translate(120,230);c.rotate(10/180*pi);star();
+c.restore();
+c.save();c.translate(270,250);c.rotate(-10/180*pi);star();
+c.restore();
+c.save();c.translate(280,100);c.rotate(-10/180*pi);star();
+c.restore();
+
+//リボン
+c.save();
+c.fillStyle=red;c.lineWidth=1;c.strokeStyle=white;
+c.translate(200,68);
+c.rotate(-5/180*Math.PI);
+
+c.beginPath();
+c.moveTo(-25,-25);
+c.quadraticCurveTo(0,-40,25,-25);
+c.lineTo(25,25);
+c.quadraticCurveTo(0,40,-25,25);
+c.closePath();
+c.fill();
+c.stroke();
+
+c.beginPath();
+c.moveTo(-25,-25);
+c.quadraticCurveTo(0,-40,25,-25);
+c.lineTo(25,25);
+c.quadraticCurveTo(0,40,-25,25);
+c.closePath();
+c.fill();
+c.stroke();
+
+c.beginPath();
+c.moveTo(-25-50,-35);
+c.quadraticCurveTo(0-50,-40,25-50,-25);
+c.lineTo(25-50,25);
+c.quadraticCurveTo(0-50,40,-25-50,35);
+c.closePath();
+c.fill();
+c.stroke();
+
+c.beginPath();
+c.moveTo(-25+50,-25);
+c.quadraticCurveTo(0+50,-40,25+50,-35);
+c.lineTo(25+50,35);
+c.quadraticCurveTo(0+50,40,-25+50,25);
+c.closePath();
+c.fill();
+c.stroke();
+
+c.restore();
+c.restore();
+
+//鐘
+c.save();
+c.translate(250,100);
+c.rotate(80*Math.sin(frame/10)/180*pi);
+c.beginPath();c.moveTo(0,0);c.lineTo(-20,15);
+c.lineTo(-40,75);c.lineTo(40,75);c.lineTo(20,15);c.closePath();
+c.fillStyle="Gold";c.fill();
+c.lineWidth=1;c.strokeStyle="white";c.stroke();
+c.save();
+c.translate(0,75);
+c.scale(1,0.2);
+c.beginPath();
+c.arc(0,0,40,0,2*pi,false);
+c.closePath();
+c.fillStyle="#aaa";
+c.fill();
+c.strokeStyle=white;
+c.stroke();
+c.restore();
+c.restore();
+}
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>

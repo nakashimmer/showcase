@@ -1,0 +1,64 @@
+window.onload=function(){
+ setInterval(anime,50);
+}
+function sin(a){return Math.sin(a*2*pi);}
+function cos(a){return Math.cos(a*2*pi);}
+function shadow(color,offset,blur){
+ c.shadowColor = color;
+ c.shadowOffsetX = offset;
+ c.shadowOffsetY = offset;
+ c.shadowBlur = blur;
+}
+
+function anime(){
+ $cls(white);
+ shadow("black",0,0);
+
+//seconds
+ for(var s=0;s<=60;s++){
+ c.lineWidth="2";
+ var ds=s/60;
+ $2( 250+sin(ds)*143,200-cos(ds)*143,
+       250+sin(ds)*130,200-cos(ds)*130,
+       '#444');
+}
+//hours
+for(var h=0;h<=12;h++){
+ c.lineWidth="12";
+ var dh=h/12;
+ $2( 250+sin(dh)*145,200-cos(dh)*145,
+       250+sin(dh)*115,200-cos(dh)*115,
+       '#444');
+}
+//get h,m
+ var today=new Date();
+ var hour=today.getHours();
+ var min=today.getMinutes();
+ var sec=today.getSeconds()+today.getMilliseconds()/1000;
+ if(0<=sec && sec<0.5 ){min-=1;}
+ if(0<=sec && sec<1 ){sec=0;}
+ shadow("#333",2,4);
+
+//hour pin
+ c.lineWidth="10";
+ var dhp= (hour+min/60)/12
+ $2( 250+sin(dhp)*83,200-cos(dhp)*83,
+       250-sin(dhp)*30,200+cos(dhp)*30,
+       '#333');
+//min pin
+ c.lineWidth="10";
+ var dmp= min/60
+ $2( 250+sin(dmp)*130,200-cos(dmp)*130,
+       250-sin(dmp)*30,200+cos(dmp)*30,
+       '#333');
+//sec pin
+ c.lineWidth="5";
+ var dsp=sec/60
+ $2( 250+sin(dsp)*100,200-cos(dsp)*100,
+       250-sin(dsp)*30,200+cos(dsp)*30,
+       '#c00');
+ $1(250+sin(dsp)*100,200-cos(dsp)*100,13,'#c00');
+ shadow("white",0,0);
+ c.lineWidth="3";
+ $1(250,200,5,'#c00');   
+}

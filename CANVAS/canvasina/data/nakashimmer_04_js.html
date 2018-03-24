@@ -1,0 +1,111 @@
+var WIDTH=500;
+var HEIGHT=400;
+c.lineCap='round';
+window.onload=function(){setInterval(draw,30);}
+
+function draw(){
+	var now=new Date();
+	var hour = now.getHours();
+	var min = now.getMinutes();
+	var sec = now.getSeconds();
+	var mil = sec + now.getMilliseconds()/1000
+	
+	$cls('gray');
+	c.save();
+	c.translate(WIDTH/2,HEIGHT/2);
+	// ------------------------------------
+	sotowaku();
+	degital(hour,min,sec,mil);
+	hun();
+	ji();
+	hari((hour+min/60)/12*2*Math.PI,8,80);
+	hari((min+sec/60)/60*2*Math.PI,4,130);
+	hari(mil/60*2*Math.PI,2,140);	
+	chuusinmaru();
+
+	// ------------------------------------
+	c.restore();
+}
+
+function degital(hour,min,sec,mil){
+	c.fillStyle="#333";
+	c.fillRect(-60,50,120,30);
+	c.fillStyle="white";
+	c.textAlign="center";
+	c.font="30px arial";
+	c.globalAlpha=Math.abs(Math.sin(mil*Math.PI));
+	c.fillText(addZero(hour)+':'+addZero(min)
+	+':'+addZero(sec),0,77);
+	c.globalAlpha=1;
+}
+
+function ji(){
+	c.save();
+	for(var i=0;i<12;i++){
+		var x=Math.sin(i/6*Math.PI)*150;
+		var y=-Math.cos(i/6*Math.PI)*150+10;
+		c.fillStyle="white";
+		c.fillRect(x-5,y-15,10,10);
+		c.fillStyle="black";
+		c.font="30px arial";
+		c.fillText(i,x,y);
+
+	}
+	c.restore();
+}
+
+function hun(){
+	c.save();
+	for(var i=0;i<60;i++){
+	
+			c.rotate(6/180*Math.PI);
+			c.fillStyle="black";
+			c.beginPath();
+			c.arc(0,-150,2,0,2*Math.PI,false);
+			c.fill();
+		
+	}
+	c.restore();
+}
+
+function sotowaku(){
+	c.beginPath();
+	c.arc(0,0,174,0,2*Math.PI,false);
+	c.closePath();
+	c.fillStyle="white";
+	c.fill();
+	c.strokeStyle="black";
+	c.lineWidth="6"
+	c.stroke();
+}
+
+function chuusinmaru(){
+	c.beginPath();
+	c.arc(0,0,10,0,2*Math.PI,false);
+	c.closePath();
+	c.fillStyle="#fff";
+	c.fill();
+	c.strokeStyle="black";
+	c.stroke();
+}
+
+function hari(d,w,l){
+	c.save();
+	c.beginPath();
+	c.rotate(d);
+	c.moveTo(0,0);
+	c.lineTo(0,-l);
+	c.strokeStyle="black";
+	c.lineWidth=w
+	c.stroke();
+	c.restore();
+}
+
+function degRad(degree){
+ return degree*Math.PI/180;
+}
+
+function addZero(n){
+ if(n<10){n='0'+n;}
+ return n;
+}

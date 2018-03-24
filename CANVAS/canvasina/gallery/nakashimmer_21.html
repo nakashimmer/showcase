@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="viewport" content="width=500">
+<title>waves created by nakashimmer | Canvasina is HTML5 art scripting gallery</title>
+<meta name=description content="waves created by nakashimmer | Canvasina.com is HTML5 art scripting gallery">
+<link href="../canvasina/canvasina.css" rel=stylesheet>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- for  facebook like button -->
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0];if(d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=141558212660855";
+  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- facebook like button -->
+
+<section id=wrap>
+	
+	<section>
+		<canvas id=canvasina width=500 height=450>
+			Sorry, Your browser is not chrome ,safari.
+			<img src=http://canvasina.com/img/icon.png height=225><br>
+			<img src=http://canvasina.com/galleryImg/nakashimmer_21.png height=225>
+		</canvas>
+	
+	</section>
+
+	<header>
+		waves
+	</header>
+
+	<footer>
+		<a href="http://www.facebook.com/nakashimmer" target=_blank>created by Shunji Nakashima</a>
+		<a href="/" ><h1>Canvasina</h1></a>
+		<a id=share name="fb_share" type="button_count" share_url="http://canvasina.com/gallery/nakashimmer_21.html"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		<div id=like style="" class="fb-like" data-href="http://canvasina.com/gallery/nakashimmer_21.html" data-width="100" 
+		data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+		
+	</footer>	
+</section>
+
+<script src="../canvasina/canvasina.js"></script>
+<script>
+var x=0,y=0,tx=0,ty=0,frame=0;
+var pi=Math.PI;
+var rangeX=3;
+var rangeY=3;
+setInterval(anime,50);
+c.translate(250,225);
+function anime(e){
+    frame++;
+    c.clearRect(-250,-250,500,500);
+    c.lineWidth=3;
+    c.strokeStyle="green";
+    for(var i=frame;i<frame+380;i+=1){
+        x=sin(rangeX*i)*200;
+        y=sin(rangeY*(i-frame/4))*200;    
+        if(i==frame){ 
+                c.beginPath(); 
+                c.moveTo(x,y);
+        }else{
+                c.lineTo(x,y);
+        } 
+    }
+   c.stroke();     
+}
+
+canvas.addEventListener("mousemove",function(e){
+
+var rect=e.target.getBoundingClientRect();
+rangeY=floor(abs(e.clientX-rect.left)/20);
+rangeX=floor(abs(e.clientY-rect.top)/20);
+});
+</script>
+
+<script type="text/javascript">
+if (window==parent){
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3233827-64']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>
