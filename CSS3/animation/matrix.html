@@ -16,6 +16,10 @@
 			perspective:2000px;
 			position:relative;
 		}
+		#box{
+			width:800px;
+			margin: 0 auto;
+		}
 		#wrap{
 			transform-style:preserve-3d;
 			width:50px;
@@ -33,11 +37,13 @@
 </head>
 
 <body>
-	
-	<div id="wrap"></div>
-	<div id=msg>
-		矢印キーで操作<br>
-		Fは前、Bは後</div>
+	<div id="box">
+		<div id="wrap"></div>
+		<div id=msg>
+			矢印キーで操作<br>
+			Fは前、Bは後
+		</div>
+	</div>
 </body>
 
 <script>

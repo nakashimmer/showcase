@@ -5,7 +5,7 @@
 	<title>HTML5 SHOWCASE</title>
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="viewport" content="width=device-width">
 	<meta name=keywords content="HTML5 CSS3 JavaScript ワークショップ 勉強">
 	<meta name=description content="春翠工房は、HTML5の楽しさを伝えるための活動を行っています。現在のメインプロジェクトは、「東京アプリ・ワークショップ」として開催している「一日まるごとどっぷりHTML5入門」です。">
 
@@ -34,11 +34,51 @@
 			padding:0.5em;
 			border:0.1px dotted gray;
 		}
-		ol{margin-left:2em;}
-		a{color:blue;}
-		a:visited{color:#99f;}
-		a:hover{color:#9f0;}
+		ol{
+			margin-left:2em;
+			list-style:none;
+			display:grid;
+			grid-template-columns:1fr 1fr 1fr;
+		}
+		li{
+			margin:0.5em 0em;padding:0;
+			overflow: hidden;
+			text-indent:0em;
+			text-align:center;
+			text-shadow:2px 2px 2px gray;
+
+		}
+		li img{
+			width:200px;
+			box-shadow:10px 10px 10px gray;
+		}
+		a{color:black;text-decoration: none;}
+		a:hover{color:#99f;}
+
+		@media screen and (max-width: 800px) {
+  		ol{
+    		grid-template-columns:1fr 1fr;
+  		}
+		}
+		@media screen and (max-width: 550px) {
+  		ol{
+    		grid-template-columns:1fr;
+  		}
+		}
 	</style>
+
+	<script>
+		function li(title,url){
+			let code='<li>'
+				+'<a target="_blank" href="'+url+'">'
+				+title+'<br>'
+				+'<img src="http://mozshot.nemui.org/shot/large?'+url+'">'
+				+'</a>'
+				+'</li>';
+			document.write(code);
+		}
+	
+	</script>
 
 </head>
 
@@ -55,50 +95,45 @@
 		<section>
 			<h3>1-1. 動画の背景</h3>
 			<ol>
-				<li><a target=_blank href="http://www.startrek-movie.jp/" alt="スタートレックビヨンド">StarTrek</a>
-				<li><a target=_blank  href="http://ss14.soniaby.com/fr/home" alt="sonia">SONIA</a>
+				<script>
+					li("StarTrek","http://www.startrek-movie.jp/");
+					li("SONIA","http://ss14.soniaby.com/fr/home/");
+				</script>
 			</ol>
 		</section>
+		
 		<section>
 			<h3>1-2. シングルページ・パララックス・高級ペライチ</h3>
 			<ol>
-				<li><a target=_blank href="http://tokyomusicodyssey.jp/">Tokyo Music Odyssey</a>
-				<li><a target=_blank href="http://www.buzzhook.co.jp/">buzzhook</a>
-				<li><a target=_blank href="http://shop.nikon-image.com/nikon1/nikon1aw1/">NICON</a>
-				<li><a target=_blank href="http://lamoulade.com/#!/home">LaMoulade</a>
-				<li><a target=_blank href="http://graphicnovel-hybrid4.peugeot.com/start.html">peugeot hybrid4</a>
+				<script>
+					li("Tokyo Music Odyssey","http://tokyomusicodyssey.jp/");
+					li("buzzhook","http://www.buzzhook.co.jp/");
+					li("LaMoulade","http://lamoulade.com/#!/home");
+					li("peugeot hybrid4","http://graphicnovel-hybrid4.peugeot.com/start.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>1-3. ３次元</h3>
 			<ol>
-				<li><a href="http://www.findyourwaytooz.com/">find your way to oz</a>
-				<li><a href="http://2011.beercamp.com/">BEERCAMP</a>
-				<li><a href="http://helloracer.com/webgl/">helloracer</a>
-				<li><a href="http://www.madebyevan.com/webgl-water/">WebGL Water</a>
-			</ol>
-		</section>
-		<section>
-			<h3>1-4. ベンダーサイト</h3>
-			<ol>
-				<li><a target=_blank href="https://www.google.com/doodles?q=interactive">google doodles</a>
-				<li><a target=_blank href="https://www.google.com/doodles/roswells-66th-anniversary">UFO</a></li>
-				<li><a target=_blank href="http://www.20thingsilearned.com/ja-JP">20things I learned</a>
-				<li><a target=_blank href="http://html5cup.kayac.com/">カヤック</a>
+				<script>
+					li("find your way to oz","http://www.findyourwaytooz.com/");
+					li("BEERCAMP","http://2011.beercamp.com/");
+					li("helloracer","http://helloracer.com/webgl/");
+					li("WebGL Water","http://www.madebyevan.com/webgl-water/");
+				</script>
 			</ol>
 		</section>
 
 		<section>
-			<h3>1-5. Webサイト</h3>
+			<h3>1-4. ベンダーサイト</h3>
 			<ol>
-				<li><a href="http://9elements.com/io/projects/html5/canvas/">HTML5 Experiment</a>
-				<li><a href="http://www.effectgames.com/demos/canvascycle/">Canvas Cycle</a>
-			</ol>
-		</section>
-		<section>
-			<h3>1-6. 共有サイト</h3>
-			<ol>
-				<li><a href="http://jsdo.it/event/memorabilia">jsdoit</a>
+				<script>
+					li("google doodles","https://www.google.com/doodles?q=interactive");
+					li("UFO","https://www.google.com/doodles/roswells-66th-anniversary");
+					li("20things I learned","http://www.20thingsilearned.com/ja-JP");
+					li("カヤック","http://html5cup.kayac.com/");
+				</script>
 			</ol>
 		</section>
 	</section>
@@ -109,14 +144,20 @@
 		<section>
 			<h3>2-1. 要素</h3>
 			<ol>
-				<li><a href="/SHOWCASE/MARKUP/index.html">あたらしい要素・属性</a>
-				<li><a href="ELEMENT/semantic/index.html">viewportのないページ</a>
+				<script>
+					li("あたらしい要素・属性","https://nakashimmer.github.io/html5SHOWCASE/MARKUP/index.html")
+					li("viewportのないページ","https://nakashimmer.github.io/html5SHOWCASE/ELEMENT/semantic/index.html")
+				</script>
 			</ol>
 		</section>
+
 		<section>
 			<h3>2-2. ゲーム</h3>
 			<ol>
-				<li><a href="ELEMENT/progress/index.html">進捗の要素</a>
+
+				<script>
+					li("進捗の要素","https://nakashimmer.github.io/html5SHOWCASE/ELEMENT/progress/index.html")
+				</script>
 			</ol>
 		</section>
 	</section>
@@ -127,44 +168,52 @@
 			<h3>3-1. リッチ</h3>
 		
 			<ol>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/yuusen.html">優先順位</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/ketugoushi.html">結合子</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/colorCode.html">色コード</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/rgba.html">RGBA</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/hsl.html">HSLA</a>
+				<script>
+					li("優先順位","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/yuusen.html");
+					li("結合子","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/ketugoushi.html");
+					li("色コード","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/colorCode.html");
+					li("RGBA","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/rgba.html");
+					li("HSLA","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/hsl.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>3-2. リッチ</h3>
 			<ol>	
-				<li><a href="CSS3/border/index.html">枠線</a>
-				<li><a href="CSS3/css3/index.html">リッチ・変形・三次元</a>
-				<li><a href="CSS3/maruko/index.html">まるこ</a> 
-				(<a href="CSS3/maruko/index2.html">メイキング</a>)
-				<li><a href="CSS3/pika/index.html">ピカ</a>
-				<li><a href="CSS3/enshu/index3.html">CSS演習</a>
+				<script>
+					li("枠線","https://nakashimmer.github.io/html5SHOWCASE/CSS3/border/index.html");
+					li("リッチ・変形・三次元","https://nakashimmer.github.io/html5SHOWCASE/CSS3/css3/index.html");
+					li("まるこ","https://nakashimmer.github.io/html5SHOWCASE/CSS3/maruko/index.html");
+					li("まるこメイキング","https://nakashimmer.github.io/html5SHOWCASE/CSS3/maruko/index2.html");
+					li("ピカチュウ","https://nakashimmer.github.io/html5SHOWCASE/CSS3/pika/index.html");
+					li("CSS演習","https://nakashimmer.github.io/html5SHOWCASE/CSS3/enshu/index3.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>3-3. アニメーション</h3>
 			<ol>
-				<li><a href="CSS3/santa//index.html">サンタのアニメ</a>
-				<li><a href="CSS3/css3/index3d.html">3次元アニメ１</a>
-				<li><a href="CSS3/animation/domino.html">3次元アニメ2</a>
-				<li><a href="CSS3/animation/mlCube.html">3次元アニメ3</a>
-				<li><a href="CSS3/kurukuru/index.html">3次元アニメ4</a>
-				<li><a href="CSS3/animation/matrix.html">3次元アニメをJSで操作</a>
-				<li><a href="CSS3/scroll//index.html">スクロールでCSSを操作</a>
-				<li><a href="CSS3/dogYear//index.html">戌年</a>
+				<script>
+					li("サンタクロース","https://nakashimmer.github.io/html5SHOWCASE/CSS3/santa//index.html");
+					li("3D","https://nakashimmer.github.io/html5SHOWCASE/CSS3/css3/index3d.html");
+					li("ドミノ","https://nakashimmer.github.io/html5SHOWCASE/CSS3/animation/domino.html");
+					li("キューブ","https://nakashimmer.github.io/html5SHOWCASE/CSS3/animation/mlCube.html");
+					li("3軸のdiv","https://nakashimmer.github.io/html5SHOWCASE/CSS3/kurukuru/index.html");
+					li("JSで操作","https://nakashimmer.github.io/html5SHOWCASE/CSS3/animation/matrix.html");
+					li("スクロール操作","https://nakashimmer.github.io/html5SHOWCASE/CSS3/scroll//index.html");
+					li("戌年","https://nakashimmer.github.io/html5SHOWCASE/CSS3/dogYear//index.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>3-4. 擬似クラス・要素</h3>
 			<ol>
-				<li><a target=_blank href="SHOWCASE/CSS3/enshu/index1.html">擬似クラス</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/enshu/index2.html">擬似要素</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/zokuseiSelector.html">属性セレクタ</a>
-				<li><a target=_blank href="SHOWCASE/CSS3/CSSKiso/gijiSelector.html">疑似セレクタ</a>
+				<script>
+					li("擬似クラス","https://nakashimmer.github.io/html5SHOWCASE/CSS3/enshu/index1.html");
+					li("擬似要素","https://nakashimmer.github.io/html5SHOWCASE/CSS3/enshu/index2.html");
+					li("属性セレクタ","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/zokuseiSelector.html");
+					li("擬似セレクタ","https://nakashimmer.github.io/html5SHOWCASE/CSS3/CSSKiso/gijiSelector.html");
+				</script>
 			</ol>
 		</section>
 	</section>
@@ -173,33 +222,42 @@
 		<section>
 			<h3>4-1. 計算</h3>
 			<ol>
-				<li><a href="SCRIPT/uranai.html">占いアプリ</a>
-				<li><a href="SCRIPT/kesan.html">計算機アプリ</a>
-				<li><a href="SCRIPT/bmi.html">BMI計算機アプリ</a>
+				<script>
+					li("占いアプリ","https://nakashimmer.github.io/html5SHOWCASE/SCRIPT/uranai.html");
+					li("計算機アプリ","https://nakashimmer.github.io/html5SHOWCASE/SCRIPT/kesan.html");
+					li("BMI計算機","https://nakashimmer.github.io/html5SHOWCASE/SCRIPT/bmi.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>4-2. 要素の取得</h3>
 			<ol>
-				<li><a href="DOM/html/index1.html">HTML置き換え</a>
-				<li><a href="DOM/html/index2.html">大阪弁変換</a>
-				<li><a href="DOM/css/index1.html">CSS変形</a>
-				<li><a href="DOM/css/index2.html">CSSページ切替</a>
-				<li><a href="SCRIPT/maimai/index.html">500px競争</a>
+				<script>
+					li("HTML置き換え","https://nakashimmer.github.io/html5SHOWCASE/DOM/html/index1.html")
+					li("大阪弁変換","https://nakashimmer.github.io/html5SHOWCASE/DOM/html/index2.html");
+					li("CSS変形","https://nakashimmer.github.io/html5SHOWCASE/DOM/css/index1.html");
+					li("CSSページ切替","https://nakashimmer.github.io/html5SHOWCASE/DOM/css/index2.html");
+					li("500px競争","https://nakashimmer.github.io/html5SHOWCASE/SCRIPT/maimai/index.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>4-3. アプリ</h3>
 			<ol>
-				<li><a href="ETC/nature-clock/index.html">自然時計</a>
-				<li><a href="ETC/countdown/index.html">カウントダウン</a>
+				<script>
+					li("自然時計","https://nakashimmer.github.io/html5SHOWCASE/ETC/nature-clock/index.html");
+					li("カウントダウン","https://nakashimmer.github.io/html5SHOWCASE/ETC/countdown/index.html")
+				</script>
 			</ol>
 		</section>
+
 		<section>
 			<h3>4-4. WoT</h3>
 			<ol>
-				<li class=nocache><a href="https://www.youtube.com/watch?v=5VQkIOMMV_o">Web of Things</a>
-				<li><a target=_blank href="https://www.youtube.com/watch?v=WL0CqY2HwxY">ロボットアーム</a>
+				<script>
+					li("Web of Things","https://www.youtube.com/watch?v=5VQkIOMMV_o");
+					li("ロボットアーム","https://www.youtube.com/watch?v=WL0CqY2HwxY");
+				</script>
 			</ol>
 		</section>
 	</section>
@@ -207,15 +265,16 @@
 	<section>
 		<h2>#5. API</h2>
 		<ol>
-			<li><a href="WEBAUDIO/synthesizer/index.html">シンセサイザ</a>
-			<li><a href="MULTIMEDIA/audio/index.html">音声</a>
-			<li><a href="MULTIMEDIA/video/index.html">映像</a>
-			<li><a href="MULTIMEDIA/welcome/index.html">ようこそ</a>
-			<li><a href="GPS/gps/index.html">GPS</a>
-			<li><a href="ETC/weight/index.html">体重記録計</a>
-			<li><a href="SPEECH/index.html">録音と読み上げ</a>
-			<li><a href="Talk/index.html">AI</a>
-			<li><a href="REQUESTANIMATION/index.html">高速処理</a>
+			<script>
+				li("シンセサイザ","https://nakashimmer.github.io/html5SHOWCASE/WEBAUDIO/synthesizer/index.html");
+				li("音声操作","https://nakashimmer.github.io/html5SHOWCASE/MULTIMEDIA/audio/index.html");
+				li("映像操作","https://nakashimmer.github.io/html5SHOWCASE/MULTIMEDIA/video/index.html");
+				li("GPS","https://nakashimmer.github.io/html5SHOWCASE/GPS/gps/index.html");
+				li("体重記録計","https://nakashimmer.github.io/html5SHOWCASE/ETC/weight/index.html");
+				li("読上と音声認識","https://nakashimmer.github.io/html5SHOWCASE/SPEECH/index.html");
+				li("人工知能","https://nakashimmer.github.io/html5SHOWCASE/Talk/index.html");
+				li("高速処理","https://nakashimmer.github.io/html5SHOWCASE/REQUESTANIMATION/index.html");
+			</script>
 		</ol>
 	</section>
 
@@ -224,68 +283,77 @@
 		<section>
 			<h3>6-1. 座標</h3>
 			<ol>
-				<li><a href="CANVAS/zahyo/index.html">座標の取得</a>
-				<li><a href="CANVAS/accel/index.html">(重力)加速度</a>
+				<script>
+					li("座標の取得","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/zahyo/index.html");
+					li("(重力)加速度","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/accel/index.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>6-2. 実用</h3>
 			<ol>
-				<li><a href="CANVAS/whiteboard/index.html">ホワイトボード</a>
-				<li><a href="CANVAS/simpleTeditor/index.html">シンプルテキストエディタ</a>
-				<li><a href="CANVAS/oekaki/index.html">お絵かき</a>
-				<li class=nocache><a href="/schoo/js/index.html">JavaScript練習エディタ</a>
-				<li class=nocache><a href="CANVAS/tepco/index.html">電力使用量</a>
+				<script>
+					li("ホワイトボード","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/whiteboard/index.html");
+					li("シンプルテキストエディタ","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/simpleTeditor/index.html");
+					li("お絵かき","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/oekaki/index.html");
+					li("電力使用量","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/tepco/index.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>6-3. 学習</h3>
 			<ol>
-				<li><a href="CANVAS/heart/index.html">ハート</a>
-				<li><a href="CANVAS/physics/parabola1.html">放物線</a>
-				<li><a href="CANVAS/physics/fractal.html">フラクタル図形</a>
-				<li><a href="CANVAS/graph/line.html">線グラフ</a>
-				<li><a href="CANVAS/graph/bar.html">棒グラフ</a>
-				<li><a href="CANVAS/graph/arc.html">円グラフ</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_80.html">all balls go straight</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_34.html">bang</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_17.html">めいろ</a>
-				<li><a href="CANVAS/pi/index.html">円周率の求め方</a>
+				<script>
+					li("ハート","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/heart/index.html");
+					li("放物線","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/physics/parabola1.html");
+					li("フラクタル図形","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/physics/fractal.html");
+					li("線グラフ","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/graph/line.html");
+					li("棒グラフ","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/graph/bar.html");
+					li("円グラフ","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/graph/arc.html");
+					li("all balls go straight","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_80.html");
+					li("bang","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_34.html");
+					li("めいろ","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_17.html");
+					li("円周率の求め方","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/pi/index.html");
+					
+				</script>
 			</ol>
 		</section>
 
 		<section>
 			<h3>6-4. ゲーム</h3>
 			<ol>
-				<li><a href="CANVAS/ufo/index.html">UFO重力ゲーム</a>
-				<li><a href="CANVAS/touch/index.html">タッチゲーム</a>
-				<li><a href="CANVAS/hscrolling/index.html">横スクロールゲーム</a>
-				<li><a href="CANVAS/angry/index.html">放物ゲーム</a>
-				<li><a href="CANVAS/shuji/index.html">習字</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_69.html">午年パズル</a>
+				<script>
+					li("UFO重力ゲーム","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/ufo/index.html");
+					li("タッチゲーム","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/touch/index.html");
+					li("横スクロールゲーム","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/hscrolling/index.html");
+					li("放物ゲーム","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/angry/index.html");
+					li("習字","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/shuji/index.html");
+					li("午年パズル","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_69.html");
+				</script>
 			</ol>
 		</section>
 		<section>
 			<h3>6-5. アートスクリプティング</h3>
 			<ol>
-				<li class=nocache><a href="CANVAS/shonan/index.html">湘南</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/xmas/fullscreen/">クリスマスツリー</a>
-				<li><a href="CANVAS/packman/index.html">パックマン</a>
-				<li><a href="CANVAS/heart/index.html">ハート</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/tokyoAppWorkShop_new_year/fullscreen">新年</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/rr62/fullscreen">桜</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_11.html">花火</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/pv0Z/fullscreen">風鈴</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_71.html">雪</a>
-				<li><a href="CANVAS/canvasina/gallery/nakashimmer_19.html">もみじ</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/iGud/fullscreen">かぼちゃ</a>
-				<li class=secret><a href="CANVAS/canvasina/gallery/nakashimmer_12.html">クレヨン</a>
-				<li class="nocache secret"><a href="http://jsdo.it/nakashimmer/i8sG/fullscreen">どら焼き</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/oFjD/fullscreen">リズムボックス</a>
-				<li class=nocache><a href="http://jsdo.it/nakashimmer/1SvW/fullscreen">9</a>
-				<li><a href="WebGL/solar/index.html">太陽系</a>
-				<li><a href="WebGL/co/index.html">CO</a>
-				<li><a href="WebGL/toras/index.html">トーラス</a>
+				<script>
+					li("湘南","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/shonan/index.html");
+					li("クリスマスツリー","http://jsdo.it/nakashimmer/xmas/fullscreen/");
+					li("パックマン","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/packman/index.html");
+					li("ハート","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/heart/index.html");
+					li("新年","http://jsdo.it/nakashimmer/tokyoAppWorkShop_new_year/fullscreen");
+					li("桜","http://jsdo.it/nakashimmer/rr62/fullscreen");
+					li("花火","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_11.html");
+					li("風鈴","http://jsdo.it/nakashimmer/pv0Z/fullscreen");
+					li("雪","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_71.html");
+					li("もみじ","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_19.html");
+					li("かぼちゃ","http://jsdo.it/nakashimmer/iGud/fullscreen");
+					li("しんちゃん","https://nakashimmer.github.io/html5SHOWCASE/CANVAS/canvasina/gallery/nakashimmer_12.html");
+					li("ドラえもん","http://jsdo.it/nakashimmer/i8sG/fullscreen");
+					li("9つのボード","http://jsdo.it/nakashimmer/1SvW/fullscreen");
+					li("太陽系","https://nakashimmer.github.io/html5SHOWCASE/WebGL/solar/index.html");
+					li("CO","https://nakashimmer.github.io/html5SHOWCASE/WebGL/co/index.html");
+					li("トーラス","https://nakashimmer.github.io/html5SHOWCASE/WebGL/toras/index.html");
+				</script>
 			</ol>
 		</section>
 	</section>
@@ -293,13 +361,18 @@
 	<section>
 		<h2>#7. Link</h2>
 		<ol>
-			<li><a href="https://www.w3.org/2003/glossary/">W3C用語集と辞書</a>
-			<li><a href="https://whatwg.org/">WHATWG</a>
-			(<a href="https://momdo.github.io/html/">Ja</a>)
-			<li><a href="https://www.w3.org/TR/html5-diff/">HTML5の差異</a>
-			<li><a target=_blank href="https://www.browserstack.com/">ブラウザチェック</a>
-			<li><a href="https://msdn.microsoft.com/ja-jp/library/6974wx4d(v=vs.94).aspx">JavaScriptの基礎</a>
-			<li><a href="https://html5experts.jp/">HTML5エキスパート</a>
+			<script>
+				li("Web技術振興協会","https://webtectpromo.org");
+				li("W3C最新のHTML仕様","https://www.w3.org/TR/html/");
+				li("W3C用語集と辞書","https://www.w3.org/2003/glossary/");
+				li("WHATWG","https://whatwg.org/");
+				li("WHATWG日本語","https://momdo.github.io/html/");
+				li("HTML5の差異","https://www.w3.org/TR/html5-diff/");
+				li("ブラウザチェック","https://www.browserstack.com/");
+				li("JavaScriptの基礎","https://msdn.microsoft.com/ja-jp/library/6974wx4d(v=vs.94).aspx");
+				li("HTML5エキスパート","https://html5experts.jp/");
+				li("jsdoit","http://jsdo.it/event/memorabilia");
+			</script>
 		</ol>
 	</section>
 	
@@ -307,6 +380,9 @@
 <footer>
 	<p><small>2018 (C) 中島俊治</small></p>
 </footer>
+
+
+
 
 </body>
 </html>
