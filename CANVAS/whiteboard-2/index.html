@@ -49,6 +49,8 @@
 		outline: 0;
 		
 	}
+
+	#img{width:100%;height:100vh;border:1px solid red;}
 </style>
 
 
@@ -69,8 +71,9 @@
 </div>
 
 <div id=wrap>
-	<canvas id=canvas></canvas>
+	<canvas id=canvas></canvas>a
 	<div id=textarea contenteditable=true></div>
+	<img id="img">a
 </div>
 
 <script>
@@ -113,6 +116,12 @@
 		myDraw=false;
 	});
 
+	//マウスが動くとデータを保存する
+	var img=dpcument.getElementById("img");
+	canvas.addEventListener("mousemove",function(){
+		img.src=canvas.toDataURL();
+	})
+
 	//ボタンで色操作
 	function btn(color){
 		mouse.color=color;
@@ -154,10 +163,10 @@ function sizeChange(){
 		bw.clientWidth,bw.scrollWidth,
 		dw.scrollWidth,dw.clientWidth
 	);
-	$("canvas").height=Math.max(
+	$("canvas").height=(Math.max(
 		bw.clientHeight,bw.scrollHeight,
 		dw.scrollHeight,dw.clientHeight
-	)-35;
+	)-35))/2;
 	
 	$("textarea").style.height=($("canvas").height-10)+"px";
 	$("wrap").style.height=$("canvas").height+"px";
