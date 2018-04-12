@@ -1,1 +1,0 @@
-#divart{width:100px;height:100px;margin:100px auto;border:1px solid gray;}
