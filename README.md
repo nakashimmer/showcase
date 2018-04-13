@@ -1,3 +1,3 @@
 # html5SHOWCASE
 HTML5サンプル
-https://nakashimmer.github.io/showcase/
+Githubページ https://nakashimmer.github.io/showcase/index.html
