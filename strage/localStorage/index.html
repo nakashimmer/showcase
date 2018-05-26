@@ -1,35 +1,57 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>LocalStorage</title>
 	<style>
-		table{width:200px;border-collapse: collapse;}
-		td,th{border:1px solid gray;width:100px;padding:0.3em;}
+		*{margin:0;padding:0;font-size:16px;}
+		#wrap{width:500px;}
+		h1{font-size:1.5em;padding:0.5em;}
+		section{
+			margin:0.5em;
+		}
+		.h{width:5em;display:inline-block;text-align:center;}
+		input{width:100%;}
+		button{border:1px solid gray;background-color:#eee;padding:0.1em;width:5em;text-align:center;}
+		#info{}
+		table{border-collapse: collapse;margin:1em;width:100%;}
+		td,th{border:1px solid gray;width:5em;padding:0.3em;}
 	</style>
 </head>
 <body>
-	<h1>localStorage</h1>
-	<section>
-		<h1>データの保存</h1>
+	<div id="wrap">
+		<h1>localStorage</h1>
+		<section>
+			<h2>データの保存</h2>
+			<table>
+				<tr><th>key:</th><td><input id="input1" type="text"></td>
+				<td rowspan="2"><button onclick="myset();">保存</button></td></tr>
+				<tr><th>value:</th><td><input id="input2" type="text"></td></tr>
+			</table>
+		</section>
 		
-		<p>
-			key:<input id="input1" type="text">
-			value:<input id="input2" type="text">
-			<button onclick="myset();">保存</button>
-		</p>
-		
-	</section>
-
-	<section>
-			<button onclick="myget();">読出</button>
-			<p id="info"></p>
-	</section>
+		<section>
+			<h2>データの抽出</h2>
+			<table>
+				<tr><th>key:</th><td><input id="input3" type="text"></td>
+				<td><button onclick="myget();">抽出</button></td></tr>
+				<tr><th>value:</th><td id="output1">抽出結果...</td></tr>
+			</table>
+			
+		</section>
+	
+		<section>
+			<h2>保存されているデータの一覧</h2>
+			<p><button onclick="mylist();">一覧表示</button></p>
+			<div id="info"></div>
+		</section>
+	</div>
 <script>
 
 	var input1 = document.getElementById("input1");
 	var input2 = document.getElementById("input2");
+	var input3 = document.getElementById("input3");
+	var output1 = document.getElementById("output1");
 	var info = document.getElementById("info");
 
 	//保存
@@ -40,10 +62,14 @@
 		);
 	}
 
-	//呼出
+	//抽出
 	function myget(){
-		var str="";
-		str="<table><tr><th>key</th><th>value</th></tr>";
+		output1.innerHTML = localStorage.getItem(input3.value);
+	}
+
+	//リスト
+	function mylist(){
+		var str="<table><tr><th>key</th><th>value</th></tr>";
 
 		for(var i=0;i<localStorage.length;i++){
 			var key = localStorage.key(i);
