@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>LocalStorage</title>
+	<style>
+		table{width:200px;border-collapse: collapse;}
+		td,th{border:1px solid gray;width:100px;padding:0.3em;}
+	</style>
+</head>
+<body>
+	<h1>localStorage</h1>
+	<section>
+		<h1>データの保存</h1>
+		
+		<p>
+			key:<input id="input1" type="text">
+			value:<input id="input2" type="text">
+			<button onclick="myset();">保存</button>
+		</p>
+		
+	</section>
+
+	<section>
+			<button onclick="myget();">読出</button>
+			<p id="info"></p>
+	</section>
+<script>
+
+	var input1 = document.getElementById("input1");
+	var input2 = document.getElementById("input2");
+	var info = document.getElementById("info");
+
+	//保存
+	function myset(){
+		localStorage.setItem(
+			input1.value,
+			input2.value
+		);
+	}
+
+	//呼出
+	function myget(){
+		var str="";
+		str="<table><tr><th>key</th><th>value</th></tr>";
+
+		for(var i=0;i<localStorage.length;i++){
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+
+			str += "<tr><td>" +key +"</td><td>" +value+ "</td></tr>";
+		}
+		str += "</table>";
+		info.innerHTML=str;
+		
+	}
+</script>
+</body>
+</html>
