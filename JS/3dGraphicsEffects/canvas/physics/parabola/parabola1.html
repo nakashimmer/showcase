@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>放物線</title>
+	<meta name=viewport content="width=device-width">
+	<style>
+		#canvas{background-color:black;}
+	</style>
+</head>
+
+<body>
+	<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+
+	//canvasの要素とcontextを取得する。
+	var canvas=document.getElementById("canvas");
+	var c=canvas.getContext("2d");
+
+//======================================================
+
+
+	//①canvasの座標の原点を左上から左下へ移動、およびy軸を反転して描画
+	c.translate(0,300);
+	c.scale(1,-1);
+	
+	
+	
+	//②初期設定=================================
+	var v = 70;										//打上初速
+	var g = 10;										//重力
+	var dx = 10;									//横方向の移動割合/秒
+	var ball = {x:0, y:0}; 				//初期座標と１フレーム毎の横移動の割合
+	var interval = 0.05;					//1フレームの間隔 0.2s=200ms
+	var t = 0;										//時間
+	
+
+	
+	//アニメーションを行うための設定=================
+	setInterval(anime , interval*1000);
+	
+	function anime(){
+		//消去(矩形で半透明黒で塗りつぶし)=============
+		c.globalAlpha=0.1;					//透過率
+		c.fillStyle="black";				//塗り色は黒
+		c.fillRect(0, 0, canvas.width, canvas.height);
+
+
+		//③白の丸を描画(canvasの授業を参照してください)
+		c.globalAlpha=1;
+		c.beginPath();
+		c.arc(ball.x, ball.y, 2, 0, 2*Math.PI, false);
+		c.closePath();
+		c.fillStyle="white";
+		c.fill();
+
+
+		//④計算================
+		ball.x += dx*interval;				//xに一コマ毎の移動距離を加算してxを算出
+		ball.y = v*t-1/2*g*t*t;				//物を上に打ち上げた時の位置の公式でyを算出
+		t += interval;								//時間を加算
+		if(300 < ball.x){ball.x = 0;}	//ボールが右にはみ出したら左からでてくる
+		if(ball.y < 0){t = 0;}				//ボールが着地したら時間をリセット
+	}
+	
+//======================================================
+</script>
+</body>
+</html>

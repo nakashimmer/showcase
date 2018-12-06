@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>HTML5の広義の定義</title>
+<style>
+	*{margin:0;padding:0;font-weight:bold;font-family:serif;}
+	body{background-color:#fff;font-size:30px;}
+	#nav{
+		margin:0;padding:0;
+		background-color:#333;
+		position:absolute;
+		bottom:0;left:0;right:0;
+		width:100%;
+		text-align:center;
+		z-index:1;
+		padding:5px 0;
+		height:50px;
+	}
+	#nav button{
+		font-size:20px;
+		margin:0 20px; 
+		border-radius:10px;
+		padding:3px 10px;
+		background-color:#aaa;
+	}
+	#b1{background-color:#afa;}
+	#css,#js,#api,#html5{display:none;}
+	.page{
+		transition:display 0.5s ease-in-out;
+		border:1px solid white;
+		overflow:hidden;
+	}
+
+</style>
+
+<script>
+	function $(id){return document.getElementById(id);}
+</script>
+
+<nav id=nav>
+	<button onclick="display(1);" id=b1>HTML</buton>
+	<button onclick="display(2);" id=b2>+CSS</buton>
+	<button onclick="display(3);" id=b3>+JavaScript</buton>
+	<button onclick="display(4);" id=b4>+Api</buton>
+	<button onclick="display(5);" id=b5>楽しいHTML5</buton>
+</nav>
+
+<div id=html class=page>
+	<style scoped>
+		#html *{margin:10px 0;}
+		#html{margin:10px;}
+		.tag{opacity:0.5;font-weight:normal;}
+	</style>
+	<section><span class=tag>&lt;section></span>
+	<h1><span class=tag>&lt;h1></span>HTMLとは<span class=tag>&lt;/h1></span></h1>
+	<p><span class=tag>&lt;p></span><a href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language"><span class=tag>&lt;a href="#"></span>HTML<span class=tag>&lt;/a></span></a>の目的は、タグで構造付されたHTML文書を作成すること<span class=tag>&lt;/p></span></p>
+	<p><span class=tag>&lt;p></span>HTML文書とはブラウザが読込・解釈して整形しコンテンツを表示するためのファイル<span class=tag>&lt;/p></span></p>
+	<span class=tag>&lt;/section></span></section>
+</div>
+
+<div id=css class=page>
+	<style scoped>
+		#css *{margin:0;padding:0;}
+		#css{
+			padding:10px;
+			text-decoration:none;
+			background-image:url(css.png);
+			height:100%;
+		}
+		#css h1{
+			font-size:50px;
+			line-height:3em;
+			text-align:center;
+		}
+		#css p{
+			font-size:30px;
+			line-height:3em;
+			text-align:center;
+		}
+		#css h1,#css p{
+			text-shadow:
+				0px 0px 6px white,
+				0px 0px 6px white,
+				0px 0px 6px white,
+				0px 0px 6px white;
+		}
+		#css *{color:#333;}
+		#css strong{font-size:1.3em;}
+		#css a{
+			text-decoration:none;
+			color:#a33;
+			font-weight:bold;
+			font-size:1.3em;
+		}
+		#css strong:hover{
+			color:red;
+		}
+		#css h1{animation:css 3s ease 3s infinite alternate;}
+		@keyframes css{
+			25%{transform:translate(300px,350px) scale(-1);}
+			75%{transform:translate(-300px,350px) scale(1);}
+			
+		}
+		
+		#css #css1{animation:css1 10s ease 5s infinite alternate;}
+		@keyframes css1{
+			100%{transform:translate(-300px,0px);}
+			
+		}
+	</style>
+	
+
+	<h1>CSSとは</h1>
+	<p id=css1><a href="https://ja.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>は、HTML文書の要素を
+	<br><strong>どのように装飾・表示するか</strong>
+	<br>を、提示するための仕様のひとつ</p>
+
+</div>
+
+<section id=js class=page>
+	<style scoped>
+		#js{
+			width:800px;
+			margin:0 auto;
+		}
+		#js #date{
+			font-size:30px;text-align:center;
+			line-height:5em;
+			border:8px double gray;
+			margin:2em;
+		}
+		#js h1{line-height:3em;}
+		#js p{line-height:2em;}
+		#js b{color:red;}
+	</style>
+	<h1>JavaScriptとは</h1>
+	<p>プログラミング言語の一つ。主にWebブラウザに実装され、動的なUI開発に用いる。例えば</p>
+	<p id=date>Loading...</p>
+	<script>
+		setInterval(clock,1000);
+		var week=["日","月","火","水","木","金","土"]
+		function clock(){
+			var now=new Date();
+			$("date").innerHTML
+				="今の時刻は"+now.getFullYear()+"年"
+				+(now.getMonth()+1)+"月"
+				+now.getDate()+"日("
+				+week[now.getDay()]+")<b>"
+				+now.getHours()+"時"
+				+now.getMinutes()+"分"
+				+now.getSeconds()+"秒</b>";
+			}
+	</script>
+</section>
+
+<section id=api class=page>
+	<style scoped>
+		#api *{margin:0;padding:0;}
+		#api{
+			width:800px;
+			margin:0 auto;
+		}
+		#api header h1{
+			background:linear-gradient(#999,#fff);
+			line-height:2em;
+			font-size:30px;
+			text-align:center;
+		}
+		#api canvas{
+			margin:0 auto;
+			display:block;
+		}
+		#api #info{
+			font-size:25px;
+			text-align:center;
+		}
+		#api #info{
+			background:linear-gradient(#fff,#999);
+			height:2em;
+		}
+		#api .half{width:50%;box-sizing:border-box;padding:20px 0;float:left;}
+	</style>
+	<div class=half>
+		<h1>APIとは</h1>
+		<p>よく使いたい機能を呼び出す短いプログラムを、記述すれば、その機能を利用してソフトウェアを作成できる</p>
+	</div>
+	<div class=half>
+		<header>
+			<h1>電力使用量のグラフ</h1>
+		</header>
+		<div id=jsonp></div>
+		<canvas id=canvas width=400 height=400></canvas>
+		<div id=info></div>
+	</div>
+	<script>
+		var script=document.createElement("script");
+		script.src = "https://tepco-usage-api.appspot.com/latest.json?callback=jsonmsg";
+		
+		
+		$("jsonp").appendChild(script);
+		var capacity=0;
+		var usage=0;
+		function jsonmsg(e){
+			capacity=e.capacity;
+			usage=e.usage;
+			$("info").innerHTML="使用量："+usage+"/最大量："+capacity;
+			var canvas=$("canvas");
+			var ctx=canvas.getContext("2d");
+			ctx.clearRect(0,0,400,400);
+			ctx.beginPath();
+			ctx.moveTo(200,200);
+			ctx.arc(200,200,150,0,2*Math.PI,false);
+			ctx.closePath();
+			ctx.fillStyle="yellow";
+			ctx.fill();
+			ctx.beginPath();
+			ctx.moveTo(200,200);
+			ctx.arc(
+				200,200,150,0-0.5*Math.PI,
+				usage/capacity*2*Math.PI-0.5*Math.PI,
+				false);
+			ctx.closePath();
+			ctx.fillStyle="red";
+			ctx.fill();
+		}
+	</script>
+</section>
+
+<section id=html5 class=page>
+	<style scoped>
+		#html5{
+			width:100%;
+			margin:0 auto;
+		}
+		#html5 #ml{width:1px;height:1px;
+			margin:300px auto;
+			position:relative;
+			transform-style:preserve-3d;
+			width:0px;height:0px;
+		}
+		#html5{
+			transform-style:preserve-3d;
+			perspective:300px;
+		}
+		#html5 .box{
+			background-size:100%;
+			line-height:200px;
+			text-align:center;
+			width:200px;height:200px;
+			background-color:rgba(0,255,0,0.6);
+			position:absolute;
+			border:2px solid gray;
+		}
+		#html5 #a{
+			transform:rotateY(90deg) translateZ(0px) translateY(-100px);
+			font-size:50px;
+		}
+		#html5 #b{
+			transform:rotateY(-90deg) translateZ(200px) translateY(-100px);
+			font-size:120px;
+		}
+		#html5 #c{
+			transform:rotateX(90deg) translateZ(200px) translateX(-100px);
+			font-size:40px;
+		}
+		#html5 #d{
+			transform:rotateX(90deg) rotateY(180deg) translateZ(0px) translateX(100px);
+			font-size:20px;
+		}
+		#html5 #e{
+			transform:translateZ(100px) translateX(-100px) translateY(-100px);
+			font-size:80px;
+		}
+		#html5 #f{
+			transform:translateZ(-100px) translateX(-100px) translateY(-100px) rotateY(180deg);
+			font-size:70px;
+		}
+		#html5 #ml{
+			animation:mystory 20s linear 0s infinite normal;
+		}
+		@keyframes mystory{
+			100%{transform:rotateY(-1440deg) rotateX(360deg);}
+		}
+		
+		.box{
+			transform-style:preserve-3d;
+		}
+		#html5 .str{
+			animation:mystory2 15s linear 0s infinite normal;
+			color:#f00;
+			text-shadow:0 0 2px white,0 0 4px white;
+		}
+		@keyframes mystory2{
+			33%{transform:translateZ(170px) rotateZ(-360deg);}
+			66%{transform:translateZ(-100px) rotateZ(360deg);}
+		}
+		
+		#html5 .box{
+			animation:mystory3 15s ease-in-out 0s infinite normal;
+		}
+		@keyframes mystory3{
+			66%{
+				background-color:rgba(255,255,255,0);
+				border-color:rgba(255,255,255,0);
+			}
+		}
+		
+		#html5 #player{
+			width:100%;
+			transform:translateZ(-200px) scale(2);
+			position:absolute;z-index:-1;top:-50px;left:0px;
+			opacity:0.4;
+		}
+	</style>
+
+	<div id="ml">
+		<div id=a class=box><div class=str>HTML5</div></div>
+		<div id=b class=box><div class=str>JS</div></div>
+		<div id=c class=box><div class=str>東京アプリ</div></div>
+		<div id=d class=box><div class=str>ワークショップ</div></div>
+		<div id=e class=box><div class=str>API</div></div>
+		<div id=f class=box><div class=str>CSS3</div></div>
+	</div>
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<div id=player class=page></div>
+	<script>
+		// YouTubeの埋め込み
+    function onYouTubeIframeAPIReady() {
+        ytPlayer = new YT.Player(
+            'player', // 埋め込む場所の指定
+            {
+                videoId: 'fNUiAnKomQE', // YouTubeのID
+                playerVars: {
+                    loop: 1,//0:ループしない 1:ループする 1の場合playlist設定必須
+                    playlist: 'fNUiAnKomQE',//次に流すYoutubeのID
+                    controls: 0,//コントローラー無し
+                    autoplay: 1,//オートプレイ
+                    showinfo: 0,//動画タイトルなど表示しない
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            }
+        );
+    }
+//プレイ準備完了後
+      function onPlayerReady(event) {
+        event.target.playVideo();
+        event.target.mute();
+      }
+	</script>
+	
+</section>
+
+
+<script>
+	function display(i){
+		$("html").style.display="none";
+		$("css").style.display="none";
+		$("js").style.display="none";
+		$("api").style.display="none";
+		$("html5").style.display="none";
+		$("b1").style.backgroundColor="#aaa";
+		$("b2").style.backgroundColor="#aaa";
+		$("b3").style.backgroundColor="#aaa";
+		$("b4").style.backgroundColor="#aaa";
+		$("b5").style.backgroundColor="#aaa";
+		
+		switch(i){
+			case 1:
+				$("html").style.display="block";
+				$("b1").style.backgroundColor="#afa";
+				break;
+			case 2:
+				$("css").style.display="block";
+				$("b2").style.backgroundColor="#afa";
+				break;
+			case 3:
+				$("js").style.display="block";
+				$("b3").style.backgroundColor="#afa";
+				break;
+			case 4:
+				$("api").style.display="block";
+				$("b4").style.backgroundColor="#afa";
+				break;
+			case 5:
+				$("html5").style.display="block";
+				$("b5").style.backgroundColor="#afa";
+				break;
+		}
+	}
+</script>
+
+<script>
+var pg=document.getElementsByClassName("page");
+for(var i=0;i<pg.length;i++){
+	pg[i].style.height=(window.innerHeight-10)+"px";
+}
+
+window.addEventListener('resize',function(){
+	for(var i=0;i<pg.length;i++){
+		pg[i].style.height=(window.innerHeight-10)+"px";
+	}
+});
+</script>

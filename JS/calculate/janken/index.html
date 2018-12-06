@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>じゃんけん</title>
+		<style>
+			*{font-size:32px;}
+		</style>
+	</head>
+
+	<body>
+		<h1>じゃんけんゲーム</h1>
+		<p>
+			<button onclick='janken("グー")' id="gu">ぐー</button>
+			<button onclick='janken("チョキ")' id="choki">ちょき</button>
+			<button onclick='janken("パー")' id="pa">ぱー</button>
+		</p>
+		<div id="output">じゃんけん・・・</div>
+	
+		<script>
+			//得点
+			let point = 0;
+			let judge;
+			const OUTPUT = document.getElementById("output");
+
+			function janken(player) {
+				//PCの手
+				let pc = Math.floor(Math.random() * 3);
+				if (pc == 0) { pc = "グー"; }
+				if (pc == 1) { pc = "チョキ"; }
+				if (pc == 2) { pc = "パー"; }
+
+				//判定
+				if (player === "グー") {
+					if (pc === "グー") { judge = "あいこ"; }
+					if (pc === "チョキ") { judge = "勝ち"; point++; }
+					if (pc === "パー") { judge = "負け"; point--; }
+				}
+
+				if (player === "チョキ") {
+					if (pc === "グー") { judge = "負け"; point--; }
+					if (pc === "チョキ") { judge = "あいこ"; }
+					if (pc === "パー") { judge = "勝ち"; point++; }
+				}
+
+				if (player === "パー") {
+					if (pc === "グー") { judge = "勝ち"; point++; }
+					if (pc === "チョキ") { judge = "負け"; point--; }
+					if (pc === "パー") { judge = "あいこ"; }
+				}
+
+					//ページに表示
+				OUTPUT.innerHTML
+					= "<p>PCは" + pc + "</p>" 
+					+ "<p>あなたは" + player + "</p>" 
+					+ "<p>" + judge + "</p>" 
+					+ "<p>得点" + point + "</p>";
+			}
+
+			</script>
+		</div>
+	</body>
+</html>

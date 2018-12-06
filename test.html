@@ -1,6 +1,74 @@
-testtest
-testtest
-resrrsrsrsr
-testtest
-ttttttttt
-ttttttttt
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://unpkg.com/obniz@1.8.2/obniz.js" crossorigin="anonymous"></script>
+
+		<style>
+			*{font-size:30px}
+		</style>
+	</head>
+
+ 	<body>
+		<!-- div id="obniz-debug"></div -->
+
+      	<h1>obniz でＬチカ(LEDチカチカ)</h1>
+		<button id="speech">押す>赤or緑</button>
+		<div id="print"></div>
+
+		<script>
+
+			const speach=document.getElementById("speach");
+          const speech=document.getElementById("speech");
+			const print=document.getElementById("print");
+  
+			const obniz = new Obniz("OBNIZ_ID_HERE");
+			let led1;
+			let led2;
+
+			obniz.onconnect = async function(){
+				led1 = obniz.wired("LED", { anode:0, cathode:1 } );
+				led2 = obniz.wired("LED", { anode:2, cathode:3 } );
+
+				obniz.display.clear();
+				obniz.display.print("チカチカしよう！");
+			}
+
+			obniz.switch.onchange = function(state) {
+				print.innerHTML=state;
+				obniz.display.clear();
+				obniz.display.print(state);
+			}
+
+			function red(){
+				led1.on();
+				led2.off();
+				obniz.display.clear();
+				obniz.display.print("赤のLED！");go();
+			};
+
+			function blue(){
+				led1.off();
+				led2.on();
+				obniz.display.clear();
+				obniz.display.print("緑のLED");go();
+			};
+
+			speech.addEventListener("click",go);
+			
+			function go(){
+				const recognition = new webkitSpeechRecognition();
+				recognition.lang = "ja-JP";
+				recognition.start();
+				recognition.addEventListener('result', (e)=>{
+					let rec = e.results.item(0).item(0).transcript;
+					console.log(rec);
+					if(rec==="赤"){red();}
+					else if(rec==="緑"){blue();}
+					else{go();}
+				});
+			}
+
+		</script>
+	</body>
+</html>

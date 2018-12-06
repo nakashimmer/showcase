@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
+		<style>
+			*{margin:0;padding:0;font-size:20px;}
+			table{
+				border-collapse: collapse;
+			}
+			th,td{
+				border:1px solid gray;
+			}
+			th{width:100px;}
+			td{width:200px;text-align:right;}
+			input{line-height:2em;padding:0.5em;
+				width:calc(100% - 1em);
+				border:none;
+				text-align:right;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table>
+			<tr><th>s</th><th>X</th><th>Y</th></tr>
+			<tr><th>0</th>
+				<td><input type="text" class="x" value="-1"></td>
+				<td><input type="text" class="y" value="-3"></td>
+			</tr>
+			<tr><th>1</th>
+				<td><input type="text" class="x" value="0"></td>
+				<td><input type="text" class="y" value="-1"></td>
+			</tr>
+			<tr><th>2</th>
+				<td><input type="text" class="x" value="1"></td>
+				<td><input type="text" class="y"value="1"></td>
+			</tr>
+			<tr><th>3</th>
+				<td><input type="text" class="x" value="2"></td>
+				<td><input type="text" class="y" value="3"></td>
+			</tr>
+			<tr><th>4</th>
+				<td><input type="text" class="x" value="3"></td>
+				<td><input type="text" class="y" value="5"></td>
+			</tr>
+			<tr><th>5</th>
+				<td><input type="text" class="x"value="4"></td>
+				<td><input type="text" class="y" value="7"></td>
+			</tr>
+			<tr><th>?</th>
+				<td><input type="text" class="x" placeholder="調べたいXを指定"></td>
+				<td class="y">予測されたY</td>
+			</tr>
+		</table>
+		<button onclick="tsr();">実行</button>
+	</body>
+
+	<script>
+		const x = document.getElementsByClassName("x");
+		const y = document.getElementsByClassName("y");
+
+		function xf(i){return parseFloat(x[i].value);}
+		function yf(i){return parseFloat(y[i].value);}
+
+		function tsr(){
+
+			async function learnLinear(){
+				const model = tf.sequential();
+				model.add(
+					tf.layers.dense(
+						{
+							units: 1, 
+							inputShape: [1]
+						}
+					)
+				);
+
+				model.compile(
+					{
+						loss: 'meanSquaredError',
+						optimizer: 'sgd'
+					}
+				);
+
+				const xs = tf.tensor2d(
+					[xf(0),xf(1),xf(2),xf(3),xf(4),xf(5)],[6, 1]
+				);
+
+
+				const ys = tf.tensor2d(
+					[yf(0),yf(1),yf(2),yf(3),yf(4),yf(5)],[6, 1]
+				);
+
+
+
+				await model.fit(
+					xs,
+					ys,
+					{epochs: 500}
+				);
+
+			
+				var result = model.predict(
+					tf.tensor2d(
+						[xf(6)],[1, 1]
+					)
+				)
+
+
+
+				y[6].innerText = (""+result).slice(14).slice(0,-3);
+
+			}
+
+			learnLinear();
+			
+		}
+	</script>
+<html>

@@ -1,388 +1,238 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset=utf-8>
-	<title>HTML5 SHOWCASE</title>
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-91633090-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-91633090-1');
+		</script>
+		<meta charset=utf-8>
+		<title>HTML5 SHOWCASE</title>
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-	<meta name="viewport" content="width=device-width">
-	<meta name=keywords content="HTML5 CSS3 JavaScript ワークショップ 勉強">
-	<meta name=description content="春翠工房は、HTML5の楽しさを伝えるための活動を行っています。現在のメインプロジェクトは、「東京アプリ・ワークショップ」として開催している「一日まるごとどっぷりHTML5入門」です。">
+		<meta name="viewport" content="width=960">
+		<meta name=keywords content="HTML5 CSS3 JavaScript ワークショップ 勉強">
+		<meta name=description content="春翠工房は、HTML5の楽しさを伝えるための活動を行っています。現在のメインプロジェクトは、「東京アプリ・ワークショップ」として開催している「一日まるごとどっぷりHTML5入門」です。">
 
-	<meta property="fb:app_id" content="966242223397117" />
-	<meta property="og:title" content="HTML5 SHOWCASE" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://springreen.jp/SHOWCASE/" />
-	<meta property="og:description" content="HTML5の見本(マークアップやCSS3、JavaSCriptと各種API)を掲載しています。" />
-	<meta property="og:image" content="http://springreen.jp/indexPhoto/showcase.png" />
+		<meta property="fb:app_id" content="966242223397117" />
+		<meta property="og:title" content="HTML5 SHOWCASE" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://springreen.jp/" />
+		<meta property="og:description" content="HTML5の見本(マークアップやCSS3、JavaSCriptと各種API)を掲載しています。" />
+		<meta property="og:image" content="http://springreen.jp/indexPhoto/showcase.png" />
 
-	<link rel="shortcut icon" href="favicon.ico">
-	<style>
-		*{margin: 0;padding: 0;}
-		header,footer{
-			background-color: springgreen;
-			color:white;
-			text-align: center;
-			padding:0.5em;
-		}
-		#wrap{
-			max-width:800px;
-			margin:0 auto;
-		}
-		section{
-			margin:0.5em;
-			padding:0.5em;
-			border:0.1px dotted gray;
-		}
-		ol{
-			margin-left:2em;
-			list-style:none;
-			display:grid;
-			grid-template-columns:1fr 1fr 1fr;
-		}
-		li{
-			margin:0.5em 0em;padding:0;
-			overflow: hidden;
-			text-indent:0em;
-			text-align:center;
-			text-shadow:2px 2px 2px gray;
+		<link rel="stylesheet" href="style.css">
+		<script src="script1.js"></script>
 
-		}
-		li img{
-			width:200px;
-			box-shadow:10px 10px 10px gray;
-		}
-		a{color:black;text-decoration: none;}
-		a:hover{color:#99f;}
+		<style>
+		</style>
+	</head>
 
-		@media screen and (max-width: 800px) {
-  		ol{
-    		grid-template-columns:1fr 1fr;
-  		}
-		}
-		@media screen and (max-width: 550px) {
-  		ol{
-    		grid-template-columns:1fr;
-  		}
-		}
-	</style>
+	<body>
 
-	<script>
-		function li(title,url){
-			let code='<li>'
-				+'<a target="_blank" href="'+url+'">'
-				+title+'<br>'
-				+'<img src="http://mozshot.nemui.org/shot/large?'+url+'">'
-				+'</a>'
-				+'</li>';
-			document.write(code);
-		}
-	
-	</script>
+		<header onclick='link("title.html","HTML5 SHOWCASE")'>
+			<h1>HTML5 SHOWCASE</h1>
+		</header>
 
-</head>
+		<div id="wrap">
+			<div id="left">
+				<nav>
 
-<body>
+					<details open class="h2">
+						<summary><h2>HTML5のサンプル</h2></summary>
 
-<header>
-	<h1>HTML5 SHOWCASE</h1>
-</header>
+						<details open>
+							<summary><h3>1-1. イントロ</h3></summary>
+							<ol>
+								<script>
+									item(
+										"introHTML5/index.html",
+										"HTML5について",
+										"HTML5の解説です"
+									);
+									item(
+										"http://info.cern.ch/hypertext/WWW/TheProject.html",
+										"世界で最初のWeb",
+										"欧州のCERNでティム・バーナーズ=リー博士を中心としたグループが世界で最初に作ったWebの復刻版です"
+									);
+								</script>
+							</ol>
+						</details>
 
-<div id="wrap">
+						<details open>
+							<summary><h3>1-2. SEMANTICS</h3></summary>
+							<ol>
+								<script>
+									item(
+										"semantics/structure/index.html",
+										"ページの構造",
+										"HTML5のタグを用いた一般的Webページの構造"
+									);
+									item(
+										"semantics/element/index.html",
+										"要素",
+										"様々なHTML5の要素"
+									);
+									item(
+										"semantics/charset/index.html",
+										"UTF-8",
+										"文字コード「UNICODE」の8ビットでの技術仕様。世界中の文字や絵文字を含むことが可能"
+									);
+									item(
+										"semantics/base64/index.html",
+										"base64で画像を表示",
+										"画像をbase64で表示。画像ファイルを準備しなくてもファイルに埋め込むことが可能"
+									);
+								</script>
+							</ol>
+						</details>
 
-	<section>
-		<h2>#1. HTML5で作られたサイトへのリンク</h2>
-		<section>
-			<h3>1-1. 動画の背景</h3>
-			<ol>
-				<script>
-					li("Yahoo! Japan","https://about.yahoo.co.jp/hr/");
-					li("SONIA","http://ss14.soniaby.com/fr/home/");
-				</script>
-			</ol>
-		</section>
-		
-		<section>
-			<h3>1-2. シングルページ・パララックス・高級ペライチ</h3>
-			<ol>
-				<script>
-					li("Tokyo Music Odyssey","http://tokyomusicodyssey.jp/");
-					li("buzzhook","http://www.buzzhook.co.jp/");
-					li("LaMoulade","http://lamoulade.com/#!/home");
-					li("peugeot hybrid4","http://graphicnovel-hybrid4.peugeot.com/start.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>1-3. ３次元</h3>
-			<ol>
-				<script>
-					li("find your way to oz","http://www.findyourwaytooz.com/");
-					li("BEERCAMP","http://2011.beercamp.com/");
-					li("helloracer","http://helloracer.com/webgl/");
-					li("WebGL Water","http://www.madebyevan.com/webgl-water/");
-				</script>
-			</ol>
-		</section>
+						<details open>
+							<summary><h3>1-3. CSS3</h3></summary>
+							<ol>
+								<script>
+									item("css3/rule/gijiClass.html","擬似クラス");
+									item("css3/rule/ketugoushi.html","結合子");
+									item("css3/rule/yuusen.html","優先順位");
+									item("css3/rule/zokuseiSelector.html","属性セレクタ");
+									item("css3/color/colorCode.html","カラーコード");
+									item("css3/color/hsl.html","HSLA");
+									item("css3/color/rgba.html","RGBA");
+									item("css3/rich/index.html","リッチなCSS");
+									item("css3/rwd/index.html","レスポンシブWebデザイン");
+									item("css3/animation/CSSSanta/index.html","サンタ");
+									item("css3/animation/maruko/index.html","まるこ");
+									item("css3/animation/scroll/index.html","ページスクロール");
+									item("css3/animation/3d/cube/index.html","3Dキューブ");
+									item("css3/animation/3d/domino/index.html","3Dドミノ");
+								</script>
+							</ol>
+						</details>
+					</details>
 
-		<section>
-			<h3>1-4. ベンダーサイト</h3>
-			<ol>
-				<script>
-					li("google doodles","https://www.google.com/doodles?q=interactive");
-					li("UFO","https://www.google.com/doodles/roswells-66th-anniversary");
-					li("20things I learned","http://www.20thingsilearned.com/ja-JP");
-					li("カヤック","http://html5cup.kayac.com/");
-				</script>
-			</ol>
-		</section>
-	</section>
-
-	<section>
-		<h2>#2. HTML5マークアップ</h2>
-
-		<section>
-			<h3>2-1. 要素</h3>
-			<ol>
-				<script>
-					li("あたらしい要素・属性","https://nakashimmer.github.io/showcase/MARKUP/index.html")
-					li("viewportのないページ","https://nakashimmer.github.io/showcase/ELEMENT/semantic/index.html")
-				</script>
-			</ol>
-		</section>
-
-		<section>
-			<h3>2-2. ゲーム</h3>
-			<ol>
-
-				<script>
-					li("進捗の要素","https://nakashimmer.github.io/showcase/ELEMENT/progress/index.html")
-				</script>
-			</ol>
-		</section>
-	</section>
-	
-	<section>
-		<h2>#3. CSS3</h2>
-			<section>
-			<h3>3-1. リッチ</h3>
-		
-			<ol>
-				<script>
-					li("優先順位","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/yuusen.html");
-					li("結合子","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/ketugoushi.html");
-					li("色コード","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/colorCode.html");
-					li("RGBA","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/rgba.html");
-					li("HSLA","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/hsl.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>3-2. リッチ</h3>
-			<ol>	
-				<script>
-					li("枠線","https://nakashimmer.github.io/showcase/CSS3/border/index.html");
-					li("リッチ・変形・三次元","https://nakashimmer.github.io/showcase/CSS3/css3/index.html");
-					li("まるこ","https://nakashimmer.github.io/showcase/CSS3/maruko/index.html");
-					li("まるこメイキング","https://nakashimmer.github.io/showcase/CSS3/maruko/index2.html");
-					li("ピカチュウ","https://nakashimmer.github.io/showcase/CSS3/pika/index.html");
-					li("CSS演習","https://nakashimmer.github.io/showcase/CSS3/enshu/index3.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>3-3. アニメーション</h3>
-			<ol>
-				<script>
-					li("サンタクロース","https://nakashimmer.github.io/showcase/CSS3/santa//index.html");
-					li("3D","https://nakashimmer.github.io/showcase/CSS3/css3/index3d.html");
-					li("ドミノ","https://nakashimmer.github.io/showcase/CSS3/animation/domino.html");
-					li("キューブ","https://nakashimmer.github.io/showcase/CSS3/animation/mlCube.html");
-					li("3軸のdiv","https://nakashimmer.github.io/showcase/CSS3/kurukuru/index.html");
-					li("JSで操作","https://nakashimmer.github.io/showcase/CSS3/animation/matrix.html");
-					li("スクロール操作","https://nakashimmer.github.io/showcase/CSS3/scroll//index.html");
-					li("戌年","https://nakashimmer.github.io/showcase/CSS3/dogYear//index.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>3-4. 擬似クラス・要素</h3>
-			<ol>
-				<script>
-					li("擬似クラス","https://nakashimmer.github.io/showcase/CSS3/enshu/index1.html");
-					li("擬似要素","https://nakashimmer.github.io/showcase/CSS3/enshu/index2.html");
-					li("属性セレクタ","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/zokuseiSelector.html");
-					li("擬似セレクタ","https://nakashimmer.github.io/showcase/CSS3/CSSKiso/gijiSelector.html");
-				</script>
-			</ol>
-		</section>
-	</section>
-	<section>
-		<h2>#4. JavaScript</h2>
-		<section>
-			<h3>4-1. 計算</h3>
-			<ol>
-				<script>
-					li("占いアプリ","https://nakashimmer.github.io/showcase/SCRIPT/uranai.html");
-					li("計算機アプリ","https://nakashimmer.github.io/showcase/SCRIPT/kesan.html");
-					li("BMI計算機","https://nakashimmer.github.io/showcase/SCRIPT/bmi.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>4-2. 要素の取得</h3>
-			<ol>
-				<script>
-					li("HTML置き換え","https://nakashimmer.github.io/showcase/DOM/html/index1.html")
-					li("大阪弁変換","https://nakashimmer.github.io/showcase/DOM/html/index2.html");
-					li("CSS変形","https://nakashimmer.github.io/showcase/DOM/css/index1.html");
-					li("CSSページ切替","https://nakashimmer.github.io/showcase/DOM/css/index2.html");
-					li("500px競争","https://nakashimmer.github.io/showcase/SCRIPT/maimai/index.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>4-3. アプリ</h3>
-			<ol>
-				<script>
-					li("自然時計","https://nakashimmer.github.io/showcase/ETC/nature-clock/index.html");
-					li("カウントダウン","https://nakashimmer.github.io/showcase/ETC/countdown/index.html")
-				</script>
-			</ol>
-		</section>
-
-		<section>
-			<h3>4-4. WoT</h3>
-			<ol>
-				<script>
-					li("Web of Things","https://www.youtube.com/watch?v=5VQkIOMMV_o");
-					li("ロボットアーム","https://www.youtube.com/watch?v=WL0CqY2HwxY");
-				</script>
-			</ol>
-		</section>
-	</section>
-
-	<section>
-		<h2>#5. API</h2>
-		<ol>
-			<script>
-				li("ストレージ","https://nakashimmer.github.io/showcase/strage/localStorage/index.html");
-				li("シンセサイザ","https://nakashimmer.github.io/showcase/WEBAUDIO/synthesizer/index.html");
-				li("音声操作","https://nakashimmer.github.io/showcase/MULTIMEDIA/audio/index.html");
-				li("映像操作","https://nakashimmer.github.io/showcase/MULTIMEDIA/video/index.html");
-				li("GPS","https://nakashimmer.github.io/showcase/GPS/gps/index.html");
-				li("体重記録計","https://nakashimmer.github.io/showcase/ETC/weight/index.html");
-				li("読上と音声認識","https://nakashimmer.github.io/showcase/SPEECH/index.html");
-				li("人工知能","https://nakashimmer.github.io/showcase/Talk/index.html");
-				li("高速処理","https://nakashimmer.github.io/showcase/REQUESTANIMATION/index.html");
-			</script>
-		</ol>
-	</section>
-
-	<section>
-		<h2>#6. Canvas API</h2>
-		<section>
-			<h3>6-1. 座標</h3>
-			<ol>
-				<script>
-					li("座標の取得","https://nakashimmer.github.io/showcase/CANVAS/zahyo/index.html");
-					li("(重力)加速度","https://nakashimmer.github.io/showcase/CANVAS/accel/index.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>6-2. 実用</h3>
-			<ol>
-				<script>
-					li("ホワイトボード","https://nakashimmer.github.io/showcase/CANVAS/whiteboard/index.html");
-					li("シンプルテキストエディタ","https://nakashimmer.github.io/showcase/CANVAS/simpleTeditor/index.html");
-					li("お絵かき","https://nakashimmer.github.io/showcase/CANVAS/oekaki/index.html");
-					li("電力使用量","https://nakashimmer.github.io/showcase/CANVAS/tepco/index.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>6-3. 学習</h3>
-			<ol>
-				<script>
-					li("ハート","https://nakashimmer.github.io/showcase/CANVAS/heart/index.html");
-					li("放物線","https://nakashimmer.github.io/showcase/CANVAS/physics/parabola1.html");
-					li("フラクタル図形","https://nakashimmer.github.io/showcase/CANVAS/physics/fractal.html");
-					li("線グラフ","https://nakashimmer.github.io/showcase/CANVAS/graph/line.html");
-					li("棒グラフ","https://nakashimmer.github.io/showcase/CANVAS/graph/bar.html");
-					li("円グラフ","https://nakashimmer.github.io/showcase/CANVAS/graph/arc.html");
-					li("all balls go straight","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_80.html");
-					li("bang","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_34.html");
-					li("めいろ","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_17.html");
-					li("円周率の求め方","https://nakashimmer.github.io/showcase/CANVAS/pi/index.html");
+					<details open class="h2">
+						<summary><h2>JavaScript</h2></summary>
 					
-				</script>
-			</ol>
-		</section>
+						<details open>
+							<summary><h3>2-1. DOM</h3></summary>
+							<ol>
+								<script>
+									item("JS/dom/html/index1.html","やまびこ");
+									item("JS/dom/html/index2.html","大阪弁変換");
+									item("JS/dom/css/index1.html","CSS変化");
+									item("JS/dom/css/index2.html","ページ遷移");
+									item("JS/dom/css/index3.html","3Dコントロール");
+								</script>
+						</details>
 
-		<section>
-			<h3>6-4. ゲーム</h3>
-			<ol>
-				<script>
-					li("UFO重力ゲーム","https://nakashimmer.github.io/showcase/CANVAS/ufo/index.html");
-					li("タッチゲーム","https://nakashimmer.github.io/showcase/CANVAS/touch/index.html");
-					li("横スクロールゲーム","https://nakashimmer.github.io/showcase/CANVAS/hscrolling/index.html");
-					li("放物ゲーム","https://nakashimmer.github.io/showcase/CANVAS/angry/index.html");
-					li("習字","https://nakashimmer.github.io/showcase/CANVAS/shuji/index.html");
-					li("午年パズル","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_69.html");
-				</script>
-			</ol>
-		</section>
-		<section>
-			<h3>6-5. アートスクリプティング</h3>
-			<ol>
-				<script>
-					li("湘南","https://nakashimmer.github.io/showcase/CANVAS/shonan/index.html");
-					li("クリスマスツリー","http://jsdo.it/nakashimmer/xmas/fullscreen/");
-					li("パックマン","https://nakashimmer.github.io/showcase/CANVAS/packman/index.html");
-					li("ハート","https://nakashimmer.github.io/showcase/CANVAS/heart/index.html");
-					li("新年","http://jsdo.it/nakashimmer/tokyoAppWorkShop_new_year/fullscreen");
-					li("桜","http://jsdo.it/nakashimmer/rr62/fullscreen");
-					li("花火","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_11.html");
-					li("風鈴","http://jsdo.it/nakashimmer/pv0Z/fullscreen");
-					li("雪","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_71.html");
-					li("もみじ","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_19.html");
-					li("かぼちゃ","http://jsdo.it/nakashimmer/iGud/fullscreen");
-					li("しんちゃん","https://nakashimmer.github.io/showcase/CANVAS/canvasina/gallery/nakashimmer_12.html");
-					li("ドラえもん","http://jsdo.it/nakashimmer/i8sG/fullscreen");
-					li("9つのボード","http://jsdo.it/nakashimmer/1SvW/fullscreen");
-					li("太陽系","https://nakashimmer.github.io/showcase/WebGL/solar/index.html");
-					li("CO","https://nakashimmer.github.io/showcase/WebGL/co/index.html");
-					li("トーラス","https://nakashimmer.github.io/showcase/WebGL/toras/index.html");
-				</script>
-			</ol>
-		</section>
-	</section>
-	
-	<section>
-		<h2>#7. Link</h2>
-		<ol>
-			<script>
-				li("Web技術振興協会","https://webtechpromo.org");
-				li("W3C最新のHTML仕様","https://www.w3.org/TR/html/");
-				li("W3C用語集と辞書","https://www.w3.org/2003/glossary/");
-				li("WHATWG","https://whatwg.org/");
-				li("WHATWG日本語","https://momdo.github.io/html/");
-				li("HTML5の差異","https://www.w3.org/TR/html5-diff/");
-				li("JavaScriptの基礎","https://msdn.microsoft.com/ja-jp/library/6974wx4d(v=vs.94).aspx");
-				li("HTML5エキスパート","https://html5experts.jp/");
-				li("jsdoit","http://jsdo.it/event/memorabilia");
-			</script>
-		</ol>
-	</section>
-	
-</div>
-<footer>
-	<p><small>2018 (C) 中島俊治</small></p>
-</footer>
+						<details open>
+							<summary><h3>2-2. Calculate</h3></summary>
+							<ol>
+								<script>
+									item("JS/calculate/kesan/index.html","計算");
+									item("JS/calculate/bmi/index.html","BMI");
+									item("JS/calculate/uranai/index.html","占い");
+									item("JS/calculate/janken/index.html","じゃんけん");
+									item("JS/calculate/countdown/index.html","カウントダウン");
+									item("JS/calculate/maimai/index.html","500px競争");
+								</script>
+							</ol>
+						</details>
 
+						<details open>
+							<summary><h3>2-3. OFFLINE & STORAGE</h3></summary>
+							<ol>
+								<script>
+									item("JS/offlineStorage/localStorage/index.html","Local Storage");
+								</script>
+							</ol>
+						</details>
 
+						<details open>
+							<summary><h3>2-4. DEVICE ACCESS</h3></summary>
+							<ol>
+								<script>
+									item("JS/deviceAccess/camera/index.html","カメラ");
+									item("JS/deviceAccess/devicemotion/index.html","重力加速度");
+									item("JS/deviceAccess/devicemotion/ufo/index.html","UFO");
+									item("JS/deviceAccess/gps/index.html","位置情報");
+									item("JS/deviceAccess/speechSynthesis/index.html","音声認識読み上げ");
+									item("JS/deviceAccess/speechSynthesis/ai/index.html", "AI連携");
+									item("JS/deviceAccess/webaudio/synthesizer/index.html","シンセサイザ");
+								</script>
+							</ol>
+						</details>
 
+						<details open>
+							<summary><h3>2-5. CONNECTIVITY</h3></summary>
+						</details>
 
-</body>
+						<details open>
+							<summary><h3>2-6. MULTIMEDIA</h3></summary>
+							<ol>
+								<script>
+									item("JS/multimedia/audio/index.html","オーディオ");	
+									item("JS/multimedia/video/index.html","ビデオ");	
+								</script>
+							</ol>
+						</details>
+						
+						<details open>
+							<summary><h3>2-7. 3D, GRAPHICS & EFFECTS</h3></summary>
+							<ol>
+								<script>
+									item("JS/3dGraphicsEffects/canvas/heart/index.html","ハート");
+									item("JS/3dGraphicsEffects/canvas/hscrolling/index.html","スクロール");
+									item("JS/3dGraphicsEffects/canvas/oekaki/index.html","お絵かき");
+									item("JS/3dGraphicsEffects/canvas/physics/fractal/index.html","フラクタル");
+									item("JS/3dGraphicsEffects/canvas/physics/parabola/index.html","放物線");
+									item("JS/3dGraphicsEffects/canvas/physics/parabola/index2.html","放物ゲーム");
+									item("JS/3dGraphicsEffects/canvas/physics/pi/index.html","円周率");
+									item("JS/3dGraphicsEffects/canvas/shonan/index.html","湘南");
+									item("JS/3dGraphicsEffects/canvas/shuji/index.html","習字");
+									item("JS/3dGraphicsEffects/canvas/simpleTeditor/index.html","テキストエディタ");
+									item("JS/3dGraphicsEffects/canvas/tepco/index.html","電気使用量");
+									item("JS/3dGraphicsEffects/canvas/touch/index.html","スマホタッチゲーム");
+									item("JS/3dGraphicsEffects/canvas/whiteboard/index.html","ホワイトボード");
+									item("JS/3dGraphicsEffects/canvas/zahyo/index.html","座標");
+									item("JS/3dGraphicsEffects/webgl/co/index.html","CO");
+									item("JS/3dGraphicsEffects/webgl/control/index.html","ドーナツ");
+									item("JS/3dGraphicsEffects/webgl/toras/index.html","トーラス");
+								</script>
+							</ol>
+						</details>
+
+						<details open>
+							<summary><h3>2-8. PERFORMANCE & INTEGRATION</h3></summary>
+							<ol>
+								<script>
+									item("JS/PerformanceIntegration/requestAnimationFrame/index.html","requestAnimationFrame");
+								</script>
+							</ol>
+						</details>
+					</details>
+
+					<details><summary><h2 onclick='link("link.html","外部リンク")'>HTML5で作られた外部サイト</h2></summary></details>
+				</nav>
+				
+			</div>
+			
+			<div id="right">
+				<div id="comment">説明</div>
+				<iframe id="iframe" src="title.html"></iframe>
+			</div>
+			
+				
+		</div>
+
+		<footer>
+			<a href="/"><p><small>2018 (C) 東京アプリ・ワークショップ</small></p></a>
+		</footer>
+
+		<script src="script2.js"></script>
+	</body>
 </html>

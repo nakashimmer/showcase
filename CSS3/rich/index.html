@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>CSS3で遊ぼう ワクワクくん</title>
+<meta name=viewport content="width=device-width">
+<style>
+*{margin:0px;padding:0px;font-size:16px;}
+
+#wrap{
+	display:flex;
+}
+
+.flex2{flex:1;height:100vh;}
+
+.control{
+	display:block;
+	width:500px;
+	margin:0;
+	text-align:center;
+	border-collapse:collapse;
+	background-color:rgba(255,255,255,0.7);
+}
+
+th{background-color:#eee;}
+th,td{border:1px solid gray;line-height:1.2em;box-sizing:border-box;}
+
+h1{line-height:1.5em}
+
+.range{height:1em;border:none;width:60%;}
+.color{height:1em;border:none;width:30%;}
+
+.h2{background-color:#999;color:white;width:4em;}
+.h3{width:6em;}
+.h4{width:6em;}
+.h5{width:8em;}
+
+#box{
+	margin:calc(100vh - 50% - 200px - 50px) auto;
+	border:10px solid #6666ff;
+	width:200px;height:200px;
+	transition:all 1s ease;
+	background-image:url(mL.png);
+	background-size:100% 100%;
+}
+
+
+</style>
+<body>
+	<h1>CSSで遊ぼう ワクワクくん</h1>
+<div id=wrap>
+
+			<table class=control>
+				<tr>
+					<th rowspan=2 class=h3>div要素<br>
+						(背景色<input class=color type=color id=bgColor value="#ffffff">)
+					</th>
+					<th colspan=2>横幅 <span id=widthPx>200px</span></th>
+					<td class=h5><input class=range type=range min=0 max=500 value=200 step=10  id=width>	</td>
+				</tr>
+				<tr>
+					<th colspan=2>縦幅 <span id=heightPx>200px</span></th>
+					<td><input class=range type=range min=0 max=500 value=200 step=10  id=height>	</td>
+				</tr>
+				<tr>
+					<th rowspan=4 class=h3>border-width</th>
+					<th colspan=2>上 <span id=topPx>10px</span></th>
+					<td><input class=range type=range min=0 max=100 value=10 step=10 id=top>
+						<input class=color type=color id=topColor value=#6666ff></td>
+				</tr>
+				<tr>
+					<th colspan=2>右 <span id=rightPx>10px</span></th>
+					<td><input class=range type=range min=0 max=100 value=10 step=10 id=right>
+						<input class=color type=color id=rightColor value=#6666ff></td>
+				</tr>
+				<tr>
+					<th colspan=2>下 <span id=bottomPx>10px</span></th>
+					<td><input class=range type=range min=0 max=100 value=10 step=10 id=bottom>
+						<input class=color type=color id=bottomColor value=#6666ff></td>
+				</tr>
+				<tr>
+					<th colspan=2>左 <span id=leftPx>10px</span></th>
+					<td><input class=range type=range min=0 max=100 value=10 step=10 id=left>
+						<input class=color type=color id=leftColor value=#6666ff></td>
+				</tr>
+				
+				<tr>
+					<th rowspan=4  class=h3>影<br>box-shadow<br>
+					(背景色<input class=color type=color id=shadowColor value="#999999">)</th>
+					<th  colspan=2>左右 <span id=shadowXpx>0px</span></th>
+					<td><input class=range type=range min=-100 max=100 value=0 step=10 id=shadowX></td>
+				</tr>
+				<tr>
+					<th colspan=2>上下 <span id=shadowYpx>0px</span></th>
+					<td><input class=range type=range min=-100 max=100 value=0 step=10 id=shadowY></td>
+				</tr>
+				<tr>
+					<th colspan=2>ぼかし <span id=shadowBokashipx>0px</span></th>
+					<td><input class=range type=range min=0 max=100 value=0 step=10 id=shadowBokashi></td>
+				</tr>
+				<tr>
+					<th colspan=2>大きさ <span id=shadowSizepx>0px</span></th>
+					<td><input class=range type=range min=0 max=100 value=0 step=10 id=shadowSize></td>
+				</tr>
+	
+				
+				<tr>
+					<th rowspan=4  class=h3>角の丸み<br>border-radius</th>
+					<th  colspan=2>左上 <span id=leftTopPx>0%</span></th>
+					<td><input class=range type=range min=0 max=100 value=0 step=10 id=leftTop></td>
+				</tr>
+				<tr>
+					<th colspan=2>右上 <span id=rightTopPx>0%</span></th>
+					<td><input class=range type=range min=0 max=100 value=0 step=10 id=rightTop></td>
+				</tr>
+				<tr>
+					<th colspan=2>右下 <span id=rightBottomPx>0%</span></th>
+					<td><input class=range type=range min=0 max=100 value=0 step=10 id=rightBottom></td>
+				</tr>
+				<tr>
+					<th colspan=2>左下 <span id=leftBottomPx>0%</span></th>
+					<td><input class=range type=range min=0 max=100 value=0 step=10 id=leftBottom></td>
+				</tr>
+				
+				
+				
+				<tr>
+					<th rowspan=8>変形<br>transform</th>
+				</tr>
+				<tr>
+					<th  class=h4>回転<br>rotate</th>
+					<th  class=h4>角度<br><span id=rotateDeg>0deg</span></th>
+					<td><input class=range type=range min=-180 max=180 value=0 step=10 id=rotate></td>
+				</tr>
+				
+				<tr>
+					<th rowspan=2>伸縮<br>scale</th>
+					<th>横倍率<br><span id=scaleXN>1倍</span></th>
+					<td><input class=range type=range min=-3 max=5 value=1 step=1 id=scaleX></td>
+				</tr>
+				<tr>
+					<th>縦倍率<br><span id=scaleYN>1倍</span></th>
+					<td><input class=range type=range min=-3 max=5 value=1 step=1 id=scaleY></td>
+				</tr>
+				<tr>
+					<th rowspan=2>歪み<br>skew</th>
+					<th>横歪み<br><span id=skewXPx>0deg</span></th>
+					<td><input class=range type=range min=-90 max=90 value=0 step=10 id=skewX></td>
+				</tr>
+				<tr>
+					<th>縦歪み<br><span id=skewYPx>0deg</span></th>
+					<td><input class=range type=range min=-90 max=90 value=0 step=10 id=skewY></td>
+				</tr>
+				<tr>
+					<th rowspan=2>移動<br>translate</th>
+					<th>横移動<br><span id=translateXPx>0px</span></th>
+					<td><input class=range type=range min=-800 max=800 value=0 step=10 id=translateX></td>
+				</tr>
+				<tr>
+					<th>縦移動<br><span id=translateYPx>0px</span></th>
+					<td><input class=range type=range min=-400 max=400 value=0 step=10 id=translateY></td>
+				</tr>
+			</table>
+
+
+	
+		<div class="flex2">
+			<div id=box></div>
+		</div>
+	</div>
+</div>
+
+<script>
+	function $(id){return document.getElementById(id);}
+	
+	function el(element,listener){
+		$(element).addEventListener("change",listener);
+	}
+	
+	//div要素背景色
+	el("bgColor",bgColorChange);
+	function bgColorChange(){
+		$("box").style.backgroundColor=$("bgColor").value;
+	}
+	
+	//横幅・縦幅 width,height
+	el("width",boxSizeChange);
+	el("height",boxSizeChange);
+	
+	function boxSizeChange(){
+		$("box").style.width=$("width").value+"px";
+		$("box").style.height=$("height").value+"px";
+		$("widthPx").innerHTML=$("width").value+"px";
+		$("heightPx").innerHTML=$("height").value+"px";
+	}
+	
+	//枠線の太さborderWidth
+	el("top",borderWidthChange);
+	el("right",borderWidthChange);
+	el("left",borderWidthChange);
+	el("bottom",borderWidthChange);
+	
+	function borderWidthChange(){
+		$("box").style.borderWidth
+			=$("top").value+"px " 
+			+$("right").value+"px "
+			+$("bottom").value+"px " 
+			+$("left").value+"px";
+			
+		$("topPx").innerHTML=$("top").value+"px";
+		$("rightPx").innerHTML=$("right").value+"px";
+		$("bottomPx").innerHTML=$("bottom").value+"px";
+		$("leftPx").innerHTML=$("left").value+"px";
+	};
+	
+	//枠線の色 borderColor
+	el("topColor",borderColorChange);
+	el("rightColor",borderColorChange);
+	el("leftColor",borderColorChange);
+	el("bottomColor",borderColorChange);
+
+	function borderColorChange(){
+		$("box").style.borderColor
+			=$("topColor").value+" "
+			+$("rightColor").value+" "
+			+$("bottomColor").value+" "
+			+$("leftColor").value;
+	}
+	
+	//影 boxshadow
+	el("shadowX",shadowChange);
+	el("shadowY",shadowChange);
+	el("shadowBokashi",shadowChange);
+	el("shadowSize",shadowChange);
+	el("shadowColor",shadowChange);
+
+	function shadowChange(){
+		$("box").style.boxShadow=
+			$("shadowX").value+"px "
+			+$("shadowY").value+"px "
+			+$("shadowBokashi").value+"px "
+			+$("shadowSize").value+"px "
+			+$("shadowColor").value;
+		$("shadowXpx").innerHTML=$("shadowX").value+"px";
+		$("shadowYpx").innerHTML=$("shadowY").value+"px";
+		$("shadowBokashipx").innerHTML=$("shadowBokashi").value+"px";
+		$("shadowSizepx").innerHTML=$("shadowSize").value+"px";
+	}
+
+
+
+	
+	//borderRadius
+	$("leftTop").addEventListener("change",borderRadiusChange);
+	$("rightTop").addEventListener("change",borderRadiusChange);
+	$("rightBottom").addEventListener("change",borderRadiusChange);
+	$("leftBottom").addEventListener("change",borderRadiusChange);
+	
+	function borderRadiusChange(){
+		$("box").style.borderRadius
+			=$("leftTop").value+"% "
+			+$("rightTop").value+"% "
+			+$("rightBottom").value+"% "
+			+$("leftBottom").value+"% ";
+		$("leftTopPx").innerHTML=$("leftTop").value+"%";
+		$("rightTopPx").innerHTML=$("rightTop").value+"%";
+		$("rightBottomPx").innerHTML=$("rightBottom").value+"%";
+		$("leftBottomPx").innerHTML=$("leftBottom").value+"%";
+	}
+	
+	//---transform---
+	$("rotate").addEventListener("change",transformChange);
+	$("skewX").addEventListener("change",transformChange);
+	$("skewY").addEventListener("change",transformChange);
+	$("scaleX").addEventListener("change",transformChange);
+	$("scaleY").addEventListener("change",transformChange);
+	$("translateX").addEventListener("change",transformChange);
+	$("translateY").addEventListener("change",transformChange);
+	
+	function transformChange(){
+		//$("box").style.transform
+		var str
+		= "skew("+$("skewX").value+"deg,"+$("skewY").value+"deg) " 
+		+ "rotate("+$("rotate").value+"deg) "
+		+ "scale("+$("scaleX").value+","+$("scaleY").value+") "
+		+ "translate("+$("translateX").value+"px,"+$("translateY").value+"px)";
+		console.log(str);
+		$("box").style.transform = str;
+		
+		$("rotateDeg").innerHTML=$("rotate").value+"deg";
+		$("skewXPx").innerHTML=$("skewX").value+"deg";
+		$("skewYPx").innerHTML=$("skewY").value+"deg";
+		$("scaleXN").innerHTML=$("scaleX").value+"倍";
+		$("scaleYN").innerHTML=$("scaleY").value+"倍";
+		$("translateXPx").innerHTML=$("translateX").value+"px";
+		$("translateYPx").innerHTML=$("translateY").value+"px";
+	}
+	
+
+</script>

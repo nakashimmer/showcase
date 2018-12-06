@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>8月のcanvas講座 絵日記風「湘南海岸」</title>
+<style>
+	*{margin: 0;padding: 0;}
+	body{text-align:center;}
+	canvas{margin:0;box-shadow:3px 3px 3px gray;}
+</style>
+
+<canvas id=sea width=1200 height=500></canvas>
+
+<audio autoplay loop src="wave.mp3"></audio>
+
+<script>
+var canvas 	= document.getElementById('sea');
+var c = canvas.getContext('2d');
+
+//初期設定//////////////
+var frame	=0;
+var dF=0;
+var twilightFrame=1500;
+var morningFrame=2500;
+//初期設定.オブジェクト
+var sky		={color:"rgb(135,206,250)"};
+var sun		={x:10,		y:10,	r:200,	color:"yellow"					};
+var moon	={x:70,		y:60,	r:100,	color:"yellow"					};
+var plane	={x:1250,	y:250,					dx:1.1,		dy:-0.18	};
+var cloud	={			y:240,	color:"white"							};
+var sea		={					color1:"white",	color2:"blue"			};
+var yocht	={x:400,	y:280,					dx:0.5,		dy:0		};
+var kujira	={x:700,	y:250,					dx:-0.1,	dy:0		};
+var light 	= 40;
+var sound	= new Array("http://springreen.jp/INDEX/themes/ShunsuiKobo/bg/wave.mp3");
+
+//初期設定.カモメ
+var kamome 	= new Array();
+kamome[1]	={x:250,	y:250,	dx:-1,	dy:1	};
+kamome[2]	={x:350,	y:300,	dx:-1,	dy:1	};
+kamome[3]	={x:450,	y:200,	dx:-1,	dy:1	};
+
+//初期設定：天の川
+var kosu	= 2000;
+var hoshi	= new Array(kosu);
+for(var i=0;i<kosu;i++){
+    var j	= ransu(kosu)/kosu*1250;
+    hoshi[i]={x:j,y:j/8+Math.tan(i)*50,r:ransu(2),color:"rgb("+ransu(245)+5+","+ransu(245)+5+","+ransu(245)+5+")" };
+}
+//初期設定：流れ星
+var nagareboshi	={x:-10,y:10};
+//初期設定.揺れ関数
+var fwave=0;
+function f(f){return Math.sin(fwave/45+pi)*f;}
+//初期設定.影
+var kage={x:10,y:10};
+function shadow()	{	c.shadowBlur=3;	c.shadowColor="gray";	c.shadowOffsetX=kage.x;	c.shadowOffsetY=kage.y;	}
+function shadowClr(){	c.shadowBlur=0;	c.shadowColor="gray";	c.shadowOffsetX=0;	c.shadowOffsetY=0;	}
+//計算を楽にしてくれるもの
+function ransu(x)	{	return Math.floor(Math.random()*x);}
+var pi		=Math.PI;
+
+//アニメーション開始///////////////
+shadow();
+
+setInterval(anime,30);
+function anime(){
+    fwave++;
+    frame++;if(frame>3000)frame=0;
+    //描画
+    skyDraw();	moonDraw(); sunDraw();	planeDraw();	cloudDraw();
+    enoshima();	kujiraDraw();	seaDraw();	yochtDraw();
+    kamomeDraw(1);	kamomeDraw(2);	kamomeDraw(3); 
+
+    //昼から夜へ
+    if(frame>=twilightFrame && frame<=twilightFrame+500){dF = frame-twilightFrame;change();}   
+    //夜から昼へ
+    if(frame>=morningFrame  && frame<= morningFrame+500){dF = 500-(frame-morningFrame);change();} 
+    
+    //    c.fillText("ただいま改善中。"+frame+"/dF="+dF,0,450);
+}
+
+//昼と夜の移り変わり//////////////////////////////
+function change(){
+    //空　skyblue(135,206,250)<->darkblue(0,0,139)
+    sky.color='rgb('+Math.floor(135-(135-0)/500*dF)+','+Math.floor(206-(206-0)/500*dF)+','+Math.floor(250-(250-139)/500*dF)+')';  
+    //海 blue(0,0,255)<->darkblue(0,0,139)
+    sea.color2='rgb(0,0,'+Math.floor(255-(255-139)/500*dF)+')';
+	//影の厚み x,y(10)<->(0);
+    kage.x=Math.floor(10-(10-0)/500*dF);
+    kage.y=Math.floor(10-(10-0)/500*dF);
+    //灯台のライト(40<->280)
+    light=Math.floor(40-(40-280)/500*dF);
+    //雲   
+    cloud.y =Math.floor(240-(240-400)/500*dF);
+}
+
+//描画の関数///////////////////////
+//空の描画
+function skyDraw(){
+    c.fillStyle	=sky.color;
+    c.fillRect(0,0,1200,250);
+
+    if(dF>0){
+        //星 
+        shadowClr();
+        for(var i=0;(i<dF*4);i++){
+        	c.beginPath();
+        	c.arc(hoshi[i].x,hoshi[i].y,hoshi[i].r+ransu(2),0,2*pi,true);
+        	c.fillStyle=hoshi[i].color;
+        	c.fill();    
+    	}
+        shadow();
+    	//流れ星
+		if(frame%800===100){nagareboshi.x=1250;nagareboshi.y=ransu(250);}
+   		nagareboshi.x -=3;
+		nagareboshi.y +=0.5;
+    	c.beginPath();
+    	c.arc(nagareboshi.x,nagareboshi.y,1,0,2*pi,true);
+    	c.fillStyle="white";
+   		c.fill();
+    }
+}
+
+//太陽の描画
+function sunDraw(){
+    a=1-dF/150;if(a<0)a=0;
+    c.globalAlpha=a;
+    c.fillStyle=sun.color;    
+    c.beginPath();
+    c.arc(sun.x,sun.y,sun.r+f(10),0,2*pi,false);
+    c.fill();
+    c.globalAlpha=1;
+    
+}
+//月の描画
+function moonDraw(){   
+    c.globalAlpha=(dF+0.001)/500;
+    c.beginPath();
+    c.arc(moon.x,moon.y,90,15/8*pi,6.3/8*pi,false);
+    c.arc(moon.x-20,moon.y-30,moon.r,5.5/8*pi,15.5/8*pi,true);
+    c.closePath();
+    c.fillStyle=moon.color;  
+    c.fill();
+    c.globalAlpha=1;
+}
+//雲の描画
+function cloudDraw(){
+    c.fillStyle=cloud.color;    
+    c.beginPath();
+    c.arc(300,cloud.y+40+f(10),100,0,2*pi,false);
+    c.arc(400,cloud.y+f(20),100,0,2*pi,false);
+    c.arc(500,cloud.y-20+f(10),100,0,2*pi,false);
+    c.fill();
+}
+//飛行機の描画
+function planeDraw(){
+    if(frame == 500){plane.x=0;plane.y=250;}
+    c.beginPath();
+    c.moveTo(plane.x,plane.y-5);
+    c.lineTo(plane.x+3,plane.y-2);
+    c.strokeStyle="white";
+    c.lineWidth=1;
+    c.stroke();
+    
+    c.beginPath();
+    c.moveTo(plane.x-3,plane.y-3);
+    c.lineTo(plane.x-plane.dx*50-3,plane.y-plane.dy*50-3);
+    c.strokeStyle="white";
+    c.lineWidth=1;
+    c.stroke();
+    
+    c.beginPath();
+    c.moveTo(plane.x,plane.y);
+    c.lineTo(plane.x-plane.dx*50,plane.y-plane.dy*50);
+    c.strokeStyle="white";
+    c.lineWidth=1;
+    c.stroke();
+    plane.x +=plane.dx;
+    plane.y +=plane.dy;  
+}
+//江ノ島の描画
+function enoshima(){        
+    //ライト1
+    c.fillStyle="white";
+    c.beginPath();
+    c.moveTo(960,125);
+    c.lineTo(960-f(light),120);
+    c.lineTo(960-f(light),150);
+    c.lineTo(960,145);
+    c.closePath();
+    c.globalAlpha=0.5;
+    c.fill(); 
+    c.globalAlpha=1;
+    
+   //灯台
+    c.fillStyle="white";
+   	c.fillRect(950,115,20,5);
+    c.fillRect(945,120,30,30); 
+    c.beginPath();
+    c.moveTo(950,150);
+    c.lineTo(970,150);
+    c.lineTo(980,250);
+    c.lineTo(940,250);
+    c.closePath();
+    c.fill();
+    //ライト2
+    c.fillStyle="white";
+    c.beginPath();
+    c.moveTo(960,125);
+    c.lineTo(960+f(light),120);
+    c.lineTo(960+f(light),150);
+    c.lineTo(960,145);
+    c.closePath();
+    c.globalAlpha=0.5;
+    c.fill(); 
+    c.globalAlpha=1;
+    //島
+    c.fillStyle="darkgreen";
+    c.beginPath();
+    c.moveTo(900,230);
+    c.lineTo(1000,230);
+    c.lineTo(1010,250);
+    c.lineTo(890,250);
+    c.closePath();
+    c.fill();
+}
+//クジラの描画
+function kujiraDraw(){
+    c.fillStyle="#eee";
+    c.globalAlpha=0.5;
+    c.beginPath();
+    c.moveTo(kujira.x,kujira.y-10-f(10));
+    c.lineTo(kujira.x-10,kujira.y-10-f(50));
+    c.lineTo(kujira.x+10,kujira.y-10-f(50));
+    c.closePath();
+    c.fill();
+    c.globalAlpha=1;
+    
+    c.fillStyle="black";    
+    c.beginPath();
+    c.arc(kujira.x,kujira.y+20-f(10),30,1/2*pi,10/6*pi,false);
+    c.lineTo(kujira.x+40,kujira.y+10-f(10));
+    c.closePath();
+    c.fill();
+    
+    shadowClr();    
+    c.fillStyle="white"; 
+    c.beginPath();
+    c.arc(kujira.x-5,kujira.y+3-f(10),5,0,2*pi,false);
+    c.closePath();
+    c.fill();
+    
+    c.fillStyle="black"; 
+    c.beginPath();
+    c.arc(kujira.x-7,kujira.y+3-f(10),3,0,2*pi,false);
+    c.closePath();
+    c.fill();
+    shadow();	
+    kujira.x +=kujira.dx;
+    if(kujira.x<-100)kujira.x=1250;
+}
+//海の描画
+function seaDraw(){
+    //海の背景色
+	g = c.createLinearGradient(0,200,0,500);
+	g.addColorStop(0,sea.color1);
+	g.addColorStop(1,sea.color2);
+    c.fillStyle=g;		
+    c.fillRect(0,250,1200,250);	
+
+    /*
+    shadowClr();
+    if(dF>0){     
+        for(var i=0;(i<dF*4);i++){
+            c.beginPath();
+        	c.arc(hoshi[i].x,500-hoshi[i].y,hoshi[i].r+ransu(2),0,2*pi,true);
+        	c.fillStyle=hoshi[i].color;
+            c.globalAlpha=0.6;
+        	c.fill();
+            c.globalAlpha=1;
+            c.closePath();
+        }
+    }  
+    shadow();
+*/
+}
+//ヨットの描画
+function yochtDraw(){
+    c.fillStyle="orange";
+    c.beginPath();
+    c.moveTo(yocht.x,yocht.y-10);
+    c.lineTo(yocht.x-80,yocht.y-10);
+    c.lineTo(yocht.x,yocht.y-150-f(10));
+    c.closePath();
+    c.fill();
+ 
+    c.fillStyle="yellow";
+    c.beginPath();
+    c.moveTo(yocht.x+5,yocht.y-10);
+    c.lineTo(yocht.x+35,yocht.y-10);
+    c.lineTo(yocht.x+5,yocht.y-80);
+    c.closePath();
+    c.fill();
+    
+    c.fillStyle="red";
+    c.beginPath();
+    c.moveTo(yocht.x-25,yocht.y-5);
+    c.lineTo(yocht.x+25,yocht.y-5);
+    c.lineTo(yocht.x+20,yocht.y+10);    
+    c.lineTo(yocht.x-20,yocht.y+10);
+    c.closePath();
+    c.fill();
+    
+    yocht.x +=yocht.dx;
+    if(yocht.x>=1280)yocht.dx *=(-1);
+    if(yocht.x<=-80)yocht.dx *=(-1);
+
+    yocht.y +=yocht.dy;
+    if(yocht.y>=550)yocht.dy *=(-1);
+    if(yocht.y<=250)yocht.dy *=(-1);
+}
+//カモメの描画
+function kamomeDraw(i){
+    c.strokeStyle="black";
+    c.lineWidth=2;
+    c.beginPath();
+    c.arc(kamome[i].x-10,kamome[i].y,10,Math.PI,2*pi,false);
+    c.arc(kamome[i].x+10,kamome[i].y,10,Math.PI,2*pi,false);
+    c.stroke();
+
+    c.strokeStyle="white";
+    c.lineWidth=3;  
+    c.beginPath();
+    c.arc(kamome[i].x-10,kamome[i].y,10,3/2*Math.PI,2*pi,false);
+    c.arc(kamome[i].x+10,kamome[i].y,10,Math.PI,3/2*pi,false);
+    c.stroke();
+   
+    kamome[i].x +=kamome[i].dx;
+    if(kamome[i].x>=1510)kamome[i].dx *=(-1);
+    if(kamome[i].x<=-10)kamome[i].dx *=(-1);
+
+    kamome[i].y +=kamome[i].dy-f(1);
+    if(kamome[i].y>=510)kamome[i].dy *=(-1);
+    if(kamome[i].y<=-10)kamome[i].dy *=(-1);
+}
+
+
+
+</script>
+</body>
+</html>
