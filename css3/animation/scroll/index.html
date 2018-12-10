@@ -1,121 +1,93 @@
 
 <!DOCTYPE html>
-<meta charset=utf-8>
-<title>スクロールの値</title>
-<style>
-	*{margin:0;padding:0;}
-	body{position:relative;}
-	#info{
-		width:100%;height:100px;background-color:black;
-		font-size:50px;color:white;
-	}
-	#page{
-		width:100%;height:5000px;
-		background:linear-gradient(transparent,rgba(255,0,0,0.7));
-	}
-	#center{
-		text-align:center;
-		line-height:200px;
-	}
-</style>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>スクロールでCSS変形</title>
+		<link rel="stylesheet" href="/sample.css">
+		<style>
+			#wrap{height:auto;}
+			.sample{
+				background:repeating-linear-gradient(
+					transparent,#aaa 50px,transparent 100px
+				);
+				transform-style:preserve-3d;
+				perspective:8000px;
+				height:10600px;
+				overflow:hidden;
+				position:relative;
+			}
 
-<style>
+			#ball{
+				position:absolute;
+				top:100px;
+				left:calc(50% - 150px);
+				z-index:1;
+				background-color:red;
+				width:300px;height:200px;
+				border:25px solid gray;
+				border-radius:50%;
+				text-align:center;
+				transform-style:preserve-3d;
+				perspective:100px;
+			}
 
-*{
-	margin:0;padding:0;border:0;
-	height:0px;
-	border:0px;
-}
+			#info{
+				background-color:transparent;
+				width:100%;height:100px;
+				margin:0 auto;
+				font-size:50px;
+				line-height:200px;
+				transform:translateZ(20px);
+			}
 
-#page{
-transform-style:preserve-3d;
-	perspective:3000px;
-}
+		</style>
+	</head>
+	<body>
+		<h1>スクロールでCSS変形</h1>
+		<div id="wrap">
+			<p id="msg">
+				<button onclick="btn=0;">rotate</button>
+				<button onclick="btn=1;">scale</button>
+				<button onclick="btn=2;">translate</button>
+				<button onclick="btn=3;">3D</button>
+			</p>
 
-#ball{
-	position:absolute;top:100px;left:200px;z-index:1;
-	width:400px;height:400px;
-	overflow:hidden;
-	
-}
-
-#top{background-color:blue;}
-#middle{background-color:gray;position:relative;}
-#bottom{background-color:white;}
-#center{
-	position:absolute;left:75px;top:-100px;z-index:1;
-	width:0;height:0;font-size:3em;
-
-}
-
-
-#top{
-	height:175px;
-}
-#middle{
-	height:50px;
-}
-#bottom{
-	height:175px;
-}
-#center{
-	background-color:white;
-	width:200px;height:200px;
-	border:25px solid gray;
-	border-radius:50%;
-}
-
-#ball{
-	border-radius:50%;
-	
-}
-
-button{
-	background-color:white;
-	font-size:50px;
-	border:1px solid gray;
-	height:1.3em;
-	padding:3px;margin:3px 0 0 3px;
-	border-radius:5px;
-}
-</style>
-
-
-<div id=page>
-	<div id=control>
-		<button onclick="btn=0;">rotate</button
-		><button onclick="btn=1;">scale</button
-		><button onclick="btn=2;">translate</button
-		><button onclick="btn=3;">3D</button>
-	</div>
-		
-	<div id=ball>
-		<div id=top class=box></div>
-		<div id=middle class=box>
-			<div id=center></div>
+			<div class="sample">
+				<div id="ball">
+					<div id="info">0</div>
+				</div>
+			</div>
 		</div>
-		<div id=bottom class=box></div>
-	</div>
-</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
 <script>
-	function $id(id){return document.getElementById(id);}
-	
-	var btn=0;
+	const BALL = document.getElementById("ball");
+	const INFO = document.getElementById("info");
+	let btn = 0;
+
 	window.addEventListener("scroll",function(e){
-		var n=window.pageYOffset;
-	
-		if(btn==0){$id("ball").style.transform="rotate("+n+"deg)";}
-		if(btn==1){$id("ball").style.transform="scale("+(n/1000)+")";}
-		if(btn==2){$id("ball").style.transform="translate("+n/10+"px,"+n/100+"px)";}
-		if(btn==3){$id("ball").style.transform="translateZ(5px) translateX("+n/10+"px) rotateY("+n*10/180*Math.PI+"deg)";}
-		
-		
-		$id("center").innerHTML=window.pageYOffset;
-		
-		
-		$id("ball").style.top=(window.pageYOffset+100)+"px";
+		console.log=btn;
+		let scrollPx=window.pageYOffset;
+		if(btn===0){
+			BALL.style.transform="rotate("+ scrollPx+"deg)";
+		}
+		if(btn===1){
+			BALL.style.transform="scale("+(scrollPx/1000)+")";}
+		if(btn===2){
+			BALL.style.transform="translate("+ scrollPx/10+"px,"+scrollPx/100+"px)";
+		}
+		if(btn===3){
+			BALL.style.transform="rotateY("+ scrollPx*10/180*Math.PI+"deg)";
+		}
+		BALL.style.top=(scrollPx+100)+"px";
+		INFO.innerHTML= scrollPx;
+
 	});
 	
 	
 </script>
+</body>
+</html>
