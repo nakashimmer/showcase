@@ -23,7 +23,7 @@
 				top:100px;
 				left:calc(50% - 150px);
 				z-index:1;
-				background-color:red;
+				background-color:#333;
 				width:300px;height:200px;
 				border:25px solid gray;
 				border-radius:50%;
@@ -38,7 +38,15 @@
 				margin:0 auto;
 				font-size:50px;
 				line-height:200px;
-				transform:translateZ(20px);
+				text-shadow: 2px 2px 2px black;
+				color:white;
+			}
+			button{
+				padding:0.3em;
+				border-radius:15px;
+				background-color: #aaa;
+				color:white;
+				font-size:20px;
 			}
 
 		</style>
@@ -71,15 +79,17 @@
 	window.addEventListener("scroll",function(e){
 		console.log=btn;
 		let scrollPx=window.pageYOffset;
+		INFO.style.transform = "translateZ(0px)";
 		if(btn===0){
 			BALL.style.transform="rotate("+ scrollPx+"deg)";
 		}
 		if(btn===1){
 			BALL.style.transform="scale("+(scrollPx/1000)+")";}
 		if(btn===2){
-			BALL.style.transform="translate("+ scrollPx/10+"px,"+scrollPx/100+"px)";
+			BALL.style.transform="translateX("+ (scrollPx/8.5-600)+"px)";
 		}
 		if(btn===3){
+			INFO.style.transform="translateZ(20px)";
 			BALL.style.transform="rotateY("+ scrollPx*10/180*Math.PI+"deg)";
 		}
 		BALL.style.top=(scrollPx+100)+"px";
