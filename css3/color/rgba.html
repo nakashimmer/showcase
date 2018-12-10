@@ -1,61 +1,83 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<style>
-	*:not(ul){margin:0;padding:0;}
-	#title{margin:1em;}
-	
-	#style1,ul{background-color:white;}
-	#style1{font-size:30px;}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RGBA</title>
+		<link rel="stylesheet" href="/sample.css">
+		<style>
+			#style1{
+				border:3px double green;
+				font-size:30px;
+			}
 
-	#box1{
-		box-shadow:12px 12px 12px gray;width:300px;height:300px;margin:0 auto;
-		transition:all 0.3s linear;
-		background-color:rgba(0, 0, 0, 1);
-	}
-	input{width:500px;}
-	body{background:repeating-linear-gradient(-30deg,#aaa,white 10px);}
-	td{text-align:right;}
-</style>
-<body>
-<h1 id=title>色の指定　rgba</h1>
-<div style="border:3px double green;margin:2em;">
-<div id="style1">
-	#box1{background-color:rgba(0, 0, 0, 1);}</div>
-</div>
+			#box1{
+				box-shadow:12px 12px 12px gray;width:300px;height:300px;margin:0 auto;
+				transition:all 0.3s linear;
+				background-color:rgba(0, 0, 0, 1);
+			}
+			input{width:500px;}
+			.sample{
+				background:repeating-linear-gradient(-30deg,#aaa,white 10px);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>色の指定　RGBA</h1>
+		<div id="wrap">
+			<div id="style1">
+				#box1{background-color:rgba(0, 0, 0, 1);}
+			</div>
 
-<p>色を指定する</p>
-<table>
-	<tr><th>赤(red)：</th><td><input id=r type="range" min=0 max=255 step=5 value=0 id=sikisou></th><td><span id=rvalue>0</span></td></tr>
-	<tr><th>緑(green)：</th><td><input id=g type="range" min=0 max=255 step=5 value=0></th><td><span id=gvalue>0</span></td></tr>
-	<tr><th>青(blue)：</th><td><input id=b type="range" min=0 max=255 step=5 value=0></th><td><span id=bvalue>0</span></td></tr>
-	<tr><th>透明度(alpha)：</th><td><input id=a type="range" min=0 max=1 step=0.1 value=1></th><td><span id=avalue>1</span></td></tr>
-</table>
+			<div class="msg">
+				<p>色を指定する</p>
+				<table>
+					<tr><th>赤(red)：</th><td><input id=r type="range" min=0 max=255 step=5 value=0 id=sikisou></th><td><span id=rvalue>0</span></td></tr>
+					<tr><th>緑(green)：</th><td><input id=g type="range" min=0 max=255 step=5 value=0></th><td><span id=gvalue>0</span></td></tr>
+					<tr><th>青(blue)：</th><td><input id=b type="range" min=0 max=255 step=5 value=0></th><td><span id=bvalue>0</span></td></tr>
+					<tr><th>透明度(alpha)：</th><td><input id=a type="range" min=0 max=1 step=0.1 value=1></th><td><span id=avalue>1</span></td></tr>
+				</table>
+			</div>
 
-<div id="box1"></div>
-
-<script>
-	function $id(id){
-		return document.getElementById(id);
-	}
-	
-
-	$id("r").addEventListener("change",rgbachange);
-	$id("g").addEventListener("change",rgbachange);
-	$id("b").addEventListener("change",rgbachange);
-	$id("a").addEventListener("change",rgbachange);
-	
-	function rgbachange(){
-		$id("rvalue").innerHTML=$id("r").value;
-		$id("gvalue").innerHTML=$id("g").value;
-		$id("bvalue").innerHTML=$id("b").value;
-		$id("avalue").innerHTML=$id("a").value;
+			<div class="sample">
+				<div id="box1"></div>
+			</div>
+		</div>
+		<footer>
+			<p><small>(C)
+					<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 		
-		var param="rgba(" +$id("r").value+", "+$id("g").value+", "+$id("b").value+", "+$id("a").value+" )";
-		console.log(param);
-		box1.style.backgroundColor=param;
-		document.getElementById("style1").innerHTML="#box1{background-color:"+param+";}";
-		
-	
-	}
-	
-</script>
+
+		<script>
+			const STYLE1 = document.getElementById("style1");
+			const BOX1 = document.getElementById("box1");
+
+			const R = document.getElementById("r");
+			const G = document.getElementById("g");
+			const B = document.getElementById("b");
+			const A = document.getElementById("a");
+
+			const RValue = document.getElementById("rvalue");
+			const GValue = document.getElementById("gvalue");
+			const BValue = document.getElementById("bvalue");
+			const AValue = document.getElementById("avalue");
+
+
+			R.addEventListener("change",rgbachange);
+			G.addEventListener("change",rgbachange);
+			B.addEventListener("change",rgbachange);
+			A.addEventListener("change",rgbachange);
+
+			function rgbachange(){
+				RValue.innerHTML=R.value;
+				GValue.innerHTML=G.value;
+				BValue.innerHTML=B.value;
+				AValue.innerHTML=A.value;
+				
+				let param = "rgba(" +R.value+", "+G.value+", "+B.value+", "+A.value+" )";
+				BOX1.style.backgroundColor=param;
+				STYLE1.innerHTML="#box1{background-color:"+param+";}";
+			}
+		</script>
+	</body>
+</html>

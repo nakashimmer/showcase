@@ -1,93 +1,106 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<style>
-	*:not(ul){margin:0;padding:0;}
-	#title{margin:1em;}
-	
-	#style1,section{background-color:white;}
-	#style1{font-size:30px;}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>カラーコード</title>
+		<link rel="stylesheet" href="/sample.css">
+		<style>
+			#style1{
+				border:3px double green;
+				font-size:20px;
+			}
 
-
-	#box1{
-		box-shadow:12px 12px 12px gray;
-		width:300px;height:300px;margin:30px auto;
-		transition:all 0.3s linear;
-		background-color:#000000;
-	}
-	input{width:500px;}
-	body{background:repeating-linear-gradient(-30deg,#aaa,white 10px);}
-</style>
-<body>
-<h1 id=title>色の指定　カラーコード</h1>
-<div style="border:3px double green;margin:2em;">
-<div id="style1">
-	#box1{background-color:#000000;}</div>
-</div>
-
-<section>色を指定する
-<script>
-	function select(){
-		for(var i=0;i<16;i++){
-			ii=i.toString(16);
-			document.write("<option value="+ii+">"+ii);
-		}
-	}
-</script>
-	<p>
-		<span style="color:red";>赤(red)</span>
-			<select id="r1">
-				<script>select();</script>
-			</select>
-			<select id="r2">
-				<script>select();</script>
-			</select>
-		
-		<span style="color:green";>　緑(green)</span>
-			<select id="g1">
-				<script>select();</script>
-			</select>
-			<select id="g2">
-				<script>select();</script>
-			</select>
+			#box1{
+				box-shadow:12px 12px 12px gray;
+				width:300px;height:300px;margin:30px auto;
+				transition:all 0.3s linear;
+				background-color:#000000;
+			}
+			input{width:500px;}
+			.sample{
+				background:repeating-linear-gradient(-30deg,#aaa,white 10px);
+			}
+		</style>
+		<script>
+			function select() {
+				for (var i = 0; i < 16; i++) {
+					ii = i.toString(16).toUpperCase();
+					document.write("<option value=" + ii + ">" + ii);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1>色の指定　カラーコード</h1>
+		<div id="wrap">
+			<div id="style1">
+				#box1{background-color: #000000 ;}
+			</div>
+			<p class="msg">色を指定：
+				<span style="color:red";>赤(red)</span>
+				<select id="r1">
+					<script>select();</script>
+				</select>
+				<select id="r2">
+					<script>select();</script>
+				</select>
 			
-		<span style="color:blue";>　青(blue)</span>
-			<select id="b1">
-				<script>select();</script>
-			</select>
-			<select id="b2">
-				<script>select();</script>
-			</select>
-</section>
+				<span style="color:green";>　緑(green)</span>
+				<select id="g1">
+					<script>select();</script>
+				</select>
+				<select id="g2">
+					<script>select();</script>
+				</select>
+				
+				<span style="color:blue";>　青(blue)</span>
+					<select id="b1">
+						<script>select();</script>
+					</select>
+					<select id="b2">
+						<script>select();</script>
+					</select>
+				</section>
+			</p>
+
+			<div class="sample">
+				<div id="box1"></div>
+			</div>
+		</div>
+		<footer>
+			<p><small>(C)
+					<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 		
-<div id="box1"></div>
+		<script>
+			const STYLE1 = document.getElementById("style1");
+			const BOX1=document.getElementById("box1");
 
-<script>
-	
-	function $id(id){
-		return document.getElementById(id);
-	}
-	
-	$id("r1").addEventListener("change",rgbchange);
-	$id("r2").addEventListener("change",rgbchange);
-	$id("g1").addEventListener("change",rgbchange);
-	$id("g2").addEventListener("change",rgbchange);
-	$id("b1").addEventListener("change",rgbchange);
-	$id("b2").addEventListener("change",rgbchange);
+			const R1 = document.getElementById("r1");
+			const R2 = document.getElementById("r2");
+			const G1 = document.getElementById("g1");
+			const G2 = document.getElementById("g2");
+			const B1 = document.getElementById("b1");
+			const B2 = document.getElementById("b2");
 
+			R1.addEventListener("change",rgbchange);
+			R2.addEventListener("change",rgbchange);
+			G1.addEventListener("change",rgbchange);
+			G2.addEventListener("change",rgbchange);
+			B1.addEventListener("change",rgbchange);
+			B2.addEventListener("change",rgbchange);
 
-	function rgbchange(){
+			function rgbchange(){
 
-		var param="#"+
-			$id("r1").value+$id("r2").value+
-			$id("g1").value+$id("g2").value+
-			$id("b1").value+$id("b2").value;
+				let param="#"+
+					R1.value+R2.value+
+					G1.value+G2.value+
+					B1.value+B2.value;
 
-			console.log(param);
-		box1.style.backgroundColor=param;
-		document.getElementById("style1").innerHTML
-		="#box1{background-color:"+param+";}";
-		
-	
-	}
-	
-</script>
+				BOX1.style.backgroundColor=param;
+				STYLE1.innerHTML="#box1{background-color: "+param+" ;}";
+			}
+		</script>
+
+	</body>
+</html>

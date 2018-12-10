@@ -1,0 +1,62 @@
+*{
+	margin:0;
+	padding: 0;
+	font-size:16px;
+	text-decoration: none;
+	outline:0;
+}
+#wrap{	
+	height:calc(100vh - 6em);
+	padding:2em calc(50% - 400px) 0px;
+	overflow:scroll;
+}
+h1{
+	text-align:center;
+	background-color:#eee;
+	font-size:1.2em;
+	line-height:2em;
+}
+ol{
+	list-style-type:none;
+}
+ul{
+	margin-left:2em;
+}
+.msg{
+	margin:1em 0;
+}
+.sample{
+	margin:1em 0;
+	padding:1em;
+	background-color:#eee;
+}
+.sample *{
+	background-color: #fff;
+}
+footer{
+	text-align: center;
+	background-color: #333;
+}
+footer *{
+	color:white;
+	text-decoration: none;
+	line-height:2em;
+}
+
+/*スクロールバーを非表示 (除Firefox)*/
+::-webkit-scrollbar{display:none;}
+*{-ms-overflow-style:none;}
+
+.contentcss{
+	display:block;
+	border:3px double green;	min-height:2em;
+	margin:2px 0;
+	line-height:2em;
+	white-space:pre;
+	font-size:20px;
+	font-family:menlo;
+	resize:both;
+	overflow:scroll;
+	tab-size:2;
+	text-indent:1em;
+}

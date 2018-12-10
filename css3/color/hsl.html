@@ -1,67 +1,96 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<style>
-	*:not(ul){margin:0;padding:0;}
-	#title{margin:1em;}
-	
-	#style1,ul{background-color:white;}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>HSLA</title>
+		<link rel="stylesheet" href="/sample.css">
+		<style>
+			#style1{
+				border:3px double green;
+				font-size:20px;
+			}
+			#box1{
+				box-shadow:12px 12px 12px gray;width:300px;height:300px;margin:0 auto;
+				transition:all 0.3s linear;
+				background-color:hsla(360, 100%, 50%, 1);
+			}
+			input{width:500px;}
+			.sample{
+				background:repeating-linear-gradient(-30deg,#aaa,white 10px);
+			}
+			td{text-align:right;}
+		</style>
+	</head>
+	<body>
+		<h1>色の指定　HSLA</h1>
+		<div id="wrap">
+			<div id="style1">
+				#box1{background-color:hsla(360, 100%, 50%, 1);}
+			</div>
+			<div class="msg">
+				<p>色を指定する</p>
+				<table>
+					<tr>
+						<th>色相(hue)：</th>
+						<td><input type="range" min=0 max=360 step=10 value=360 id=sikisou></th>
+						<td><span id=sikisouvalue>360</span>度</td>
+					</tr>
+					<tr>
+						<th>彩度(saturation)：</th>
+						<td><input type="range" min=0 max=100 step=10 id=saido value=100></th>
+						<td><span id=saidovalue>100</span>%</td>
+					</tr>
+					<tr>
+						<th>明度(luminousity)：</th>
+						<td><input type="range" min=0 max=100 step=10 id=meido value=50></th>
+						<td><span id=meidovalue>50</span>%</td>
+					</tr>
+					<tr>
+						<th>透明度(alpha)：</th>
+						<td><input type="range" min=0 max=1 step=0.1 id=toumeido value=1></th>
+						<td><span id=toumeidovalue>1</span></td>
+					</tr>
+				</table>
+			</div>
 
+			<div class="sample">
+				<div id="box1"></div>
+			</div>
+		</div>
 
-	#box1{
-		box-shadow:12px 12px 12px gray;width:300px;height:300px;margin:0 auto;
-		transition:all 0.3s linear;
-		background-color:hsla(360, 100%, 50%, 1);
-	}
-	input{width:500px;}
-	body{background:repeating-linear-gradient(-30deg,#aaa,white 10px);}
-	td{text-align:right;}
-</style>
-<body>
-<h1 id=title>色の指定　hlsa</h1>
-<div style="border:3px double green;margin:2em;">
-<div id="style1">
-	#box1{background-color:hsla(360, 100%, 50%, 1);}</div>
-</div>
+		<footer>
+			<p><small>(C)
+					<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
-<p>色を指定する</p>
-<table>
-	<tr><th>色相(hue)：</th><td><input type="range" min=0 max=360 step=10 value=360 id=sikisou></th><td><span id=sikisouvalue>360</span>度</td></tr>
-	<tr><th>彩度(saturation)：</th><td><input type="range" min=0 max=100 step=10 id=saido value=100></th><td><span id=saidovalue>100</span>%</td></tr>
-	<tr><th>明度(luminousity)：</th><td><input type="range" min=0 max=100 step=10 id=meido value=50></th><td><span id=meidovalue>50</span>%</td></tr>
-	<tr><th>透明度(alpha)：</th><td><input type="range" min=0 max=1 step=0.1 id=toumeido value=1></th><td><span id=toumeidovalue>1</span></td></tr>
-</table>
-
-<div id="box1"></div>
-
-<script>
-	
-	var sikisou=document.getElementById("sikisou");
-	var saido=document.getElementById("saido");
-	var meido=document.getElementById("meido");
-	var toumeido=document.getElementById("toumeido");
-	var box1=document.getElementById("box1");
-	var sikisouvalue=document.getElementById("sikisouvalue");
-	var saidovalue=document.getElementById("saidovalue");
-	var meidovalue=document.getElementById("meidovalue");
-	var toumeidovalue=document.getElementById("toumeidovalue");
-	
-	sikisou.addEventListener("change",hslchange);
-	saido.addEventListener("change",hslchange);
-	meido.addEventListener("change",hslchange);
-	toumeido.addEventListener("change",hslchange);
-	
-	function hslchange(){
-		sikisouvalue.innerHTML=sikisou.value;
-		saidovalue.innerHTML=saido.value;
-		meidovalue.innerHTML=meido.value;
-		toumeidovalue.innerHTML=toumeido.value;
-		
-		var param="hsla(" +sikisou.value+", "+saido.value+"%, "+meido.value+"%, "+toumeido.value+" )";
-		console.log(param);
-		box1.style.backgroundColor=param;
-		document.getElementById("style1").innerHTML="#box1{background-color:"+param+";}";
-		
-	
-	}
-	
-</script>
+		<script>
+			const STYLE1 = document.getElementById("style1");
+			const BOX1 = document.getElementById("box1");
+			
+			const SIKISOU=document.getElementById("sikisou");
+			const SAIDO=document.getElementById("saido");
+			const MEIDO=document.getElementById("meido");
+			const TOUMEIDO=document.getElementById("toumeido");
+			const SIKISOUValue=document.getElementById("sikisouvalue");
+			const SAIDOValue=document.getElementById("saidovalue");
+			const MEIDOValue=document.getElementById("meidovalue");
+			const TOUMEIDOValue=document.getElementById("toumeidovalue");
+			
+			SIKISOU.addEventListener("change",hslchange);
+			SAIDO.addEventListener("change",hslchange);
+			MEIDO.addEventListener("change",hslchange);
+			TOUMEIDO.addEventListener("change",hslchange);
+			
+			function hslchange(){
+				SIKISOUValue.innerHTML = SIKISOU.value;
+				SAIDOValue.innerHTML = SAIDO.value;
+				MEIDOValue.innerHTML = MEIDO.value;
+				TOUMEIDOValue.innerHTML = TOUMEIDO.value;
+				
+				let param="hsla(" +SIKISOU.value+", "+SAIDO.value+"%, "+MEIDO.value+"%, "+TOUMEIDO.value+" )";
+				BOX1.style.backgroundColor=param;
+				STYLE1.innerHTML="#box1{background-color:"+param+";}";
+			}
+		</script>
+	</body>
+</html>
