@@ -1,379 +1,379 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-91633090-1">
-	
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-91633090-1');
-	</script>
-	<meta charset=utf-8>
-	<title>HTML5 SHOWCASE</title>
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
-	<meta name="viewport" content="width=960">
-	<meta name=keywords content="HTML5 CSS3 JavaScript ワークショップ 勉強">
-	<meta name=description content="春翠工房は、HTML5の楽しさを伝えるための活動を行っています。現在のメインプロジェクトは、「東京アプリ・ワークショップ」として開催している「一日まるごとどっぷりHTML5入門」です。">
-
-	<meta property="fb:app_id" content="966242223397117" />
-	<meta property="og:title" content="HTML5 SHOWCASE" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://nakashimmer.github.io/showcase/" />
-	<meta property="og:description" content="HTML5の見本(マークアップやCSS3、JavaSCriptと各種API)を掲載しています。" />
-	<meta property="og:image" content="image.png" />
-
-	<style>
-		*{
-			margin: 0;padding: 0;
-			font-size: 16px;
-			font-family:sans-serif;
-			text-decoration: none;
-		}
-		#wrap{max-width:800px;margin:0 auto;}
-		header,footer{text-align: center;}
-		header h1{font-size:2em;line-height:5em;}
-		h2{font-size:1.2em;padding:0.3em;}
-		main>section{
-			border:1px solid #ccc;
-			margin-bottom: 1em;
-			background-color: #eee;
-		}
-
-		section section{margin:0.2em;}
-		ol,ul{list-style: none;}
-		ol>li{
-			padding:0.2em;
-			border:1px solid #aaa;
-			border-bottom:none;
-			background-color: #fff;
-		}
-		ol>li:last-of-type{
-			border-bottom:1px solid #aaa;
-		}
-
-		/*カウンタ*/
-		main{counter-reset: ctr1;}
-		h2:before{
-			counter-increment: ctr1;
-			content: counter(ctr1)". " ;
-		}
-
-		h2{counter-reset: ctr2;}
-		h3:before{
-			counter-increment: ctr2;
-			content: counter(ctr1)"-"counter(ctr2)". " ;
-		}
-
-		h3{counter-reset: ctr3;}
-		h4:before{
-			counter-increment: ctr3;
-			content: counter(ctr1)"-"counter(ctr2)"-"counter(ctr3)". " ;
-		}
-
-		ol{counter-reset: ctr4;}
-		li:before{
-			counter-increment: ctr4;
-			content: counter(ctr4) ". " ;
-		}
-
-		li{display:flex;margin-left:1em;}
-		li>*{flex:1;}
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-91633090-1">
 		
-		h3,h4{display:inline;}
-		summary{outline:0;margin-left:1em;}
-		details[open] summary~*{
-			animation: sweep 1s ease-in-out;
-			animation-fill-mode: both;
-		}
-		@keyframes sweep{
-			0%{opacity: 0;}
-			100%{opacity: 1;}
-		}
-		details details{margin-left:1em;}
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-91633090-1');
+		</script>
+		<meta charset=utf-8>
+		<title>HTML5 SHOWCASE</title>
+		<link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-	</style>
-</head>
+		<meta name="viewport" content="width=device-width">
+		<meta name=keywords content="HTML5 CSS3 JavaScript ワークショップ 勉強">
+		<meta name=description content="春翠工房は、HTML5の楽しさを伝えるための活動を行っています。現在のメインプロジェクトは、「東京アプリ・ワークショップ」として開催している「一日まるごとどっぷりHTML5入門」です。">
 
-<body>
+		<meta property="fb:app_id" content="966242223397117" />
+		<meta property="og:title" content="HTML5 SHOWCASE" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://nakashimmer.github.io/showcase/" />
+		<meta property="og:description" content="HTML5の見本(マークアップやCSS3、JavaSCriptと各種API)を掲載しています。" />
+		<meta property="og:image" content="image.png" />
 
-	<div id="wrap">
-		<header>
-			<h1>HTML5 SHOWCASE</h1>
-		</header>
+		<style>
+			*{
+				margin: 0;padding: 0;
+				font-size: 16px;
+				font-family:sans-serif;
+				text-decoration: none;
+			}
+			#wrap{max-width:800px;margin:0 auto;}
+			header,footer{text-align: center;}
+			header h1{font-size:2em;line-height:5em;}
+			h2{font-size:1.2em;padding:0.3em;}
+			main>section{
+				border:1px solid #ccc;
+				margin-bottom: 1em;
+				background-color: #eee;
+			}
 
-		<main>
-			<section>
-				<h2>HTML5のサンプル</h2>
+			section section{margin:0.2em;}
+			ol,ul{list-style: none;}
+			ol>li{
+				padding:0.2em;
+				border:1px solid #aaa;
+				border-bottom:none;
+				background-color: #fff;
+			}
+			ol>li:last-of-type{
+				border-bottom:1px solid #aaa;
+			}
+
+			/*カウンタ*/
+			main{counter-reset: ctr1;}
+			h2:before{
+				counter-increment: ctr1;
+				content: counter(ctr1)". " ;
+			}
+
+			h2{counter-reset: ctr2;}
+			h3:before{
+				counter-increment: ctr2;
+				content: counter(ctr1)"-"counter(ctr2)". " ;
+			}
+
+			h3{counter-reset: ctr3;}
+			h4:before{
+				counter-increment: ctr3;
+				content: counter(ctr1)"-"counter(ctr2)"-"counter(ctr3)". " ;
+			}
+
+			ol{counter-reset: ctr4;}
+			li:before{
+				counter-increment: ctr4;
+				content: counter(ctr4) ". " ;
+			}
+
+			li{display:flex;margin-left:1em;}
+			li>*{flex:1;}
+			
+			h3,h4{display:inline;}
+			summary{outline:0;margin-left:1em;}
+			details[open] summary~*{
+				animation: sweep 1s ease-in-out;
+				animation-fill-mode: both;
+			}
+			@keyframes sweep{
+				0%{opacity: 0;}
+				100%{opacity: 1;}
+			}
+			details details{margin-left:1em;}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="wrap">
+			<header>
+				<h1>HTML5 SHOWCASE</h1>
+			</header>
+
+			<main>
 				<section>
+					<h2>HTML5のサンプル</h2>
+					<section>
+						<details>
+							<summary><h3>イントロ</h3></summary>
+							<ol>
+								<li><a target="_blank" href="introHTML5/index.html">HTML5について</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>SEMANTICS</h3></summary>
+							<ol>
+								<li><a target="_blank" href="semantics/structure/index.html">ページの構造</a></li>
+								<li><a target="_blank" href="semantics/element/index.html">要素</a></li>
+								<li><a target="_blank" href="semantics/charset/index.html">UTF-8</a></li>
+								<li><a target="_blank" href="semantics/base64/index.html">base64で画像を表示</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>CSS3</h3></summary>
+							<ol>
+								<li><a target="_blank" href="css3/rule/gijiClass.html">擬似クラス</a></li>
+								<li><a target="_blank" href="css3/rule/ketugoushi.html">結合子</a></li>
+								<li><a target="_blank" href="css3/rule/yuusen.html">優先順位</a></li>
+								<li><a target="_blank" href="css3/rule/zokuseiSelector.html">属性セレクタ</a></li>
+								<li><a target="_blank" href="css3/color/colorCode.html">カラーコード</a></li>
+								<li><a target="_blank" href="css3/color/hsl.html">HSLA</a></li>
+								<li><a target="_blank" href="css3/color/rgba.html">RGBA</a></li>
+								<li><a target="_blank" href="css3/rich/index.html">リッチなCSS</a></li>
+								<li><a target="_blank" href="css3/rwd/index.html">レスポンシブWebデザイン</a></li>
+								<li><a target="_blank" href="css3/animation/CSSSanta/index.html">サンタ</a></li>
+								<li><a target="_blank" href="css3/animation/maruko/index.html">まるこ</a></li>
+								<li><a target="_blank" href="css3/animation/scroll/index.html">ページスクロール</a></li>
+								<li><a target="_blank" href="css3/animation/3d/cube/index.html">3Dキューブ</a></li>
+								<li><a target="_blank" href="css3/animation/3d/domino/index.html">3Dドミノ</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>JavaScript</h3></summary>
+							<section>
+								<details>
+									<summary><h4>DOM</h4></summary>
+									<ol>
+										<li><a target="_blank" href="JS/dom/html/index1.html">やまびこ</a></li>
+										<li><a target="_blank" href="JS/dom/html/index2.html">大阪弁変換</a></li>
+										<li><a target="_blank" href="JS/dom/css/index1.html">CSS変化</a></li>
+										<li><a target="_blank" href="JS/dom/css/index2.html">ページ遷移</a></li>
+										<li><a target="_blank" href="JS/dom/css/index3.html">3Dコントロール</a></li>
+									</ol>
+								</details>
+							</section>
+							<section>
+								<details>
+									<summary><h4>Calculate</h4></summary>
+									<ol>	
+										<li><a target="_blank" href="JS/calculate/kesan/index.html">計算</a></li>
+										<li><a target="_blank" href="JS/calculate/bmi/index.html">BMI</a></li>
+										<li><a target="_blank" href="JS/calculate/uranai/index.html">占い</a></li>
+										<li><a target="_blank" href="JS/calculate/janken/index.html">じゃんけん</a></li>
+										<li><a target="_blank" href="JS/calculate/countdown/index.html">カウントダウン</a></li>
+										<li><a target="_blank" href="JS/calculate/maimai/index.html">500px競争</a></li>
+									</ol>
+								</details>
+							</section>
+							<section>
+								<details>
+									<summary><h4>OFFLINE & STORAGE</h4></summary>
+									<ol>
+										<li><a target="_blank" href="JS/offlineStorage/localStorage/index.html">Local Storage</a></li>
+									</ol>
+								</details>
+							</section>
+
+							<section>
+								<details>
+									<summary><h4>DEVICE ACCESS</h4></summary>
+									<ol>
+										<li><a target="_blank" href="JS/deviceAccess/camera/index.html">カメラ</a></li>
+										<li><a target="_blank" href="JS/deviceAccess/devicemotion/index.html">重力加速度</a></li>
+										<li><a target="_blank" href="JS/deviceAccess/devicemotion/ufo/index.html">UFO</a></li>
+										<li><a target="_blank" href="JS/deviceAccess/gps/index.html">位置情報</a></li>
+										<li><a target="_blank" href="JS/deviceAccess/speechSynthesis/index.html">音声認識読み上げ</a></li>
+										<li><a target="_blank" href="JS/deviceAccess/speechSynthesis/ai/index.html">AI連携</a></li>
+										<li><a target="_blank" href="JS/deviceAccess/webaudio/synthesizer/index.html">シンセサイザ</a></li>
+									</ol>
+								</details>
+							</section>
+
+							<section>
+								<details>
+									<summary><h4>CONNECTIVITY</h4></summary>
+							</section>
+
+							<section>
+								<details>
+									<summary><h4>MULTIMEDIA</h4></summary>
+									<ol>
+										<li><a target="_blank" href="JS/multimedia/audio/index.html">オーディオ</a></li>	
+										<li><a target="_blank" href="JS/multimedia/video/index.html">ビデオ</a></li>	
+									</ol>
+								</details>
+							</section>
+
+							<section>
+								<details>
+									<summary><h4>3D, GRAPHICS & EFFECTS</h4></summary>	
+									<ol>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/heart/index.html">ハート</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/hscrolling/index.html">スクロール</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/oekaki/index.html">お絵かき</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/fractal/index.html">フラクタル</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index.html">放物線</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index2.html">放物ゲーム</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/pi/index.html">円周率</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/shonan/index.html">湘南</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/shuji/index.html">習字</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/simpleTeditor/index.html">テキストエディタ</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/tepco/index.html">電気使用量</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/touch/index.html">スマホタッチゲーム</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/whiteboard/index.html">ホワイトボード</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/zahyo/index.html">座標</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/co/index.html">CO</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/control/index.html">ドーナツ</a></li>
+										<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/toras/index.html">トーラス</a></li>
+									</ol>
+								</details>
+							</section>
+
+							<section>
+								<details>
+									<summary><h4>PERFORMANCE & INTEGRATION</h4></summary>
+									<ol>
+										<li><a target="_blank" href="JS/PerformanceIntegration/requestAnimationFrame/index.html">requestAnimationFrame</a></li>
+									</ol>
+								</details>
+							</section>
+						</details>
+					</section>
+				</section>
+					
+				<section>
+					<h2>HTML5で作られた外部サイト</h2>
+
+					<section>
+						<details>
+							<summary><h3>動画の背景</h3></summary>
+							<ol>
+								<li><a target="_blank" href="http://ss14.soniaby.com/fr/home/">SONIA</a></li>
+							</ol>
+						</details>
+					</section>
+					<section>
+						<details>
+							<summary><h3>シングルページ・パララックス・高級ペライチ</h3></summary>
+							<ol>
+								<li><a target="_blank" href="https://tokyomusicodyssey.jp/">Tokyo Music Odyssey</a></li>
+								<li><a target="_blank" href="http://www.buzzhook.co.jp/">buzzhook</a></li>
+								<li><a target="_blank" href="http://graphicnovel-hybrid4.peugeot.com/start.html">peugeot hybrid4</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>３次元</h3></summary>
+							<ol>
+								<li><a target="_blank" href="http://www.findyourwaytooz.com/">find your way to oz</a></li>
+								<li><a target="_blank" href="https://2011.beercamp.com/">BEERCAMP</a></li>
+								<li><a target="_blank" href="http://helloracer.com/webgl/">helloracer</a></li>
+								<li><a target="_blank" href="http://www.madebyevan.com/webgl-water/">WebGL Water</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>Google doodles</h3></summary>
+							<ol>
+								<li><a target="_blank" href="https://www.google.com/doodles?q=interactive">google Doodles</a></li>
+								<li><a target="_blank" href="https://www.google.com/doodles/roswells-66th-anniversary">UFO</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>WoT</h3></summary>
+							<ol>
+								<li><a target="_blank" href="http://www.youtube.com/watch?v=5VQkIOMMV_o">Web of Things</a></li>
+								<li><a target="_blank" href="http://www.youtube.com/watch?v=WL0CqY2HwxY">ロボットアーム</a></li>
+							</ol>
+						</details>
+					</section>
+					<section>
+						<details>
+							<summary><h3>Canvas</h3></summary>
+							<ol>
+								<li><a target="_blank" href="https://appsweets.net/gradius/index.html">グラディウス</a></li>
+								<li><a target="_blank" href="https://www.afsgames.com/slider.htm">スライダーパズル</a></li>
+								<li><a target="_blank" href="http://slither.io/">ミミズ君</a></li>
+								<li><a target="_blank" href="http://js-racing.knockknock.jp:3000/">レーシング</a></li>
+								<li><a target="_blank" href="http://hexgl.bkcore.com/play/">３Dレーシング</a></li>
+								<li><a target="_blank" href="http://www.creative-forest.com/games/action/molebeat/molebeat.html">もぐらたたき</a></li>
+								<li><a target="_blank" href="http://www.kesiev.com/akihabara/demo/game-capman.html">Capman</a></li>
+							</ol>
+						</details>
+					</section>
+				</section>
+
+				<section>
+					<h2>W3C関連</h2>
+
+					<section>
+						<details>
+							<summary><h3>W3C</h3></summary>
+							<ol>
+								<li><a target="_blank" href="http://info.cern.ch/hypertext/WWW/TheProject.html">世界で最初のWeb</a></li>
+								<li><a target="_blank" href="https://www.w3.org/TR/html/">最新のHTML仕様</a></li>
+								<li><a target="_blank" href="https://www.w3.org/TR/html5-diff/">HTML5の差異</a></li>
+								<li><a target="_blank" href="https://www.w3.org/2003/glossary/">W3C用語集</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>WHATWG</h3></summary>
+							<ol>
+								<li><a target="_blank" href="https://whatwg.org/">WHATWG</a></li>
+								<li><a target="_blank" href="https://momdo.github.io/html/">日本語</a></li>
+							</ol>
+						</details>
+					</section>
+
+					<section>
+						<details>
+							<summary><h3>MDN</h3></summary>
+							<ol>
+								<li><a target="_blank" href="https://developer.mozilla.org/ja/">Web Docs</a></li>
+							</ol>
+						</details>
+					</section>
+				</section>
+
+				<section>
+					<h2>その他の参考リンク</h2>
 					<details>
-						<summary><h3>イントロ</h3></summary>
+						<summary><h3>参考リンク</h3></summary>
 						<ol>
-							<li><a target="_blank" href="introHTML5/index.html">HTML5について</a></li>
+							<li><a target="_blank" href="https://webtechpromo.org">HTML5の検定</a></li>
+							<li><a target="_blank" href="https://html5experts.jp/">HTML5エキスパート</a></li>
+							<li><a target="_blank" href="https://ja.monaca.io/">ハイブリッドアプリ</a></li>
+							<li><a target="_blank" href="http://jsdo.it/nakashimmer/codes">jsdoit</a></li>
 						</ol>
 					</details>
 				</section>
-
-				<section>
-					<details>
-						<summary><h3>SEMANTICS</h3></summary>
-						<ol>
-							<li><a target="_blank" href="semantics/structure/index.html">ページの構造</a></li>
-							<li><a target="_blank" href="semantics/element/index.html">要素</a></li>
-							<li><a target="_blank" href="semantics/charset/index.html">UTF-8</a></li>
-							<li><a target="_blank" href="semantics/base64/index.html">base64で画像を表示</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>CSS3</h3></summary>
-						<ol>
-							<li><a target="_blank" href="css3/rule/gijiClass.html">擬似クラス</a></li>
-							<li><a target="_blank" href="css3/rule/ketugoushi.html">結合子</a></li>
-							<li><a target="_blank" href="css3/rule/yuusen.html">優先順位</a></li>
-							<li><a target="_blank" href="css3/rule/zokuseiSelector.html">属性セレクタ</a></li>
-							<li><a target="_blank" href="css3/color/colorCode.html">カラーコード</a></li>
-							<li><a target="_blank" href="css3/color/hsl.html">HSLA</a></li>
-							<li><a target="_blank" href="css3/color/rgba.html">RGBA</a></li>
-							<li><a target="_blank" href="css3/rich/index.html">リッチなCSS</a></li>
-							<li><a target="_blank" href="css3/rwd/index.html">レスポンシブWebデザイン</a></li>
-							<li><a target="_blank" href="css3/animation/CSSSanta/index.html">サンタ</a></li>
-							<li><a target="_blank" href="css3/animation/maruko/index.html">まるこ</a></li>
-							<li><a target="_blank" href="css3/animation/scroll/index.html">ページスクロール</a></li>
-							<li><a target="_blank" href="css3/animation/3d/cube/index.html">3Dキューブ</a></li>
-							<li><a target="_blank" href="css3/animation/3d/domino/index.html">3Dドミノ</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>JavaScript</h3></summary>
-						<section>
-							<details>
-								<summary><h4>DOM</h4></summary>
-								<ol>
-									<li><a target="_blank" href="JS/dom/html/index1.html">やまびこ</a></li>
-									<li><a target="_blank" href="JS/dom/html/index2.html">大阪弁変換</a></li>
-									<li><a target="_blank" href="JS/dom/css/index1.html">CSS変化</a></li>
-									<li><a target="_blank" href="JS/dom/css/index2.html">ページ遷移</a></li>
-									<li><a target="_blank" href="JS/dom/css/index3.html">3Dコントロール</a></li>
-								</ol>
-							</details>
-						</section>
-						<section>
-							<details>
-								<summary><h4>Calculate</h4></summary>
-								<ol>	
-									<li><a target="_blank" href="JS/calculate/kesan/index.html">計算</a></li>
-									<li><a target="_blank" href="JS/calculate/bmi/index.html">BMI</a></li>
-									<li><a target="_blank" href="JS/calculate/uranai/index.html">占い</a></li>
-									<li><a target="_blank" href="JS/calculate/janken/index.html">じゃんけん</a></li>
-									<li><a target="_blank" href="JS/calculate/countdown/index.html">カウントダウン</a></li>
-									<li><a target="_blank" href="JS/calculate/maimai/index.html">500px競争</a></li>
-								</ol>
-							</details>
-						</section>
-						<section>
-							<details>
-								<summary><h4>OFFLINE & STORAGE</h4></summary>
-								<ol>
-									<li><a target="_blank" href="JS/offlineStorage/localStorage/index.html">Local Storage</a></li>
-								</ol>
-							</details>
-						</section>
-
-						<section>
-							<details>
-								<summary><h4>DEVICE ACCESS</h4></summary>
-								<ol>
-									<li><a target="_blank" href="JS/deviceAccess/camera/index.html">カメラ</a></li>
-									<li><a target="_blank" href="JS/deviceAccess/devicemotion/index.html">重力加速度</a></li>
-									<li><a target="_blank" href="JS/deviceAccess/devicemotion/ufo/index.html">UFO</a></li>
-									<li><a target="_blank" href="JS/deviceAccess/gps/index.html">位置情報</a></li>
-									<li><a target="_blank" href="JS/deviceAccess/speechSynthesis/index.html">音声認識読み上げ</a></li>
-									<li><a target="_blank" href="JS/deviceAccess/speechSynthesis/ai/index.html">AI連携</a></li>
-									<li><a target="_blank" href="JS/deviceAccess/webaudio/synthesizer/index.html">シンセサイザ</a></li>
-								</ol>
-							</details>
-						</section>
-
-						<section>
-							<details>
-								<summary><h4>CONNECTIVITY</h4></summary>
-						</section>
-
-						<section>
-							<details>
-								<summary><h4>MULTIMEDIA</h4></summary>
-								<ol>
-									<li><a target="_blank" href="JS/multimedia/audio/index.html">オーディオ</a></li>	
-									<li><a target="_blank" href="JS/multimedia/video/index.html">ビデオ</a></li>	
-								</ol>
-							</details>
-						</section>
-
-						<section>
-							<details>
-								<summary><h4>3D, GRAPHICS & EFFECTS</h4></summary>	
-								<ol>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/heart/index.html">ハート</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/hscrolling/index.html">スクロール</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/oekaki/index.html">お絵かき</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/fractal/index.html">フラクタル</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index.html">放物線</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index2.html">放物ゲーム</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/pi/index.html">円周率</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/shonan/index.html">湘南</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/shuji/index.html">習字</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/simpleTeditor/index.html">テキストエディタ</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/tepco/index.html">電気使用量</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/touch/index.html">スマホタッチゲーム</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/whiteboard/index.html">ホワイトボード</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/zahyo/index.html">座標</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/co/index.html">CO</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/control/index.html">ドーナツ</a></li>
-									<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/toras/index.html">トーラス</a></li>
-								</ol>
-							</details>
-						</section>
-
-						<section>
-							<details>
-								<summary><h4>PERFORMANCE & INTEGRATION</h4></summary>
-								<ol>
-									<li><a target="_blank" href="JS/PerformanceIntegration/requestAnimationFrame/index.html">requestAnimationFrame</a></li>
-								</ol>
-							</details>
-						</section>
-					</details>
-				</section>
-			</section>
-				
-			<section>
-				<h2>HTML5で作られた外部サイト</h2>
-
-				<section>
-					<details>
-						<summary><h3>動画の背景</h3></summary>
-						<ol>
-							<li><a target="_blank" href="http://ss14.soniaby.com/fr/home/">SONIA</a></li>
-						</ol>
-					</details>
-				</section>
-				<section>
-					<details>
-						<summary><h3>シングルページ・パララックス・高級ペライチ</h3></summary>
-						<ol>
-							<li><a target="_blank" href="https://tokyomusicodyssey.jp/">Tokyo Music Odyssey</a></li>
-							<li><a target="_blank" href="http://www.buzzhook.co.jp/">buzzhook</a></li>
-							<li><a target="_blank" href="http://graphicnovel-hybrid4.peugeot.com/start.html">peugeot hybrid4</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>３次元</h3></summary>
-						<ol>
-							<li><a target="_blank" href="http://www.findyourwaytooz.com/">find your way to oz</a></li>
-							<li><a target="_blank" href="https://2011.beercamp.com/">BEERCAMP</a></li>
-							<li><a target="_blank" href="http://helloracer.com/webgl/">helloracer</a></li>
-							<li><a target="_blank" href="http://www.madebyevan.com/webgl-water/">WebGL Water</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>Google doodles</h3></summary>
-						<ol>
-							<li><a target="_blank" href="https://www.google.com/doodles?q=interactive">google Doodles</a></li>
-							<li><a target="_blank" href="https://www.google.com/doodles/roswells-66th-anniversary">UFO</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>WoT</h3></summary>
-						<ol>
-							<li><a target="_blank" href="http://www.youtube.com/watch?v=5VQkIOMMV_o">Web of Things</a></li>
-							<li><a target="_blank" href="http://www.youtube.com/watch?v=WL0CqY2HwxY">ロボットアーム</a></li>
-						</ol>
-					</details>
-				</section>
-				<section>
-					<details>
-						<summary><h3>Canvas</h3></summary>
-						<ol>
-							<li><a target="_blank" href="https://appsweets.net/gradius/index.html">グラディウス</a></li>
-							<li><a target="_blank" href="https://www.afsgames.com/slider.htm">スライダーパズル</a></li>
-							<li><a target="_blank" href="http://slither.io/">ミミズ君</a></li>
-							<li><a target="_blank" href="http://js-racing.knockknock.jp:3000/">レーシング</a></li>
-							<li><a target="_blank" href="http://hexgl.bkcore.com/play/">３Dレーシング</a></li>
-							<li><a target="_blank" href="http://www.creative-forest.com/games/action/molebeat/molebeat.html">もぐらたたき</a></li>
-							<li><a target="_blank" href="http://www.kesiev.com/akihabara/demo/game-capman.html">Capman</a></li>
-						</ol>
-					</details>
-				</section>
-			</section>
-
-			<section>
-				<h2>W3C関連</h2>
-
-				<section>
-					<details>
-						<summary><h3>W3C</h3></summary>
-						<ol>
-							<li><a target="_blank" href="http://info.cern.ch/hypertext/WWW/TheProject.html">世界で最初のWeb</a></li>
-							<li><a target="_blank" href="https://www.w3.org/TR/html/">最新のHTML仕様</a></li>
-							<li><a target="_blank" href="https://www.w3.org/TR/html5-diff/">HTML5の差異</a></li>
-							<li><a target="_blank" href="https://www.w3.org/2003/glossary/">W3C用語集</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>WHATWG</h3></summary>
-						<ol>
-							<li><a target="_blank" href="https://whatwg.org/">WHATWG</a></li>
-							<li><a target="_blank" href="https://momdo.github.io/html/">日本語</a></li>
-						</ol>
-					</details>
-				</section>
-
-				<section>
-					<details>
-						<summary><h3>MDN</h3></summary>
-						<ol>
-							<li><a target="_blank" href="https://developer.mozilla.org/ja/">Web Docs</a></li>
-						</ol>
-					</details>
-				</section>
-			</section>
-
-			<section>
-				<h2>その他の参考リンク</h2>
-				<details>
-					<summary><h3>参考リンク</h3></summary>
-					<ol>
-						<li><a target="_blank" href="https://webtechpromo.org">HTML5の検定</a></li>
-						<li><a target="_blank" href="https://html5experts.jp/">HTML5エキスパート</a></li>
-						<li><a target="_blank" href="https://ja.monaca.io/">ハイブリッドアプリ</a></li>
-						<li><a target="_blank" href="http://jsdo.it/nakashimmer/codes">jsdoit</a></li>
-					</ol>
-				</details>
-			</section>
-		</main>
-		<footer>
-			<a target="_blank" href="https://tokyoappwork.shop"><p><small>2018 (C) 東京アプリ・ワークショップ</small></p></a>
-		</footer>
-	</div>
-</body>
+			</main>
+			<footer>
+				<a target="_blank" href="https://tokyoappwork.shop"><p><small>2018 (C) 東京アプリ・ワークショップ</small></p></a>
+			</footer>
+		</div>
+	</body>
 </html>
