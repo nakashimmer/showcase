@@ -136,17 +136,17 @@
 				
 				<!--  -->
 				<div>影<br>box-shadow<br>(背景色<input class=color type=color id=shadowColor value="#999999">)</div>
-					<div>左右 <span id=shadowXpx>0px</span></div>
+					<div>左右 <span id="shadowXpx">0px</span></div>
 					<div><input class="range" type="range" min=-100 max="100"  value="0"  step="10" id="shadowX"></div>
 
-					<div>上下 <span id=shadowYpx>0px</span></div>
+					<div>上下 <span id="shadowYpx">0px</span></div>
 					<div><input class="range" type="range" min=-100 max="100"  value="0"  step="10" id="shadowY"></div>
 
-					<div>ぼかし <span id=shadowBokashipx>0px</span></div>
+					<div>ぼかし <span id="shadowBokashipx">0px</span></div>
 					<div><input class="range" type="range" min="0"  max="100"  value="0"  step="10" id="shadowBokashi"></div>
 			
-					<div>大きさ <span id=shadowSizepx>0px</span></div>
-					<div><input class="range" type="range" min="0"  max="100"  value="0"  step="10" id="shadowSize"></div>
+					<div>大きさ <span id="shadowSizepx">0px</span></div>
+					<div><input class="range" type="range" min="-100"  max="100"  value="0"  step="10" id="shadowSize"></div>
 
 				<!--  -->
 				<div>角の丸み<br>border-radius</div>
@@ -287,10 +287,10 @@
 					+ $id("shadowBokashi").value+"px "
 					+ $id("shadowSize").value+"px "
 					+ $id("shadowColor").value;
-				$("shadowXpx").innerHTML= $id("shadowX").value+"px";
-				$("shadowYpx").innerHTML= $id("shadowY")+"px";
-				$("shadowBokashipx").innerHTML= $id("shadowBokashi").value+"px";
-				$("shadowSizepx").innerHTML= $id("shadowSize").value+"px";
+				$id("shadowXpx").innerHTML= $id("shadowX").value+"px";
+				$id("shadowYpx").innerHTML= $id("shadowY").value+"px";
+				$id("shadowBokashipx").innerHTML= $id("shadowBokashi").value+"px";
+				$id("shadowSizepx").innerHTML= $id("shadowSize").value+"px";
 			}
 
 			//borderRadius
