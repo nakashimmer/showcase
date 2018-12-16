@@ -3,34 +3,37 @@
 <head>
 	<meta charset="utf-8">
 	<meta name=viewport content="width=device-width">
+	<link rel="stylesheet" href="../../../../sample.css">
 	<style>
-		*{margin:0;padding:0;font-size:60px;box-sizing:border-box;}
 		input{width:4em;height:2em;text-align:right;}
 		p{text-align:center;line-height:1em;}
-		#wrap{margin:0 auto;}
 		button{width:4em;min-height:2em;}
 	</style>
 </head>
 <body>
-<div id=wrap>
 	<h1>足算計算機</h1>
-	<p>
-		<input type="text" id="n1">＋<input type="text" id="n2">
-		<button onclick="plus();" id="total">合計</button>
-	</p>
-</div>
-<script>
-	const N1 = document.getElementById("n1");
-	const N2 = document.getElementById("n2");
-	const TOTAL = document.getElementById("total");
+	<div id="wrap">
+		<p>
+			<input type="text" id="n1">＋<input type="text" id="n2">
+			<button id="btn1">合計</button>
+		</p>
+	</div>
 
-	function plus(){
-		TOTAL.innerHTML
-			="合計は<br>＝"
-			+(Number(N1.value)+Number(N2.value));
-	}
+	<footer>
+		<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+	</footer>
+		
+	<script>
+		const N1 = document.getElementById("n1");
+		const N2 = document.getElementById("n2");
+		const BTN1 = document.getElementById("btn1");
 
-</script>
+		BTN1.addEventListener("click",()=>{
+			BTN1.innerHTML
+				= "合計は<br>＝"
+				+ (Number(N1.value) + Number(N2.value));
+		});
+	</script>
 
 </body>
 </html>

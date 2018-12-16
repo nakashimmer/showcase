@@ -12,7 +12,8 @@
 }
 h1{
 	text-align:center;
-	background-color:#eee;
+	background-color:#333;
+	color:white;
 	font-size:1.2em;
 	line-height:2em;
 }

@@ -4,23 +4,16 @@
 		<meta charset="utf-8">
 		<title>CSSサンタ</title>
 		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../sample.css">
 		
 		<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
 		
 		<!-- ※基本共通設定 -->
-		<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-		<meta property="og:title" content="CSSでサンタ" />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="http://springreen.jp/SHOWCASE/CSS3/CSSSanta/" />
-		<meta property="og:image" content="http://springreen.jp/SHOWCASE/CSS3/CSSSanta/xmas.png" />
-		<meta property="og:site_name" content="CSSでサンタ" />
-		<meta property="og:description" content="CSSだけでサンタを作ってみた" />
-		
-		<style>
-			*{margin:0;padding:0;}
+		<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">		
+		<style>			
 			body{background-color:black;}
-			#bg{
-				width:800px;height:500px;margin:50px auto;
+			#wrap{
+				width:800px;
 				position:relative;
 				background:linear-gradient(blue,black);
 				overflow:hidden;
@@ -28,29 +21,36 @@
 
 			#santa{
 				width:400px;height:160px;
-				position:absolute;top:300px;left:380px;
+				position:absolute;
+				top:400px;
+				left:calc(100vw - 50%);
 				animation:story1 4s linear 0s infinite normal;
 				animation-fill-mode:both;
 			}
 			
 			@keyframes story1{
-				0%{top:300px;transform:rotate(0deg);}
+				0%{top:calc(50vh + 0px);transform:rotate(0deg);}
 				15%{transform:rotate(3deg);}
 				35%{transform:rotate(3deg);}
-				50%{top:100px;transform:rotate(0deg);}
+				50%{top:calc(50vh - 200px);transform:rotate(0deg);}
 				65%{transform:rotate(-3deg);}
 				85%{transform:rotate(-3deg);}
-				100%{top:300px;transform:rotate(0deg);}
+				100%{top:calc(50vh + 0px);transform:rotate(0deg);}
 			}
 			
-			#bg h1{
-				font-size:90px;text-align:center;color:white;
+			#wrap h2{
+				font-size:90px;
+				text-align:center;
+				color:white;
+				text-shadow:2px 2px 2px gray;
 				font-family: 'Alex Brush', cursive;
 			}
-			#bg p{
-				position:absolute;width:300px;left:10px;
-				font-size:20px;text-align:center;color:white;
-				font-family:serif;
+			#wrap p{
+				position:absolute;
+				width:300px;left:10px;
+				font-size:30px;text-align:center;
+				color:yellow;
+				font-family:sans-serif;
 			}
 			
 			#santa{display:flex;}
@@ -74,7 +74,7 @@
 			
 			@keyframes storySnow{
 				0%{left:-50px;}
-				100%{left:810px;}
+				100%{left:calc(100vw + 50px);}
 			}
 			
 			div.snow:nth-of-type(1){top:100px;animation-delay:0s;}
@@ -254,57 +254,64 @@
 				100%{opacity:1;}
 			}
 
-			p{color:white;margin:10px;text-align:center;}
+			p{
+				color:white;
+				margin:10px;
+				text-align:center;
+				margin-left:calc(50vw - 400px);
+			}
 			small a{color:white;}
 		</style>
 	</head>
 	<body>
-		<div id=bg>
-			<h1>Merry Xmas</h1>
+		<h1>CSSサンタ</h1>
+		<div id="wrap">
+			<h2>Merry Xmas</h2>
 			<p>
-				<span id=msg1 class=msg>みなさん今年一年、</span><br>
-				<span id=msg2 class=msg>HTML5を楽しみました?</span><br>
-				<span id=msg3 class=msg>来年もよいことがいっぱいあるに違いありません。</span><br>
-				<span id=msg4 class=msg>メリークリスマス</span><br>
-				<span id=msg5 class=msg>＆ハッピーニューイヤ〜</span><br>
-				<span id=msg6 class=msg>from なかしまぁサンタ</span><br>
-				<span id=msg7 class=msg>この画面はCSSだけで<br>作っています</span>
+				<span id="msg1" class="msg">みなさん今年一年、</span><br>
+				<span id="msg2" class="msg">HTML5を楽しみました?</span><br>
+				<span id="msg3" class="msg">来年もよいことがいっぱいあるはず</span><br>
+				<span id="msg4" class="msg">メリークリスマス</span><br>
+				<span id="msg5" class="msg">＆ハッピーニューイヤ〜</span><br>
+				<span id="msg6" class="msg">from なかしまぁサンタ</span><br>
+				<span id="msg7" class="msg">この画面はCSSだけで<br>作っています</span>
 			</p>
-			<div class=snow></div>
-			<div class=snow></div>
-			<div class=snow></div>
-			<div class=snow></div>
-			<div class=snow></div>
-			<div id=santa>
-				<div id=tonakai>
-					<div id=tuno1></div>
-					<div id=tuno2></div>
-					<div id=kubi1></div>
-					<div id=kubi2></div>
-					<div id=kao></div>
-					<div id=maeashi></div>
-					<div id=ushiroashi></div>
-					<div id=doutai></div>
-					<div id=hana></div>
-					<div id=me></div>
+			<div class="snow"></div>
+			<div class="snow"></div>
+			<div class="snow"></div>
+			<div class="snow"></div>
+			<div class="snow"></div>
+			<div id="santa">
+				<div id="tonakai">
+					<div id="tuno1"></div>
+					<div id="tuno2"></div>
+					<div id="kubi1"></div>
+					<div id="kubi2"></div>
+					<div id="kao"></div>
+					<div id="maeashi"></div>
+					<div id="ushiroashi"></div>
+					<div id="doutai"></div>
+					<div id="hana"></div>
+					<div id="me"></div>
 				</div>
 				
-				<div id=sled>
-					<div class=inner>
-						<div id=present></div>
-						<div id=face></div>
-						<div id=body></div>
-						<div id=bousi></div>
-						<div id=bousi-huchi></div>
-						<div id=hige></div>
-						<div id=eye1></div>
-						<div id=eye2></div>
-						<div id=sori></div>
+				<div id="sled">
+					<div class="inner">
+						<div id="present"></div>
+						<div id="face"></div>
+						<div id="body"></div>
+						<div id="bousi"></div>
+						<div id="bousi-huchi"></div>
+						<div id="hige"></div>
+						<div id="eye1"></div>
+						<div id="eye2"></div>
+						<div id="sori"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<p><small>感謝：BGMは「<a href="http://www.music-note.jp/">著作権フリーの無料音楽素材ダウンロードサイト「ミュージックノート」</a>からいただきました</small></p>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small><small>感謝：BGM「<a href="http://www.music-note.jp/">「ミュージックノート」</a></small></p>
 		<audio src="thatsaXmas.mp3" autoplay loop></audio>
 	</body>
 </html>

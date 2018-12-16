@@ -2,45 +2,48 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>DOM</title>
-		<meta name=viewport content="width=device-width">
+		<title>CSSをJSで操作</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../sample.css">
 		<style>
-			*{margin:0;padding:0;font-size:20px;}
-			#box{
+			#box1{
 				margin:100px;
 				height:200px;
 				width:500px;
 				background-color:gray;
 				text-align:center;
 				line-height:200px;
-			}
-			#box{
 				transition:all 5s ease;
 			}
 		</style>
 	</head>
 	<body>
-		<button onclick="changeCss();">押す</button>
-		<div id="box">Hello!</div>
+		<h1>CSSをJSで操作</h1>
+		<div id="wrap">
+			<div id="box1">Click!</div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
 		<script>
-			var box = document.getElementById("box")
+			const BOX1 = document.getElementById("box1")
 		
-			function changeCss(){
-				box.style.color = "white";
-				box.style.backgroundColor = "pink";
-				box.style.width = "100px";
-				box.style.height = "100px";
-				box.style.lineHeight = "100px";
-				box.style.transform = "translate(500px,0) rotate(360deg)";
-				box.style.borderRadius = "50%";
-				box.style.boxShadow = "0px 0px 20px gray"
-					+",-105px 0px 0px lightgreen"
-					+",0px -105px 0px skyblue"
-					+",105px 0px 0px orange"
-					+",0px 105px 0px purple"
-					;
-			}
+			BOX1.addEventListener("click",()=>{
+				BOX1.style.color = "white";
+				BOX1.style.backgroundColor = "black";
+				BOX1.style.width = "100px";
+				BOX1.style.height = "100px";
+				BOX1.style.lineHeight = "100px";
+				BOX1.style.transform = "translate(500px,0) rotate(360deg)";
+				BOX1.style.borderRadius = "50%";
+				BOX1.style.boxShadow 
+					= "-105px 0px 0px red"
+					+ ",0px -105px 0px green"
+					+ ",105px 0px 0px blue"
+					+ ",0px 105px 0px yellow";
+				BOX1.innerHTML="Hellow!!";
+			});
 		</script>
 	</body>
 </html>

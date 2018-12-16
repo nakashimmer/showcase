@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>2.DOMを試す</title>
-	<meta name=viewport content="width=device-width">
-	<style>
-		*{font-size:20px;}
-		#out1{border:1px solid gray;}
-		
-	</style>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>DOM</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			#out1{border:1px solid gray;}
+			#btn1,#ipt1,#out1{
+				font-size:2em;
+				margin:1em;
+			}
+		</style>
+	</head>
 
-<body>
+	<body>
+		<h1>オウム返し</h1>
+		<div id="wrap">
+			<ol>
+				<li>
+					<input type="text" id="ipt1" placeholder="① 例：こんにちは！">
+					<button id="btn1">②入力して押す</button>
+				</li>
+				<li>
+					<div id="out1">③ここに出力される</div>
+				</li>
+			</ol>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
-	<p>
-		<input type="text" id="inp1">
-		<button onclick="but1();">押す</button>
-	</p>
-	<div id="out1">出力</div>
-	
-<script>
-	function but1(){
-		var str = document.getElementById("inp1").value;
-		document.getElementById("out1").innerHTML = str;
-		
-	}
-</script>
+		<script>
+			const IPT1 = document.getElementById("ipt1");
+			const BTN1 = document.getElementById("btn1");
+			const OUT1 = document.getElementById("out1");
 
-</body>
+			BTN1.addEventListener("click",()=>{
+				OUT1.innerHTML = IPT1.value;
+			});
+		</script>
+
+	</body>
 </html>

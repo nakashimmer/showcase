@@ -1,42 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>大阪弁</title>
-	<meta name=viewport content="width=device-width">
-	<style>
-		
-		*{margin:0px;padding:0px;font-size:30px;box-sizing:border-box;}
-		#wrap{width:300px;margin:0 auto;}
-		#inp1{width:290px;height:200px;margin:5px;}
-		button{width:290px;height:50px;margin:5px;}
-		#out1{width:290px;margin:5px;height:200px;border:1px solid gray;}
-	</style>
-</head>
-<body>
-	<div id=wrap>
-		<textarea id="inp1">私は、中島です。</textarea>
-		<button onclick="but1();">変換する</button>
-		<div id="out1"></div>
-	</div>
-<script>
-	function but1(){
-		var str = document.getElementById("inp1").value;
-		
-		str = str.replace("です。","やねん。");
-		str = str.replace("ですか？","でっか？");
-		str = str.replace("私は","わては");
-		str = str.replace("だめ。","あかん。");
-		str = str.replace("ありがとう。","おおきに。");
-		str = str.replace("こんばんは。","おばんです。");
-		str = str.replace("おもしろい","おもろい");
-		str = str.replace("すごく","ごっつ");
-		str = str.replace("なので、","さかい、");
-		str = str.replace("ちがう","ちゃう");
-		
-		document.getElementById("out1").innerHTML = str;
-	}
-</script>
+	<head>
+		<meta charset="utf-8">
+		<title>大阪弁変換</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../sample.css">
+		<style>
+			
+			textarea,#out1{
+				width:100%;height:3em;
+				margin:0.5em;padding:0.5em;
+				border:1px double gray;
+			}
+			#btn1{
+				padding:0.5em;
+				margin:1em auto;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>大阪弁変換</h1>
+		<div id="wrap">
+			<p>変換前：<textarea id="ipt1">私は、中島です。</textarea>
+			
+			<button id="btn1">変換する</button>
+			
+			<p>変換後:</p>
+			<div id="out1"></div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
-</body>
+		<script>
+			const IPT1 = document.getElementById("ipt1");
+			const BTN1 = document.getElementById("btn1");
+			const OUT1 = document.getElementById("out1");
+
+			BTN1.addEventListener("click",()=>{
+				let word=IPT1.value;
+				word = word.replace("です。", "やねん。");
+				word = word.replace("ですか？", "でっか？");
+				word = word.replace("私は", "わては");
+				word = word.replace("だめ。", "あかん。");
+				word = word.replace("ありがとう。", "おおきに。");
+				word = word.replace("こんばんは。", "おばんです。");
+				word = word.replace("おもしろい", "おもろい");
+				word = word.replace("すごく", "ごっつ");
+				word = word.replace("なので、", "さかい、");
+				word = word.replace("ちがう", "ちゃう");
+
+				OUT1.innerHTML = word;
+			});
+
+		</script>
+
+	</body>
 </html>

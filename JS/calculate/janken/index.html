@@ -3,19 +3,26 @@
 	<head>
 		<meta charset="utf-8">
 		<title>じゃんけん</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
 		<style>
-			*{font-size:32px;}
+			#wrap *{font-size:32px;}
 		</style>
 	</head>
 
 	<body>
 		<h1>じゃんけんゲーム</h1>
-		<p>
-			<button onclick='janken("グー")' id="gu">ぐー</button>
-			<button onclick='janken("チョキ")' id="choki">ちょき</button>
-			<button onclick='janken("パー")' id="pa">ぱー</button>
-		</p>
-		<div id="output">じゃんけん・・・</div>
+		<div id="wrap">
+			<p>
+				<button onclick='janken("グー")' id="gu">ぐー</button>
+				<button onclick='janken("チョキ")' id="choki">ちょき</button>
+				<button onclick='janken("パー")' id="pa">ぱー</button>
+			</p>
+			<div id="output">じゃんけん・・・</div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 	
 		<script>
 			//得点
@@ -49,7 +56,7 @@
 					if (pc === "パー") { judge = "あいこ"; }
 				}
 
-					//ページに表示
+				//ページに表示
 				OUTPUT.innerHTML
 					= "<p>PCは" + pc + "</p>" 
 					+ "<p>あなたは" + player + "</p>" 

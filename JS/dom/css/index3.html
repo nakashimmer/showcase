@@ -2,105 +2,107 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>DOM</title>
+	<title>3次元コントロール</title>
 	<meta name=viewport content="width=device-width">
+	<link rel="stylesheet" href="../../../../sample.css">
 	<style>
 		*{
-			margin:0;padding:0;
-			font-size:20px;
-			-webkit-transition:all 0.1s linear;
+			transition:all 0.1s linear;
 		}
-		body{
-			-webkit-transform-style:preserve-3d;
-			-webkit-perspective:1000px;
+
+		#wrap{
+			perspective:1000px;
+			transform-style:preserve-3d;
 			position:relative;
 		}
-		#wrap{
-			-webkit-transform-style:preserve-3d;
-			width:50px;
-			height:50px;
-			border:0px solid red;
-			margin:300px auto;position:relative;
+		#box1{
+			width:0px;
+			height:0px;
+			perspective:1000px;
+			transform-style:preserve-3d;
+			margin:calc(50vh - 70px) auto 0 auto;
+			border:0px solid gray;
+			animation:loop 6s linear 0s infinite normal;
+			position:relative;
 		}
-		p{position:absolute;top:0;left:0;}
-	</style>
+
+		#box1 div{
+			width:100px;
+			margin-left:-50px;
+			height:100px;
+			top:-50px;
+			left:0px;
+			
+			border-top:10px solid red;
+			border-right:5px solid green;
+			border-bottom:10px solid blue;
+			border-left:5px solid yellow;
+			background-color:rgba(150,150,150,0.3);
+			border-radius:50%;
+			position:absolute;
+			animation:loop 3s linear 0s infinite normal;
+		}
+		.msg{position:absolute;top:0;left:0;}
+</style>
 </head>
 
 <body>
-	
-	<div id="wrap"></div>
-	<p>←(左)<br>↑(上)<br>↓(下)<br>→(右)<br>F(前)B(後)</p>
-</body>
+	<h1>三次元コントロール</h1>
+	<div id="wrap">
+		<div id="box1"></div>
+		<p class="msg">←(左) ↑(上) ↓(下) →(右) f(前) b(後) s(縮) x(大)</p>
+	</div>
+
+	<footer>
+		<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+	</footer>
+
 
 <script>
-	var wa = new Array();
-	var wrap = document.getElementById("wrap");
+	const wa = new Array();
+	const BOX1 = document.getElementById("box1");
 	
-	for(var i=0;i<24;i++){
+	let n=8;
+
+	for(let i=0;i<n;i++){
 		wa[i] = document.createElement("div");
-		wa[i].style.webkitTransform
-			="scaleX(0.1) scaleY(0.1) "
-			+"rotateY("+(i*15+Math.PI)+"deg) "
-			+"translateX(500px)";
-		wa[i].style.width="500px";
-		wa[i].style.height="500px";
-		wa[i].style.top="-225px";
-		wa[i].style.left="-225px";
-		wa[i].style.boxSizing="border-box";
-		wa[i].style.border="10px solid black";
-		wa[i].style.backgroundColor="rgba(150,150,150,0.1)";
-		wa[i].style.borderRadius="10%";
-		wa[i].style.position="absolute";
-		wrap.appendChild(wa[i]);
+		BOX1.appendChild(wa[i]);
 	}
 	
-	setInterval(anime,100);
-	var count=0;
-	var tx=0;		//translateZ
-	var ty=0;		//translateX
-	var tz=5000;	//perspective
-	
-	function anime(){
-		for(var i=0;i<24;i++){
-			wa[i].style.webkitTransform
-			="scaleX(0.1) scaleY(0.1) "
-			+"rotateY("+(i*15+Math.PI+count*2)+"deg) "
-			+"translateX(500px)";
+	setInterval(loop2,100);
+	let d=0;
+	let tx=0;
+	let ty=0;
+	let tz=0;
+	let scale=1;
+	function loop2(){
+		for (let i = 0; i < n; i++) {
+			wa[i].style.transform
+				= "rotateY(" + ((360/n*i)+d) + "deg) "
+				+ "translateX(" + (100+scale) + "px) "
+				+ "translateY(" + ty + "px) "
+				+ "rotateX(40deg) "
+				+ "rotateZ("+((360 / n * i)+d*10)+"deg)";
+			d+=1;
 		}
-		
-		if(tx<-1000){tx=-1000};if(1000<tx){tx=1000;}
-		if(ty<-200){ty=-200};if(200<ty){ty=200;}
-		if(tz<-1000){tz=-1000;};if(5000<tz){tz=5000;}
-		wrap.style.webkitTransform
-			=	"translateX("+Math.floor(tx)+"px) "
-			+	"translateY("+Math.floor(ty)+"px) "
-			+	"rotateX("+(-ty*5/180*Math.PI)+"deg)";
-		wrap.style.webkitPerspective=tz+"px";
-		count++;
+		BOX1.style.transform
+			=	"translateX(" + tx + "px)"
+			+ "translateY(" + ty + "px)"
+			+ "translateZ(" + tz + "px)";
 	}
 
-	window.addEventListener("keydown",function(e){
-		console.log(e.keyCode+" "+tz);
-		if(e.keyCode==70){	//Forard
-			e.preventDefault();	tz -=150;
-		}
-		if(e.keyCode==66){	//Back
-			e.preventDefault();	tz +=150;
-		}
-		if(e.keyCode==37){	//←
-			e.preventDefault();	tx -=5;
-		}
-		if(e.keyCode==39){	//→
-			e.preventDefault();	tx +=5;
-		}
-		if(e.keyCode==38){ //↑
-			e.preventDefault();	ty -=15;
-		}
-		
-		if(e.keyCode==40){ //↓
-			e.preventDefault();	ty +=15;
-		}
-		
+	window.addEventListener("keydown",(e)=>{
+		e.preventDefault();
+		console.log(e.keyCode);
+		if(e.keyCode == 37){tx -= 5;}	//←
+		if(e.keyCode == 39){tx += 5;}	//→
+		if(e.keyCode == 38){ty -= 15;} //↑
+		if(e.keyCode == 40){ty += 15;} //↓
+		if(e.keyCode == 70){tz += 50;}	//Forard
+		if(e.keyCode == 66){tz -= 50;}	//Back
+		if(e.keyCode == 88) {scale += 5; }	//X
+		if(e.keyCode == 83) { scale -= 5; }	//small
 	});
 </script>
+</body>
 </html>

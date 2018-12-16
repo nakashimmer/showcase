@@ -1,76 +1,102 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<title>5.アニメーション</title>
-<meta name=viewport content="width=device-width">
-<style>
-*{margin:0px;padding:0px;}
-#ml{
-	margin:300px auto;
-	position:relative;
-	transform-style:preserve-3d;
-	width:0px;height:0px;
-	border:5px solid red;
-}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CSS立体</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
 
-/* 親要素3D */
-body{
-	transform-style:preserve-3d;
-	perspective:300px;}
+			#ml{
+				margin:calc(50% - 150px) auto 0 auto;
+				position:relative;
+				transform-style:preserve-3d;
+				width:0;height:0;
+			}
+			#ml>p{
+				
+				width:5em;margin-left:-2.5em;
+				text-align:center;
+				line-height:1em;
+				margin-top:5em;
+				background-color: rgba(0,0,0,0.2);
+				font-size:30px;
+			}
 
-/* 面共通CSS */
-.box{
-	width:200px;height:200px;
-	background-color:rgba(100,255,100,0.2);
-	position:absolute;
-	top:-100px;left:-100px;
-	border:2px solid rgba(0,0,0,0.7);
-	transform-style:preserve-3d;
-}
-.mL{
-	position:absolute;
-	background-image:url(mL.png);
-	background-size:100%;
-	width:200px;height:200px;
-	animation:mLStory 7s linear infinite normal;
-	animation-fill-mode:both;
-	transform:translateZ(20px) rotateZ(0deg);
-}
-/* キーフレーム */
-@keyframes mLStory{
-	50%{transform:translateZ(100px) rotateZ(-180deg);}
-	100%{transform:translateZ(20px) rotateZ(-360deg);}
-}
+			/* 親要素3D */
+			#wrap{
+				transform-style:preserve-3d;
+				perspective:300px;}
+
+			/* 面共通CSS */
+			.box{
+				width:200px;height:200px;
+				background-color:rgba(0,0,0,0.2);
+				position:absolute;
+				top:-100px;left:-100px;
+				transform-style:preserve-3d;
+				box-sizing: border-box;
+				border:2px solid black;
+			}
+			.mL{
+				position:absolute;
+				width:100px;height:100px;
+				top:50px;left:50px;
+				line-height:100px;text-align:center;
+				animation:mLStory 7s ease-in-out infinite normal;
+				animation-fill-mode:both;
+				transform:translateZ(0px) rotateZ(0deg);
+				font-size:30px;
+				color:rgba(0,0,0,0.8);
+			}
+			/* キーフレーム */
+			@keyframes mLStory{
+				33%{transform:translateZ(200px) rotateZ(-120deg);}
+				66%{transform:translateZ(-100px) rotateZ(-240deg);}
+				100%{transform:translateZ(0px) rotateZ(-360deg);}
+			}
 
 
-/* 面個別CSS */
-#a{transform:	translateZ(100px);}
-#b{transform:	translateZ(-100px)	rotateY(-180deg);}
-#c{transform:	translateX(100px)	rotateY(90deg);}
-#d{transform:	translateX(-100px)	rotateY(-90deg);}
-#e{transform:	translateY(-100px)	rotateX(90deg);}
-#f{transform:	translateY(100px) rotateX(-90deg);}
+			/* 面個別CSS */
+			#a{transform:	translateZ(100px);}
+			#b{transform:	translateZ(-100px)	rotateY(-180deg);}
+			#c{transform:	translateX(100px)	rotateY(90deg);}
+			#d{transform:	translateX(-100px)	rotateY(-90deg);}
+			#e{transform:	translateY(-100px)	rotateX(90deg);}
+			#f{transform:	translateY(100px) rotateX(-90deg);}
 
-/* アニメーション */
-#ml{
-	animation:mystory 30s ease-in-out 0s infinite normal;
-	animation-fill-mode:both;
-}
 
-/* キーフレーム */
-@keyframes mystory{
-	10%{transform:translateZ(0px) rotateX(0deg) rotateY(0deg);}
-	40%{transform:translateZ(280px) rotateX(180deg) rotateY(540deg);}
-	60%{transform:translateZ(280px) rotateX(180deg) rotateY(540deg);}
-	90%{transform:translateZ(0px) rotateX(360deg) rotateY(1080deg);}
-	100%{transform:translateZ(0px) rotateX(360deg) rotateY(1080deg);}
-}
-</style>
+			/* アニメーション */
+			#ml{
+				animation:mystory 30s ease-in-out 0s infinite normal;
+				animation-fill-mode:both;
+			}
 
-<div id="ml">
-	<div id=a class=box><div class=mL></div></div>
-	<div id=b class=box><div class=mL></div></div>
-	<div id=c class=box><div class=mL></div></div>
-	<div id=d class=box><div class=mL></div></div>
-	<div id=e class=box><div class=mL></div></div>
-	<div id=f class=box><div class=mL></div></div>
-</div>
+			/* キーフレーム */
+			@keyframes mystory{
+				10%{transform:translateZ(0px) rotateX(0deg) rotateY(0deg);}
+				40%{transform:translateZ(280px) rotateX(360deg) rotateY(1000deg);}
+				60%{transform:translateZ(280px) rotateX(360deg) rotateY(1160deg);}
+				90%{transform:translateZ(0px) rotateX(720deg) rotateY(2160deg);}
+				100%{transform:translateZ(0px) rotateX(720deg) rotateY(2160deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<h1>CSSキューブ</h1>
+		<div id="wrap">
+			<div id="ml">
+				<p>3D Cube</p>
+				<div id="a" class="box"><div class="mL">front</div></div>
+				<div id="b" class="box"><div class="mL">back</div></div>
+				<div id="c" class="box"><div class="mL">right</div></div>
+				<div id="d" class="box"><div class="mL">left</div></div>
+				<div id="e" class="box"><div class="mL">top</div></div>
+				<div id="f" class="box"><div class="mL">bottom</div></div>
+			</div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+	</body>
+</html>

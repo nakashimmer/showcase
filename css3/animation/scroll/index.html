@@ -71,34 +71,34 @@
 		<footer>
 			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
 		</footer>
+			
+		<script>
+			const BALL = document.getElementById("ball");
+			const INFO = document.getElementById("info");
+			let btn = 0;
 
-<script>
-	const BALL = document.getElementById("ball");
-	const INFO = document.getElementById("info");
-	let btn = 0;
+			window.addEventListener("scroll",function(e){
+				console.log=btn;
+				let scrollPx=window.pageYOffset;
+				INFO.style.transform = "translateZ(0px)";
+				if(btn===0){
+					BALL.style.transform="rotate("+ scrollPx+"deg)";
+				}
+				if(btn===1){
+					BALL.style.transform="scale("+(scrollPx/1000)+")";}
+				if(btn===2){
+					BALL.style.transform="translateX("+ (scrollPx/8.5-600)+"px)";
+				}
+				if(btn===3){
+					INFO.style.transform="translateZ(20px)";
+					BALL.style.transform="rotateY("+ scrollPx*10/180*Math.PI+"deg)";
+				}
+				BALL.style.top=(scrollPx+100)+"px";
+				INFO.innerHTML= scrollPx;
 
-	window.addEventListener("scroll",function(e){
-		console.log=btn;
-		let scrollPx=window.pageYOffset;
-		INFO.style.transform = "translateZ(0px)";
-		if(btn===0){
-			BALL.style.transform="rotate("+ scrollPx+"deg)";
-		}
-		if(btn===1){
-			BALL.style.transform="scale("+(scrollPx/1000)+")";}
-		if(btn===2){
-			BALL.style.transform="translateX("+ (scrollPx/8.5-600)+"px)";
-		}
-		if(btn===3){
-			INFO.style.transform="translateZ(20px)";
-			BALL.style.transform="rotateY("+ scrollPx*10/180*Math.PI+"deg)";
-		}
-		BALL.style.top=(scrollPx+100)+"px";
-		INFO.innerHTML= scrollPx;
-
-	});
-	
-	
-</script>
-</body>
+			});
+			
+			
+		</script>
+	</body>
 </html>
