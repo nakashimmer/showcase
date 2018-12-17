@@ -47,7 +47,9 @@ BTN2.addEventListener("click",()=>{
 
 var pcres="";
 
-BTN3.addEventListener("click",()=>{
+BTN3.addEventListener("click",talk1);
+
+function talk1(){
 	let msg =MSG.value;
 	const params={
 		apikey:"2Fqmk3u4lWUjbZ6ps7gPcKaRXeq3dA92",
@@ -76,7 +78,7 @@ BTN3.addEventListener("click",()=>{
 	
 	//RESULT.scrollTop = RESULT.scrollHeight;
 	return false;
-});
+};
 
 //テキスト読み上げ
 function speech1(pcres){
