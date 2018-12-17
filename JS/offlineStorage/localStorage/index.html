@@ -1,86 +1,106 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>LocalStorage</title>
-	<style>
-		*{margin:0;padding:0;font-size:16px;}
-		#wrap{width:500px;}
-		h1{font-size:1.5em;padding:0.5em;}
-		section{
-			margin:0.5em;
-		}
-		.h{width:5em;display:inline-block;text-align:center;}
-		input{width:100%;}
-		button{border:1px solid gray;background-color:#eee;padding:0.1em;width:5em;text-align:center;}
-		#info{}
-		table{border-collapse: collapse;margin:1em;width:100%;}
-		td,th{border:1px solid gray;width:5em;padding:0.3em;}
-	</style>
-</head>
-<body>
-	<div id="wrap">
+	<head>
+		<meta charset="utf-8">
+		<title>LocalStorage</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../sample.css">
+		<style>
+			.h{
+				width:5em;
+				display:inline-block;text-align:center;
+			}
+			input{width:100%;}
+			button{
+				border:1px solid gray;background-color:#eee;
+				padding:0.1em;
+				width:5em;text-align:center;
+			}
+			table{
+				border-collapse: collapse;margin:1em;width:100%;}
+			td,th{border:1px solid gray;width:5em;padding:0.3em;}
+		</style>
+	</head>
+	<body>
 		<h1>localStorage</h1>
-		<section>
-			<h2>データの保存</h2>
-			<table>
-				<tr><th>key:</th><td><input id="input1" type="text"></td>
-				<td rowspan="2"><button onclick="myset();">保存</button></td></tr>
-				<tr><th>value:</th><td><input id="input2" type="text"></td></tr>
-			</table>
-		</section>
-		
-		<section>
-			<h2>データの抽出</h2>
-			<table>
-				<tr><th>key:</th><td><input id="input3" type="text"></td>
-				<td><button onclick="myget();">抽出</button></td></tr>
-				<tr><th>value:</th><td id="output1">抽出結果...</td></tr>
-			</table>
+		<div id="wrap">
+			<section>
+				<h2>データの保存</h2>
+				<table>
+					<tr>
+						<th>key:</th>
+						<td><input id="input1" type="text"></td>
+						<td rowspan="2">
+							<button id="btn1">保存</button>
+						</td>
+					</tr>
+					<tr>
+						<th>value:</th>
+						<td><input id="input2" type="text"></td>
+					</tr>
+				</table>
+			</section>
 			
-		</section>
-	
-		<section>
-			<h2>保存されているデータの一覧</h2>
-			<p><button onclick="mylist();">一覧表示</button></p>
-			<div id="info"></div>
-		</section>
-	</div>
-<script>
-
-	var input1 = document.getElementById("input1");
-	var input2 = document.getElementById("input2");
-	var input3 = document.getElementById("input3");
-	var output1 = document.getElementById("output1");
-	var info = document.getElementById("info");
-
-	//保存
-	function myset(){
-		localStorage.setItem(
-			input1.value,
-			input2.value
-		);
-	}
-
-	//抽出
-	function myget(){
-		output1.innerHTML = localStorage.getItem(input3.value);
-	}
-
-	//リスト
-	function mylist(){
-		var str="<table><tr><th>key</th><th>value</th></tr>";
-
-		for(var i=0;i<localStorage.length;i++){
-			var key = localStorage.key(i);
-			var value = localStorage.getItem(key);
-
-			str += "<tr><td>" +key +"</td><td>" +value+ "</td></tr>";
-		}
-		str += "</table>";
-		info.innerHTML=str;
+			<section>
+				<h2>データの抽出</h2>
+				<table>
+					<tr>
+						<th>key:</th>
+						<td><input id="input3" type="text"></td>
+						<td rowspan="2">
+							<button id="btn2">抽出</button>
+						</td>
+					</tr>
+					<tr>
+						<th>value:</th>
+						<td id="output1">抽出結果...</td>
+					</tr>
+				</table>
+			</section>
 		
-	}
-</script>
-</body>
+			<section>
+				<h2>保存されているデータの一覧</h2>
+				<p><button id="btn3">一覧表示</button></p>
+				<div id="info"></div>
+			</section>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+
+		<script>
+
+			const INPUT1 = document.getElementById("input1");
+			const INPUT2 = document.getElementById("input2");
+			const INPUT3 = document.getElementById("input3");
+			const OUTPUT1 = document.getElementById("output1");
+			const BTN1 = document.getElementById("btn1");
+			const BTN2 = document.getElementById("btn2");
+			const BTN3 = document.getElementById("btn3");
+			const INFO = document.getElementById("info");
+
+			//保存
+			BTN1.addEventListener("click",()=>{
+				localStorage.setItem(INPUT1.value,INPUT2.value);
+			});
+
+			//抽出
+			BTN2.addEventListener("click", () => {
+				OUTPUT1.innerHTML = localStorage.getItem(INPUT3.value);
+			});
+
+			//リスト
+			BTN3.addEventListener("click", () => {
+				let str="<table><tr><th>key</th><th>value</th></tr>";
+
+				for(let i=0;i<localStorage.length;i++){
+					let key = localStorage.key(i);
+					let value = localStorage.getItem(key);
+					str += "<tr><td>" +key +"</td><td>" +value+ "</td></tr>";
+				}
+				str += "</table>";
+				INFO.innerHTML=str;
+			});
+		</script>
+	</body>
 </html>

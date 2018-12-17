@@ -1,154 +1,66 @@
 <!DOCTYPE html>
-<meta charset="utf-8"/>
-<meta name=viewport content="width=device-width">
-<title>Talk API</title>
-<style>
-*{margin:0px;padding:0px;box-sizing:border-box;font-size:16px;color:#666;}
-#wrap{width:500px;margin:0 auto;}
-.you,.pc{margin:0.2em;padding:0.3em;color:white;}
-.you{background-color:skyblue;text-align:right;}
-.pc{background-color:pink;}
-#result{width:500px;height:300px;border:1px solid gray;overflow:scroll;}
-.write{display:none;}
-@media(max-width:450px){
-	.write{display:inline;}
-	.rec1{display:none;}
-	#wrap{width:100%;}
-}
-footer{background-color:#eee;}
-footer p small a{font-size:0.7em;}
-a{text-decoration:none;}
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name=viewport content="width=device-width">
+		<title>Talk API</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			.you,.pc{margin:0.2em;padding:0.3em;color:black;}
+			.you{background-color:skyblue;text-align:right;}
+			.pc{background-color:pink;}
 
-</style>
-<script src="jquery-3.2.1.min.js"></script>
-</head>
-<body>
-
-
-<div id="wrap">
-	<h1>AI連携</h1>
-	<p>1.音声種類選択→ 
-		<span id=voices><button onclick="voice();">選択</button></p>
-	<p>2. 言語を選択する→ 
-		<select id=lang>
-			<option value="ja-JP" selected>日本語</option>
-			<!--option value="en-US">英語</option-->
-		</select>
-	</p>
-	
-	<p>
-		3. メッセージ：<button onclick="rec1();" class=rec1>音声で呼びかける</button>
-		<input type="text" id="msg" class=write>
-		<button onclick="talk1();" class=write>送信</button>
-	</p>
-
-	<p><small style="color:red;">外部と共有されるので非公開情報・個人情報にかかるものは絶対禁止です</small></p>
-	<div id="result"></div>
-	<footer>
-		<p><small><a href="https://tokyoappwork.shop">(C)東京アプリ・ワークショップ</a></small></p>
-	</footer>
-</div>
-
-<script>
-	//ボイスの種類
-
-	var voices = speechSynthesis.getVoices();
-	
-	function voice(){
-		voices = speechSynthesis.getVoices();
-		var length=voices.length;
-		var voiceStr="<select id=voice>";
-		console.log(length);
-		
-		for(var i=0;i<length;i++){
-			if(voices[i]){
-				if(voices[i].name==="Google 日本語"){var sel="selected"}else{var sel=""};
-				voiceStr+="<option value="+i+" "+sel+">"+voices[i].name+"</option>";
-				
+			#result{
+				height:300px;
+				border:1px solid gray;
+				overflow:scroll;
 			}
-		}
-		voiceStr+="</select>";
-		
-		$id("voices").innerHTML=voiceStr;
+			.write{display:none;}
 
-	}
-</script>
-
-<script>
-	//音声認識
-	function rec1(){
-		var recognition = new webkitSpeechRecognition();	//音声認識オブジェクト生成
-		recognition.lang = $id("lang").value;	//言語設定
-		recognition.start();	//認識開始
-		// 終了時トリガー
-		recognition.addEventListener('result', function(e){
-			var rec = e.results.item(0).item(0).transcript;	//文字列抽出
-			$id("msg").value=	rec;
-			setTimeout(talk1,1000);	//1秒後にmySpeechを起動
-		});
-	}
-</script>
-
-<script>
-	var pcres="";
-	function talk1(){
-	
-		var msg =$id('msg').value;
-		var params={
-			apikey:"2Fqmk3u4lWUjbZ6ps7gPcKaRXeq3dA92",
-			query:msg
-		};
-		
-		$id('result').innerHTML
-			="<p class=you>You: "+msg+"</p>"
-			+$id('result').innerHTML;
-		
-		$.post(
-			'https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk',
-			params,
-			(result)=>{
-				if(result.status == 0) {
-					pcres = result.results[0].reply;
-					speech1(pcres);console.log(pcres);
-				}
-				$id('result').innerHTML 
-					="<p class=pc>AIちゃん: "+pcres
-					//+"(status:"+ result.status +"-"+
-					//"message:"+result.message+")"
-					+"</p>"
-					+$id('result').innerHTML;
-			},'json');
-		
-		//$id("result").scrollTop = $id("result").scrollHeight;
-		return false;
-	};
-	
-</script>
-
-<script>
-	//テキスト読み上げ
-	function speech1(pcres){
-		var input	= pcres;
-		var voice = parseInt($id("voice").value);
-		var input = new SpeechSynthesisUtterance(input);
-		var lang = $id("lang").value
-		input.lang = lang;
-		var voices = speechSynthesis.getVoices();
-		input.voice = voices[voice];
-		speechSynthesis.speak(input);
-		$id('msg').value="";
-	}
-</script>
+			@media(max-width:450px){
+				.write{display:inline;}
+				.rec1{display:none;}
+				#wrap{width:100%;}
+			}
 
 
+		</style>
+		<script src="jquery-3.2.1.min.js"></script>
+	</head>
+	<body>
+		<h1>AI連携</h1>
+		<div id="wrap">	
+			<ol>
+				<li>
+					1.音声種類選択→ 
+					<span id="voiceSelect"><button id="btn1">選択</button>
+				</li>
+				<li>
+					2. 言語を選択する→ 
+					<select id="lang">
+						<option value="ja-JP" selected>日本語</option>
+						<!--option value="en-US">英語</option-->
+					</select>
+				</li>
+				<li>
+					3. メッセージ：
+					<button id="btn2" class=rec1>音声で呼びかける</button>
+					<input type="text" id="msg" class="write">
+					<button id="btn3" class="write">送信</button>
+				</li>
+				<li>
+					<small style="color:red;">外部と共有されるので非公開情報・個人情報にかかるものは絶対禁止です</small>
+				</li>
+			</ol>
 
+			<div id="result"></div>
+		</div>
+		<footer>
+				<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+			</footer>
 
-
-
-
-	<script>
-		function $id(id){return document.getElementById(id);}
-	</script>
+		<script src="script.js"></script>
 
   </body>
 </html>

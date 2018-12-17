@@ -1,45 +1,79 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<title>video要素</title>
-<meta name=viewport content="width=320px,user-scalable=no">
-<style>
-#player_div button{font-size:20px;}
-#videoProgress{width:80%;margin:5px 0;text-align:center;border:10px;border-color:white;}
-#wrap{width:700px;margin:0 auto;text-align:center;}
-</style>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>動画のコントロール</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../sample.css">
 
-<div id=wrap>
-<video id=video width=80%></video>
-<progress value=0 max=1 id=videoProgress></progress>
-<div id=info></div>
-<div id=player_div>
-	<button onclick=video.play()>再生</button>
-	<button onclick=video.pause()>停止</button>
-	<button onclick=video.currentTime=0;video.play()>最初</button>
-	<button onclick=vol(-0.2)>音小</button>
-	<button onclick=vol(0.2)>音大</button>
-	<button onclick=speed(0.5)>早い</button>
-	<button onclick=speed(-0.5)>遅い</button>
-</div>
-</div>
+		<style>
+			#myvideo{max-width:500px;
+				display:block;
+				margin:0 auto;
+			}
+			ul{
+				display: flex;
+				list-style:none;
+				margin:1em 0;
+			}
+			li{
+				display:block;
+				flex:1;}
+			button{
+				width:100%;
+				line-height:80px;
+			}
+			progress{width:100%;height:20px;border:1px solid gray;}
+			#info{display:flex;margin:1em 0;}
+			#info>div{
+				flex:1;border:1px solid gray;padding:1em;
+				border-right:none;
+			}
+			#info>div:last-of-type{
+				border-right:1px solid gray;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>動画のコントロール</h1>
+		<div id=wrap>
+			<video id="myvideo"></video>
 
+			<ul>
+				<li><button onclick="VIDEO.play();">再生</button></li>
+				<li><button onclick="VIDEO.pause();"">停止</button></li>
+				<li><button onclick="VIDEO.currentTime=0;VIDEO.play();">最初</button></li>
+				<li><button onclick="VIDEO.volume -=0.2;">音小</button></li>
+				<li><button onclick="VIDEO.volume +=0.2;">音大</button></li>
+				<li><button onclick="VIDEO.playbackRate +=0.2;">早い</button></li>
+				<li><button onclick="VIDEO.playbackRate -=0.2;">遅い</button></li>
+			</ul>
+			
+			<progress value=0 max=1 id="videoProgress"></progress>
+			<div id="info">情報</div>
+		</div>
+		<footer>
+				<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>	
 
+		<script>
+			const VIDEO = document.getElementById("myvideo");
+			VIDEO.src="html5.mp4";
+			const VIDEOProgress = document.getElementById("videoProgress");
+			const INFO = document.getElementById("info");
+			
+			VIDEO.addEventListener("timeupdate",(e)=>{
+				INFO.innerHTML
+				= "<div>再生位置："+short(Math.floor(VIDEO.currentTime))+"秒</div>"
+				+ "<div>長さ" + short((Math.floor(VIDEO.duration*10) /10	))+"秒</div>"
+				+ "<div>音量" + short(VIDEO.volume)+"倍</div>"
+				+ "<div>スピード" + short(VIDEO.playbackRate)+"倍速</div>";
+				VIDEOProgress.value = short(VIDEO.currentTime/VIDEO.duration);
+			});
 
-
-<script>
-function $(id){return document.getElementById(id);}
-var video = document.getElementById("video");
-video.src="html5.mp4";
-
-video.addEventListener("timeupdate",function(e){
-    	$("info").innerHTML
- 	= "再生位置"+Math.floor(video.currentTime)+"秒"
-	+ "　長さ" + (Math.floor(video.duration*10) /10	)+"秒"
-	+ "　音量" + video.volume
-  + "　スピード" + video.playbackRate;
-		$("videoProgress").value =video.currentTime/video.duration;
-});
-
-function vol(v)	{video.volume += v;}
-function speed(s){video.playbackRate += s;}
-</script>
+			function short(n){
+				return Math.floor(n*10)/10;
+			}
+		</script>
+	</body>
+</html>
