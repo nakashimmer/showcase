@@ -1,133 +1,148 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>フラクタルツリー</title>
-	<meta name=viewport content="width=550">
-	<style>
-		body{background-color:black;}
-		#wrap{width:500px;margin:10px auto;}
-		#canvas{border:2px solid lightgreen;}
-		input{width:100%;height:30px;display:block;}
-		table{width:500px;border:1px solid white;}
-		th,td,p{text-align:center;color:white;}
-	</style>
-</style>
-<body>
-	<div id="wrap">
+	<head>
+		<meta charset="utf-8">
+		<title>フラクタルツリー</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../../sample.css">
+		<style>
+			
+			#wrap{
+				display:flex;
+			}
+			#canvas1{
+				width:502px;
+				border:1px solid gray;
+			}
+			
+			#item{
+				flex:1;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>fractal</h1>	
+		<div id="wrap">
+			<canvas id="canvas1" width="500" height="500"></canvas>
+		
+			<ul id=""item">
+				<li>
+					<span>枝の長さ</span>
+					<input type="range" min="0" max="160" value="80" step="1" id="len">
+					<span id="lenValue">80px</span>
+				</li>
+				<li>
+					<span>枝の比率</span>
+					<input type="range" min="0" max="1" value="0.7" step="0.1" id="scale">
+					<span id="scaleValue">70%</span>
+				</li>
+				<li>
+					<span>広がり角度</span>
+					<input type="range" min="0" max="180" value="20" step="1" id="angle">
+					<span id="angleValue">20度</span>
+				</li>
+				<li>
+					<span>枝の段数</span>
+					<input type="range" min="0" max="7" value="0" step="1" id="step">
+					<span id="stepValue">0段</span>
+				</li>
+			</ul>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+		
+		<script>
+			const CANVAS1 = document.getElementById("canvas1");
+			const CTX = CANVAS1.getContext("2d");
 
-		<canvas id=canvas width=500 height=500></canvas>
-		<p>fractal</p>
-		<table id=table>
-			<tr>
-				<th>枝の長さ</th>
-				<td><input type=range min=0 max=160 value=80 step=1 id=len></td>
-				<td id=lenValue>80px</td>
-			</tr>
-			<tr>
-				<th>枝の比率</th>
-				<td><input type=range min=0 max=1 value=0.7 step=0.1 id=scale></td>
-				<td id=scaleValue>70%</td>
-			</tr>
-			<tr>
-				<th>枝の広がり</th>
-				<td><input type=range min=0 max=180 value=20 step=1 id=angle></td>
-				<td id=angleValue>20度</td>
-			</tr>
-			<tr>
-				<th>枝の段数</th>
-				<td><input type=range min=1 max=14 value=8 id=step></td>
-				<td id=stepValue>8段</td>
-			</tr>
-		</table>
-	</div>
-<script>
-var canvas = $("canvas");
-var c = canvas.getContext("2d");
+			//初期設定
+				let x=250;
+				let y=380;
+				let deg=0;
 
-//======================================================
+				const LEN = document.getElementById("len");			//枝の長さ(px)
+				let len = Number(LEN.value);
+				const LENV = document.getElementById("lenValue");
+			
+				const SCALE = document.getElementById("scale");		//枝の短くなる比率
+				let scale = Number(SCALE.value);
+				const SCALEV = document.getElementById("scaleValue");
 
-//初期設定
-var scale = 0.7	//枝の短くなる比率
-var angle = 20;	//枝の広がり(度)
-var len = 80;	//最初の枝の長さ(px)
-var step = 8	//枝別れの段数
-var x1=250;
-var y1=380;
-var deg=0;
-var lenTarget=80;
-var angleTarget=20;
-var scaleTarget = 0.7;
-var stepTarget = 8;
-setInterval(start,50);
+				const ANGLE = document.getElementById("angle");		//枝の角度(度)
+				let angle = Number(ANGLE.value)
+				const ANGLEV = document.getElementById("angleValue");
 
-function start(){
-	c.clearRect(0,0,canvas.width,canvas.height);
-	
-	if(len!=lenTarget){
-		len+=(lenTarget-len)/Math.abs(lenTarget-len);
-		$("lenValue").innerHTML=Math.floor(lenTarget)+"px";
-		y1=300+len;
-	}
-	
-	if(Math.abs(scale-scaleTarget)<0.01){
-		scale=scaleTarget
-	}else if(scale!=scaleTarget){
-		scale+=(scaleTarget-scale)/Math.abs(scaleTarget-scale)*0.01;
-		$("scaleValue").innerHTML=(scaleTarget*100)+"%";
-		console.log(scale+","+scaleTarget);
-		scale
-	}
-	if(angle!=angleTarget){
-		angle+=(angleTarget-angle)/Math.abs(angleTarget-angle);
-		$("angleValue").innerHTML=Math.floor(angleTarget)+"度";
-	}
+				let STEP = document.getElementById("step");		//枝の広がり(度)
+				let step = Number(STEP.value);
+				const STEPV = document.getElementById("stepValue");
 
-	if(step!=stepTarget){
-		step+=(stepTarget-step)/Math.abs(stepTarget-step);
-		$("stepValue").innerHTML=Math.floor(stepTarget)+"段";
-	}
-	
-	fractal(x1,y1,len,deg,step);
-}
+				draw(x,y,len,angle,step);
+				
+				LEN.addEventListener("change",()=>{
+					len = Number(LEN.value);
+					LENV.innerHTML = len+"px";
+					draw(x,y,len,angle,step);
+				});
+				SCALE.addEventListener("change",()=>{
+					scale = Number(SCALE.value);
+					SCALEV.innerHTML=scale+"%";
+					draw(x,y,len,angle,step);
+				});
+				ANGLE.addEventListener("change",()=>{
+					angle = Number(ANGLE.value);
+					ANGLEV.innerHTML=angle+"度";
+					draw(x,y,len,angle,step);
+				});
+				STEP.addEventListener("change",()=>{
+					step = Number(STEP.value);
+					STEPV.innerHTML=(step)+"段";
+					draw(x,y,len,angle,step);
+				});
 
-//独自関数fractalの定義（x座標,y座標,長さ,角度,段数）
-function fractal(x1,y1,len,deg,step) {
-	var x2= x1+len*Math.sin(deg/180*Math.PI); //枝先のx座標
-	var y2= y1-len*Math.cos(deg/180*Math.PI); //枝先のy座標
-	line(x1,y1,x2,y2);
-	if(step>=1) {  
-		fractal(x2,y2,len*scale,deg-angle,step-1);	//自分自身を呼び出す
-		fractal(x2,y2,len*scale,deg+angle,step-1);	//自分自身を呼び出す
-	}
-}
+			
+			function draw(x,y,len,angle,step){
+				CTX.clearRect(0,0,CANVAS1.width,CANVAS1.height);
+				deg=0;
+				let x2 = x;
+				let y2 = y - len*scale; //枝先のy座標
+				line(x,y,x2,y2);
+				fractal(x2,y2,len*scale,angle,step);
+				fractal(x2,y2,len*scale,-angle,step);
+			}
 
-//独自関数line()の定義
-function line(x1,y1,x2,y2){
-	c.beginPath();
-	c.moveTo(x1,y1)
-	c.lineTo(x2,y2);
-	c.lineWidth=2;
-	c.lineCap="round";
-	c.strokeStyle="yellow";
-	c.stroke();
-}
+			//独自関数fractalの定義（x座標,y座標,長さ,角度,段数）
+			function fractal(x1,y1,len,deg,step) {
+				let x2 = x1 + len*Math.sin(deg/180*Math.PI); //枝先のx座標
+				let y2 = y1 - len*Math.cos(deg/180*Math.PI); //枝先のy座標
+				line(x1,y1,x2,y2);
 
-$("len").addEventListener("change",function(){lenTarget=$("len").value;})
-$("scale").addEventListener("change",function(){scaleTarget=Math.floor($("scale").value*10)/10;})
-$("angle").addEventListener("change",function(){angleTarget=$("angle").value;})
-$("step").addEventListener("change",function(){stepTarget=$("step").value;})
+				
+				console.log(
+					"1=("
+					+Math.floor(x1)+","
+					+Math.floor(y1)+"),2=("
+					+Math.floor(x2)+","
+					+Math.floor(y2)+"),deg:"
+					+deg
+				);
+				
+				if(1 <= step) {  
+					fractal(x2, y2, len*scale, (deg-angle), step-1);	//自分自身を呼び出す
+					fractal(x2, y2, len*scale, (deg+angle), step-1);	//自分自身を呼び出す
+				}
+			}
 
-function $(id){return document.getElementById(id);}
-
-/*
-$("canvas").addEventListener("touchmove",function(e){
-	e.preventDefault();
-});
-*/
-
-//======================================================
-
-</script>
-</body>
+			//独自関数line()の定義
+			function line(lx1,ly1,lx2,ly2){
+				CTX.beginPath();
+				CTX.moveTo(lx1,ly1)
+				CTX.lineTo(lx2,ly2);
+				CTX.lineWidth = 5;
+				CTX.lineCap = "round";
+				CTX.strokeStyle = "red";
+				CTX.stroke();
+			}
+		</script>
+	</body>
 </html>
