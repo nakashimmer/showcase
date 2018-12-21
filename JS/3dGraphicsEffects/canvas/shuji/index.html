@@ -1,138 +1,145 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<title>書き初めHTML5｜書く</title>
-<meta name="viewport" content="width=400">
-<style>
-	*{margin:0;padding:0;}
-	body{background:black;}
-	#wrap{width:400px;margin:0 auto;text-align:center;}
-	canvas{display:block;}
-</style>
-
-<div id=wrap>
-	<canvas id=canvas width=400 height=500></canvas>
-</div>
-
-<script>
-	function $(id){
-		return document.getElementById(id);
-	}
-	
-	var canvas=$('canvas');
-	var c=canvas.getContext('2d');
-	
-	var fude={x:0,y:0,d:0};
-	var fude2={x:0,y:0,d:0};
-	var draw=false;
-	
-	clr();
-	
-	c.fillStyle="black";
-	c.shadowBlur=5;
-	c.shadowColor="black";
-	
-	//筆先------
-	//mouse ---------------------------------------
-	canvas.addEventListener("mousedown",function(e){
-		draw=true;
-		c.globalAlpha=1;
-		fudesaki(fude.x,fude.y-5,-8);
-		savePos();
-	});
-	canvas.addEventListener("mousemove",function(e){
-		mousePos(e);
-		drw();
-		savePos();
-	});
-	canvas.addEventListener("mouseup",function(e){
-		draw=false;
-		c.globalAlpha=1;
-		fudesaki(fude.x,fude.y,10);
-		savePos();
-	});
-	//touch ----------------------------------------
-	canvas.addEventListener("touchstart",function(e){
-		draw=true;touchPos(e);
-		c.globalAlpha=1;
-		fudesaki(fude.x,fude.y-5,-5);savePos();
-	});
-	canvas.addEventListener("touchmove",function(e){
-		e.preventDefault();
-		touchPos(e);
-		drw();
-		savePos();
-	});
-	canvas.addEventListener("touchend",function(e){
-		draw=false;
-		touchPos(e);
-		c.globalAlpha=1;
-		if(fude.x!=fude2.x){
-			fudesaki(fude.x,fude.y+5,-5);
-		}
-		savePos();
-	});
-	
-	//筆先
-	function fudesaki(x,y,d){//x,y,dは20=痩せ具合
-		c.save();
-		c.translate(x,y);
-		c.rotate(20/180*Math.PI);
-		c.scale(1,0.5);
-		c.beginPath();
-		c.arc(0,0,20-d,0,2*Math.PI,false);
-		c.fill();
-		c.restore();
-	}
-
-	//描画
-	function drw(){
-		fude.d= Math.abs((fude2.x-fude.x)/3);
-		if(fude.d>=20)fude.d=19;
-		var j=10;
-		if(draw){
-			c.globalAlpha=1/j;
-			for(var i=1;i<=j;i++){
-				fudesaki(
-					fude.x+Math.floor((fude2.x-fude.x)*i/j),
-					fude.y+Math.floor((fude2.y-fude.y)*i/j),
-					fude.d
-				);
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>習字</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../../sample.css">
+		<style>
+			#wrap{background:black;}
+			canvas{
+				display:block;
+				margin:0 auto;
 			}
-			c.closePath();
-			c.fill();c.stroke();
-		}
-	}
+		</style>
+	</head>
+	<body>
+		<h1>習字</h1>
+		<div id="wrap">
+			<canvas id=canvas width=400 height=500></canvas>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
-	//マウスの位置を取得
-	function mousePos(e){
-		var rect=e.target.getBoundingClientRect();
-		fude.x=e.clientX-rect.left;
-		fude.y= e.clientY-rect.top;
-	}
-	
-	//タッチの位置を取得
-	function touchPos(e){
-		var rect=e.target.getBoundingClientRect();
-		fude.x=e.touches[0].clientX-rect.left;
-		fude.y=e.touches[0].clientY-rect.top;
-	}
+		<script>
+			const CANVAS=document.getElementById("canvas");
+			const CTX=CANVAS.getContext('2d');
+			
+			const fude={x:0,y:0,d:0};
+			const fude2={x:0,y:0,d:0};
+			let draw=false;
+			
+			clr();
+			
+			CTX.fillStyle="black";
+			CTX.shadowBlur=5;
+			CTX.shadowColor="black";
+			
+			//筆先------
+			//mouse ---------------------------------------
+			CANVAS.addEventListener("mousedown",function(e){
+				draw=true;
+				CTX.globalAlpha=1;
+				fudesaki(fude.x,fude.y-5,-8);
+				savePos();
+			});
+			CANVAS.addEventListener("mousemove",function(e){
+				mousePos(e);
+				drw();
+				savePos();
+			});
+			CANVAS.addEventListener("mouseup",function(e){
+				draw=false;
+				CTX.globalAlpha=1;
+				fudesaki(fude.x,fude.y,10);
+				savePos();
+			});
+			//touch ----------------------------------------
+			CANVAS.addEventListener("touchstart",function(e){
+				draw=true;touchPos(e);
+				CTX.globalAlpha=1;
+				fudesaki(fude.x,fude.y-5,-5);savePos();
+			});
+			CANVAS.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				touchPos(e);
+				drw();
+				savePos();
+			});
+			CANVAS.addEventListener("touchend",function(e){
+				draw=false;
+				touchPos(e);
+				CTX.globalAlpha=1;
+				if(fude.x!=fude2.x){
+					fudesaki(fude.x,fude.y+5,-5);
+				}
+				savePos();
+			});
+			
+			//筆先
+			function fudesaki(x,y,d){//x,y,dは20=痩せ具合
+				CTX.save();
+				CTX.translate(x,y);
+				CTX.rotate(20/180*Math.PI);
+				CTX.scale(1,0.5);
+				CTX.beginPath();
+				CTX.arc(0,0,20-d,0,2*Math.PI,false);
+				CTX.fill();
+				CTX.restore();
+			}
 
-	//移動後の前の位置を保存
-	function savePos(){
-		fude2.x=fude.x;
-		fude2.y=fude.y;
-		fude2.d=fude.d;
-	}
-	
-	//画面クリア
-	function clr(){
-		c.fillStyle="white";
-		c.fillRect(0,0,canvas.width,canvas.height);
-			c.fillStyle="black";
-	c.shadowBlur=5;
-	c.shadowColor="black";
-	}
-</script>
+			//描画
+			function drw(){
+				fude.d= Math.abs((fude2.x-fude.x)/3);
+				if(fude.d>=20)fude.d=19;
+				var j=10;
+				if(draw){
+				//	CTX.globalAlpha=1/j;
+					for(var i=1;i<=j;i++){
+						fudesaki(
+							fude.x+Math.floor((fude2.x-fude.x)*i/j),
+							fude.y+Math.floor((fude2.y-fude.y)*i/j),
+							fude.d
+						);
+					}
+					CTX.closePath();
+					CTX.fill();CTX.stroke();
+				}
+			}
+
+			//マウスの位置を取得
+			function mousePos(e){
+				const RECT=e.target.getBoundingClientRect();
+				fude.x=e.clientX-RECT.left;
+				fude.y= e.clientY-RECT.top;
+			}
+			
+			//タッチの位置を取得
+			function touchPos(e){
+				const RECT=e.target.getBoundingClientRect();
+				fude.x=e.touches[0].clientX-RECT.left;
+				fude.y=e.touches[0].clientY-RECT.top;
+			}
+
+			//移動後の前の位置を保存
+			function savePos(){
+				fude2.x=fude.x;
+				fude2.y=fude.y;
+				fude2.d=fude.d;
+			}
+			
+			//画面クリア
+			function clr(){
+				CTX.fillStyle="white";
+				CTX.fillRect(0,0,CANVAS.width,CANVAS.height);
+				CTX.fillStyle="black";
+				CTX.shadowBlur=5;
+				CTX.shadowColor="black";
+			}
+		</script>
+	</body>
+</html>
 
 
 

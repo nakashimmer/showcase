@@ -1,66 +1,110 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>座標を取得するサンプル</title>
-	<meta name=viewport content="width=device-width">
-	<style>
-		body{text-align:center;}
-		canvas{background-color:#eee;}
-	</style>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>座標を取得するサンプル</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			body{text-align:center;}
+			#canvas1{background-color:black;}
+			#info{width:500px;margin:0 auto;
+				border:1px solid gray;
+				border-width:1px;
+				border-style:solid;
+				border-color:gray;
+				border-width:0px 1px 1px 0px;
+			}
+			#info th,#info td{
+				width:50%;
+				border-width:1px;
+				border-style:solid;
+				border-color:gray;
+				border-width:1px 0px 0px 1px;
+				padding:0;
+			}
+		</style>
+	</head>
 
-<body>
-	<h1>座標を取得するサンプル</h1>
-	<canvas id="canvas1" width="500" height="300"></canvas>
-	<div id="info">座標の値</div>
-<script>
-	//canvas 最初の設定
-	var canvas1 = document.getElementById("canvas1");
-	var c = canvas1.getContext("2d");
+	<body>
+		<h1>座標を取得するサンプル</h1>
+		<div id="wrap">
+			<canvas id="canvas1" width="500" height="300"></canvas>
+			<table id="info">
+				<tr>
+					<th>マウス座標X(e.client.X)</th><td id="info1"></td>
+				</tr>
+				<tr>
+					<th>マウス座標Y(e.client.Y)</th><td id="info2"></td>
+				</tr>
+				<tr>
+					<th>書込可否(myDraw)</th><td  id="info3"></td>
+				</tr>
+				<tr>
+					<th>canvasの左の余白(rect.left)</th><td id="info4"></td>
+				</tr>
+				<tr>
+					<th>canvasの上の余白(rect.top)</th><td id="info5"></td>
+				</tr>
+			</table>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+				
+		<script>
+			//canvas 最初の設定
+			const CANVAS1 = document.getElementById("canvas1");
+			const CTX = CANVAS1.getContext("2d");
 
-	//1.PC(マウス)で操作
-	var mouse = {x:0,y:0,x1:0,y1:0,color:"black"};
-	var myDraw = false;
+			const INFO1 = document.getElementById("info1")
+			const INFO2 = document.getElementById("info2")
+			const INFO3 = document.getElementById("info3")
+			const INFO4 = document.getElementById("info4")
+			const INFO5 = document.getElementById("info5")
 
-	canvas1.addEventListener("mousemove",function(e){
-		
-		//2.マウスが動いたら座標値を取得
-		var rect = e.target.getBoundingClientRect();
-		mouse.x = e.clientX - rect.left;
-		mouse.y = e.clientY - rect.top;
-		
-		//3.情報をinfoに出力
-		document.getElementById("info").innerHTML = 
-		" rect.left=" + Math.floor(rect.left) + "px" +
-		" rect.top=" + Math.floor(rect.top) + "px" +
-		" myDraw=" + myDraw + "<br>" +
-		" x座標=" + Math.floor(mouse.x) + "px" +
-		" y座標=" +Math.floor(mouse.y) + "px";
-		
-		//4.myDrawがtrueのとき描画
-		if(myDraw){
-			c.beginPath();
-			c.moveTo(mouse.x1,mouse.y1);
-			c.lineTo(mouse.x,mouse.y);
-			c.lineCap="round";
-			c.strokeStyle=mouse.color;
-			c.stroke();
-			mouse.x1=mouse.x;
-			mouse.y1=mouse.y;
-		}
-	});
-	
-	//5.マウスを押したら、描画OK(myDrawをtrue)
-	canvas1.addEventListener("mousedown",function(e){
-		myDraw=true; mouse.x1=mouse.x; mouse.y1=mouse.y;
-	});
-	
-	//6.マウスを上げたら、描画禁止(myDrawをfalse)
-	canvas1.addEventListener("mouseup",function(e){
-		myDraw=false;
-	});
+			//1.PC(マウス)で操作
+			const MOUSE = {x:0,y:0,x1:0,y1:0,color:"white"};
+			let myDraw = false;
 
-</script>
-</body>
+			CANVAS1.addEventListener("mousemove",function(e){
+				
+				//2.マウスが動いたら座標値を取得
+				var rect = e.target.getBoundingClientRect();
+				MOUSE.x = e.clientX - rect.left;
+				MOUSE.y = e.clientY - rect.top;
+				
+				//3.情報をinfoに出力
+				INFO1.innerHTML = Math.floor(MOUSE.x) + "px";
+				INFO2.innerHTML = Math.floor(MOUSE.y) + "px";
+				INFO3.innerHTML = myDraw;
+				INFO4.innerHTML = Math.floor(rect.left) + "px";
+				INFO5.innerHTML = Math.floor(rect.top) + "px";
+				
+				//4.myDrawがtrueのとき描画
+				if(myDraw){
+					CTX.beginPath();
+					CTX.moveTo(MOUSE.x1,MOUSE.y1);
+					CTX.lineTo(MOUSE.x,MOUSE.y);
+					CTX.lineCap = "round";
+					CTX.strokeStyle = MOUSE.color;
+					CTX.stroke();
+					MOUSE.x1 = MOUSE.x;
+					MOUSE.y1 = MOUSE.y;
+				}
+			});
+			
+			//5.マウスを押したら、描画OK(myDrawをtrue)
+			CANVAS1.addEventListener("mousedown",(e)=>{
+				myDraw=true;
+				MOUSE.x1 = MOUSE.x;
+				MOUSE.y1 = MOUSE.y;
+			});
+			
+			//6.マウスを上げたら、描画禁止(myDrawをfalse)
+			CANVAS1.addEventListener("mouseup",(e)=>{
+				myDraw = false;
+			});
+		</script>
+	</body>
 </html>

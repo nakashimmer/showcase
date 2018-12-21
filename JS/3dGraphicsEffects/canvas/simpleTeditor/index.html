@@ -1,94 +1,129 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<title>入力</title>
-<style>
-	*{margin:0;padding:0;font-size:25px;box-sizing:border-box;}
-	#wrap{width:90%;margin:10px auto;}
-	#outer{
-		height:500px;		/*高さが狭い時はこの数字を変更する*/
-		overflow:scroll;
-		border:1px solid gray;padding:5px;
-	}
-	#editor{
-		height:5000px;width:100%;
-		display:block;
-		line-height:30px;
-		padding:0em;
-		font-family:sans-serif;
-		tab-size:4;
-		background:linear-gradient(white 50%,#eee 50%);
-		background-size:auto 60px;
-		border:none;
-		outline:none;
-	}
-	p{margin:10px 0;}
-	button,a{border:1px solid gray;background-color:#eee;
-		displey:block;width:30%;height:4em;margin:1px;}
-	.flex{display :flex;}
-	.btn{font-size:13px;}
-	#btn{background-color:skyblue;width:90%;}
-	.temp{background-color:yellow;}
-	#clrbtn{background-color:pink;}
-	#msg{font-size:0.5em;}
-	h1{font-size:0.5em;background-color:#999;color:white;text-align:center;}
-	#download{display:block;line-height:50px;text-decoration:none;text-align:center;background-color:#aaa;color:white;}
-</style>
-<script type="text/javascript" src="jquery-1.11.1.js"></script>
-<div id=wrap>
-	<h1>簡易テキストエディタβ版</h1>
-	<div id=outer>
-		<textarea id=editor contenteditable></textarea>
-	</div>
-	<p class=flex>
-		<button id="btn" class="btn">別窓閲覧</button>
-		<a class="temp btn" id="download" href="#" download="noname.html" onclick="dl()">DL</a>
-		<button id="temp1" class="temp btn">マークアップ</button>
-		<button id="temp2" class="temp btn">CSS<wbr>①②</button>
-		<button id="temp3" class="temp btn">CSS<wbr>③④⑤ JS③</button>
-		<button id="temp4" class="temp btn">JS①②</button>
-		<button id="clrbtn" class="btn">ソース消去</button>
-	</p>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>入力</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			#wrap{
+				background-color: black;
+			}
+			#outer{
+				width:calc(100% - 1px);
+				height:calc(100vh - 200px);
+				overflow:scroll;
+				padding:5px;
+				box-sizing:border-box;
+				background-color:#333;
+				display:flex;
+			}
+			#editor{
+				flex:1;
+				font-size:20px;
+				height:5000px;width:100%;
+				display:block;
+				line-height:30px;
+				padding:0em;
+				font-family:menlo;
+				tab-size:2;
+				color:white;
+				text-shadow:2px 2px 2px black;
+				background:linear-gradient(#666 50%,#333 50%);
+				background-size:auto 60px;
+				border:none;
+				outline:none;
+			}
+
+			.flex{
+				display :flex;
+				width:100%;
+			}
+			.flex>*{
+				flex:1;
+				background-color:#eee;
+				border-style:solid;
+				border-width:1px;
+				border-color:black;
+				border-width:1px 0 1px 1px;
+				display:block;
+				line-height:2em;
+				font-weight: bold;
+				font-family:sans-serif;
+				background-color: #aaa;
+			}
+			.flex>button:last-of-type{border-right:1px solid black;}
+			.flex a{text-align:center;line-height:4em;}
+			
+		</style>
+		<script type="text/javascript" src="jquery-1.11.1.js"></script>
+	</head>
+	<body>
+		<h1>簡易テキストエディタ</h1>
+		<div id="wrap">
+			<div id="outer">
+				<textarea id="editor"></textarea>
+			</div>
+			<div class="flex">
+				<button id="browse">別窓閲覧</button>
+				<a id="download" href="#" download="noname.html" onclick="dl()">DL</a>
+				<button id="temp1">マークアップ</button>
+				<button id="temp2">CSS基本</button>
+				<button id="temp3">ボックス<br>モデル</button>
+				<button id="temp4">JavaScript</button>
+				<button id="clrbtn">コード消去</button>
+			</div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 	
-	<!-- DL -->
-	<script>
-		function dl() {
-			var content = $id("editor").value;
-			var blob = new Blob([ content ],{"type":"text/plain"});
-			$id("download").href = window.URL.createObjectURL(blob);
-		}
-	</script>
-	
-	<!-- /DL -->
-</div>
+		<script>
+			const EDITOR = document.getElementById("editor");
+			const BROWSE = document.getElementById("browse");
+			const DOWNLOAD = document.getElementById("download");
+			const TEMP1 = document.getElementById("temp1");
+			const TEMP2 = document.getElementById("temp2");
+			const TEMP3 = document.getElementById("temp3");
+			const TEMP4 = document.getElementById("temp4");
+			const CLRBtn = document.getElementById("clrbtn");
 
+			//作成中のコードが紛失しないよう保存・復元する
+			var content=localStorage.getItem("editor_contents");
+			if(content){EDITOR.value=content;}
 
-<script>
-var content=localStorage.getItem("editor_contents");
-if(content){$id("editor").value=content;}
+			EDITOR.addEventListener("mousemove",()=>{
+				localStorage.setItem(
+					"editor_contents",
+					EDITOR.value
+				);
+			});
 
-$id("btn").addEventListener("click",function(){
-	var editor = $id("editor");
-	editor =editor.value;
-	var w = window.open("","sample");
-	var doc=w.document;
-	doc.open();
-	doc.write(editor);
-	doc.close();
-});
+			//閲覧ボタン
+			BROWSE.addEventListener("click",()=>{
+				const DOC = window.open("","sample").document;
+				DOC.open();
+				DOC.write(EDITOR.value);
+				DOC.close();
+			});
 
-$id("editor").addEventListener("mousemove",function(){
-	localStorage.setItem("editor_contents",$id("editor").value);
-});
+			//DLボタン
+			function dl() {
+				let content = EDITOR.value;
+				let blob = new Blob([ content ],{"type":"text/plain"});
+				DOWNLOAD.href = window.URL.createObjectURL(blob);
+			}
 
-$id("clrbtn").addEventListener("click",function(){
-	localStorage.clear();
-	editor.value="";
-});
+			//削除ボタン
+			CLRBtn.addEventListener("click",()=>{
+				localStorage.clear();
+				EDITOR.value="";
+			});
 
+			//コードテンプレート
 
-$id("temp1").addEventListener("click",function(){
-	$id("editor").value
-=`<!DOCTYPE html>
+			TEMP1.addEventListener("click",()=>{
+				EDITOR.value =`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -97,12 +132,12 @@ $id("temp1").addEventListener("click",function(){
 	<body>
 
 	</body>
-</html>`;
-});
+</html>
+`;
+			});
 
-$id("temp2").addEventListener("click",function(){
-	$id("editor").value
-=`<!DOCTYPE html>
+			TEMP2.addEventListener("click",()=>{
+				EDITOR.value =`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -114,12 +149,12 @@ $id("temp2").addEventListener("click",function(){
 	<body>
 
 	</body>
-</html>`;
-});
+</html>
+`;
+			});
 
-$id("temp3").addEventListener("click",function(){
-	$id("editor").value
-=`<!DOCTYPE html>
+			TEMP3.addEventListener("click",()=>{
+				EDITOR.value =`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -138,12 +173,12 @@ $id("temp3").addEventListener("click",function(){
 	<body>
 		<div id="box1">CSS3デザイン</div>
 	</body>
-</html>`;
-});
+</html>
+`;
+			});
 
-$id("temp4").addEventListener("click",function(){
-	$id("editor").value
-=`<!DOCTYPE html>
+			TEMP4.addEventListener("click",()=>{
+				EDITOR.value =`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -157,31 +192,28 @@ $id("temp4").addEventListener("click",function(){
 		
 		</sc`+`ript>
 	</body>
-</html>`;
-});
+</html>
+`;
+			});
 
-
-function $id(id){
-	return document.getElementById(id);
-}
-
-$(function(){
-$("textarea").on('keydown', function(e){
-	// tabキー押下時の対応
-	if (e.which == 9 || e.keyCode == 9) {
-		e.preventDefault();
-		var pos = this.selectionStart;
-		var text = $(this).val();
-		// tabの挿入
-		$(this).val(text.substr(0,pos) + '\t' + text.substr(pos, text.length));
-		// カーソルの場所を移動
-		this.setSelectionRange(pos + 1, pos + 1);
-		}
-	});
-});
-
-</script>
-
+			//タブキーをtextarea内で有効にする。
+			//ここはjQueryを使用しているので改変不可。
+			$("textarea").on('keydown',function(e){
+				if (e.which == 9 || e.keyCode == 9) {
+					e.preventDefault();
+					let pos = this.selectionStart;
+					let text = $(this).val();
+					// tabの挿入
+					$(this).val(
+						text.substr(0,pos) + '\t' + text.substr(pos, text.length)
+					);
+					// カーソルの場所を移動
+					this.setSelectionRange(pos + 1, pos + 1);
+				}
+			});
+		</script>
+	</body>
+</html>
 
 
 

@@ -1,222 +1,131 @@
 <!DOCTYPE html>
-<meta charset=utf-8>
-<meta name="viewport" content="width=device-width">
-<title>PI</title>
-<style>
-	*{margin:0;padding:0;text-decoration:none;list-style:none;}
-	body{background-color:#eee;}
-	#wrap{}
-	
-	h1,p,li{
-		text-shadow:10px 10px 2px #ccc;
-		text-align:center;
-		font-size:100px;
-		line-height:120px;
-	}
-	.page{
-		border-bottom:4px solid #ccc;
-	}
-	
-	a{color:red;}
-	a:hover{
-		transform:rotate(20deg);
-	}
-
-</style>
-
-<div id=wrap>
-	<!--div id=p1 class=page>
-		<h1>質問</h1>
-		<p>円周率を求めましょう</p>
-	</div>
-	
-	<div id=p2 class=page>
-		<h1>こたえ</h1>
-		<p>Math.PI</p>
-	</div>
-	
-	<div id=p3 class=page>
-		<p>それじゃ<br>面白くない<br>HTML5で<br>求めてみる</p>
-	</div>
-	
-	<div id=p4 class=page>
-		<p>必要なもの</p>
-		<ul>
-			<li>★ canvas API</li>
-		</ul>
-	</div-->
-		
-	<div id=p5  class=page>
-		<style scoped>
-			#p5wrap{
-				width:402px;
-				margin:0 auto;
-			}
-			#p5 #center{
-				position:relative;
-				width:400px;
-				height:400px;
-				margin:0 auto;
-				margin:10px 0;
-			}
-			
-			#p5 #center:after{
-				content:"";display:block;clear:both;
-			}
-			
-			#p5 canvas{
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PI</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../../sample.css">
+		<style>
+			#canvas{
 				display:block;
-				position:absolute;
+				margin:0 auto;
 				top:0;left:0;
-				border:1px solid red;
+				border:1px solid black;
 			}
 
-			#p5 #canvas{
-				background-color:white;
-				box-shadow:10px 10px 2px #aaa;
 
+			#info{
+				width:400px;
+				margin:1em auto;
+				border-style:solid;
+				border-color:gray;
+				border-width:0 1px 1px 0;
 			}
-			#p5 #canvas1{
-				border:1px solid gray;
+			
+			#info tr{display:flex;}
+			#info th,#info td{
+				flex:1;
+				padding:0.5em;
+				border-style:solid;
+				border-color:gray;
+				border-width:1px 0 0 1px;
+				min-height:2em;
 			}
-			#p5 #info{
-				font-size:35px;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				text-align:left;
+			td{
+				text-align:right;
 			}
-			#p5 #gatling{
-				font-size:20px;
-			}
-			#p5 #pi{color:red;font-size:40px;line-height:1.2em;margin:0;}
-			#p5 #cal{font-size:30px;line-height:1.2em;}
-			#p5 #gosa{color:red;font-size:30px;line-height:1.2em;}
+
 		</style>
-		<div id=p5wrap>
-			<div id=info>
-				<div id=pi>円周率は</div>
-				<p id=cal>=4*(円面積)/(矩形面積)</p>
-				<p id=gosa>(誤差)</p>
-			</div>
-			<div id=center>
-				<canvas id=canvas width=400 height=400></canvas>
-				<canvas id=canvas1 width=400 height=400></canvas>
-			</div>
-			<button id=gatling>ゴムゴムのガトリング</button>
+	</head>
+
+	<body>
+		<h1>円周率の計算(モンテカルロ法)</h1>
+		<div id="wrap">
+			<canvas id="canvas" width="400" height="400"></canvas>
+
+			<table id="info">
+				<tr>
+					<th>ヒット(1)</th>
+					<th>トータル(2)</th>
+					<th>4*(1)/(2)</th>
+					<th>πとの差</th>
+				</tr>
+				<tr>
+					<td id="hit"></td>
+					<td id="total"></td>
+					<td id="cal"></td>
+					<td id="gosa"></td>
+				</tr>
+			</table>
 		</div>
-	</div>
 	
-	<!--div id=p6 class=page>
-		<style scoped>
-			#p6 ul{
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+	
+		<script>
+			const CANVAS = document.getElementById("canvas");
+			const CTX = CANVAS.getContext("2d");
+			const sound = new Audio("gatling.mp3");
+			const HIT = document.getElementById("hit");
+			const TOTAL = document.getElementById("total");
+			const CAL = document.getElementById("cal");
+			const GOSA = document.getElementById("gosa");
+
+			CTX.beginPath();
+			CTX.arc(200,200,200,0,2*Math.PI);
+			CTX.lineWidth=5;
+			CTX.strokeStyle="rgba(0,0,0,0.5)";
+			CTX.stroke();
+
 			
-				perspective:80px;
-			}
-			#p6 li{transition:all 1s ease;}
-			#p6 li:hover{transform:rotateX(360deg);}
-		</style>
-		<h1>絶賛募集</h1>
-		<ul>
-			<li><a href="http://9-bit.jp/archives/154695/%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBd%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3-%E3%82%B4%E3%83%A0%E3%82%B4%E3%83%A0%E3%81%AE%E9%8A%83%E4%B9%B1%E6%89%93%EF%BC%88%E3%82%AC%E3%83%88%E3%83%AA%E3%83%B3">手伝ってください</a></li>
-		</ul>
-	</div-->
-	
-	
-</div>
+			let hit = 0; //円内の数
+			let total = 0;　//試行回数
+			let w = 40;	//マークの大きさ
 
-<script>
-	function $(id){return document.getElementById(id);}
-	var c=$("canvas").getContext("2d");
+			CANVAS.addEventListener("click",()=>{
+				sound.currentTime=0;
+				sound.play();
 
-	var total=0;
-	var p=0;
-	var w=40;
-	
-	var sound=new Audio("gatling.mp3");
-		
-	function anime(){
-		
-		sound.pause();
-		sound.currentTime=0;
-		sound.play();
-		
-			
-		var x=Math.random()*400;
-		var y=Math.random()*400;
-		
-		var color="rgba("
-			+Math.floor(Math.random()*(255/3)*3)+","
-			+Math.floor(Math.random()*(255/3)*3)+","
-			+Math.floor(Math.random()*(255/3)*3)+",1"
-		+")";
+				let x　=　Math.random()*400;
+				let y　=　Math.random()*400;
+				
+				let color="rgba("
+					+Math.floor(Math.random()*(255/3)*3)+","
+					+Math.floor(Math.random()*(255/3)*3)+","
+					+Math.floor(Math.random()*(255/3)*3)+",1"
+				+")";
+
+				CTX.save();
+				CTX.beginPath();
+				CTX.translate(Math.floor(x),Math.floor(y));
+				CTX.rotate(Math.random()*2*Math.PI);
+				CTX.font = w+"px serif";
+				CTX.strokeStyle = "white";
+				CTX.lineWidth = 1;
+				CTX.strokeText("★",-w/2+1,w/2+1);
+				CTX.fillStyle = color;
+
+				CTX.fillText("★",-w/2,+w/2);
+				CTX.restore();
+
+				total++;
+
+				if(Math.pow(x-200,2)+Math.pow(y-200,2)<Math.pow(200,2)){
+					hit++;
+				}
+				HIT.innerHTML = hit; 
+				TOTAL.innerHTML = total;
+				CAL.innerHTML = hit/total*4;
+				GOSA.innerHTML = Math.abs(100-(hit/total*4)/Math.PI*100).toFixed(3)+"%";
+			});
 
 
-		c.save();
-		c.beginPath;
-		c.translate(Math.floor(x),Math.floor(y));
-		c.rotate(Math.random()*2*Math.PI);
-		c.font=w+"px serif";
-		c.strokeStyle="white";
-		c.lineWidth=1;
-		c.strokeText("★",-w/2+1,w/2+1);
-		c.fillStyle=color;
 
-		c.fillText("★",-w/2,+w/2);
-		c.restore();
 
-		total++;
-		if(Math.pow(x-200,2)+Math.pow(y-200,2)<Math.pow(200,2)){
-		 p++;
-		}
-		$("info").innerHTML 
-			= "<div id=pi>"+(p/total*4)+"</div>"
-			+"<p id=cal>=4 × "+p+" ÷ "+total+"</p>"
-			+"<p id=gosa>("+Math.abs(100-(p/total*4)/Math.PI*100).toFixed(3)+"%)</p>";
-		/*	
-		if(Math.floor(p/total*4 *1000)/1000 == 3.141){
-			clearInterval(timer);
-			done=false;
-		}
-		*/
-	}
-</script>
+		</script>
 
-<script>
-	var c1=$("canvas1").getContext("2d");
-	c1.beginPath();
-	c1.arc(200,200,200,0,2*Math.PI);
-	c1.lineWidth=5;
-	c1.strokeStyle="rgba(0,0,0,0.5)";
-	c1.stroke();
-</script>
 
-<script>
 
-	var done=false;
-	$("gatling").addEventListener("mousedown",function(){
-		anime();
-		if(10<=p){done=true;}
-	});
-	var timer;
-	$("canvas1").addEventListener("mouseover",function(){
-		if(done){timer=setInterval(anime,30);}
-	});
-	$("canvas1").addEventListener("mouseout",function(){
-		clearInterval(timer);
-	});
-</script>
-
-<script>
-var pg=document.getElementsByClassName("page");
-for(var i=0;i<pg.length;i++){
-	pg[i].style.height=window.innerHeight+"px";
-}
-
-window.addEventListener('resize',function(){
-	for(var i=0;i<pg.length;i++){
-		pg[i].style.height=window.innerHeight+"px";
-	}
-});
-
-</script>
+	</body>
+</html>

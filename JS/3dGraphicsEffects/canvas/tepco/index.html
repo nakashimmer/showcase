@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>リアルタイムグラフ</title>
-	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
-	<style>
-	#wrap{text-align:center;}
-	canvas{background-color:skyblue;}
-	</style>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>グラフ</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			#canvas{
+				display:block;
+				margin:0 auto;
+				background-color:skyblue;
+			}
+		</style>
+	</head>
 <body>
 	<div id=jsonp></div>
-	
-	<div id="wrap">
-		<header>
-			<h1>東京電力<br>電力使用量グラフ</h1>
-		</header>
-
-		<main>
-			<canvas id=canvas width=400 height=400></canvas>
-			<div id=info></div>
-		</main>
+		<h1>東京電力 電力使用量グラフ</h1>
+		<div id="wrap">
+			<canvas id="canvas" width="400" height="400"></canvas>
+			<div id="info"></div>
+		</div>
 		<footer>
-			<small>(C)2015 Nakashima.</small>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
 		</footer>
-	</div>
-	
-	<script>
-		var script=document.createElement("script");
-		script.src = "https://tepco-usage-api.appspot.com/latest.json?callback=jsonmsg";
-		document.getElementById("jsonp").appendChild(script);
+
 		
-		var capacity=0;
-		var usage=0;
-		function jsonmsg(e){
-			capacity=e.capacity;
-			usage=e.usage;
-			document.getElementById("info").innerHTML="使用量="+usage+",最大="+capacity;
+		<script>
+			const JSONP = document.getElementById("jsonp");
+			const INFO = document.getElementById("info");
+
+			const CANVAS = document.getElementById("canvas");
+			const CTX=canvas.getContext("2d");
+
+			const SCRIPT = document.createElement("script");
+			SCRIPT.src = "https://tepco-usage-api.appspot.com/latest.json?callback=jsonmsg";
+			JSONP.appendChild(SCRIPT);
 			
-			var canvas=document.getElementById("canvas");
-			var ctx=canvas.getContext("2d");
-			
-			ctx.clearRect(0,0,400,400);
-			ctx.beginPath();
-			ctx.moveTo(200,200);
-			ctx.arc(200,200,155,0,2*Math.PI,false);
-			ctx.closePath();
-			ctx.fillStyle="yellow";
-			ctx.fill();
-			
-			ctx.beginPath();
-			ctx.moveTo(200,200);
-			ctx.arc(
-				200,200,150,0-0.5*Math.PI,
-				usage/capacity*2*Math.PI-0.5*Math.PI,
-				false);
-			ctx.closePath();
-			ctx.fillStyle="red";
-			ctx.fill();
-		}
-	</script>
-</body>
+			let capacity = 0;
+			let usage = 0;
+			function jsonmsg(e){
+				capacity = e.capacity;
+				usage = e.usage;
+				INFO.innerHTML = "使用量="+usage+",最大="+capacity;
+				
+				CTX.clearRect(0,0,400,400);
+				CTX.beginPath();
+				CTX.moveTo(200,200);
+				CTX.arc(200,200,155,0,2*Math.PI,false);
+				CTX.closePath();
+				CTX.fillStyle = "yellow";
+				CTX.fill();
+				
+				CTX.beginPath();
+				CTX.moveTo(200,200);
+				CTX.arc(
+					200,200,150,0-0.5*Math.PI,
+					usage/capacity*2*Math.PI-0.5*Math.PI,
+					false);
+				CTX.closePath();
+				CTX.fillStyle = "red";
+				CTX.fill();
+			}
+		</script>
+	</body>
 </html>
