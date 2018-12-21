@@ -11,6 +11,9 @@
 				margin:0 auto;
 				background-color:skyblue;
 			}
+			#info{
+				text-align:center;
+			}
 		</style>
 	</head>
 <body>
@@ -41,7 +44,7 @@
 			function jsonmsg(e){
 				capacity = e.capacity;
 				usage = e.usage;
-				INFO.innerHTML = "使用量="+usage+",最大="+capacity;
+				INFO.innerHTML = "使用量="+usage+"万kw／最大="+capacity+"万kw";
 				
 				CTX.clearRect(0,0,400,400);
 				CTX.beginPath();
