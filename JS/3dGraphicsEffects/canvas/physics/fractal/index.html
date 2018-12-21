@@ -12,6 +12,7 @@
 			}
 			#canvas1{
 				width:502px;
+				height:500px;
 				border:1px solid gray;
 			}
 			
@@ -34,7 +35,7 @@
 				<li>
 					<span>枝の比率</span>
 					<input type="range" min="0" max="1" value="0.7" step="0.1" id="scale">
-					<span id="scaleValue">70%</span>
+					<span id="scaleValue">0.7倍</span>
 				</li>
 				<li>
 					<span>広がり角度</span>
@@ -43,8 +44,8 @@
 				</li>
 				<li>
 					<span>枝の段数</span>
-					<input type="range" min="0" max="10" value="0" step="1" id="step">
-					<span id="stepValue">0段</span>
+					<input type="range" min="2" max="12" value="2" step="1" id="step">
+					<span id="stepValue">2段</span>
 				</li>
 			</ul>
 		</div>
@@ -60,7 +61,7 @@
 			let x=250;
 			let y=380;
 			let deg=0;
-			const rad=Math.PI/180;
+			const deg2rad=Math.PI/180;
 
 			const LEN = document.getElementById("len");			//枝の長さ(px)
 			let len = Number(LEN.value);
@@ -80,7 +81,7 @@
 
 			CTX.lineWidth = 3;
 			CTX.lineCap = "round";
-			CTX.strokeStyle = "red";
+			CTX.strokeStyle = "green";
 			draw(x,y,len,angle,step);
 			
 			LEN.addEventListener("change",()=>{
@@ -90,7 +91,7 @@
 			});
 			SCALE.addEventListener("change",()=>{
 				scale = Number(SCALE.value);
-				SCALEV.innerHTML=scale+"%";
+				SCALEV.innerHTML=scale+"倍";
 				draw(x,y,len,angle,step);
 			});
 			ANGLE.addEventListener("change",()=>{
@@ -109,7 +110,7 @@
 				CTX.clearRect(0,0,CANVAS1.width,CANVAS1.height);
 				deg=0;
 				let x2 = x;
-				let y2 = y - len*scale; //枝先のy座標
+				let y2 = y - len; //枝先のy座標
 				line(x,y,x2,y2);
 				fractal(x2,y2,len*scale,angle,step);
 				fractal(x2,y2,len*scale,-angle,step);
@@ -118,12 +119,16 @@
 			
 			//独自関数fractalの定義（x座標,y座標,長さ,角度,段数）
 			function fractal(x1,y1,len,deg,step) {
-				let x2=x1+len*Math.sin(deg*rad);
-				let y2=y1-len*Math.cos(deg*rad);
+				let rad = deg*deg2rad;
+				let x2=x1+len*Math.sin(rad);
+				let y2=y1-len*Math.cos(rad);
 				line(x1,y1,x2,y2);
-				if(1<=step){  
-					fractal(x2,y2,len*scale,deg-angle,step-1);
-					fractal(x2,y2,len*scale,deg+angle,step-1);
+
+				let len2=len*scale;
+				let step2=step-1;
+				if(3<=step){  
+					fractal(x2,y2,len2,deg-angle,step2);
+					fractal(x2,y2,len2,deg+angle,step2);
 				}
 			}
 
