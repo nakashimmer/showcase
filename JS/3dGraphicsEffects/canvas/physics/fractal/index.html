@@ -43,7 +43,7 @@
 				</li>
 				<li>
 					<span>枝の段数</span>
-					<input type="range" min="0" max="7" value="0" step="1" id="step">
+					<input type="range" min="0" max="10" value="0" step="1" id="step">
 					<span id="stepValue">0段</span>
 				</li>
 			</ul>
@@ -53,52 +53,56 @@
 		</footer>
 		
 		<script>
+			//初期設定
 			const CANVAS1 = document.getElementById("canvas1");
 			const CTX = CANVAS1.getContext("2d");
+	
+			let x=250;
+			let y=380;
+			let deg=0;
+			const rad=Math.PI/180;
 
-			//初期設定
-				let x=250;
-				let y=380;
-				let deg=0;
+			const LEN = document.getElementById("len");			//枝の長さ(px)
+			let len = Number(LEN.value);
+			const LENV = document.getElementById("lenValue");
+		
+			const SCALE = document.getElementById("scale");		//枝の短くなる比率
+			let scale = Number(SCALE.value);
+			const SCALEV = document.getElementById("scaleValue");
 
-				const LEN = document.getElementById("len");			//枝の長さ(px)
-				let len = Number(LEN.value);
-				const LENV = document.getElementById("lenValue");
+			const ANGLE = document.getElementById("angle");		//枝の角度(度)
+			let angle = Number(ANGLE.value)
+			const ANGLEV = document.getElementById("angleValue");
+
+			let STEP = document.getElementById("step");		//枝の広がり(度)
+			let step = Number(STEP.value);
+			const STEPV = document.getElementById("stepValue");
+
+			CTX.lineWidth = 3;
+			CTX.lineCap = "round";
+			CTX.strokeStyle = "red";
+			draw(x,y,len,angle,step);
 			
-				const SCALE = document.getElementById("scale");		//枝の短くなる比率
-				let scale = Number(SCALE.value);
-				const SCALEV = document.getElementById("scaleValue");
-
-				const ANGLE = document.getElementById("angle");		//枝の角度(度)
-				let angle = Number(ANGLE.value)
-				const ANGLEV = document.getElementById("angleValue");
-
-				let STEP = document.getElementById("step");		//枝の広がり(度)
-				let step = Number(STEP.value);
-				const STEPV = document.getElementById("stepValue");
-
+			LEN.addEventListener("change",()=>{
+				len = Number(LEN.value);
+				LENV.innerHTML = len+"px";
 				draw(x,y,len,angle,step);
-				
-				LEN.addEventListener("change",()=>{
-					len = Number(LEN.value);
-					LENV.innerHTML = len+"px";
-					draw(x,y,len,angle,step);
-				});
-				SCALE.addEventListener("change",()=>{
-					scale = Number(SCALE.value);
-					SCALEV.innerHTML=scale+"%";
-					draw(x,y,len,angle,step);
-				});
-				ANGLE.addEventListener("change",()=>{
-					angle = Number(ANGLE.value);
-					ANGLEV.innerHTML=angle+"度";
-					draw(x,y,len,angle,step);
-				});
-				STEP.addEventListener("change",()=>{
-					step = Number(STEP.value);
-					STEPV.innerHTML=(step)+"段";
-					draw(x,y,len,angle,step);
-				});
+			});
+			SCALE.addEventListener("change",()=>{
+				scale = Number(SCALE.value);
+				SCALEV.innerHTML=scale+"%";
+				draw(x,y,len,angle,step);
+			});
+			ANGLE.addEventListener("change",()=>{
+				angle = Number(ANGLE.value);
+				ANGLEV.innerHTML=angle+"度";
+				draw(x,y,len,angle,step);
+			});
+			STEP.addEventListener("change",()=>{
+				step = Number(STEP.value);
+				STEPV.innerHTML=(step)+"段";
+				draw(x,y,len,angle,step);
+			});
 
 			
 			function draw(x,y,len,angle,step){
@@ -111,25 +115,15 @@
 				fractal(x2,y2,len*scale,-angle,step);
 			}
 
+			
 			//独自関数fractalの定義（x座標,y座標,長さ,角度,段数）
 			function fractal(x1,y1,len,deg,step) {
-				let x2 = x1 + len*Math.sin(deg/180*Math.PI); //枝先のx座標
-				let y2 = y1 - len*Math.cos(deg/180*Math.PI); //枝先のy座標
+				let x2=x1+len*Math.sin(deg*rad);
+				let y2=y1-len*Math.cos(deg*rad);
 				line(x1,y1,x2,y2);
-
-				
-				console.log(
-					"1=("
-					+Math.floor(x1)+","
-					+Math.floor(y1)+"),2=("
-					+Math.floor(x2)+","
-					+Math.floor(y2)+"),deg:"
-					+deg
-				);
-				
-				if(1 <= step) {  
-					fractal(x2, y2, len*scale, (deg-angle), step-1);	//自分自身を呼び出す
-					fractal(x2, y2, len*scale, (deg+angle), step-1);	//自分自身を呼び出す
+				if(1<=step){  
+					fractal(x2,y2,len*scale,deg-angle,step-1);
+					fractal(x2,y2,len*scale,deg+angle,step-1);
 				}
 			}
 
@@ -138,9 +132,6 @@
 				CTX.beginPath();
 				CTX.moveTo(lx1,ly1)
 				CTX.lineTo(lx2,ly2);
-				CTX.lineWidth = 5;
-				CTX.lineCap = "round";
-				CTX.strokeStyle = "red";
 				CTX.stroke();
 			}
 		</script>
