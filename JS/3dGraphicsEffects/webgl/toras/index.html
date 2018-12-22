@@ -1,27 +1,43 @@
 <!DOCTYPE html>
-<meta charset="UTF-8" />
-<title>トーラス</title>
-<meta name="viewport" content="width=device-width">
-<style>
-body{
-	background-color:gray;
-}
-canvas{
-	display:block;
-	margin:0 auto;
-	background:url("bg.png") no-repeat;
-	background-position:center;
-	
-}
-</style>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>トーラス</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			body{
+				background-color:gray;
+			}
+			canvas{
+				display:block;
+				margin:0 auto;
+				background:url("bg.png") no-repeat;
+				background-position:center;
+			}
+			#range{
+				text-align:center;
+				top:50px;left:calc(50vw - 100px);
+				width:200px;
+			}
 
-<body>
-<script src="../threeJs/three.js"></script>
+		</style>
+		<script src="../threeJs/three.js"></script>
+	</head>
 
-<script>
+	<body>
+		<h1>トーラス</h1>
+		<div id="wrap"></div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+		
+		<script>
+			const WRAP=document.getElementById("wrap");
 //1.レンダラ
+			
 	//1-1レンダラの初期化
-			var renderer = new THREE.WebGLRenderer(
+			const renderer = new THREE.WebGLRenderer(
 				{ antialias:true }
 			);
 	//1-2描画領域の幅と高さ
@@ -29,15 +45,15 @@ canvas{
 	//1-3クリア色（0x16進数）
 			renderer.setClearColorHex(0x000000,0);
 	//1-4renderer設置
-			document.body.appendChild(renderer.domElement);
+			WRAP.appendChild(renderer.domElement);
 
 //2.シーン
 	//2-1シーンの作成
-			var scene = new THREE.Scene();
+			const scene = new THREE.Scene();
 	
 //3.カメラ
 	//3-1 奥行の深さと画面の縦横比を設定
-			var camera = new THREE.PerspectiveCamera(30, 600/600);
+			const camera = new THREE.PerspectiveCamera(30, 600/600);
 	//3-2 カメラ位置（x,y,z）
 			camera.position = new THREE.Vector3(0, 0, 20);
 	//3-3 回転の中心
@@ -47,49 +63,48 @@ canvas{
 
 //4.ライト
 	//4-1ライトの色
-			var light = new THREE.DirectionalLight(0xaaaaaa);
+			const light = new THREE.DirectionalLight(0xaaaaaa);
 	//4-2 ライト位置
 			light.position = new THREE.Vector3(1, 1, 1);
 	//4-3ライトをシーンに追加
 			scene.add(light);		
 	//4-4照り返し
-			var ambient = new THREE.AmbientLight(0x333333);
+			const ambient = new THREE.AmbientLight(0x333333);
 	//4-5照り返しをシーンに追加
 			scene.add(ambient);
 
 //5.物体
-    var maki=Math.floor(Math.random()*5)+1;
-    var shibori=Math.floor(Math.random()*5);
+			let maki=Math.floor(Math.random()*5)+1;
+			let shibori=Math.floor(Math.random()*5);
 		
 	//5-1-7トーラス結び目（半径、筒の厚み、横分割数、縦分割数、巻き数、絞り数）
-   //      var geometry = new THREE.CubeGeometry(2,2,4,1,1,1);
-           var geometry = new THREE.TorusKnotGeometry(1,0.2,240,240,maki,shibori);
+			const geometry = new THREE.TorusKnotGeometry(1,0.2,240,240,maki,shibori);
 	//5-2物体の質感
-			var material = new THREE.MeshPhongMaterial({
+			const material = new THREE.MeshPhongMaterial({
 				color:0xffffff, 			//物体の色
 				ambient:0xff0000,			//影の色
 				specular:0xffffff, 			//ハイライト色
 				shininess:50,				//ハイライトの大きさ
 				metal:false			        //金属質感true/false
-			 });
+			});
 	//5-3物体を生成
-			var mesh = new THREE.Mesh(geometry, material);
+			const mesh = new THREE.Mesh(geometry, material);
 	//5-4物体をシーンに追加
 			scene.add(mesh);
 
 
 //6.レンダリング
-			var baseTime = new Date();
+			const baseTime = new Date();
 			function render() {
 				requestAnimationFrame(render);	//アニメーション化
-				var t=((new Date()-baseTime)/1000)*Math.PI;
+				let t=((new Date()-baseTime)/1000)*Math.PI;
 				mesh.rotation.y = Math.PI/2*t;
-	//			mesh.rotation.x = Math.PI/5*t;
-        mesh.position.z = -12*Math.sin(t/3);
-        renderer.render(scene, camera);
-		}
-		render();
+				mesh.position.z = -12*Math.sin(t/3);
+				renderer.render(scene, camera);
+			}
+			render();
 
-</script>
-</body>
+
+		</script>
+	</body>
 </html>
