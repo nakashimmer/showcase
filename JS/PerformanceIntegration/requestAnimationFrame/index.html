@@ -15,6 +15,11 @@
 			#wrap p:last-of-type{
 				border-bottom:1px solid gray;
 			}
+			canvas{
+				width:100%;
+				display:block;
+				margin:1em 0;
+			}
 			button{
 				margin:5px;
 				padding: 3px;
@@ -64,12 +69,6 @@
 					loop();
 				}
 			});
-
-			STOP.addEventListener("click", ()=>{
-				window.cancelAnimationFrame(myLoop);
-				START.disabled = false;
-				STOP.disabled = true;
-			});
 			
 			function loop(){
 				myLoop = requestAnimationFrame(loop);
@@ -81,6 +80,12 @@
 				CTX.clearRect(0,0,500,10);
 				CTX.fillRect(0,0,i%500,10);
 			}
+
+			STOP.addEventListener("click", () => {
+				window.cancelAnimationFrame(myLoop);
+				START.disabled = false;
+				STOP.disabled = true;
+			});
 		</script>
 	</body>
 </html>
