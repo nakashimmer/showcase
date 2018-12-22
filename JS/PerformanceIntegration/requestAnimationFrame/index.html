@@ -1,78 +1,86 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>requestAnimationFrame API</title>
-<meta name=viewport content="width=500">
-<style>
-	*{margin:0;padding:0;
-		font-size:20px;
-	}
-	#wrap{width:500px;
-		margin:0 auto;
-	}
-	p{
-		text-align:right;
-		border:1px solid gray;
-		border-bottom:none;
-		padding:5px;
-	}
-	p:last-of-type{
-		border-bottom:1px solid gray;
-	}
-	button{margin:5px;}
-</style>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>requestAnimationFrame API</title>
+		<meta name=viewport content="width=500">
+		<link rel="stylesheet" href="../../../sample.css">
+		<style>
+			#wrap p{
+				text-align:right;
+				border:1px solid gray;
+				border-bottom:none;
+				padding:5px;
+			}
+			#wrap p:last-of-type{
+				border-bottom:1px solid gray;
+			}
+			button{
+				margin:5px;
+				padding: 3px;
+				border: 1px solid gray;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>requestAnimationFrame API</h1>
+		<div id="wrap">
+			
+			<p id="now">秒</p>
+			<p id="i">回</p>
+			<p id="ps">％</p>
+			<canvas width="500" height="10" id="canvas"></canvas>
+			<button id="start">スタート</button>
+			<button id="stop">ストップ</button>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://tokyoappwork.shop">東京アプリ・ワークショップ</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
 
-<div id=wrap>
-	<h1>requestAnimationFrame API</h1>
-	<button id=start>スタート</button>
-	<button id=stop>ストップ</button>
-	<p id=now>秒</p>
-	<p id=i>回</p>
-	<p id=ps>％</p>
-	<canvas width=500 height=10 id=canvas></canvas>
-</div>
+		<script>
+			const START = document.getElementById("start");
+			const STOP = document.getElementById("stop");
+			const NOW = document.getElementById("now");
+			const I = document.getElementById("i");
+			const PS = document.getElementById("ps");
+			
+			const CANVAS = document.getElementById("canvas");
+			const CTX = CANVAS.getContext("2d");
 
-<script>
-$("start").addEventListener("click",loopStart);
-$("stop").addEventListener("click",loopStop);
-
-var i;
-var myLoop;
-var startTime;
-var c=$("canvas").getContext("2d");
-$("stop").disabled="disabled";
-
-function loopStart(){
-	if(window.performance && performance.now){
-		startTime=performance.now();
-		i=0;
-		$("start").disabled=true;
-		$("stop").disabled=false;
-		loop();
-	}
-}
+			STOP.disabled = true;
+			let startTime;
 
 
-function loop(){
-	myLoop=requestAnimationFrame(loop);
-	var now=performance.now()-startTime;
-	$("now").innerHTML=(now/1000).toFixed(20)+"秒経過";
-	$("i").innerHTML=i+"回";
-	i++;
-	$("ps").innerHTML="一秒間に"+(i/(now/1000)).toFixed(20)+"回";
-	c.fillStyle="blue";
-	c.clearRect(0,0,500,10);
-	c.fillRect(0,0,i%500,10);
-}
+			let myLoop;
+			let i = 0;
+			CTX.fillStyle = "blue";
 
-function loopStop(){
-	window.cancelAnimationFrame(myLoop); 
-	$("start").disabled=false;
-	$("stop").disabled=true;
-}
+			START.addEventListener("click", ()=>{
+				if (window.performance && performance.now) {
+					startTime = performance.now();
+					i = 0;
+					START.disabled = true;
+					STOP.disabled = false;
+					loop();
+				}
+			});
 
-function $(id){
-	return document.getElementById(id);
-}
-</script>
-</body>
+			STOP.addEventListener("click", ()=>{
+				window.cancelAnimationFrame(myLoop);
+				START.disabled = false;
+				STOP.disabled = true;
+			});
+			
+			function loop(){
+				myLoop = requestAnimationFrame(loop);
+				let now = performance.now()-startTime;
+				NOW.innerHTML = (now/1000).toFixed(20)+"秒経過";
+				i++;
+				I.innerHTML = i+"回";
+				PS.innerHTML = "一秒間に"+(i/(now/1000)).toFixed(20)+"回";
+				CTX.clearRect(0,0,500,10);
+				CTX.fillRect(0,0,i%500,10);
+			}
+		</script>
+	</body>
 </html>
