@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width">
 		<link rel="stylesheet" href="../../../../../sample.css">
 		<style>
-			#canvas{display:block;}
+			#wrap{background-color:black;}
+			#canvas{display:block;border:1px solid gray;}
 			#range{width:100px;}
 		</style>
 	</head>
@@ -30,9 +31,9 @@
 			//⑧初期の背景色
 			CTX.fillStyle = "black";
 			CTX.fillRect(0,0,800,300);
-			CTX.globalAlpha = 0.5;
-			CTX.fillStyle = "blue";
-			CTX.fillRect(500,0,50,300);
+			CTX.globalAlpha = 1;
+			CTX.fillStyle = "yellow";
+			CTX.fillRect(500,290,50,300);
 			
 			//①canvasの座標の原点を左上から左下へ移動、およびy軸を反転して描画
 			CTX.translate(0,300);
@@ -65,8 +66,9 @@
 				CTX.globalAlpha=0.1;
 				CTX.fillStyle="black";
 				CTX.fillRect(0, 0, CANVAS.width, CANVAS.height);
-				CTX.fillStyle="blue";
-				CTX.fillRect(500,0,50,300);
+				CTX.globalAlpha = 1;
+				CTX.fillStyle="yellow";
+				CTX.fillRect(500,0,50,10);
 
 				//③白の丸を描画=======
 				CTX.globalAlpha=1;
