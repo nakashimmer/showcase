@@ -55,6 +55,7 @@ function nyuryoku(){
 		//認識文字列を加工
 		//①文字を書き換え
 		msg = rec.replace("中島","イケメン中島");
+		console.log(msg);
 		msg = rec.replace("なかしま","イケメン中島");
 		//②時間を回答
 		const now=new Date();
