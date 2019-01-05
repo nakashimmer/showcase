@@ -49,17 +49,15 @@ function nyuryoku(){
 
 	// 出力
 	RECOGNITION.addEventListener('result', (e)=>{
-		let rec = e.results.item(0).item(0).transcript;	//文字列抽出
-		let msg;
+		let msg = e.results.item(0).item(0).transcript;	//文字列抽出
 		
 		//認識文字列を加工
 		//①文字を書き換え
-		msg = rec.replace("中島","イケメン中島");
-		console.log(msg);
-		msg = rec.replace("なかしま","イケメン中島");
+		msg = msg.replace("中島","イケメン中島");
+		msg = msg.replace("なかしま","イケメン中島");
 		//②時間を回答
 		const now=new Date();
-		msg = rec.replace("何時",now.getHours()+"時"+now.getMinutes()+"分です");
+		msg = msg.replace("何時",now.getHours()+"時"+now.getMinutes()+"分です");
 
 		INPUT.value = msg;
 		setTimeout(mySpeech,1000);	//1秒後にmySpeechを起動
