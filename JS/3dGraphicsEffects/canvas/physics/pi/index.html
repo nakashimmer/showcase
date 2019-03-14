@@ -6,58 +6,71 @@
 		<meta name="viewport" content="width=device-width">
 		<link rel="stylesheet" href="../../../../../sample.css">
 		<style>
+			#wrap{
+				display:flex;
+			}
+			
 			#canvas{
+				width:400px;
 				display:block;
-				margin:0 auto;
-				top:0;left:0;
 				border:1px solid black;
 			}
 
 
 			#info{
-				width:400px;
-				margin:1em auto;
-				border-style:solid;
-				border-color:gray;
-				border-width:0 1px 1px 0;
-			}
-			
-			#info tr{display:flex;}
-			#info th,#info td{
 				flex:1;
+				margin-left:1em;
+			}
+			#info table{width:100%;}
+			#info th,
+			#info td{
 				padding:0.5em;
-				border-style:solid;
-				border-color:gray;
-				border-width:1px 0 0 1px;
-				min-height:2em;
+			}
+			table{
+			border-collapse: collapse;
+			}
+			th,td{
+				border:1px solid black;
+				
+			}
+			th{
+				width:6em;
 			}
 			td{
 				text-align:right;
 			}
-
+			::selection{background:none;}
+			button{margin:1em;}
+			#cal{text-align: left;}
 		</style>
 	</head>
 
 	<body>
 		<h1>円周率の計算(モンテカルロ法)</h1>
 		<div id="wrap">
-			<canvas id="canvas" width="400" height="400"></canvas>
+			<div>
+				<canvas id="canvas" width="400" height="400"></canvas>
+			</div>
 
-			<table id="info">
+			<div id="info">
+				<table>
 				<tr>
-					<th>ヒット(1)</th><td id="hit"></td>
+					<th>総数(1)</th><td id="total"></td>
+					
 				</tr>
 				<tr>
-					<th>トータル(2)</th><td id="total"></td>
+					<th>円中の数(2)</th><td id="hit"></td>
 				</tr>
 				<tr>
-					<th>4*(1)/(2)</th><td id="cal"></td>
+					<th>計算円周率値<br>=4*(2)/(1)</th><td id="cal"></td>
 				</tr>
 				<tr>
 					<th>πとの差</th><td id="gosa"></td>
 				</tr>
-
 			</table>
+			<p><button onclick="play();">自動実行</button>
+			<button onclick="pause()">一時停止</button></p>
+		</div>
 		</div>
 	
 		<footer>
@@ -67,7 +80,7 @@
 		<script>
 			const CANVAS = document.getElementById("canvas");
 			const CTX = CANVAS.getContext("2d");
-			const sound = new Audio("gatling.mp3");
+			//const sound = new Audio("gatling.mp3");
 			const HIT = document.getElementById("hit");
 			const TOTAL = document.getElementById("total");
 			const CAL = document.getElementById("cal");
@@ -75,18 +88,27 @@
 
 			CTX.beginPath();
 			CTX.arc(200,200,200,0,2*Math.PI);
-			CTX.lineWidth=5;
-			CTX.strokeStyle="rgba(0,0,0,0.5)";
+			CTX.lineWidth=1;
+			CTX.strokeStyle="rgba(0,0,0,1)";
 			CTX.stroke();
 
 			
 			let hit = 0; //円内の数
 			let total = 0;　//試行回数
-			let w = 40;	//マークの大きさ
+		//	let w = 40;	//マークの大きさ
 
-			CANVAS.addEventListener("click",()=>{
-				sound.currentTime=0;
-				sound.play();
+			CANVAS.addEventListener("click",pi);
+			var timer;
+			function play(){
+				timer=setInterval(pi,10);
+			}
+			function pause() {
+					clearInterval(timer);
+				}
+			
+			function pi(){
+			//	sound.currentTime=0;
+			//	sound.play();
 
 				let x　=　Math.random()*400;
 				let y　=　Math.random()*400;
@@ -101,13 +123,15 @@
 				CTX.beginPath();
 				CTX.translate(Math.floor(x),Math.floor(y));
 				CTX.rotate(Math.random()*2*Math.PI);
-				CTX.font = w+"px serif";
-				CTX.strokeStyle = "white";
-				CTX.lineWidth = 1;
-				CTX.strokeText("★",-w/2+1,w/2+1);
-				CTX.fillStyle = color;
+		//		CTX.font = w+"px serif";
+		//		CTX.strokeStyle = "white";
+		//		CTX.lineWidth = 1;
+		//		CTX.strokeText("★",-w/2+1,w/2+1);
 
-				CTX.fillText("★",-w/2,+w/2);
+				CTX.fillStyle = color;
+		//		CTX.fillText("★",-w/2,+w/2);
+				CTX.fillRect(-1,-1,1,1);
+
 				CTX.restore();
 
 				total++;
@@ -119,7 +143,7 @@
 				TOTAL.innerHTML = total;
 				CAL.innerHTML = hit/total*4;
 				GOSA.innerHTML = Math.abs(100-(hit/total*4)/Math.PI*100).toFixed(3)+"%";
-			});
+			};
 
 
 
