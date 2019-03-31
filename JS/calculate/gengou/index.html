@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset=utf-8>
-		<title>年号メーカ</title>
+		<title>新元号メーカー</title>
 		<meta name="viewport" content="width=device-width">
 		<style>
 			*{
@@ -33,7 +33,7 @@
 	</head>
 	<body>
 		<h1>新元号メーカー</h1>
-		<p>あなたの元号を<button onclick="gengo();">表示します</button></p>
+		<p>あなたの新元号を<button onclick="gengo();">表示します</button></p>
 		<div id=shikishi></div>
 		<div id="twitter"></div>
 		
@@ -51,7 +51,7 @@ function gengo(){
 	ssu.lang = "ja-JP";
 	speechSynthesis.speak(ssu);
 
-	TWITTER.innerHTML = '<a href="http://twitter.com/share?url=https://nakashimmer.github.io/showcase/JS/calculate/gengou/&hashtags=新元号メーカー&text=新しい元号は【'+kanji1+kanji2+'】です">シェアする</a>';
+	TWITTER.innerHTML = '<a href="http://twitter.com/share?url=https://nakashimmer.github.io/showcase/JS/calculate/gengou/&hashtags=新元号メーカー&text=私の新元号は【'+kanji1+kanji2+'】です">シェアする</a>';
 }
 
 
