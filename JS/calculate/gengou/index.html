@@ -33,7 +33,7 @@
 	</head>
 	<body>
 		<h1>私の新元号メーカー</h1>
-		<p>あなたの新元号を<button onclick="gengo();">表示します</button></p>
+		<p>あなたの新元号を<button onclick="gengo();">発表します</button></p>
 		<div id=shikishi></div>
 		<div id="twitter"></div>
 		
@@ -47,7 +47,7 @@ function gengo(){
 	let kanji2=kanji[Math.floor(Math.random()*kanji.length)];
 	SHIKISHI.innerHTML=kanji1 + "<br>" + kanji2;
 	
-	let ssu = new SpeechSynthesisUtterance("私の新元号は"+kanji1+kanji2+"です");
+	let ssu = new SpeechSynthesisUtterance("私の新元号は"+kanji1+kanji2+"であります");
 	ssu.lang = "ja-JP";
 	speechSynthesis.speak(ssu);
 
