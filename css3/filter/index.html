@@ -48,6 +48,7 @@
 					<li>ぼかし：<input type="range" min=0 max=100 step=1 value=0 id=i11></li>
 					<li>透明度：<input type="range" min=0 max=1 step=0.1 value=1 id=i12></li>
 					<li>画像URL：<input type="text" id=i13 value="img1.png"></li>
+					<li><button onclick="location.reload();">リセット</button></li>
 				</ul>
 			</div>
 
@@ -71,8 +72,7 @@
 			}
 			filterChange();		
 			function filterChange(){
-				let str = 
-`
+				let str = `
 	drop-shadow(`
 						+input[0].value+"px "
 						+input[1].value+"px "
