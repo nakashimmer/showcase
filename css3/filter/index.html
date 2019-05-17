@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Analytics --><script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>filter属性</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../sample.css">
+		<style>
+			#style1{
+				border:3px double green;
+				font-size:20px;
+			}
+			#box1{
+				width:300px;height:300px;margin:0 auto;
+				transition:all 0.3s linear;
+				background-image: url(img1.png);
+				background-size:100% 100%;
+				background-color: transparent;
+				filter:drop-shadow(0px 0px 0px gray);
+			}
+			input{width:100px;}
+
+			td{text-align:right;}
+		</style>
+	</head>
+	<body>
+		<h1>filter属性</h1>
+		<div id="wrap">
+			<div class="msg" style="display:flex;">
+				<pre style="flex:1;border:1px solid gray;padding:1em;"><code>#box{filter:<span id=dsv>***</span><br>}</code></pre>
+
+				<ul style="flex:1;">
+					<li>
+						影：<br>
+						x：<input type="range" min=0 max=200 step=10 value=0 id=i1><br>
+						y：<input type="range" min=0 max=200 step=10 value=0 id=i2><br>
+						ぼかし：<input type="range" min=0 max=200 step=10 value=0 id=i3><br>
+						色：<input type="color" id=i4>
+					</li>
+					<li>明るさ：<input type="range" min=0 max=300 step=10 value=100 id=i5></li>
+					<li>コントラスト：<input type="range" min=0 max=300 step=1 value=100 id=i6></li>
+					<li>グレイスケール：<input type="range" min=0 max=100 step=1 value=0 id=i6></li>
+					<li>彩度：<input type="range" min=0 max=300 step=1 value=100 id=i7></li>
+					<li>セピア：<input type="range" min=0 max=100 step=1 value=0 id=i8></li>
+					<li>色相反転：<input type="range" min=0 max=360 step=1 value=0 id=i9></li>
+					<li>階調反転：<input type="range" min=0 max=300 step=1 value=0 id=i10></li>
+					<li>ぼかし：<input type="range" min=0 max=100 step=1 value=0 id=i11></li>
+					<li>透明度：<input type="range" min=0 max=1 step=0.1 value=1 id=i12></li>
+					<li>画像URL：<input type="text" id=i13 value="img1.png"></li>
+				</ul>
+			</div>
+
+			<div class="sample">
+				<div id="box1"></div>
+			</div>
+		</div>
+
+		<footer>
+			<p><small>(C)
+					<a href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+
+		<script>
+			const box1 = document.getElementById("box1");
+			const input = document.getElementsByTagName("input");
+			const dsv = document.getElementById("dsv");
+
+			for(let i=0;i<input.length;i++){
+				input[i].addEventListener("change",filterChange);
+			}
+			filterChange();		
+			function filterChange(){
+				let str = 
+`
+	drop-shadow(`
+						+input[0].value+"px "
+						+input[1].value+"px "
+						+input[2].value+"px "
+						+input[3].value+`)
+	brightness(`+input[4].value+`%)
+	contrast(`+input[5].value+`%)
+	grayscale(`+input[6].value+`%)
+	saturate(`+ input[7].value +`%)
+	sepia(`+ input[8].value +`%)
+	hue-rotate(`+ input[9].value +`deg)
+	invert(`+ input[10].value +`%)
+	blur(`+ input[11].value +`px)
+	opacity(`+ input[12].value +`)`;
+				box1.style.filter=str;
+				dsv.innerHTML = str;
+
+				box1.style.backgroundImage="url("+input[13].value+")";
+
+				console.log();
+
+			}
+		</script>
+	</body>
+</html>
