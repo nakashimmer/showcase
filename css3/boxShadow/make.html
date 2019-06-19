@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Analytics --><script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>写真のピクセルを吸い上げる</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../sample.css">
+	</head>
+
+	<body>
+		<h1>ピクセル吸い上げ</h1>
+		<div id="wrap">
+
+			<canvas id="canvas" width="400" height="400"></canvas>
+			<img id="image" src="nakashima.png" style="display:none;">
+			<button onclick="get();">ゲット</button>
+
+			<p id="data">box-shadow:</p>
+
+		</div>
+		<footer>
+			<p><small>(C)
+					<a
+						href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a>・<a
+						href="https://webtechpromo.org">Web技術振興協会</a></small>
+			</p>
+		</footer>
+
+		<script>
+			const canvas = document.getElementById("canvas");
+			const context = canvas.getContext("2d");
+			const image = document.getElementById("image");
+			const data = document.getElementById("data");
+			image.onload = function () {
+				context.drawImage(image, 0, 0);
+			}
+			function get() {
+				let str = "";
+
+				for (let y = 0; y < 263; y++) {
+					for (let x = 0; x < 283; x++) {
+						let imagedata = context.getImageData(x, y, 1, 1);
+						let r = imagedata.data[0];
+						let g = imagedata.data[1];
+						let b = imagedata.data[2];
+						let a = imagedata.data[3];
+						str += x + "px " + y + "px 0px rgba(" + r + "," + g + "," + b + "," + a + "),<br>";
+					}
+					console.log("<" + y + ">");
+				}
+				data.innerHTML += str;
+			}
+
+		</script>
+
+	</body>
+</html>
