@@ -24,15 +24,16 @@
 				font-size: 16px;
 				font-family:sans-serif;
 				text-decoration: none;
+				color:#333;
 			}
 			#wrap{max-width:800px;margin:0 auto;}
 			header,footer{text-align: center;}
 			header h1{font-size:2em;line-height:5em;}
 			h2{font-size:1.2em;padding:0.3em;}
 			main>section{
-				border:1px solid #ccc;
+				
 				margin-bottom: 1em;
-				background-color: #eee;
+			
 			}
 
 			section section{margin:0.2em;}
@@ -60,11 +61,11 @@
 				content: counter(ctr1)"-"counter(ctr2)". " ;
 			}
 
-/*			h3{counter-reset: ctr4;}
+			h3{counter-reset: ctr4;}
 			h4:before{
 				counter-increment: ctr4;
 				content: counter(ctr4)". " ;
-			}*/
+			}
 
 			ol{counter-reset: ctr4;}
 			li:before{
@@ -72,20 +73,36 @@
 				content: counter(ctr4) ". " ;
 			}
 
-			li{display:flex;margin-left:1em;}
-			li>*{flex:1;}
+	
 			
-			h3,h4{display:inline;}
-			summary{outline:0;margin-left:1em;}
-			details[open] summary~*{
-				animation: sweep 1s ease-in-out;
-				animation-fill-mode: both;
+			main>section>section{
+				background-color: #eee;
+				display:flex;border:1px solid gray;
+				padding:0.5em;
+				margin-bottom:0.5em;
 			}
-			@keyframes sweep{
-				0%{opacity: 0;}
-				100%{opacity: 1;}
+
+
+
+			main>section>section>h3{flex:1;}
+			main>section>section>ol{flex:3;}
+
+			.js>h3{flex:1;}
+			.js>div{flex:3;}
+
+			ol>li{display:flex;}
+			ol>li>a{flex:1;}
+			ol>li>p{flex:2;}
+
+			a{text-decoration: underline;}
+
+			@media(max-width:800px){
+				main>section>section,
+				ol>li{
+					display:block;
+				}
+				ol>li>p{margin-left:2em;}
 			}
-			details details{margin-left:1em;}
 
 		</style>
 	</head>
@@ -101,164 +118,346 @@
 				<section>
 					<h2>HTML5のサンプル</h2>
 					<section>
-						<details>
-							<summary><h3>イントロ</h3></summary>
+						<h3>イントロ</h3>
+						<ol>
+							<li>
+								<a target="_blank" href="introHTML5/index.html">HTML5について</a>
+								<p>HTML,CSS,JavaScriptを簡単に解説しています							<a。</p>
+							</li>
+						</ol>
+					</section>
+				
+					<section>
+						
+							<h3>SEMANTICS</h3>
 							<ol>
-								<li><a target="_blank" href="introHTML5/index.html">HTML5について</a></li>
+								<li>
+									<a target="_blank" href="semantics/structure/index.html">ページの構造</a>
+									<p>一般的に「ホームページ」と言われるWebページを制作する際の要素です							<a</p>
+								</li>
+								<li>
+									<a target="_blank" href="semantics/element/index.html">新しい要素</a>
+									<p>HTML5の様々な要素を紹介しています							<a</p>
+								</li>
+								<li>
+									<a target="_blank" href="semantics/charset/index.html">UTF-8</a>
+									<p>HTML5で推奨している文字コード「UTF-8」です。あらゆる国の文字と「絵文字」を使用することが可能です。なお、HTML5には<a href="https://googlefonts.github.io/japanese/">Webフォント</a>というものもあります</p>
+								</li>
+								<li>
+									<a target="_blank" href="semantics/base64/index.html">base64で画像を表示</a>
+									<p>画像を（ファイルではなく）base64形式の文字列に変換したものを表示できます。ページのソースに埋め込むことが可能ですが、若干重くなることもあります</p>
+								</li>
 							</ol>
-						</details>
+						
 					</section>
 
 					<section>
-						<details>
-							<summary><h3>SEMANTICS</h3></summary>
+						
+							<h3>CSS3</h3>
 							<ol>
-								<li><a target="_blank" href="semantics/structure/index.html">ページの構造</a></li>
-								<li><a target="_blank" href="semantics/element/index.html">要素</a></li>
-								<li><a target="_blank" href="semantics/charset/index.html">UTF-8</a></li>
-								<li><a target="_blank" href="semantics/base64/index.html">base64で画像を表示</a></li>
+								<li>
+									<a target="_blank" href="css3/rule/gijiClass.html">擬似クラス</a>
+									<p>CSS側から要素を指定してスタイルを適用できます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/rule/ketugoushi.html">結合子</a>
+									<p>結合子を使って子孫、兄弟の要素を指定してスタイルを適用できます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/rule/yuusen.html">優先順位</a>
+									<p>「カスケーディング」とは、ある要素のあるプロパティに対する宣言が複数あるとき、宣言の優先順位を定め、うち1つの宣言だけ有効にするしくみです</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/rule/zokuseiSelector.html">属性セレクタ</a>
+									<p>属性の値によってCSSを適用させることができます。このサンプルはclass属性を使用しています</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/color/colorCode.html">16進数のカラーコード</a>
+									<p>redやgreenといったキーワードではなく、16進数の数字を使って色を指定することができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/color/hsl.html">HSLA</a>
+									<p>色相・彩度・明度・透明度で色を指定することができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/color/rgba.html">RGBA</a>
+									<p>赤、緑、青、透明度で色を指定することができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/filter/index.html">画像加工</a>
+									<p>filterプロパティは画像を加工することができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/rich/index.html">リッチなCSS</a>
+									<p>影・角丸・変形をCSSで体験することができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/rwd/index.html">レスポンシブWebデザイン</a>
+									<p>スマホやタブレットでも閲覧できるようにするデザインです</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/animation/CSSSanta/index.html">サンタ</a>
+									<p>CSSでアニメーションができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/animation/maruko/index.html">まるこ</a>
+									<p>画像を使用せずにキャラクタを描けます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/animation/scroll/index.html">ページスクロール</a>
+									<p>JavaScriptでスクロールの値を取得し、CSSをコントロールしています</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/animation/3d/cube/index.html">3Dキューブ</a>
+									<p>CSSでは三次元を表示できます。このサンプルは３次元でのアニメーションを表示しました</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/animation/3d/domino/index.html">3Dドミノ</a>
+									<p>このサンプルも三次元。ビュンビュン飛んでます</p>
+								</li>
+								<li>
+									<a target="_blank" href="css3/boxShadow/index.html">影で写真を表示</a>
+									<p>CSSでは要素に影を作れますが、その影はいくらでも追加できます。それを利用して、1px分の影を数限りなく用意し描画してみました。</p>
+								</li>
 							</ol>
-						</details>
+						
 					</section>
 
-					<section>
-						<details>
-							<summary><h3>CSS3</h3></summary>
-							<ol>
-								<li><a target="_blank" href="css3/rule/gijiClass.html">擬似クラス</a></li>
-								<li><a target="_blank" href="css3/rule/ketugoushi.html">結合子</a></li>
-								<li><a target="_blank" href="css3/rule/yuusen.html">優先順位</a></li>
-								<li><a target="_blank" href="css3/rule/zokuseiSelector.html">属性セレクタ</a></li>
-								<li><a target="_blank" href="css3/color/colorCode.html">カラーコード</a></li>
-								<li><a target="_blank" href="css3/color/hsl.html">HSLA</a></li>
-								<li><a target="_blank" href="css3/color/rgba.html">RGBA</a></li>
-								<li><a target="_blank" href="css3/filter/index.html">画像加工</a></li>
-								<li><a target="_blank" href="css3/rich/index.html">リッチなCSS</a></li>
-								<li><a target="_blank" href="css3/rwd/index.html">レスポンシブWebデザイン</a></li>
-								<li><a target="_blank" href="css3/animation/CSSSanta/index.html">サンタ</a></li>
-								<li><a target="_blank" href="css3/animation/maruko/index.html">まるこ</a></li>
-								<li><a target="_blank" href="css3/animation/scroll/index.html">ページスクロール</a></li>
-								<li><a target="_blank" href="css3/animation/3d/cube/index.html">3Dキューブ</a></li>
-								<li><a target="_blank" href="css3/animation/3d/domino/index.html">3Dドミノ</a></li>
-								<li><a target="_blank" href="css3/boxShadow/index.html">影で写真を表示</a></li>
-							</ol>
-						</details>
-					</section>
+					<section class="js">
+							<h3>JavaScript</h3>
+							<div>
+								<section>
+									
+										<h4>DOM</h4>
+										<ol>
+											<li>
+												<a target="_blank" href="JS/dom/html/index1.html">やまびこ</a>
+												<p>入力した値をそのまま返します。HTMLのタグが有効です。</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/dom/html/index2.html">大阪弁変換</a>
+												<p>文字列を置換することができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/dom/css/index1.html">CSS変化</a>
+												<p>JavaScriptでCSSをコントロールできます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/dom/css/index2.html">ページ遷移</a>
+												<p>JavaScriptはコンテンツをページごとに書き換えることができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/dom/css/index3.html">3Dコントロール</a>
+												<p>3次元のCSSアニメーションをキーでコントロールできます</p>
 
-					<section>
-						<details>
-							<summary><h3>JavaScript</h3></summary>
-							<section>
-								<details>
-									<summary><h4>DOM</h4></summary>
-									<ol>
-										<li><a target="_blank" href="JS/dom/html/index1.html">やまびこ</a></li>
-										<li><a target="_blank" href="JS/dom/html/index2.html">大阪弁変換</a></li>
-										<li><a target="_blank" href="JS/dom/css/index1.html">CSS変化</a></li>
-										<li><a target="_blank" href="JS/dom/css/index2.html">ページ遷移</a></li>
-										<li><a target="_blank" href="JS/dom/css/index3.html">3Dコントロール</a></li>
-									</ol>
-								</details>
-							</section>
-							<section>
-								<details>
-									<summary><h4>Calculate</h4></summary>
-									<ol>	
-										<li><a target="_blank" href="JS/calculate/kesan/index.html">計算</a></li>
-										<li><a target="_blank" href="JS/calculate/bmi/index.html">BMI</a></li>
-										<li><a target="_blank" href="JS/calculate/uranai/index.html">占い</a></li>
-										<li><a target="_blank" href="JS/calculate/janken/index.html">じゃんけん</a></li>
-										<li><a target="_blank" href="JS/calculate/countdown/index.html">カウントダウン</a></li>
-										<li><a target="_blank" href="JS/calculate/maimai/index.html">500px競争</a></li>
-									</ol>
-								</details>
-							</section>
-							<section>
-								<details>
-									<summary><h4>OFFLINE & STORAGE</h4></summary>
-									<ol>
-										<li><a target="_blank" href="JS/offlineStorage/localStorage/index.html">Local Storage</a></li>
-									</ol>
-								</details>
-							</section>
+											</li>
+										</ol>
+									
+								</section>
+								
+								<section>
+									
+										<h4>Calculate</h4>
+										<ol>	
+											<li>
+												<a target="_blank" href="JS/calculate/kesan/index.html">計算</a>
+												<p>JavaScriptはプログラミング言語ですから計算できます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/calculate/bmi/index.html">BMI</a>
+												<p>if文(もし〜のとき、〜する)を扱えます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/calculate/uranai/index.html">占い</a>
+												<p>乱数で診断アプリを作れます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/calculate/janken/index.html">じゃんけん</a>
+												<p>当然じゃんけんゲームも可能です</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/calculate/countdown/index.html">カウントダウン</a>
+												<p>時間を測ることもできます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/calculate/maimai/index.html">500px競争</a>
+												<p>いろいろ組み合わせることで、簡単なゲームができます</p>
+											</li>
+										</ol>
+									
+								</section>
 
-							<section>
-								<details>
-									<summary><h4>DEVICE ACCESS</h4></summary>
-									<ol>
-										<li><a target="_blank" href="JS/deviceAccess/camera/index.html">カメラ</a></li>
-										<li><a target="_blank" href="JS/deviceAccess/devicemotion/acceleration/index.html">重力加速度</a></li>
-										<li><a target="_blank" href="JS/deviceAccess/devicemotion/ufo/index.html">UFO</a></li>
-										<li><a target="_blank" href="JS/deviceAccess/gps/index.html">位置情報</a></li>
-										<li><a target="_blank" href="JS/deviceAccess/speechSynthesis/recognition/index.html">音声認識読み上げ</a></li>
-										<li><a target="_blank" href="JS/deviceAccess/speechSynthesis/ai/index.html">AI連携</a></li>
-										<li><a target="_blank" href="JS/deviceAccess/webaudio/synthesizer/index.html">シンセサイザ</a></li>
-									</ol>
-								</details>
-							</section>
+								<section>
+									
+										<h4>OFFLINE & STORAGE</h4>
+										<ol>
+											<li>
+												<a target="_blank" href="JS/offlineStorage/localStorage/index.html">Local Storage</a>
+												<p>Key-value方式でデータを貯蔵する「Webストレージ」があります。LocalStorageはブラウザの中に、オリジンごとにデータをずっと保管できます。</p>
+											</li>
+										</ol>	
+								</section>
 
-							<section>
-								<details>
-									<summary><h4>CONNECTIVITY</h4></summary>
-							</section>
+								<section>
+									
+										<h4>DEVICE ACCESS</h4>
+										<ol>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/camera/index.html">カメラ</a>
+												<p>PCなどのWebカメラの動画を取得できます。(要PCカメラ)</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/devicemotion/acceleration/index.html">重力加速度</a>
+												<p>スマホの重力加速度を利用した液体のシミュレーションです（要スマホ）</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/devicemotion/ufo/index.html">UFO</a>
+												<p>スマホの重力加速度を利用したUFOゲームです。（要スマホ）</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/gps/index.html">位置情報</a>
+												<p>PCやスマホのGPSを使って位置情報を取得し、そのデータをGoogle Mapへ送ることで地図を表示します。スマホの方がより多くのデータを取得します</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/speechSynthesis/recognition/index.html">テキストの読み上げと音声認識</a>
+												<p>テキストを読み上げたり、言葉を認識してくれます（要マイク）</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/speechSynthesis/ai/index.html">AI連携</a>
+												<p>音声でAIと会話できます。ただし、AIが覚えてしまうので、自己責任において、個人情報は一切しゃべらないでください。
+												</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/deviceAccess/webaudio/synthesizer/index.html">シンセサイザ</a>
+												<p>簡単なメロディは楽器がなくても、ファイルにしなくてもだせるようになりました</p>
+											</li>
+										</ol>
+									
+								</section>
 
-							<section>
-								<details>
-									<summary><h4>MULTIMEDIA</h4></summary>
-									<ol>
-										<li><a target="_blank" href="JS/multimedia/audio/index.html">オーディオ</a></li>	
-										<li><a target="_blank" href="JS/multimedia/video/index.html">ビデオ</a></li>	
-									</ol>
-								</details>
-							</section>
+								<section>
+										<h4>CONNECTIVITY</h4>
+								</section>
 
-							<section>
-								<details>
-									<summary><h4>3D, GRAPHICS & EFFECTS</h4></summary>	
-									<ol>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/heart/index.html">ハート</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/hscrolling/index.html">スクロール</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/oekaki/index.html">お絵かき</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/fractal/index.html">フラクタル</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index.html">放物線</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index2.html">放物ゲーム</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/pi/index.html">円周率</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/shonan/index.html">湘南</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/shuji/index.html">習字</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/simpleTeditor/index.html">テキストエディタ</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/tepco/index.html">電気使用量</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/touch/index.html">スマホタッチゲーム</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/whiteboard/index.html">ホワイトボード</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/canvas/zahyo/index.html">座標</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/co/index.html">CO</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/control/index.html">ドーナツ</a></li>
-										<li><a target="_blank" href="JS/3dGraphicsEffects/webgl/toras/index.html">トーラス</a></li>
-									</ol>
-								</details>
-							</section>
+								<section>
+										<h4>MULTIMEDIA</h4>
+										<ol>
+											<li>
+												<a target="_blank" href="JS/multimedia/audio/index.html">オーディオ</a>
+												<p>オーディオファイルの再生、スピード、ボリュームをコントロールできます。</p>
+											</li>	
+											<li>
+												<a target="_blank" href="JS/multimedia/video/index.html">ビデオ</a>
+												<p>映像ファイルの再生、スピード、ボリュームをコントロールできます。</p>
+											</li>	
+										</ol>
+									
+								</section>
 
-							<section>
-								<details>
-									<summary><h4>PERFORMANCE & INTEGRATION</h4></summary>
-									<ol>
-										<li><a target="_blank" href="JS/PerformanceIntegration/requestAnimationFrame/index.html">requestAnimationFrame</a></li>
-									</ol>
-								</details>
-							</section>
+								<section>
+									
+										<h4>3D, GRAPHICS & EFFECTS</h4>	
+										<ol>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/heart/index.html">ハート</a>
+												<p>Canvasは描画が可能です。それをJavaScriptでコントロールできます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/hscrolling/index.html">横スクロールゲーム</a>
+												<p>Canvasで横スクロールゲームを作ってみました。</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/oekaki/index.html">お絵かき</a>
+												<p>Canvasでお絵かきアプリができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/fractal/index.html">フラクタル</a>
+												<p>Canvasで数学のシミュレーションができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index.html">放物線</a>
+												<p>Canvasで物理のシミュレーションができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/parabola/index2.html">放物ゲーム</a>
+												<p>放物線でゲームを作りました</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/physics/pi/index.html">円周率</a>
+												<p>数学の円周率をモンテカルロ法で解きます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/shonan/index.html">湘南</a>
+												<p>Canvasで湘南の風景を描きました</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/shuji/index.html">習字</a>
+												<p>線の太さをコントロールして習字ができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/simpleTeditor/index.html">テキストエディタ</a>
+												<p>ソースコードの演習用のテキストエディタを作りました</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/tepco/index.html">電気使用量</a>
+												<p>他のサイトのデータをJSON形式で読み込めます。ここでは東京電力のデータをCanvasでグラフにしています</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/touch/index.html">スマホタッチゲーム</a>
+												<p>マリオ風の簡単なゲームです（要スマホ）</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/whiteboard/index.html">ホワイトボード</a>
+												<p>文字と線が書けるホワイトボードです</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/canvas/zahyo/index.html">座標</a>
+												<p>マウスポインタの座標を取得します</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/webgl/co/index.html">CO</a>
+												<p>WebGLを使えば三次元を表示できます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/webgl/control/index.html">ドーナツ</a>
+												<p>WebGLでドーナッツのシミュレーションができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/3dGraphicsEffects/webgl/toras/index.html">トーラス</a>
+												<p>WebGLでトーラスができます。リロードするごとに巻き数を変えています</p>
+											</li>
+										</ol>
+									
+								</section>
 
-							<section>
-								<details>
-									<summary><h4>Machine Learning</h4></summary>
-									<ol>
-										<li><a target="_blank" href="JS/machineLearning/yosoku/index.html">値を予測</a>
-										</li>
-										<li><a target="_blank" href="JS/machineLearning/pose/index.html">ポーズを予測</a>
-										</li>
-									</ol>
-								</details>
-							</section>
+								<section>
+									
+										<h4>PERFORMANCE & INTEGRATION</h4>
+										<ol>
+											<li>
+												<a target="_blank" href="JS/PerformanceIntegration/requestAnimationFrame/index.html">requestAnimationFrame</a>
+												JavaScriptでは、高速で動作する仕組みが備わっています。
+											</li>
+										</ol>
+									
+								</section>
 
-						</details>
+								<section>
+									
+										<h4>Machine Learning</h4>
+										<ol>
+											<li>
+												<a target="_blank" href="JS/machineLearning/yosoku/index.html">値を予測</a>
+												<p>TensorFlow.jsを用いれば、複数の(x,y)があればそれを学習し、「任意のxに対応するy」を求めることができます</p>
+											</li>
+											<li>
+												<a target="_blank" href="JS/machineLearning/pose/index.html">ポーズを予測</a>
+												<p>TensorFlowで骨格の位置を定めることができます。それをCanvasで棒人間として表示しています</p>
+											</li>
+										</ol>
+									
+								</section>
+						</div>
 					</section>
 				</section>
 					
@@ -266,68 +465,98 @@
 					<h2>HTML5で作られた外部サイト</h2>
 
 					<section>
-						<details>
-							<summary><h3>動画の背景</h3></summary>
+						
+							<h3>動画の背景</h3>
 							<ol>
-								<li><a target="_blank" href="http://ss14.soniaby.com/fr/home/">SONIA</a></li>
+								<li>
+									<a target="_blank" href="http://ss14.soniaby.com/fr/home/">SONIA</a>
+									<p>動画がメインのきれいなサイトです</p>
+								</li>
 							</ol>
-						</details>
+						
 					</section>
 					<section>
-						<details>
-							<summary><h3>シングルページ・パララックス・高級ペライチ</h3></summary>
+						
+							<h3>シングルページ・パララックス・ロングスクロールページ</h3>
 							<ol>
-								<li><a target="_blank" href="https://tokyomusicodyssey.jp/">Tokyo Music Odyssey</a></li>
-								<li><a target="_blank" href="http://www.buzzhook.co.jp/">buzzhook</a></li>
-								<li><a target="_blank" href="http://graphicnovel-hybrid4.peugeot.com/start.html">peugeot hybrid4</a></li>
+								<li>
+									<a target="_blank" href="https://tokyomusicodyssey.jp/">Tokyo Music Odyssey</a>
+									<p>コンテンツと背景がバラバラに動作し、縦にとても長いページです。</p>
+								</li>
 							</ol>
-						</details>
-					</section>
-
-					<section>
-						<details>
-							<summary><h3>３次元</h3></summary>
-							<ol>
-								<li><a target="_blank" href="http://www.findyourwaytooz.com/">find your way to oz</a></li>
-								<li><a target="_blank" href="https://2011.beercamp.com/">BEERCAMP</a></li>
-								<li><a target="_blank" href="http://helloracer.com/webgl/">helloracer</a></li>
-								<li><a target="_blank" href="http://www.madebyevan.com/webgl-water/">WebGL Water</a></li>
-							</ol>
-						</details>
+						
 					</section>
 
 					<section>
-						<details>
-							<summary><h3>Google doodles</h3></summary>
+						
+							<h3>３次元</h3>
 							<ol>
-								<li><a target="_blank" href="https://www.google.com/doodles?q=interactive">google Doodles</a></li>
-								<li><a target="_blank" href="https://www.google.com/doodles/roswells-66th-anniversary">UFO</a></li>
+								<li>
+									<a target="_blank" href="https://2011.beercamp.com/">BEERCAMP</a>
+									<p>スクロールすれば三次元的にコンテンツが変化します</p>
+								</li>
+								<li>
+									<a target="_blank" href="http://www.madebyevan.com/webgl-water/">WebGL Water</a>
+									<p>プールにボールが浮かんでいるシミュレーションです</p>
+									</li>
 							</ol>
-						</details>
+						
 					</section>
 
 					<section>
-						<details>
-							<summary><h3>WoT</h3></summary>
+						
+							<h3>Google doodles</h3>
 							<ol>
-								<li><a target="_blank" href="http://www.youtube.com/watch?v=5VQkIOMMV_o">Web of Things</a></li>
-								<li><a target="_blank" href="http://www.youtube.com/watch?v=WL0CqY2HwxY">ロボットアーム</a></li>
+								<li>
+									<a target="_blank" href="https://www.google.com/doodles/roswells-66th-anniversary">UFO</a>
+									<p>Googleの検索ページのロゴでHTML5を使ったものがよくでてきます</p>
+								</li>
 							</ol>
-						</details>
+						
+					</section>
+
+					<section>
+						
+							<h3>WoT</h3>
+							<ol>
+								<li>
+									<a target="_blank" href="http://www.youtube.com/watch?v=5VQkIOMMV_o">Web of Things</a>
+									<p>IoTのWeb版であるWoT(Web of Things)でセンサの値を取得したり、モータを動かすことができます</p>
+								</li>
+								<li>
+									<a target="_blank" href="http://www.youtube.com/watch?v=WL0CqY2HwxY">ロボットアーム</a>
+									<p>JavaScriptでプログラムを組み、サーボモータでロボットを動かすシミュレーションです</p>
+								</li>
+							</ol>
+						
 					</section>
 					<section>
-						<details>
-							<summary><h3>Canvas</h3></summary>
+						
+							<h3>Canvas</h3>
 							<ol>
-								<li><a target="_blank" href="https://appsweets.net/gradius/index.html">グラディウス</a></li>
-								<li><a target="_blank" href="https://www.afsgames.com/slider.htm">スライダーパズル</a></li>
-								<li><a target="_blank" href="http://slither.io/">ミミズ君</a></li>
-								<li><a target="_blank" href="http://js-racing.knockknock.jp:3000/">レーシング</a></li>
-								<li><a target="_blank" href="http://hexgl.bkcore.com/play/">３Dレーシング</a></li>
-								<li><a target="_blank" href="http://www.creative-forest.com/games/action/molebeat/molebeat.html">もぐらたたき</a></li>
-								<li><a target="_blank" href="http://www.kesiev.com/akihabara/demo/game-capman.html">Capman</a></li>
+								<li>
+									<a target="_blank" href="https://appsweets.net/gradius/index.html">グラディウス</a>
+									<p>昔懐かしのインベーダシューティングです</p>
+								</li>
+								<li>
+									<a target="_blank" href="http://slither.io/">ミミズ君</a>
+									<p>にょろにょろといたミミズ君のゲームです</p>
+								</li>
+
+								<li>
+									<a target="_blank" href="http://hexgl.bkcore.com/play/">３Dレーシング</a>
+									<p>Flashでもあったような三次元レーシングゲームです</p>
+								</li>
+								<li>
+									<a target="_blank" href="http://www.creative-forest.com/games/action/molebeat/molebeat.html">もぐらたたき</a>
+									<p>名前のとおりです</p>
+								</li>
+								<li>
+									<a target="_blank" href="http://www.kesiev.com/akihabara/demo/game-capman.html">Capman</a>
+									<p>パックマンのようなゲームです</p>
+								</li>
 							</ol>
-						</details>
+						
 					</section>
 				</section>
 
@@ -335,53 +564,79 @@
 					<h2>W3C関連</h2>
 
 					<section>
-						<details>
-							<summary><h3>W3C</h3></summary>
+						
+							<h3>W3C</h3>
 							<ol>
-								<li><a target="_blank" href="http://info.cern.ch/hypertext/WWW/TheProject.html">世界で最初のWeb</a></li>
-								<li><a target="_blank" href="https://www.w3.org/TR/html/">最新のHTML仕様</a></li>
-								<li><a target="_blank" href="https://www.w3.org/TR/html5-diff/">HTML5の差異</a></li>
-								<li><a target="_blank" href="https://www.w3.org/2003/glossary/">W3C用語集</a></li>
+								<li>
+									<a target="_blank" href="http://info.cern.ch/hypertext/WWW/TheProject.html">World Wide Web</a>
+									<p>世界で最初のWebページ(CERN研究所・ティム・バーナーズ=リー博士が中心になって開発)の復刻版です</p>
+								</li>
+								<li>
+									<a target="_blank" href="https://www.w3.org/TR/html/">HTML 5.2</a>
+									<p>HTML5の最新仕様です</p>
+								</li>
+								<li>
+									<a target="_blank" href="https://www.w3.org/TR/html5-diff/">HTML4との違い</a>
+									<p>HTML4とHTML5との違いを説明しています</p>
+								</li>
+								<li>
+									<a target="_blank" href="https://www.w3.org/2003/glossary/">W3C用語集</a>
+									<p>W3Cによる用語の説明です。ただし統制は取れていないので、あくまでも参考に</p>
+								</li>
 							</ol>
-						</details>
+						
 					</section>
 
 					<section>
-						<details>
-							<summary><h3>WHATWG</h3></summary>
+						
+							<h3>WHATWG</h3>
 							<ol>
-								<li><a target="_blank" href="https://whatwg.org/">WHATWG</a></li>
-								<li><a target="_blank" href="https://momdo.github.io/html/">日本語</a></li>
+								<li>
+									<a target="_blank" href="https://whatwg.org/">WHATWG</a>
+									<p>現在のHTML5の仕様を検討しているWHATWGのサイトです。<a target="_blank" href="https://momdo.github.io/html/">日本語はこちら</a></li>
 							</ol>
-						</details>
+						
 					</section>
 
 					<section>
-						<details>
-							<summary><h3>MDN</h3></summary>
+						
+							<h3>MDN</h3>
 							<ol>
-								<li><a target="_blank" href="https://developer.mozilla.org/ja/">Web Docs</a></li>
+								<li>
+									<a target="_blank" href="https://developer.mozilla.org/ja/">MDN Web Docs</a>
+									<p>Webに関する技術ドキュメントです。Mozzillaにより開始され、現在ではMicrosoft、Googleなども協力しています。
+									</p>
+									</li>
 							</ol>
-						</details>
+						
 					</section>
 				</section>
 
 				<section>
-					<h2>その他の参考リンク</h2>
-					<details>
-						<summary><h3>参考リンク</h3></summary>
+					<h2>その他</h2>
+					<section>
+						<h3>参考リンク</h3>
 						<ol>
-							<li><a target="_blank" href="https://webtechpromo.org">HTML5の検定</a></li>
-							<li><a target="_blank" href="https://html5experts.jp/">HTML5エキスパート</a></li>
-							<li><a target="_blank" href="https://ja.monaca.io/">ハイブリッドアプリ</a></li>
-							<li><a target="_blank" href="http://jsdo.it/nakashimmer/codes">jsdoit</a></li>
+							<li>
+								<a target="_blank" href="https://webtechpromo.org">Web技術振興協会</a>
+								<p>HTML5の検定団体です。<a target="_blank" href="https://www.amazon.co.jp/dp/4802096607/">標準教科書</a>はこちらです</p>
+							</li>
+							<li>
+								<a target="_blank" href="https://html5experts.jp/">HTML5エキスパート</a>
+							</li>
+							<li>
+								<a target="_blank" href="https://ja.monaca.io/">Monaca</a>
+								<p>スマホのアプリをHTML5の技術で作る「ハイブリッドアプリケーション」サイトのひとつです</p>
+							</li>
 						</ol>
-					</details>
+						</section>
+					
 				</section>
 			</main>
 			<footer>
-				<p>(C)<a href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a></p>
+				<p>(C)<a href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">まるごとどっぷりHTML5教室</a></p>
 			</footer>
 		</div>
+
 	</body>
 </html>

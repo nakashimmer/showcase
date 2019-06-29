@@ -10,40 +10,49 @@
 		<style>
 			#wrap{
 				display:flex;
+				background-color:#333;
+			}
+			#wrap *,input{
+				font-size:13px !important;
 			}
 
 			.control{
-				width:400px;
+				flex:1;
 				border-width:1px 0 0 1px;
 				border-style: solid;
 				border-color:gray;
-				height:calc(100vh - 8em);
+				
 				margin-right:0.2em;
 				text-align:center;
 				border-collapse:collapse;
-				background-color:rgba(255,255,255,0.7);
+				background-color:#666;
+				color:white;
 				overflow:scroll;
 			}
 			
-			.flex2{
-				flex:1;
-				z-index:1;
-				height:calc(100vh - 10em);
-				margin:0;
-			}
 
 			/*grid*/
 			.control{
 				display:grid;
 				grid-template-columns:2fr 1fr 1fr 2fr;
-
+				
 			}
 			.control>div{
 				border-width:0 1px 1px 0;
 				border-style: solid;
 				border-color:gray;
-				line-height:1.5em;
+
+				display:flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
 			}
+			.control>div{
+				display:inline;
+				padding-top: 5px;	
+			}
+
+
 
 			.control>div:nth-of-type(1){grid-row:1/3;}
 			.control>div:nth-of-type(2){grid-column:2/4;}
@@ -66,28 +75,33 @@
 			.control>div:nth-of-type(29){grid-column:2/4;}
 			.control>div:nth-of-type(31){grid-column:2/4;}
 			/*変形*/
-			.control>div:nth-of-type(33){grid-row:15/20;}
+			.control>div:nth-of-type(33){grid-row:15/22;}
 			.control>div:nth-of-type(37){grid-row:16/18;}
 			.control>div:nth-of-type(42){grid-row:18/20;}
 			/*移動*/
 			.control>div:nth-of-type(47){grid-row:20/22;}
-			.control>div:nth-of-type(48){grid-column:2/4;}
-			.control>div:nth-of-type(50){grid-column:2/4;}
+			.control>div:nth-of-type(48){grid-column:3/4;}
+			.control>div:nth-of-type(50){grid-column:3/4;}
 
 
 			.range{height:1em;border:none;width:50%;}
 			.color{height:1.5em;border:none;width:30%;}
 
-			.sample{
+			#sample{
+
+				background-color:#fff;
+				flex:1;
+				z-index:1;
+			
 				display:flex;
+				
 			  justify-content: center;
   			align-items: center;
 			}
+			
 			#box{
-
-				
 				border:10px solid #6666ff;
-				width:200px;height:200px;
+				width:150px;height:150px;
 				transition:all 1s ease;
 				background-image:url(mL.png);
 				background-size:100% 100%;
@@ -167,32 +181,32 @@
 				<div>変形<br>transform</div>
 
 					<div>回転<br>rotate</div>
-					<div>角度<br><span id=rotateDeg>0deg</span></div>
+					<div><span id=rotateDeg>0deg</span></div>
 					<div><input class="range" type="range" min="-180" max="180" value="0"  step="10" id="rotate"></div>
 
 					<div>伸縮<br>scale</div>
-						<div>横倍率<br><span id=scaleXN>1倍</span></div>
+						<div>x <span id=scaleXN>1倍</span></div>
 						<div><input class="range" type="range" min="-3" max="5" value="1" step="1" id="scaleX"></div>
 
-						<div>縦倍率<br><span id=scaleYN>1倍</span></div>
+						<div>y <span id=scaleYN>1倍</span></div>
 						<div><input class="range" type="range" min="-3" max="5" value="1" step="1" id="scaleY"></div>
 
 					<div>歪み<br>skew</div>
-						<div>横歪み<br><span id=skewXPx>0deg</span></div>
+						<div>x <span id=skewXPx>0deg</span></div>
 						<div><input class="range" type="range" min=-90 max=90 value="0"  step="10" id="skewX"></div>
 
-						<div>縦歪み<br><span id=skewYPx>0deg</span></div>
+						<div>y <span id=skewYPx>0deg</span></div>
 						<div><input class="range" type="range" min=-90 max=90 value="0"  step="10" id="skewY"></div>
 
 					<div>移動<br>translate</div>
-					<div>横移動 <span id=translateXPx>0px</span></div>
-					<div><input class="range" type="range" min="-800" max="800" value="0"  step="10" id="translateX"></div>
-		
-					<div>縦移動 <span id=translateYPx>0px</span></div>
-					<div><input class="range" type="range" min="-400" max="400" value="0"  step="10" id="translateY"></div>
+						<div>x <span id=translateXPx>0px</span></div>
+						<div><input class="range" type="range" min="-800" max="800" value="0"  step="10" id="translateX"></div>
+			
+						<div>y <span id=translateYPx>0px</span></div>
+						<div><input class="range" type="range" min="-400" max="400" value="0"  step="10" id="translateY"></div>
 			</div>
 		
-			<div class="flex2 sample">
+			<div id="sample">
 				<div id=box></div>
 			</div>
 		</div>
