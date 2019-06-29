@@ -7,54 +7,106 @@
 		<meta name="viewport" content="width=device-width">
 		<link rel="stylesheet" href="../../sample.css">
 		<style>
-			#style1{
-				border:3px double green;
-				font-size:20px;
+			#wrap{background-color: #ccc;margin-top:0;}
+
+			#ctrl{
+				flex:1;
+				background-color: #444;color:white;
+				padding:0.5em;
+				height:calc(100vh - 150px);
 			}
+			input{width:100px;}
+			input[type="color"]{width:50px;}
+			
+			pre{
+				border:1px solid gray;
+				padding:0.3em;
+				background-color: #eee;
+				color:black;
+			}
+
+			#sample{
+				flex:1;
+				background-color: #fff;
+				display:flex;
+				flex-direction:column;
+				justify-content: center;
+    		align-items: center; 
+				height:calc(100vh - 135px);
+			}
+
 			#box1{
-				width:300px;height:300px;margin:0 auto;
+				width:150px;height:150px;
 				transition:all 0.3s linear;
 				background-image: url(img1.png);
 				background-size:100% 100%;
 				background-color: transparent;
 				filter:drop-shadow(0px 0px 0px gray);
 			}
-			input{width:100px;}
 
-			td{text-align:right;}
 		</style>
 	</head>
 	<body>
 		<h1>filterプロパティ</h1>
-		<div id="wrap">
-			<div class="msg" style="display:flex;">
-				<pre style="flex:1;border:1px solid gray;padding:1em;"><code>#box{filter:<span id=dsv>***</span><br>}</code></pre>
-
-				<ul style="flex:1;">
-					<li>
-						影：<br>
-						x：<input type="range" min=0 max=200 step=10 value=0 id=i1><br>
-						y：<input type="range" min=0 max=200 step=10 value=0 id=i2><br>
-						ぼかし：<input type="range" min=0 max=200 step=10 value=0 id=i3><br>
-						色：<input type="color" id=i4>
-					</li>
-					<li>明るさ：<input type="range" min=0 max=300 step=10 value=100 id=i5></li>
-					<li>コントラスト：<input type="range" min=0 max=300 step=1 value=100 id=i6></li>
-					<li>グレイスケール：<input type="range" min=0 max=100 step=1 value=0 id=i6></li>
-					<li>彩度：<input type="range" min=0 max=300 step=1 value=100 id=i7></li>
-					<li>セピア：<input type="range" min=0 max=100 step=1 value=0 id=i8></li>
-					<li>色相反転：<input type="range" min=0 max=360 step=1 value=0 id=i9></li>
-					<li>階調反転：<input type="range" min=0 max=100 step=1 value=0 id=i10></li>
-					<li>ぼかし：<input type="range" min=0 max=100 step=1 value=0 id=i11></li>
-					<li>透明度：<input type="range" min=0 max=1 step=0.1 value=1 id=i12></li>
-					<li>画像URL：<input type="text" id=i13 value="img1.png"></li>
-					<li><button onclick="location.reload();">リセット</button></li>
-				</ul>
+		<div id="wrap"　 style="display:flex;">
+			<div id="ctrl">
+				<table>
+					<tr>
+						<th>影：</th>
+						<td>
+							x：<input type="range" min=-150 max=150 step=10 value=0 id=i1>
+							y：<input type="range" min=-200 max=200 step=10 value=0 id=i2><br>
+							ぼかし：<input type="range" min=0 max=30 step=1 value=0 id=i3>
+							色：<input type="color" value="#aaaaaa" id=i4>
+						</td>
+					</tr>
+					<tr>
+						<th>明るさ</th>
+						<td><input type="range" min=0 max=300 step=10 value=100 id=i5></td>
+					</tr>
+					<tr>
+						<th>コントラスト</th>
+						<td><input type="range" min=0 max=300 step=1 value=100 id=i6></td>
+					</tr>
+					<tr>
+						<th>グレイスケール</th>
+						<td><input type="range" min=0 max=100 step=1 value=0 id=i6></td>
+					</tr>
+						<th>彩度</th>
+						<td><input type="range" min=0 max=300 step=1 value=100 id=i7></td></td>
+					</tr>
+					<tr>
+						<th>セピア</th>
+						<td><input type="range" min=0 max=100 step=1 value=0 id=i8></td>
+					</tr>
+					<tr>
+						<th>色相反転</th>
+						<td><input type="range" min=0 max=360 step=1 value=0 id=i9></td>
+					</tr>
+					<tr>
+						<th>階調反転</th>
+						<td><input type="range" min=0 max=100 step=1 value=0 id=i10></td>
+					</tr>
+					<tr>
+						<th>ぼかし</th>
+						<td><input type="range" min=0 max=100 step=1 value=0 id=i11></td>
+					</tr>
+					<tr>
+						<th>透明度</th>
+						<td><input type="range" min=0 max=1 step=0.1 value=1 id=i12></td>
+					</tr>
+					<tr>
+						<th>画像URL</th>
+						<td><input type="text" id=i13 value="img1.png">
+						<button onclick="location.reload();">リセットボタン</button></li>
+				</table>
+				<pre><code>#box{filter:<span id=dsv>***</span><br>}</code></pre>
 			</div>
 
-			<div class="sample">
+			<div id="sample">
 				<div id="box1"></div>
 			</div>
+
 		</div>
 
 		<footer>
