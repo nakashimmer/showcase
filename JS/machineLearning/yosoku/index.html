@@ -9,57 +9,79 @@
 		
 		<style>
 			*{margin:0;padding:0;font-size:20px;}
-			table{
+			#table{
 				border-collapse: collapse;
+				display:flex;
+				width:800px;
+				border:3px solid black;
 			}
 			th,td{
-				border:1px solid gray;
+				border:1px solid black;
+				width:270px;
 			}
-			th{width:100px;}
-			td{width:200px;text-align:right;}
-			input{line-height:2em;padding:0.5em;
-				width:calc(100% - 1em);
+			td{text-align:right;}
+			input{line-height:2em;padding:1em;
+				width:calc(100% - 2em);
 				border:none;
 				text-align:right;
 			}
+			.ctr{
+				text-align:center;
+			}
+
+			.btn{
+				margin:0 auto;
+			}
+			button{
+				display:block;
+				border:1px solid gray;
+				background-color: pink;
+				margin:1em 0 0 auto;
+			}
+
 		</style>
 	</head>
 
 	<body>
-			<h1>値を予測</h1>
-			<div id="wrap">
-		<table>
-			<tr><th>s</th><th>X</th><th>Y</th></tr>
-			<tr><th>0</th>
-				<td><input type="text" class="x" value="-1"></td>
-				<td><input type="text" class="y" value="-3"></td>
-			</tr>
-			<tr><th>1</th>
-				<td><input type="text" class="x" value="0"></td>
-				<td><input type="text" class="y" value="-1"></td>
-			</tr>
-			<tr><th>2</th>
-				<td><input type="text" class="x" value="1"></td>
-				<td><input type="text" class="y"value="1"></td>
-			</tr>
-			<tr><th>3</th>
-				<td><input type="text" class="x" value="2"></td>
-				<td><input type="text" class="y" value="3"></td>
-			</tr>
-			<tr><th>4</th>
-				<td><input type="text" class="x" value="3"></td>
-				<td><input type="text" class="y" value="5"></td>
-			</tr>
-			<tr><th>5</th>
-				<td><input type="text" class="x"value="4"></td>
-				<td><input type="text" class="y" value="7"></td>
-			</tr>
-			<tr><th>?</th>
-				<td><input type="text" class="x" placeholder="調べたいXを指定"></td>
-				<td class="y">予測されたY</td>
-			</tr>
+		<h1>値を予測</h1>
+		<div id="wrap">
+			<table id="table">
+				<tr>
+					<th>s</th>
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+				</tr>
+				<tr>
+					<th>X</th>
+					<td><input type="text" class="x" value="-1"></td>
+					<td><input type="text" class="x" value="0"></td>
+					<td><input type="text" class="x" value="1"></td>
+					<td><input type="text" class="x" value="2"></td>
+					<td><input type="text" class="x" value="3"></td>
+					<td><input type="text" class="x" value="4"></td>
+					<td><input type="text" class="x ctr" placeholder="①x入力"></td>
+				</tr>
+
+				<tr>
+					<th>X</th>
+					<td><input type="text" class="y" value="-3"></td>
+					<td><input type="text" class="y" value="-1"></td>
+					<td><input type="text" class="y"value="1"></td>
+					<td><input type="text" class="y" value="3"></td>
+					<td><input type="text" class="y" value="5"></td>
+					<td><input type="text" class="y" value="7"></td>
+					<td class="y ctr">③予測値</td>
+				</tr>
 		</table>
-		<button onclick="tsr();">実行</button>
+
+		<p><button onclick="tsr();">②予測</button></p>
+		
+
 		</div>
 				<footer>
 					<p><small>(C)<a
@@ -71,6 +93,7 @@
 	<script>
 		const x = document.getElementsByClassName("x");
 		const y = document.getElementsByClassName("y");
+
 
 		function xf(i){return parseFloat(x[i].value);}
 		function yf(i){return parseFloat(y[i].value);}
@@ -127,6 +150,6 @@
 
 			learnLinear();
 			
-		}
+		}		
 	</script>
 <html>
