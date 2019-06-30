@@ -153,6 +153,10 @@ function drawLine(point1,point2,ctx,color,width) {
 		ctx.strokeStyle = color;
 		ctx.lineWidth=width;
 		ctx.lineCap="round";
+		ctx.shadowColor = "rgba(0, 0, 0,0.8)";
+		ctx.shadowOffsetX = 30;
+		ctx.shadowOffsetY = 30;
+		ctx.shadowBlur = 30;
 		ctx.lineTo(
 			800-Math.floor(point1.position.x/r)*r,
 			Math.floor(point1.position.y / r) * r);
