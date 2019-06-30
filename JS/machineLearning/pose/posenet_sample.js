@@ -99,17 +99,20 @@ function detectPoseInRealTime(video, net) {
     ctx.restore();
 
 		poses.forEach(({ s, keypoints }) => {
-			drawLine(keypoints[3], keypoints[4], ctx, "green",150);//輪郭
 
-			drawArc(keypoints[0], ctx,"yellow",20);//鼻
-			drawArc(keypoints[1], ctx, "blue",30);//右目
-			drawArc(keypoints[2], ctx, "blue",30);//左目
 
 			drawLine(keypoints[5], keypoints[6], ctx, "gray", 50);//肩
 			drawLine(keypoints[5], keypoints[7], ctx, "gray",10);//腕1
 			drawLine(keypoints[6], keypoints[8], ctx, "gray",10);//腕1
 			drawLine(keypoints[7], keypoints[9], ctx, "gray",10);//腕2
 			drawLine(keypoints[8], keypoints[10], ctx, "gray",10);//腕2
+
+			drawLine(keypoints[3], keypoints[4], ctx, "green", 150);//輪郭
+		
+			drawArc(keypoints[1], ctx, "blue", 30);//右目
+			drawArc(keypoints[2], ctx, "blue", 30);//左目
+
+			drawArc(keypoints[0], ctx, "yellow", 20);//鼻
 /*
 			drawLine(keypoints[5], keypoints[12], ctx, "gray", 50);//脇腹1
 			drawLine(keypoints[6], keypoints[11], ctx, "gray", 50);//脇腹1
@@ -141,13 +144,6 @@ function drawArc(point,ctx,color,width){
 }
 
 function drawLine(point1,point2,ctx,color,width) {
-	if(
-		0 < point1.position.x && point1.position.x < 800 &&
-		0 < point1.position.y && point1.position.y < 600 &&
-		0 < point2.position.x && point1.position.x < 800 &&
-		0 < point2.position.y && point1.position.y < 600 
-	){
-		
 		ctx.beginPath();
 		ctx.line = color;
 		ctx.strokeStyle = color;
@@ -164,7 +160,7 @@ function drawLine(point1,point2,ctx,color,width) {
 			800 - Math.floor(point2.position.x / r) * r,
 			Math.floor(point2.position.y / r) * r);
 		ctx.stroke();
-	}
+	
 }
 
 
