@@ -14,20 +14,27 @@
 				display:flex;
 				width:800px;
 				border:3px solid black;
+				border-right: none;
 			}
 			th,td{
 				border:1px solid black;
+				border-right:3px solid black;
 				width:270px;
 			}
-			td{text-align:right;}
-			input{line-height:2em;padding:1em;
+			th{background-color:#eee;}
+			td{text-align:right;padding:0.5em;}
+			tr:nth-of-type(1),
+			tr:nth-of-type(7){
+				border-bottom:5px double black;
+			}
+			input{
+				line-height:1em;
+				
 				width:calc(100% - 2em);
 				border:none;
 				text-align:right;
 			}
-			.ctr{
-				text-align:center;
-			}
+
 
 			.btn{
 				margin:0 auto;
@@ -45,37 +52,50 @@
 	<body>
 		<h1>値を予測</h1>
 		<div id="wrap">
+		<ol>
+			<li>① (x,y)の値のセットを1〜6まで設定する</li>
+			<li>② 7のxの値を入力し「予測」ボタンを押す</li>
+			<li>③ 7のyに予測値が表示される</li>
+		</ol>
+		
 			<table id="table">
 				<tr>
-					<th>s</th>
-					<th>1</th>
-					<th>2</th>
-					<th>3</th>
-					<th>4</th>
-					<th>5</th>
-					<th>6</th>
-					<th>7</th>
+					<th>学習回数</th><th>x値</th><th>y値</th>
 				</tr>
 				<tr>
-					<th>X</th>
+					<th>1回目</th>
 					<td><input type="text" class="x" value="-1"></td>
-					<td><input type="text" class="x" value="0"></td>
-					<td><input type="text" class="x" value="1"></td>
-					<td><input type="text" class="x" value="2"></td>
-					<td><input type="text" class="x" value="3"></td>
-					<td><input type="text" class="x" value="4"></td>
-					<td><input type="text" class="x ctr" placeholder="①x入力"></td>
-				</tr>
-
-				<tr>
-					<th>X</th>
 					<td><input type="text" class="y" value="-3"></td>
+				</tr>
+				<tr>
+					<th>2回目</th>
+					<td><input type="text" class="x" value="0"></td>
 					<td><input type="text" class="y" value="-1"></td>
-					<td><input type="text" class="y"value="1"></td>
+				</tr>
+				<tr>
+					<th>3回目</th>
+					<td><input type="text" class="x" value="1"></td>
+					<td><input type="text" class="y" value="1"></td>
+				</tr>
+				<tr>
+					<th>4回目</th>
+					<td><input type="text" class="x" value="2"></td>
 					<td><input type="text" class="y" value="3"></td>
+				</tr>
+				<tr>
+					<th>5回目</th>
+					<td><input type="text" class="x" value="3"></td>
 					<td><input type="text" class="y" value="5"></td>
+				</tr>
+				<tr>
+					<th>6回目</th>
+					<td><input type="text" class="x" value="4"></td>
 					<td><input type="text" class="y" value="7"></td>
-					<td class="y ctr">③予測値</td>
+				</tr>
+				<tr>
+					<th>予測</th>
+					<td><input type="text" class="x" placeholder="①"></td>
+					<td class="y">③予測値</td>
 				</tr>
 		</table>
 
