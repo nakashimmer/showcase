@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>互い違いに見えるけど実は同じ</title>
+	<link rel="stylesheet" href="../../../../sample.css">
+
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+		#wrap{width:460px;
+		margin:0 auto;}
+
+		.yoko {
+			margin: 20px;
+			height: 20px;
+			width: 410px;
+			background-color: black;
+		}
+
+		#yokos {
+			position: absolute;
+		}
+
+		.box {
+			width: 80px;
+			height: 50px;
+			position: absolute;
+			top: 20px;
+			animation: boxmove 3s linear 0s infinite alternate;
+		}
+
+		.yellow {
+			background-color: yellow;
+		}
+
+		.blue {
+			background-color: blue;
+		}
+
+		#box1 {
+			left: 30px;
+		}
+
+		#box2 {
+			left: 130px;
+		}
+
+		#box3 {
+			left: 230px;
+		}
+
+		#box4 {
+			left: 330px;
+		}
+
+		@keyframes boxmove {
+
+			100% {
+				top: 310px;
+	
+			}
+
+		}
+	</style>
+</head>
+
+<body>
+	<h1>錯覚</h1>
+	<div id="wrap">
+		<div id=yokos>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+			<div class=yoko></div>
+
+
+			<div id=box1 class="box yellow"></div>
+			<div id=box2 class="box blue"></div>
+			<div id=box3 class="box yellow"></div>
+			<div id=box4 class="box blue"></div>
+
+		</div>
+	</div>
+
+	<footer>
+		<p><small>(C)<a
+					href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a>・<a
+					href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+	</footer>
+
+	<script>
+		document.getElementById('helloWorld').innerHTML = 'Hello, World!';
+	</script>
+</body>
+
+</html>

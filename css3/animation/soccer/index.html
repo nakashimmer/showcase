@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>サッカーボール</title>
+	<link rel="stylesheet" href="../../../../sample.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+
+		body {
+			background-color: springgreen;
+			text-align: center;
+
+
+		}
+
+		#ball1 {
+			margin: 100px auto;
+			width: 200px;
+			height: 200px;
+			border-radius: 200px;
+			z-index: 1;
+			transition: transform 3s ease-in-out;
+			-webkit-box-reflect: below -10px linear-gradient(transparent 50% ,white);
+			transition: transform 3s ease-in-out;
+		}
+
+		#ball2 {
+			position: relative;
+			width: 200px;
+			height: 200px;
+			background-color: black;
+			border-radius: 100px;
+			border-radius: 200px;
+			overflow: hidden;
+			transition: transform 3s ease-in-out;
+		}
+
+		@keyframes japan {
+			0% {
+				background-color: black;
+			}
+
+			100% {
+				background-color: blue;
+			}
+		}
+
+		#s1 {
+			transform: rotate(0deg);
+		}
+
+		#s2 {
+			transform: rotate(72deg);
+		}
+
+		#s3 {
+			transform: rotate(144deg);
+		}
+
+		#s4 {
+			transform: rotate(216deg);
+		}
+
+		#s5 {
+			transform: rotate(288deg);
+		}
+
+		#s6 {
+			transform: rotate(360deg);
+		}
+
+		.s {
+			width: 0px;
+			height: 0px;
+			margin: 100px;
+		}
+
+		.s:before {
+			position: absolute;
+			top: 35px;
+			left: -49px;
+			z-index: -1;
+			width: 45px;
+			height: 0px;
+			content: "";
+			border-bottom: 35px solid white;
+			border-left: 26px solid transparent;
+			border-right: 26px solid transparent;
+		}
+
+		.s:after {
+			position: absolute;
+			top: 68px;
+			left: -49px;
+			z-index: -1;
+			width: 48px;
+			height: 1px;
+			content: "";
+			border-top: 29px solid white;
+			border-left: 24px solid transparent;
+			border-right: 25px solid transparent;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>サッカーボール</h1>
+	<div id="wrap">
+		<div id=ball1 onclick=kaiten()>
+			<div id=ball2>
+				<div id=s1 class=s></div>
+				<div id=s2 class=s></div>
+				<div id=s3 class=s></div>
+				<div id=s4 class=s></div>
+				<div id=s5 class=s></div>
+				<div id=s6 class=s></div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<p><small>(C)<a
+					href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a>・<a
+					href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+	</footer>
+	<script>
+		var f = 0;
+
+		const ball1=document.getElementById("ball1");
+		const ball2 = document.getElementById("ball2");
+		
+
+		function kaiten() {
+			if (f == 0) {
+				f = 1;
+				ball2.style.transform = "rotate(360deg) ";
+				ball1.style.transform = "translate(500px,0) ";
+			}
+
+			else if (f == 1) {
+				f = 2;
+				ball2.style.transform = "rotate(0deg) ";
+				ball1.style.transform = "translate(0,200px)  scale(1.5,1.5)";
+			}
+
+
+			else if (f == 2) {
+				f = 0;
+				ball2.style.transform = "rotate(-360deg) ";
+				ball1.style.transform = "translate(-500px,0) ";
+
+			}
+		}
+
+	</script>
+</body>
+
+</html>
