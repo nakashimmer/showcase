@@ -12,6 +12,8 @@
 				margin: 0;
 				padding: 0;
 				color: white;
+				font-size: 30px;
+				font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 			}
 		
 			body {
@@ -20,7 +22,7 @@
 		
 			h1 {
 				text-align: center;
-				font-size: 50px;
+				font-size: 40px;
 			}
 		
 			#wrap {
@@ -31,7 +33,7 @@
 			button {
 				line-height: 100px;
 				color: black;
-				font-size: 30px;
+				font-size: 20px;
 				border-radius: 10px;
 				margin: 10px;
 			}
@@ -46,8 +48,9 @@
 			}
 		
 			#remain {
-				font-size: 50px;
+				font-size: 40px;
 				margin: 10px;
+				text-align:center;
 			}
 		</style>
 </head>
@@ -64,7 +67,7 @@
 					<button onclick="timer(5);">５分</button>
 					<button onclick="timer(0);">クリア</button>
 				</div>
-				<p id=remain>残り時間</p>
+				<p id="remain">残り時間</p>
 			</main>
 		</div>
 		</body>
@@ -107,7 +110,7 @@
 								buttons[i].style.backgroundColor = "white";
 							}
 						}
-						remain.innerHTML = "残り時間：" + Math.floor(maxTime / 60) + "分" + Math.floor(maxTime % 60) + "秒";
+						remain.innerHTML =  Math.floor(maxTime / 60) + "分" + Math.floor(maxTime % 60) + "秒";
 					}
 				}
 			}
