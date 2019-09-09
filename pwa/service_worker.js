@@ -1,5 +1,6 @@
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
+	'/',
 	'/nakashimmer.github.io/showcase/pwa/'
 ];
 
