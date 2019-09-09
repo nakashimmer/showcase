@@ -1,7 +1,6 @@
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
-	'/',
-	'/nakashimmer.github.io/showcase/pwa/'
+	'https://nakashimmer.github.io/showcase/pwa/'
 ];
 
 // インストール処理
@@ -10,7 +9,7 @@ self.addEventListener('install', function (event) {
 		caches
 			.open(CACHE_NAME)
 			.then(function (cache) {
-				return cache.addAll(urlsToCache.map(url => new Request(url, { credentials: 'same-origin' })));
+				return cache.addAll(urlsToCache);
 			})
 	);
 });
