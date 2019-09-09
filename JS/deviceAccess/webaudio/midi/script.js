@@ -30,16 +30,17 @@ function setInput(midiAccess) {
 	});
 }
 
-
+let noo;
 function onMidiMessage(e) {
 	
 	if(e.data[0]===144){
 		no=e.data[1]-60;
 		MSG.innerHTML =HZ[no];
-		on();
+		noo=no;
+		on(no);
 	}else{
 		MSG.innerHTML = "not";
-		off();
+		off(no);
 	}
 
 }
@@ -74,9 +75,9 @@ for(let i=0;i<HZ.length;i++){
 }
 VCG.connect(AC.destination); //出力につなぐ
 
-let noo;
 
-function on(e){
+
+function on(no){
 
 	VCG.gain.value=VOL.value; //音量
 	
@@ -89,9 +90,9 @@ function on(e){
 	noo=no;
 };
 
-function off(e){
-		VCO[noo].stop();
-		VCO[no]=AC.createOscillator(); //音源を作る
+function off(no){
+		VCO[no].stop();
+		VCO[no] = AC.createOscillator(); //音源を作る
 		VCO[no].connect(VCG); //音源をボリュームにつなぐ
-		VCO[no].frequency.value=HZ[no];
+		VCO[no].frequency.value = HZ[no];
 };
