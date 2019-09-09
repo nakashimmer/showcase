@@ -32,9 +32,8 @@ function setInput(midiAccess) {
 
 let noo;
 function onMidiMessage(e) {
-	
+	no = e.data[1] - 60;
 	if(e.data[0]===144){
-		no=e.data[1]-60;
 		MSG.innerHTML =HZ[no];
 		noo=no;
 		on(no);
