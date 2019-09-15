@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Analytics --><script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>カルーセル</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../sample.css">
+
+		<style>
+				*{margin:0px;padding:0px;}
+			.css1{
+				width:200px;
+				height:200px;
+				background-image:url(img1.png);
+				position:absolute;
+				top:0px;
+				left:0px;
+			}
+			#outer{
+				width:600px;
+				height:200px;
+				margin:0 auto;
+				overflow:hidden;
+				position:relative;
+			}
+
+			.css1{
+				animation:mystory 6s linear 0s infinite normal;
+				animation-fill-mode:both;
+			}
+
+			@keyframes mystory{
+				0%{transform:translate(-200px,0px);opacity:0;}
+				50%{transform:translate(200px,0px);opacity:1;}
+				100%{transform:translate(600px,0px);opacity:0}
+			}
+
+			#id2{animation-delay: 2s;}
+			#id3{animation-delay: 4s;}
+		</style>
+	</head>
+	<body>
+		<h1>カルーセル</h1>
+		<div id="wrap">
+			<div id="outer">
+				<div class="css1" id="id1"></div>
+				<div class="css1" id="id2"></div>
+				<div class="css1" id="id3"></div>
+			</div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a>・<a href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+	</body>
+</html>
