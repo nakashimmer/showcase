@@ -3,69 +3,38 @@
 	<head>
 		<!-- Google Analytics --><script src="/showcase/ga.js"></script>
 		<meta charset="utf-8">
-		<title>synthesizer</title>
+		<title>midi</title>
 		<meta name=viewport content="width=device-width">
 		<link rel="stylesheet" href="../../../../sample.css">
 		<style>
 			#wrap{background-color:#aaa;}
 			
-			#board{position:relative;}
-			#board1,#board2{
-				position: absolute;
-				display:flex;
-			}
-			.keys{
-				text-align:center;
-				width:50px;height:60px;
-				margin:3px 3px 3px 3px;
-				color:black;
-				background-color:white;
-			}
-			.keys:last-of-type{
-			}
+	
+	
 			h1{
 				font-size:1.5em;
 				line-height:2em;
 				text-align:center;
 				color:white;
 			}
-			p{line-height:2em;}
-			section{
-			}
-			#key-1{margin-left:35px;}
-			#key-6{margin-left:55px;}
-			#key-13{margin-left:65px;}
-			#key-18{margin-left:55px;}
-			#key-24{margin-right:25px;}
-			#key-25{margin-left:55px;}
-			#board1 *{
-				background-color:black;color:white;
-				height:50px;
-				padding-top:50px;
-			}
-			#board2 *{
-				padding-top:100px;
-			}
+	
+		
 		</style>
 	</head>
 	<body>
 
-		<h1>WebAudio API</h1>
-		
+		<h1>midi API</h1>
 		<div id="wrap">
-			<p>音量：<input id=vol type="range" min=0 max=1 value=0.5 step=0.1><a href="../midi/index.html">midi</a></p>
+			<p>midi キーボードを挿してください。</p>
+			<p>音量：<input id=vol type="range" min=0 max=1 value=0.5 step=0.1></p>
 			<p>波形：
 				<label><input type="radio" name="wstyle" value="sine" checked>正弦波</label> 
 				<label><input type="radio" name="wstyle" value="square">矩形波</label> 
 				<label><input type="radio" name="wstyle" value="triangle">三角波</label> 
 				<label><input type="radio" name="wstyle" value="sawtooth">のこぎり波</label>
 			</p>
-			<p>鍵盤：</p>
-			<div id="board">
-				<div id="board2"></div>
-				<div id="board1"></div>
-			</div>
-			
+			<p>メッセージ：<span id="msg"></span></p>
+	
 		</div>
 
 		<footer>

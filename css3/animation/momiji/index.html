@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Google Analytics -->
+	<script src="/showcase/ga.js"></script>
+	<meta charset="UTF-8" />
+	<title>もみじ</title>
+	<link rel="stylesheet" href="../../../sample.css">
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			background: linear-gradient(orange,white) no-repeat;
+		}
+
+		#momiji {
+			margin: 50px auto;
+			position: relative;
+			width: 300px;
+			height: 300px;
+			animation: momiji 10s ease-in-out 0s 1 normal;
+		}
+
+		#a {
+			transform: rotate(80deg) scale(0.3, 0.6);
+		}
+
+		#b {
+			transform: rotate(40deg) scale(0.4, 0.8);
+		}
+
+		#c {
+			transform: rotate(0deg) scale(0.5, 1.0);
+		}
+
+		#d {
+			transform: rotate(-40deg) scale(0.4, 0.8);
+		}
+
+		#e {
+			transform: rotate(-80deg) scale(0.3, 0.6);
+		}
+
+		#f {
+			position: absolute;
+			z-index: -1;
+			top: 290px;
+			left: 145px;
+			width: 100px;
+			height: 100px;
+			border-left: 10px solid #994C00;
+			border-bottom: 10px solid #994C00;
+			border-radius: 0 0 0 100px;
+			animation: kuki 10s ease-in-out 0s 1 normal,
+				kukiColor 10s ease-in-out 0s 1 normal;
+		}
+
+		#msg {
+			color: brown;
+			text-decoration: none;
+			text-shadow: 2px 2px 2px yellow;
+		}
+
+
+		.leaf {
+			position: absolute;
+			width: 300px;
+			height: 300px;
+			background-color: #994C00;
+			border-radius: 150px;
+			transform: scale(0.5, 1);
+			transform-origin: bottom center;
+			animation: leaf 10s ease-in-out 0s 1 normal, color 10s ease-in-out 0s 1 normal;
+		}
+
+		.shin {
+			position: absolute;
+			width: 100px;
+			height: 80px;
+			top: 100px;
+			left: 100px;
+			background-color: white;
+			border-radius: 50px;
+			transform: scale(0.1, 1);
+			transform-origin: bottom center;
+			animation: shin 10s ease-in-out 0s 1 normal;
+		}
+
+		@keyframes momiji {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes leaf {
+			0% {
+				transform: scale(1, 1);
+			}
+
+			30% {
+				transform: scale(0.5, 1);
+			}
+		}
+
+		@keyframes color {
+			0% {
+				background-color: #ff9900;
+			}
+
+			30% {
+				background-color: #ff9900;
+			}
+		}
+
+		@keyframes kukiColor {
+			0% {
+				background-color: #ff9900;
+			}
+
+			30% {
+				background-color: #ff9900;
+			}
+		}
+
+
+		@keyframes kuki {
+			0% {
+				width: 0;
+				height: 0
+			}
+
+			90% {
+				width: 0;
+				height: 0
+			}
+		}
+
+		@keyframes shin {
+			0% {
+				background-color: transparent
+			}
+
+			90% {
+				background-color: transparent
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<h1>もみじ</h1>
+	<div id=wrap>
+		<div id=momiji>
+			<div id="c" class="leaf">
+				<div class=shin></div>
+			</div>
+			<div id="b" class="leaf">
+				<div class=shin></div>
+			</div>
+			<div id="d" class="leaf">
+				<div class=shin></div>
+			</div>
+			<div id="a" class="leaf">
+				<div class=shin></div>
+			</div>
+			<div id="e" class="leaf">
+				<div class=shin></div>
+			</div>
+			<div id="f"></div>
+		</div>
+		<div id=msg>Animation CSS3</div>
+	</div>
+
+	<footer>
+		<p><small>(C)<a
+					href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">一日まるごとどっぷりHTML5教室</a>・<a
+					href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+	</footer>
+
+</body>
+
+</html>
