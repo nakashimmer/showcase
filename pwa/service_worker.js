@@ -1,9 +1,9 @@
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
-	'/',
-	'./index.html',
-	'./icon.png',
-	'./sound.mp3'
+	'/showcase/pwa/',
+	'/showcase/pwa/index.html',
+	'/showcase/pwa/icon.png',
+	'/showcase/pwa/sound.mp3'
 ];
 
 // インストール処理
