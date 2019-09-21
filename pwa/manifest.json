@@ -7,7 +7,7 @@
 	"description": "タイマー",
 	"icons": [
 		{
-			"src": "icon192.png",
+			"src": "/showcase/pwa/icon192.png",
 			"sizes": "192x192",
 			"type": "image/png"
 		}
