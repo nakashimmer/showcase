@@ -1,6 +1,9 @@
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
-	'https://nakashimmer.github.io/showcase/pwa/'
+	'/pwa/',
+	'/pwa/index.html',
+	'/pwa/icon.png',
+	'/pwa/sound.mp3'
 ];
 
 // インストール処理
