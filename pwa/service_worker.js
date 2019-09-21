@@ -1,14 +1,14 @@
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
+	'/showcase/pwa/apple-touch-icon.png',
 	'/showcase/pwa/favicon.ico',
-	'/showcase/pwa/index.html',
 	'/showcase/pwa/icon57.png',
 	'/showcase/pwa/icon180.png',
 	'/showcase/pwa/icon192.png',
 	'/showcase/pwa/icon512.png',
-	'/showcase/pwa/sound.mp3',
-	'/showcase/pwa/apple-touch-icon.png'
-
+	'/showcase/pwa/index.html',
+	'/showcase/pwa/sound.mp3'
+	
 ];
 
 // インストール処理
