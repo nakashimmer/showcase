@@ -6,7 +6,9 @@ var urlsToCache = [
 	'/showcase/pwa/icon180.png',
 	'/showcase/pwa/icon192.png',
 	'/showcase/pwa/icon512.png',
-	'/showcase/pwa/sound.mp3'
+	'/showcase/pwa/sound.mp3',
+	'/showcase/pwa/apple-touch-icon.png'
+
 ];
 
 // インストール処理
