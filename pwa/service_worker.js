@@ -2,6 +2,7 @@ var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
 	'/showcase/pwa/',
 	'/showcase/pwa/index.html',
+	'/showcase/pwa/icon57.png',
 	'/showcase/pwa/icon180.png',
 	'/showcase/pwa/icon192.png',
 	'/showcase/pwa/icon512.png',
