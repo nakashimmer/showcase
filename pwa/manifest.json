@@ -2,12 +2,12 @@
 	"short_name": "PWA",
 	"name": "PWA sample app",
 	"display": "standalone",
-	"start_url": "/showcase/pwa/",
+	"start_url": "/showcase/pwa/index.html",
 	"background_color": "#000",
 	"description": "タイマー",
 	"icons": [
 		{
-			"src": "icon.png",
+			"src": "icon192.png",
 			"sizes": "192x192",
 			"type": "image/png"
 		}
