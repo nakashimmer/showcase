@@ -1,9 +1,5 @@
-const CACHE_NAME = 'cache-v2';
+const CACHE_NAME = 'wb-v1';
 const urlsToCache = [
-    './apple-touch-icon.png',
-    './canvas.js',
-    './html5-192.png',
-		'./html5-256.png',
 		'./index.html',
 		'./'
 ];
