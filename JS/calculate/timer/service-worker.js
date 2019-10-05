@@ -5,6 +5,7 @@ const urlsToCache = [
     './html5-192.png',
 		'./html5-256.png',
 		'./index.html',
+		'./sound.mp3',
 		'./'
 ];
 
