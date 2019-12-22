@@ -64,7 +64,8 @@ footer *{
 }
 
 @media(max-width:800px){
-#wrap{	
+	#wrap{	
 /*	height:auto;*/
-	overflow:hidden;
+		overflow:hidden;
+	}
 }
