@@ -1,6 +1,6 @@
 {
-  "name": "お絵かきアプリ",
-  "short_name": "お絵かき",
+  "name": "デスクトップカメラ",
+  "short_name": "カメラ",
   "background_color": "#fc980c",
   "icons": [{
       "src": "./html5-256.png",
