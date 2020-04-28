@@ -6,6 +6,7 @@
 		<title>presen camera</title>
 	<style>
 		*{margin:0;padding:0;}
+		video{background-color:black;}
 		video,canvas{
 			display:block;
 			width:100%;
@@ -21,7 +22,7 @@
 	</head>
 	<body>
 		<video autoplay muted id="video"></video>
-		<canvas style="display:none;" width="400" height="300" id="canvas"></canvas>
+		<canvas style="display:none;" id="canvas"></canvas>
 
 		<script>
 			// service workerが有効なら、service-worker.js を登録します
