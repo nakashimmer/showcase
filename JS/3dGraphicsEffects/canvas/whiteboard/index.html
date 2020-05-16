@@ -40,9 +40,9 @@
 		border:none;
 		position:absolute;font-size:40px;
 		background-color:transparent;
-		text-align:center;
+		text-align:left;
 		outline: 0;
-		
+		tab-size:2;
 	}
 	#textarea{color:black;}
 	#canvas{
@@ -71,7 +71,7 @@
 
 <div id=wrap>
 	<canvas id=canvas></canvas>
-	<div id=textarea contenteditable=true></div>
+	<textarea id=textarea></textarea>
 </div>
 
 <script>
@@ -126,47 +126,43 @@
 		$("textarea").style.zIndex="0";
 	}
 	
-	var algn="center";
+	var algn="left";
 	function align(){
 		algn=(algn=="center")?"left":"center";
 		$("textarea").style.textAlign=algn;
 	}
 
-</script>
 
-<script>
-function spch(){
-	var mySelect = window.getSelection();
-//	alert(mySelect);
-	var input = new SpeechSynthesisUtterance(mySelect);
-	input.lang = "ja-JP";
-	var voices = speechSynthesis.getVoices();
-	speechSynthesis.speak(input);
-};
-</script>
+	//音声合成
+	function spch(){
+		var mySelect = window.getSelection();
+	//	alert(mySelect);
+		var input = new SpeechSynthesisUtterance(mySelect);
+		input.lang = "ja-JP";
+		var voices = speechSynthesis.getVoices();
+		speechSynthesis.speak(input);
+	};
 
-<script>
-sizeChange();
-
-function sizeChange(){
-	var bw = document.body;
-	var dw = document.documentElement;
-	$("canvas").width=Math.max(
-		bw.clientWidth,bw.scrollWidth,
-		dw.scrollWidth,dw.clientWidth
-	);
-	$("canvas").height=Math.max(
-		bw.clientHeight,bw.scrollHeight,
-		dw.scrollHeight,dw.clientHeight
-	)-35;
 	
-	$("textarea").style.height=($("canvas").height-10)+"px";
-	$("wrap").style.height=$("canvas").height+"px";
-	console.log($("textarea").style.height);
-};
 
-
-
+	//サイズを可変に
+	sizeChange();
+	function sizeChange(){
+		var bw = document.body;
+		var dw = document.documentElement;
+		$("canvas").width=Math.max(
+			bw.clientWidth,bw.scrollWidth,
+			dw.scrollWidth,dw.clientWidth
+		);
+		$("canvas").height=Math.max(
+			bw.clientHeight,bw.scrollHeight,
+			dw.scrollHeight,dw.clientHeight
+		)-35;
+		
+		$("textarea").style.height=($("canvas").height-10)+"px";
+		$("wrap").style.height=$("canvas").height+"px";
+		console.log($("textarea").style.height);
+	};
 
   // service workerが有効なら、service-worker.js を登録します
 	if ('serviceWorker' in navigator) {
@@ -177,7 +173,6 @@ function sizeChange(){
 			}
 		);
    }
-
 	 function update(){
 		 navigator.serviceWorker.getRegistration()
   		.then(
@@ -185,6 +180,24 @@ function sizeChange(){
 			)
 	 }
 
+
+	//タブを有効化
+	document.getElementById('textarea').addEventListener('keydown', function (e) {
+			var elem, end, start, value;
+			if (e.keyCode === 9) {
+				if (e.preventDefault) {
+					e.preventDefault();
+				}
+				elem = e.target;
+				start = elem.selectionStart;
+				end = elem.selectionEnd;
+				value = elem.value;
+				elem.value = "" + (value.substring(0, start)) + "\t" + (value.substring(end));
+				elem.selectionStart = elem.selectionEnd = start + 1;
+				return false;
+			}
+		});
+	
 </script>
 
 </html>
