@@ -53,7 +53,7 @@
 			let timer;
 
 			CANVAS1.addEventListener("click", () => {
-
+				SOUND.play();
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
 						.then(permissionState => {
