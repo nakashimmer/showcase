@@ -53,6 +53,39 @@
 			let timer;
 
 			CANVAS1.addEventListener("click", () => {
+
+				if (DeviceMotionEvent.requestPermission) {
+					DeviceMotionEvent.requestPermission()
+						.then(permissionState => {
+							if (permissionState === 'granted') {
+								window.addEventListener('devicemotion', function (e) {
+									const ACG = e.accelerationIncludingGravity;
+									GRA.x = ACG.x; //x方向の傾き重力加速度
+									GRA.y = ACG.y; //y方向の傾き重力加速度
+									//	GRA.z = acg.z; //z方向の傾き重力加速度
+
+									if (kishu > 0) {
+										STEALTH.x += Math.floor(GRA.x) * 5;
+										STEALTH.y -= Math.floor(GRA.y + 5) * 5;
+									} else {
+										STEALTH.x -= Math.floor(GRA.x) * 5;
+										STEALTH.y += Math.floor(GRA.y + 5) * 5 - 50;
+									}
+
+									if (STEALTH.x < 0) { STEALTH.x = 0; }
+									if (320 < STEALTH.x) { STEALTH.x = 320; }
+
+									if (STEALTH.y < 0) { STEALTH.y = 0; }
+									if (460 < STEALTH.y) { STEALTH.y = 460; }
+
+								});
+							}
+						})
+						.catch(console.error);
+				} else {
+					alert('DeviceMotionEvent.requestPermission is not found')
+				}
+
 				if (startlock) {
 					timer = setInterval(anime, 50);
 					startlock = false;
@@ -155,38 +188,8 @@
 				C.fillText('Time:' + (50 - Math.floor(frame / 20)), 0, 460);
 			}
 
-			if (DeviceMotionEvent.requestPermission) {
-				DeviceMotionEvent.requestPermission()
-					.then(permissionState => {
-						if (permissionState === 'granted') {
-							window.addEventListener('devicemotion', function(e) {
-								const ACG = e.accelerationIncludingGravity;
-								GRA.x = ACG.x; //x方向の傾き重力加速度
-								GRA.y = ACG.y; //y方向の傾き重力加速度
-								//	GRA.z = acg.z; //z方向の傾き重力加速度
 
-								if (kishu > 0) {
-									STEALTH.x += Math.floor(GRA.x) * 5;
-									STEALTH.y -= Math.floor(GRA.y + 5) * 5;
-								} else {
-									STEALTH.x -= Math.floor(GRA.x) * 5;
-									STEALTH.y += Math.floor(GRA.y + 5) * 5 - 50;
-								}
 
-								if (STEALTH.x < 0) { STEALTH.x = 0; }
-								if (320 < STEALTH.x) { STEALTH.x = 320; }
-
-								if (STEALTH.y < 0) { STEALTH.y = 0; }
-								if (460 < STEALTH.y) { STEALTH.y = 460; }
-
-							});
-						}
-					})
-					.catch(console.error);
-			} else {
-				alert('DeviceMotionEvent.requestPermission is not found')
-			}
-  
 
 		</script>
 	</body>
