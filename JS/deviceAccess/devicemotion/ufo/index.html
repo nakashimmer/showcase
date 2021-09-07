@@ -159,7 +159,7 @@
 				DeviceMotionEvent.requestPermission()
 					.then(permissionState => {
 						if (permissionState === 'granted') {
-							window.addEventListener('devicemotion', function (e) {
+							window.addEventListener('devicemotion', function(e) {
 								const ACG = e.accelerationIncludingGravity;
 								GRA.x = ACG.x; //x方向の傾き重力加速度
 								GRA.y = ACG.y; //y方向の傾き重力加速度
