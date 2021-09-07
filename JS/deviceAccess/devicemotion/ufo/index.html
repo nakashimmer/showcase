@@ -155,6 +155,7 @@
 				C.fillText('Time:'+(50-Math.floor(frame/20)),0,460);
 			}
 
+			DeviceMotionEvent.requestPermission()
 			window.addEventListener('devicemotion', function(e) {
 				const ACG = e.accelerationIncludingGravity;
 				GRA.x = ACG.x; //x方向の傾き重力加速度
