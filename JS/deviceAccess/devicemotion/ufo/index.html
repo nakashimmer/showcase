@@ -89,6 +89,7 @@
 				if (startlock) {
 					timer = setInterval(anime, 50);
 					startlock = false;
+					SOUND.currentTime = 0;
 					SOUND.play();
 				}
 			});
