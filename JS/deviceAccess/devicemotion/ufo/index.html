@@ -53,12 +53,13 @@
 			let kishu = userAgent.indexOf("mac");
 			let startlock = true;
 			let timer;
-			const SOUND = new Audio('sound.mp3');
+			const SOUND = new Audio();
+			SOUND.src="sound.mp3";
 
 			function btn1() {
 				SOUND.currentTime = 0;
 				SOUND.play();
-				info.innerHTML="つうか";
+			
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
 						.then(permissionState => {
