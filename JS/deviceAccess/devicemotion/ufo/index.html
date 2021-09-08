@@ -46,13 +46,14 @@
 			const GRA = { x: 0, y: 0, z: 0 };
 			const RAT = { a: 0, b: 0, g: 0 };
 			let jouge = 0;
-			const SOUND = new Audio('sound.mp3');
+			
 			let userAgent = window.navigator.userAgent.toLowerCase();
 			let kishu = userAgent.indexOf("mac");
 			let startlock = true;
 			let timer;
 
 			CANVAS1.addEventListener("click", () => {
+				const SOUND = new Audio('sound.mp3');
 				SOUND.play();
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
