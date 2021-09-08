@@ -145,7 +145,7 @@
 					(Math.abs(rival[i].y - STEALTH.y) < 10)) {
 					audio1.currentTime = 0;
 					audio1.play();
-					info.innerHTML=audio1;
+					info.innerHTML=audio1.src;
 
 					C.beginPath();
 					C.arc(rival[i].x, rival[i].y, 50, 0, 2 * Math.PI, true);
