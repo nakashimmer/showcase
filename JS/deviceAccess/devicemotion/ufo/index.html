@@ -53,13 +53,15 @@
 			let kishu = userAgent.indexOf("mac");
 			let startlock = true;
 			let timer;
-			const SOUND = new Audio();
-			SOUND.src="sound.mp3";
+			const audio1 = new Audio();
+			audio1.preload = "auto";
+			audio1.src="audio1.mp3";
+			audio1.load();
 
 			function btn1() {
-				SOUND.currentTime = 0;
-				SOUND.play();
-			
+				audio1.currentTime = 0;
+				audio1.play();
+				
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
 						.then(permissionState => {
@@ -141,8 +143,8 @@
 			function crash() {
 				if ((Math.abs(rival[i].x - STEALTH.x) < 30) &&
 					(Math.abs(rival[i].y - STEALTH.y) < 10)) {
-					SOUND.currentTime = 0;
-					SOUND.play();
+					audio1.currentTime = 0;
+					audio1.play();
 
 					C.beginPath();
 					C.arc(rival[i].x, rival[i].y, 50, 0, 2 * Math.PI, true);
