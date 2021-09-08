@@ -20,6 +20,7 @@
 		<div id="wrap">
 			<canvas id="canvas1" width="320" height="460" onclick="btn1();"></canvas>
 			<p id=info>1</p>
+			<button onclick="audio1.play();">オス</button>
 		</div>
 		<footer>
 			<p><small>(C)<a
@@ -53,6 +54,7 @@
 			let kishu = userAgent.indexOf("mac");
 			let startlock = true;
 			let timer;
+
 			const audio1 = new Audio();
 			audio1.preload = "auto";
 			audio1.src="sound.mp3";
