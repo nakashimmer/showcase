@@ -19,6 +19,7 @@
 		<h1>UFOゲーム</h1>
 		<div id="wrap">
 			<canvas id="canvas1" width="320" height="460" onclick="btn1();"></canvas>
+			<p id=info></p>
 		</div>
 		<footer>
 			<p><small>(C)<a
@@ -27,6 +28,7 @@
 		</footer>
 		<script>
 			const CANVAS1 = document.getElementById("canvas1");
+			const info= document.getElementById("info");
 			const C = CANVAS1.getContext("2d");
 
 			const STEALTH = { x: 160, y: 300 };
@@ -54,6 +56,8 @@
 			const SOUND = new Audio('sound.mp3');
 
 			function btn1() {
+				SOUND.currentTime = 0;
+				SOUND.play();
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
 						.then(permissionState => {
@@ -64,8 +68,7 @@
 								if (startlock) {
 									timer = setInterval(anime, 50);
 									startlock = false;
-									SOUND.currentTime = 0;
-									SOUND.play();
+
 								}
 
 							}
