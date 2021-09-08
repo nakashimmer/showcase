@@ -18,7 +18,7 @@
 	<body>
 		<h1>UFOゲーム</h1>
 		<div id="wrap">
-			<canvas id="canvas1" width="320" height="460"></canvas>
+			<canvas id="canvas1" width="320" height="460" onclick="btn1();"></canvas>
 		</div>
 		<footer>
 			<p><small>(C)<a
@@ -51,10 +51,11 @@
 			let kishu = userAgent.indexOf("mac");
 			let startlock = true;
 			let timer;
+			const SOUND = new Audio('sound.mp3');
 
-			CANVAS1.addEventListener("click", () => {
-				const SOUND = new Audio('sound.mp3');
-				SOUND.play();
+			function btn1(){
+				
+				
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
 						.then(permissionState => {
@@ -84,7 +85,7 @@
 						})
 						.catch(console.error);
 				} else {
-					alert('DeviceMotionEvent.requestPermission is not found')
+					alert('スマホでお試しください')
 				}
 
 				if (startlock) {
@@ -135,6 +136,7 @@
 						(Math.abs(rival[i].y - STEALTH.y) < 10)) {
 						SOUND.currentTime = 0;
 						SOUND.play();
+
 
 						C.beginPath();
 						C.arc(rival[i].x, rival[i].y, 50, 0, 2 * Math.PI, true);
@@ -190,7 +192,7 @@
 					C.fillText('Time:' + (50 - Math.floor(frame / 20)), 0, 460);
 				}
 
-			});
+			};
 
 
 		</script>

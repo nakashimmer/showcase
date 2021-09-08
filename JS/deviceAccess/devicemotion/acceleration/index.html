@@ -32,13 +32,14 @@
 		<script>
 			const CANVAS1 = document.getElementById("canvas1");
 			const C = CANVAS1.getContext("2d");
-
+			
 			// ここに図形の描画のコードを記述します。
 
 			const pos = { x: 150, y: 150, z: 0 };
-
+			let rock=true;
 			function btn1() {
-				if (DeviceMotionEvent.requestPermission) {
+				if(rock && DeviceMotionEvent.requestPermission) {
+					rock=false;
 					DeviceMotionEvent.requestPermission()
 					.then(permissionState => {
 							if (permissionState === 'granted') {
