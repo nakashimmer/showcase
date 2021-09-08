@@ -19,7 +19,7 @@
 		<h1>UFOゲーム</h1>
 		<div id="wrap">
 			<canvas id="canvas1" width="320" height="460" onclick="btn1();"></canvas>
-			<p id=info></p>
+			<p id=info>1</p>
 		</div>
 		<footer>
 			<p><small>(C)<a
@@ -58,6 +58,7 @@
 			function btn1() {
 				SOUND.currentTime = 0;
 				SOUND.play();
+				info.innerHTML="つうか";
 				if (DeviceMotionEvent.requestPermission) {
 					DeviceMotionEvent.requestPermission()
 						.then(permissionState => {
