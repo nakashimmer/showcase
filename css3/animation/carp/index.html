@@ -43,6 +43,7 @@
 			perspective: 500px;
 			animation: carpPoskeyframe 5s linear 0s infinite normal;
 			animation-fill-mode: both;
+			transform-origin: left;
 		}
 
 		@keyframes carpPoskeyframe {
@@ -63,9 +64,8 @@
 			perspective: 400px;
 			transform-origin: center;
 			transform:
-				rotateX(90deg) rotateY(-90deg) translateX(30px);
-	/*			translate3d(-80px, 100px, 0px) rotateX(-90deg) scale(0.5);
-*/			display: flex;
+				rotateX(90deg) rotateY(-90deg) translateX(180px);
+			display: flex;
 
 		}
 
@@ -87,13 +87,11 @@
 			}
 
 			25% {
-				transform: rotateY(-10deg);
+				transform: rotateY(70deg);
 			}
 
-
-
 			75% {
-				transform: rotateY(50deg);
+				transform: rotateY(-30deg);
 			}
 
 
@@ -113,7 +111,7 @@
 			z-index: 3;
 			width: 50px;
 			height: 100px;
-			animation: carp3frame 5s ease-in-out 0s infinite normal;
+			animation: carp3frame 0.5s ease-in-out 0s infinite normal;
 			background:
 				linear-gradient(120deg, red 45%, transparent 45%),
 				linear-gradient(60deg, red 45%, transparent 45%);
