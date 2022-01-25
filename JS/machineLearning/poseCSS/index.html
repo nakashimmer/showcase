@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Google Analytics -->
+	<script src="/showcase/ga.js"></script>
+	<meta charset="utf-8">
+	<title>ポーズを予測</title>
+
+	<link rel="stylesheet" href="../../../sample.css">
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#wrap2 {
+			background-color: #ccc;
+			margin: 10px auto 0;
+			border: 1px solid white;
+			width: 800px;
+			height: 600px;
+			overflow: hidden;
+		}
+
+		#video {
+			display: block;
+			margin-left: -2000px;
+			position: absolute;
+		}
+
+		#wrap2{
+			position: relative;
+			width: 800px;
+			height: 600px;
+		}
+		#wrap2>div{
+			position: absolute;
+			left:0;top:0;
+			border:1px solid red;
+			width:100px;
+			height:100px;
+			transition: all 1s linear;
+
+		}
+		div#head{
+			width:300px;
+			height:300px;
+			transform: translate(-150px,-150px);
+			background-color: #333;
+		}
+		div.eye{
+			width:50px !important;
+			height:50px !important;
+			transform: translate(-25px,-25px);
+			background-color: #666;
+		}
+		div#nose{
+			width:50px;
+			height:80px;
+			transform: translate(-25px,-40px);
+			background-color: #999;
+		}
+		div#sholder{
+			width:300px;
+			height:100px;
+			transform: translate(-150px,-50px);
+			background-color: #aaa;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<h1>ポーズを予測</h1>
+	<div id="wrap">
+		<div id="wrap2">
+			<video id="video" width="800" height="600" autoplay="1"></video>
+			<div id="head">頭</div>
+			<div id="Leye" class="eye">左目</div>
+			<div id="Reye" class="eye">右目</div>
+			<div id="nose">鼻</div>
+			<div id="sholder">肩</div>
+			<div id="Lhand">左手</div>
+			<div id="Rhand">右手</div>
+		</div>
+	</div>
+		<footer>
+			<p><small>(C)<a
+						href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">なかしまぁ先生のHTML5教室</a>・<a
+						href="https://webtechpromo.org">Web技術振興協会</a></small></p>
+		</footer>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
+<script src="posenet_sample.js"></script>
+
+</body>
+
+</html>
