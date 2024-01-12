@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>グラフ</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			#canvas {
+				display: block;
+				margin: 0 auto;
+				background-color: skyblue;
+			}
+
+			#info {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=jsonp></div>
+		<h1>東京都今の降水確率</h1>
+		<div id="wrap">
+			<canvas id="canvas" width="400" height="400"></canvas>
+			<div id="info"></div>
+		</div>
+		<footer>
+			<p><small>(C)<a
+						href="https://www.street-academy.com/steachers/1274?conversion_name=direct_message&tracking_code=f3037c532c76e32eb5636350d0147bc9">なかしまぁ先生のHTML5教室</a></small>
+			</p>
+		</footer>
+		<script>
+			const url = "https://api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917&current=rain&forecast_days=1";
+			const JSONP = document.getElementById("jsonp");
+			const INFO = document.getElementById("info");
+			const CANVAS = document.getElementById("canvas");
+			const CTX = canvas.getContext("2d");
+
+			fetch(url)
+				.then(data => data.json())
+				.then(json => arc(json));
+
+			function arc(e) {
+				console.log(e);
+
+				let rain = 0.3;//e.current.rain;
+				INFO.innerHTML = "降水確率：" + rain + "%";
+
+				CTX.clearRect(0, 0, 400, 400);
+				CTX.beginPath();
+				CTX.moveTo(200, 200);
+				CTX.arc(200, 200, 155, 0, 2 * Math.PI, false);
+				CTX.closePath();
+				CTX.fillStyle = "white";
+				CTX.fill();
+
+				CTX.beginPath();
+				CTX.moveTo(200, 200);
+				CTX.arc(
+					200, 200, 150, 0 - 0.5 * Math.PI,
+					rain * 2 * Math.PI - 0.5 * Math.PI,
+					false);
+				CTX.closePath();
+				if (rain < 0.4) {
+					CTX.fillStyle = "skyblue"; CTX.fill();
+				} else if (rain < 0.7) {
+					CTX.fillStyle = "yellow"; CTX.fill();
+				} else {
+					CTX.fillStyle = "red"; CTX.fill();
+				}
+			}
+		</script>
+	</body>
+</html>
