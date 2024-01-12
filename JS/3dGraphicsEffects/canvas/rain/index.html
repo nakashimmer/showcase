@@ -45,7 +45,7 @@
 			function arc(e) {
 				console.log(e);
 
-				let rain = 0.3;//e.current.rain;
+				let rain = e.current.rain;
 				INFO.innerHTML = "降水確率：" + rain + "%";
 
 				CTX.clearRect(0, 0, 400, 400);
