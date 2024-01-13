@@ -46,7 +46,7 @@
 				console.log(e);
 
 				let rain = e.current.rain;
-				INFO.innerHTML = "降水確率：" + rain + "%";
+				INFO.innerHTML = "降水確率：" + rain*100 + "%";
 
 				CTX.clearRect(0, 0, 400, 400);
 				CTX.beginPath();
