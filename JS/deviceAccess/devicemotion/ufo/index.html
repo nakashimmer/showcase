@@ -49,6 +49,7 @@
 			const gra = { x: 0, y: 0, z: 0 };
 //			const rat = { a: 0, b: 0, g: 0 };
 			let jouge = 0;
+			let second=20;
 
 			let userAgent = window.navigator.userAgent.toLowerCase();
 			let kishu = userAgent.indexOf("mac");
@@ -119,7 +120,7 @@
 			}
 
 			function end() {
-				if (frame > 50 * 20) {
+				if (frame > second * 20) {
 					clearInterval(timer);
 					startlock = true;
 					audio2.pause();
@@ -203,7 +204,7 @@
 			function remain() {
 				c.fillStyle = "white";
 				c.font = '30px "Times roman"';
-				c.fillText('Time:' + (30 - Math.floor(frame / 20)), 0, 460);
+				c.fillText('Time:' + (second - Math.floor(frame / 20)), 0, 460);
 			}
 
 		</script>
