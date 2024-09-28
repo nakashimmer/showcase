@@ -28,19 +28,28 @@
 	</head>
 	<body>
 		<p>
-			<textarea id="input" placeholder="テキスト入力"></textarea>
+			<textarea id="input" placeholder="カウントしたいテキストをコピーペーストする。枠内で編集すると不正な値になるので注意。"></textarea>
 		</p>
 		<p>
 			<button onclick="count();">カウントする</button>
-			カウント結果:<span id="output"></span>
+			結果は:<span id="output">？</span>文字
 		</p>
+		<p id="cons"></p>
 		<script>
 			const input = document.getElementById("input");
 			const output = document.getElementById("output");
 			function count() {
 				let text = input.value;
-				text = text.replace(" ", "").replace("　", "").replace("¥n", "").replace("\n", "").replace("¥t", "").replace("\t", "");
-				output.innerHTML = text.trim().length;
+				text = text.replace(" ", "").replace("　", "");
+				text = text.replace(/\u200B/g, "");
+				
+				text=text.replace("¥r", "").replace("\r", "");
+				text=text.replace("¥n", "").replace("\n", "");
+				text=text.replace("¥t", "").replace("\t", "");
+				text = text.replace("¥l", "").replace("\l", "");
+				
+				output.innerHTML = text.trim().length+ "<br>[" + text.trim() + "]";
+				console.log("["+text.trim()+"]");
 			}
 		</script>
 	</body>
