@@ -14,6 +14,7 @@
 			#input {
 				width: 90%;
 				height: 5em;
+				text-align: left;
 			}
 
 			#kekka {
@@ -24,7 +25,7 @@
 		</style>
 	</head>
 	<body>
-		<p><textarea id="input" placeholder="テキスト入力"></textarea></p>
+		<p><textarea id="input" placeholder="テキスト入力" onchange="count();"></textarea></p>
 		<p><button onclick="count();">カウント</button></p>
 		<p id="output">結果</p>
 		<script>
@@ -32,7 +33,7 @@
 			const output = document.getElementById("output");
 			function count() {
 				let text = input.value;
-				text = text.replace(" ", "").replace("　", "").replace("¥n", "").replace("\n", "").replace("¥t", "");
+				text = text.replace(" ", "").replace("　", "").replace("¥n", "").replace("\n", "").replace("¥t", "").replace("\t", "");
 				output.innerHTML = text.trim().length + "[" + text.trim() + "]";
 			}
 		</script>
