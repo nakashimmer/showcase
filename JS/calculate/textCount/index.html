@@ -3,53 +3,65 @@
 	<head>
 		<meta charset="utf-8">
 		<title>文字数カウント</title>
+		<link rel="stylesheet" href="../../../sample.css">
 		<style>
 			* {
-				font-size: 20px;
-				margin:0;
-				padding:0;
+				margin: 0;
+				padding: 0;
 			}
 
 			#input {
-				width:calc(100% - 3em - 2px);
+				
+				width: calc(100% - 3em - 2px);
 				height: 5em;
 				text-align: left;
-				margin: 1em;
-				padding:0.5em;
+			
+				padding: 0.5em;
+				border-radius: 1em;
 			}
 
 			#output {
 				color: red;
-				margin:0.5em;
+				margin: 0;
 			}
 
-			p{text-align: center;}
+			h1 {
+				text-align: center;
+			}
+
+			p{margin:1em;}
 		</style>
 	</head>
 	<body>
-		<p>
-			<textarea id="input" placeholder="カウントしたいテキストをコピーペーストする。枠内で編集すると不正な値になるので注意。"></textarea>
-		</p>
-		<p>
-			<button onclick="count();">カウントする</button>
-			結果は:<span id="output">？</span>文字
-		</p>
-		<p id="cons"></p>
+		<h1>文字数カウント</h1>
+		<div id="wrap">
+			<p>
+				<textarea id="input" placeholder="カウントしたいテキストをコピーペーストしてください。"></textarea>
+			</p>
+			<p>
+				<button onclick="count();">カウントする</button> 結果は:<span id="output">？</span>文字
+				<p><small>簡単な文字数カウントです。空白・改行・インデント等を除いた文字数を全角半角の区別なくカウントします。なお、すべての環境での動作保証はできませんので、参考として自己責任でご利用ください。正確なカウントはMicrosoft Wordの<a href="https://support.microsoft.com/ja-jp/office/%E5%8D%98%E8%AA%9E%E6%95%B0%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B-3c9e6a11-a04d-43b4-977c-563a0e0d5da3#:~:text=%E6%96%87%E6%9B%B8%E3%81%AE%E4%B8%80%E9%83%A8%E3%81%AE%E6%96%87%E5%AD%97%E6%95%B0%E3%82%92%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%99%E3%82%8B">文字カウント機能</a>等をご利用ください。</small></p>
+			</p>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
 		<script>
 			const input = document.getElementById("input");
 			const output = document.getElementById("output");
 			function count() {
 				let text = input.value;
-				text = text.replace(" ", "").replace("　", "");
-				text = text.replace(/\u200B/g, "");
-				
-				text=text.replace("¥r", "").replace("\r", "");
-				text=text.replace("¥n", "").replace("\n", "");
-				text=text.replace("¥t", "").replace("\t", "");
-				text = text.replace("¥l", "").replace("\l", "");
-				
-				output.innerHTML = text.trim().length+ "<br>[" + text.trim() + "]";
-				console.log("["+text.trim()+"]");
+				text = text
+				.replaceAll(" ", "")
+				.replaceAll("　", "")
+				.replaceAll("¥r", "")
+				.replaceAll("\r", "")
+				.replaceAll("¥n", "")
+				.replaceAll("\n", "")
+				.replaceAll("¥t", "")
+				.replaceAll("\t", "");
+				output.innerHTML = text.trim().length;
 			}
 		</script>
 	</body>
