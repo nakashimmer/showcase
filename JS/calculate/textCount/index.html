@@ -53,14 +53,10 @@
 			function count() {
 				let text = input.value;
 				text = text
-				.replaceAll(" ", "")
-				.replaceAll("　", "")
-				.replaceAll("¥r", "")
-				.replaceAll("\r", "")
-				.replaceAll("¥n", "")
-				.replaceAll("\n", "")
-				.replaceAll("¥t", "")
-				.replaceAll("\t", "");
+				.replaceAll(" ", "").replaceAll("　", "")
+				.replaceAll("¥r", "").replaceAll("\r", "")
+				.replaceAll("¥n", "").replaceAll("\n", "")
+				.replaceAll("¥t", "").replaceAll("\t", "");
 				output.innerHTML = text.trim().length;
 			}
 		</script>
