@@ -42,16 +42,16 @@
 
 			BTN1.addEventListener("click",()=>{
 				let word=IPT1.value;
-				word = word.replace("です。", "やねん。");
-				word = word.replace("ですか？", "でっか？");
-				word = word.replace("私は", "わては");
-				word = word.replace("だめ。", "あかん。");
-				word = word.replace("ありがとうございます。", "おおきに。");
-				word = word.replace("こんばんは。", "おばんです。");
-				word = word.replace("おもしろい", "おもろい");
-				word = word.replace("すごく", "ごっつ");
-				word = word.replace("なので、", "さかい、");
-				word = word.replace("ちがう", "ちゃう");
+				word = word.replaceAll("です。", "やねん。");
+				word = word.replaceAll("ですか？", "でっか？");
+				word = word.replaceAll("私は", "わては");
+				word = word.replaceAll("だめ。", "あかん。");
+				word = word.replaceAll("ありがとうございます。", "おおきに。");
+				word = word.replaceAll("こんばんは。", "おばんです。");
+				word = word.replaceAll("おもしろい", "おもろい");
+				word = word.replaceAll("すごく", "ごっつ");
+				word = word.replaceAll("なので、", "さかい、");
+				word = word.replaceAll("ちがう", "ちゃう");
 
 				OUT1.innerHTML = word;
 			});
