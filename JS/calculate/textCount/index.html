@@ -11,11 +11,9 @@
 			}
 
 			#input {
-				
 				width: calc(100% - 3em - 2px);
 				height: 5em;
 				text-align: left;
-			
 				padding: 0.5em;
 				border-radius: 1em;
 			}
@@ -29,6 +27,9 @@
 				text-align: center;
 			}
 
+			#wrap p {
+				margin: 1em;
+			}
 		</style>
 	</head>
 	<body>
@@ -39,7 +40,7 @@
 			</p>
 			<p>
 				<button onclick="count();">カウントする</button> 結果は:<span id="output">？</span>文字
-				<p><small>簡単な文字数カウントです。空白・改行・インデント等を除いた文字数を全角半角の区別なくカウントします。なお、すべての環境での動作保証はできませんので、参考として自己責任でご利用ください。正確なカウントはMicrosoft Wordの文字カウント機能</a>等をご利用ください。</small></p>
+			<p><small>簡単な文字数カウントです。空白・改行・インデント等を除いた文字数を全角半角の区別なくカウントします。なお、すべての環境での動作保証はできませんので、参考として自己責任でご利用ください。正確なカウントはMicrosoft 	Wordの文字カウント機能</a>等をご利用ください。</small></p>
 			</p>
 		</div>
 		<footer>
@@ -52,10 +53,10 @@
 			function count() {
 				let text = input.value;
 				text = text
-				.replaceAll(" ", "").replaceAll("　", "")
-				.replaceAll("¥r", "").replaceAll("\r", "")
-				.replaceAll("¥n", "").replaceAll("\n", "")
-				.replaceAll("¥t", "").replaceAll("\t", "");
+					.replaceAll(" ", "").replaceAll("　", "")
+					.replaceAll("¥r", "").replaceAll("\r", "")
+					.replaceAll("¥n", "").replaceAll("\n", "")
+					.replaceAll("¥t", "").replaceAll("\t", "");
 				output.innerHTML = text.trim().length;
 			}
 		</script>
