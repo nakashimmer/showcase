@@ -10,15 +10,15 @@
 				padding: 0;
 			}
 
-			#input {
+			#input1 {
 				width: calc(100% - 3em - 2px);
-				height: 5em;
+				height: 20em;
 				text-align: left;
 				padding: 0.5em;
 				border-radius: 1em;
 			}
 
-			#output {
+			#output1 {
 				color: red;
 				margin: 0;
 			}
@@ -36,11 +36,11 @@
 		<h1>文字数カウント</h1>
 		<div id="wrap">
 			<p>
-				<textarea id="input" placeholder="カウントしたいテキストをコピーペーストしてください。"></textarea>
+				<textarea id="input1" placeholder="カウントしたいテキストをコピーペーストしてください。"></textarea>
 			</p>
 			<p>
-				<button onclick="count();">カウントする</button> 結果は:<span id="output">？</span>文字
-			<p><small>簡単な文字数カウントです。空白・改行・インデント等を除いた文字数を全角半角の区別なくカウントします。なお、すべての環境での動作保証はできませんので、参考として自己責任でご利用ください。正確なカウントはMicrosoft 	Wordの文字カウント機能</a>等をご利用ください。</small></p>
+				<button onclick="count1();">カウントする</button> 結果は:<span id="output1">？</span>文字
+			<p><small>簡単な文字数カウントです。空白・改行・インデント等を除いた文字数を全角半角の区別なくカウントします。</small></p>
 			</p>
 		</div>
 		<footer>
@@ -48,16 +48,21 @@
 			</p>
 		</footer>
 		<script>
-			const input = document.getElementById("input");
-			const output = document.getElementById("output");
-			function count() {
-				let text = input.value;
+			const input1 = document.getElementById("input1");
+			const output1 = document.getElementById("output1");
+
+			input1.value = sessionStorage.getItem("textCount");
+			input1.addEventListener("input", count1);
+
+			function count1() {
+				let text = input1.value;
+				sessionStorage.setItem("textCount", text);
 				text = text
 					.replaceAll(" ", "").replaceAll("　", "")
 					.replaceAll("¥r", "").replaceAll("\r", "")
 					.replaceAll("¥n", "").replaceAll("\n", "")
 					.replaceAll("¥t", "").replaceAll("\t", "");
-				output.innerHTML = text.trim().length;
+				output1.innerHTML = text.trim().length;
 			}
 		</script>
 	</body>
