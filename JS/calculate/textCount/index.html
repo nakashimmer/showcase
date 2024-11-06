@@ -16,6 +16,7 @@
 				text-align: left;
 				padding: 0.5em;
 				border-radius: 1em;
+				font-size: 23px;
 			}
 
 			#output1 {
@@ -50,8 +51,10 @@
 		<script>
 			const input1 = document.getElementById("input1");
 			const output1 = document.getElementById("output1");
-
+			//初期化
 			input1.value = sessionStorage.getItem("textCount");
+			count1();
+
 			input1.addEventListener("input", count1);
 
 			function count1() {
