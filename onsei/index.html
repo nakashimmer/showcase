@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>テキストを音声ファイルとして保存</title>
+</head>
+<body>
+  <h2>テキスト → 音声ファイル保存デモ</h2>
+
+  <textarea id="text" rows="5" cols="50" placeholder="ここに読み上げたいテキストを入力..."></textarea><br>
+  <button id="speak">音声合成して録音</button>
+  <button id="download" disabled>音声をダウンロード</button>
+
+  <script>
+    const textArea = document.getElementById("text");
+    const speakBtn = document.getElementById("speak");
+    const downloadBtn = document.getElementById("download");
+
+    let mediaRecorder;
+    let audioChunks = [];
+
+    speakBtn.onclick = async () => {
+      const text = textArea.value.trim();
+      if (!text) {
+        alert("テキストを入力してください");
+        return;
+      }
+
+      // AudioContextを作成
+      const audioContext = new AudioContext();
+
+      // MediaStreamDestination（録音用）
+      const dest = audioContext.createMediaStreamDestination();
+
+      // SpeechSynthesisUtterance（音声合成）
+      const utter = new SpeechSynthesisUtterance(text);
+      const synth = window.speechSynthesis;
+
+      // 音声をAudioContextに流すための仕組み
+      const source = audioContext.createMediaStreamSource(dest.stream);
+
+      // 録音を開始
+      mediaRecorder = new MediaRecorder(dest.stream);
+      audioChunks = [];
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(audioChunks, { type: "audio/webm" });
+        const url = URL.createObjectURL(blob);
+        downloadBtn.href = url;
+        downloadBtn.download = "speech.webm";
+        downloadBtn.disabled = false;
+      };
+      mediaRecorder.start();
+
+      // ここがポイント：
+      // Web Speech API は直接 AudioContext に接続できないため、
+      // 暫定的には speechSynthesis の音声をスピーカー出力から録音する代替策が必要。
+      // 一部のブラウザでは getDisplayMedia() を使ってタブの音声を録音できます。
+
+      alert("現在のブラウザでは SpeechSynthesis 音声の直接録音は制限されています。\nブラウザ録音を有効にするには、タブ音声キャプチャを使用します。");
+
+      try {
+        const stream = await navigator.mediaDevices.getDisplayMedia({ audio: true, video: false });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(audioChunks, { type: "audio/webm" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "speech.webm";
+          a.click();
+        };
+        mediaRecorder.start();
+
+        // 音声再生
+        synth.speak(utter);
+
+        utter.onend = () => {
+          mediaRecorder.stop();
+          stream.getTracks().forEach(track => track.stop());
+        };
+      } catch (err) {
+        console.error(err);
+        alert("音声キャプチャが許可されませんでした。");
+      }
+    };
+  </script>
+</body>
+</html>
