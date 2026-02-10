@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>植生指数差分</title>
+	</head>
+	<body style="background-color:white;">
+		<p> 植生指数差分（2025年6月 − 2021年6月）<br>
+			<span style="color:blue">青：増加</span> / <span style="color:red">赤：減少</span> / <span>白：変化なし</span><br>
+		</p>
+		<canvas id="canvas"></canvas>
+		<script type="module">
+			import * as je from "../jaxa.earth.esm.js";
+
+			const collection =
+				"https://s3.ap-northeast-1.wasabisys.com/je-pds/cog/v1/JAXA.G-Portal_GCOM-C.SGLI_standard.L3-NDVI.daytime.v3_global_monthly/collection.json";
+			const band = "NDVI";
+
+			//const bbox = [110, 30, 150, 50];
+
+			// 2021年6月
+			const img2021 = await je.getImage({
+				collection,
+				band,
+				date: new Date(Date.UTC(2021, 5)),
+				//bbox
+			});
+
+			// 2025年6月
+			const img2025 = await je.getImage({
+				collection,
+				band,
+				date: new Date(Date.UTC(2025, 5)),
+				//bbox
+			});
+
+			// データ取得
+			const d21 = img2021.getData();
+			const d25 = img2025.getData();
+
+			const w = d21.width;
+			const h = d21.height;
+
+			// Canvas準備
+			const canvas = document.getElementById("canvas");
+			canvas.width = w;
+			canvas.height = h;
+			const ctx = canvas.getContext("2d");
+
+			const imageData = ctx.createImageData(w, h);
+
+			// 差分描画
+			for (let i = 0; i < d21.data.length; i++) {
+				const v21 = d21.data[i];
+				const v25 = d25.data[i];
+				const idx = i * 4;
+				const diff = v25 - v21;
+
+				if (diff > 0) {
+					// プラス → 青
+					imageData.data[idx] = 0;
+					imageData.data[idx + 1] = 0;
+					imageData.data[idx + 2] = Math.min(255, diff * 800);
+					imageData.data[idx + 3] = 255;
+				} else if (diff < 0) {
+					// マイナス → 赤
+					imageData.data[idx] = Math.min(255, -diff * 800);
+					imageData.data[idx + 1] = 0;
+					imageData.data[idx + 2] = 0;
+					imageData.data[idx + 3] = 255;
+				} else {
+					// 差分0 → 
+					imageData.data[idx] = 100;
+					imageData.data[idx + 1] = 100;
+					imageData.data[idx + 2] = 100;
+					imageData.data[idx + 3] = 100;
+				}
+			}
+
+			ctx.putImageData(imageData, 0, 0);
+		</script>
+	</body>
+</html>
