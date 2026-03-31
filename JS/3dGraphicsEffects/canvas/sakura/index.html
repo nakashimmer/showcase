@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>夜桜</title>
+<style>
+  body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+// 花びら生成
+function createPetal() {
+  const z = Math.random();
+
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * -canvas.height,
+    z: z,
+
+    baseSize: Math.random() * 5 + 5,
+    speedY: 0.5 + z * 1.0,
+
+    angle: Math.random() * Math.PI * 2,
+    sway: Math.random() * 0.02 + 0.01,
+
+    fadePhase: Math.random() * Math.PI * 2,
+    fadeSpeed: Math.random() * 0.02 + 0.01
+  };
+}
+
+// リセット
+function resetPetal(p) {
+  const z = Math.random();
+
+  p.x = Math.random() * canvas.width;
+  p.y = Math.random() * -canvas.height;
+  p.z = z;
+
+  p.baseSize = Math.random() * 5 + 5;
+  p.speedY = 0.5 + z * 1.0;
+  p.angle = Math.random() * Math.PI * 2;
+  p.fadePhase = Math.random() * Math.PI * 2;
+}
+
+// 更新（固定ステップ）
+function updatePetal(p) {
+  p.y += p.speedY;
+
+  p.angle += p.sway;
+  p.x += Math.sin(p.angle) * 0.3;
+
+  p.fadePhase += p.fadeSpeed;
+
+  if (p.y > canvas.height) {
+    resetPetal(p);
+  }
+}
+
+// 描画
+function drawPetal(p) {
+  const scale = 0.5 + p.z * 0.8;
+  const size = p.baseSize * scale;
+
+  const alpha = ((Math.sin(p.fadePhase) + 1) / 2) * (0.6 + p.z * 0.4);
+
+  ctx.save();
+
+  ctx.globalAlpha = alpha;
+
+  ctx.shadowColor = "rgba(255,182,193,0.5)";
+  ctx.shadowBlur = (1 - p.z) * 8;
+
+  ctx.fillStyle = "pink";
+
+  ctx.beginPath();
+  ctx.ellipse(p.x, p.y, size, size / 2, Math.PI / 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+// 配列生成
+const petals = [];
+for (let i = 0; i < 120; i++) {
+  petals.push(createPetal());
+}
+
+// メインループ（約60fps）
+setInterval(() => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < petals.length; i++) {
+    updatePetal(petals[i]);
+    drawPetal(petals[i]);
+  }
+
+}, 16); // 約60fps
+</script>
+</body>
+</html>
