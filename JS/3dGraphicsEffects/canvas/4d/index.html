@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<canvas id="canvas" width="600" height="600"></canvas>
+		<script>
+			const canvas = document.getElementById('canvas');
+			const ctx = canvas.getContext('2d');
+			const size = 600;
+			let angle = 0;
+
+			// 4次元立方体の頂点 (16個)
+			let vertices = [];
+			for (let i = 0; i < 16; i++) {
+				vertices.push([
+					(i & 1) ? 1 : -1,
+					(i & 2) ? 1 : -1,
+					(i & 4) ? 1 : -1,
+					(i & 8) ? 1 : -1
+				]);
+			}
+
+			// 辺の接続情報
+			const edges = [];
+			for (let i = 0; i < 16; i++) {
+				for (let j = i + 1; j < 16; j++) {
+					let diff = 0;
+					for (let k = 0; k < 4; k++){
+						if (vertices[i][k] !== vertices[j][k]){ diff++;}
+					}
+					if (diff === 1) edges.push([i, j]);
+				}
+			}
+
+			function matMul(a, b) {
+				let res = new Array(a.length).fill(0).map(
+					() => new Array(b[0].length).fill(0)
+				);
+				for (let i = 0; i < a.length; i++){
+					for (let j = 0; j < b[0].length; j++){
+						for (let k = 0; k < a[0].length; k++){
+							res[i][j] += a[i][k] * b[k][j];
+						}}}
+				return res;
+			}
+
+			function draw() {
+				ctx.clearRect(0, 0, size, size);
+				ctx.strokeStyle = 'white';
+				ctx.fillStyle = 'black';
+				ctx.fillRect(0, 0, size, size);
+
+				let projected = [];
+				angle += 0.02;
+
+				for (let v of vertices) {
+					// 1. 4次元回転 (xw平面とzw平面)
+					let c = Math.cos(angle); 
+					let s = Math.sin(angle);
+					let x = v[0];
+					let y = v[1];
+					let z = v[2];
+					let w = v[3];
+
+					// 回転行列の適用
+					let rXW = [
+						c * x - s * w, 
+						y, 
+						z, 
+						s * x + c * w
+					];
+					let rZW = [
+						rXW[0], 
+						rXW[1], 
+						c * rXW[2] - s * rXW[3], 
+						s * rXW[2] + c * rXW[3]
+					];
+
+					// 2. 4D -> 3D 投影 (w成分で割ることで奥行きを表現)
+					let d = 2; // カメラまでの距離
+					let factor = 1 / (d - rZW[3]);
+					let p3d = [
+						rZW[0] * factor,
+						rZW[1] * factor,
+						rZW[2] * factor
+					];
+
+					// 3. 3D -> 2D 投影 (単純にxy平面に投影)
+					let scale = 150;
+					projected.push(
+						[p3d[0] * scale + size / 2,
+						 p3d[1] * scale + size / 2
+						]
+					);
+				}
+
+				// 辺を描画
+				for (let edge of edges) {
+					ctx.beginPath();
+					ctx.moveTo(
+						projected[edge[0]][0], 
+						projected[edge[0]][1]
+					);
+					ctx.lineTo(
+						projected[edge[1]][0], 
+						projected[edge[1]][1]);
+					ctx.stroke();
+				}
+				requestAnimationFrame(draw);
+			}
+			draw();
+		</script>
+	</body>
+</html>
