@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>Mandelbrot集合（カラフル）</title>
+		<style>
+			body {
+				margin: 0;
+				background: black;
+				overflow: hidden;
+			}
+
+			canvas {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+
+			let centerX = -0.5;
+			let centerY = 0;
+			let scale = 3;
+			let maxIter = 150;
+
+			// HSV → RGB変換
+			function hsvToRgb(h, s, v) {
+				let c = v * s;
+				let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+				let m = v - c;
+
+				let r, g, b;
+
+				if (h < 60) [r, g, b] = [c, x, 0];
+				else if (h < 120) [r, g, b] = [x, c, 0];
+				else if (h < 180) [r, g, b] = [0, c, x];
+				else if (h < 240) [r, g, b] = [0, x, c];
+				else if (h < 300) [r, g, b] = [x, 0, c];
+				else[r, g, b] = [c, 0, x];
+
+				return [
+					Math.floor((r + m) * 255),
+					Math.floor((g + m) * 255),
+					Math.floor((b + m) * 255)
+				];
+			}
+
+			function draw() {
+				const width = canvas.width;
+				const height = canvas.height;
+
+				const image = ctx.createImageData(width, height);
+				const data = image.data;
+
+				for (let px = 0; px < width; px++) {
+					for (let py = 0; py < height; py++) {
+
+						const x0 = centerX + (px / width - 0.5) * scale;
+						const y0 = centerY + (py / height - 0.5) * scale;
+
+						let x = 0;
+						let y = 0;
+						let iter = 0;
+
+						while (x * x + y * y <= 4 && iter < maxIter) {
+							const xtemp = x * x - y * y + x0;
+							y = 2 * x * y + y0;
+							x = xtemp;
+							iter++;
+						}
+
+						const index = (py * width + px) * 4;
+
+						if (iter === maxIter) {
+							// 内部は黒
+							data[index] = 0;
+							data[index + 1] = 0;
+							data[index + 2] = 0;
+						} else {
+							// カラフル化（色相を反復回数に対応）
+							const hue = (iter / maxIter) * 360;
+							const [r, g, b] = hsvToRgb(hue, 1, 1);
+
+							data[index] = r;
+							data[index + 1] = g;
+							data[index + 2] = b;
+						}
+
+						data[index + 3] = 255;
+					}
+				}
+
+				ctx.putImageData(image, 0, 0);
+			}
+
+			// クリックでズーム
+			canvas.addEventListener("click", (e) => {
+				const rect = canvas.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+
+				centerX += (x / canvas.width - 0.5) * scale;
+				centerY += (y / canvas.height - 0.5) * scale;
+				scale *= 0.5;
+
+				draw();
+			});
+
+			// 初期描画
+			draw();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>ローレンツアトラクタ（操作可能）</title>
+		<style>
+			body {
+				margin: 0;
+				background: black;
+				color: white;
+				font-family: sans-serif;
+				text-align: center;
+			}
+
+			canvas {
+				display: block;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>ρ（ロー）を変えると形が変わる</h3>
+		<input type="range" id="rhoSlider" min="0" max="50" step="0.1" value="28">
+		<span id="rhoValue">28</span>
+		<canvas id="canvas"></canvas>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			// 固定サイズ（中央に見せるため）
+			canvas.width = 800;
+			canvas.height = 800;
+
+			const sigma = 10;
+			let rho = 28;
+			const beta = 8 / 3;
+
+			let x, y, z;
+
+			const dt = 0.01;
+			const scale = 8;
+
+			// 初期化
+			function reset() {
+				x = 0.01;
+				y = 70;
+				z = 0;
+
+				ctx.fillStyle = "black";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			}
+
+			// スライダー
+			const slider = document.getElementById("rhoSlider");
+			const valueText = document.getElementById("rhoValue");
+
+			slider.addEventListener("input", () => {
+				rho = parseFloat(slider.value);
+				valueText.textContent = rho;
+				reset();
+			});
+
+			// ローレンツ方程式
+			function step() {
+				const dx = sigma * (y - x);
+				const dy = x * (rho - z) - y;
+				const dz = x * y - beta * z;
+
+				x += dx * dt;
+				y += dy * dt;
+				z += dz * dt;
+			}
+
+			function draw() {
+				for (let i = 0; i < 100; i++) {
+					step();
+
+					// 中央配置（重要）
+					const px = canvas.width / 2 + x * scale;
+					const py = canvas.height / 2 - z * scale;
+
+					// 色（滑らかに変化）
+					const hue = (x + y + z) * 10 % 360;
+					ctx.strokeStyle = `hsl(${hue}, 100%, 60%)`;
+
+					ctx.beginPath();
+					ctx.moveTo(px, py);
+					ctx.lineTo(px + 1, py + 1);
+					ctx.stroke();
+				}
+
+				requestAnimationFrame(draw);
+			}
+
+			// 初期化して開始
+			reset();
+			draw();
+		</script>
+	</body>
+</html>
