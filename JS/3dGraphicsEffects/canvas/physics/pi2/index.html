@@ -54,7 +54,11 @@
 							ctx.fillStyle = "#EEEEEE"; // 円外
 						}
 
-						ctx.fillRect(i * cell, j * cell, cell, cell);
+						ctx.fillRect(
+							i * cell, 
+							j * cell, 
+							cell, 
+							cell);
 					}
 				}
 
@@ -65,9 +69,11 @@
 				valueText.textContent = n;
 			}
 
-			slider.addEventListener("input", () => {
-				draw(parseInt(slider.value));
-			});
+			slider.addEventListener("input",
+				() => {
+					draw(parseInt(slider.value));
+				}
+			);
 
 			// 初期描画
 			draw(parseInt(slider.value));
