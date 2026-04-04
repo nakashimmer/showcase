@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Mandelbrot集合（カラフル）</title>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>マンデルブロー集合</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../../sample.css">
 		<style>
 			body {
 				margin: 0;
 				background: black;
 				overflow: hidden;
 			}
-
+			#wrap{
+				width:100%;
+			}
 			canvas {
 				display: block;
+				width:800px;
+				height:800px;
 			}
 		</style>
 	</head>
 	<body>
+		<h1>マンデルブロー集合</h1>
+		<div id="wrap">
 		<canvas id="canvas"></canvas>
 		<script>
 			const canvas = document.getElementById("canvas");
@@ -115,5 +125,10 @@
 			// 初期描画
 			draw();
 		</script>
-	</body>
-</html>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		</body>
+		</html>
