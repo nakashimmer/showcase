@@ -14,10 +14,28 @@
         overflow: hidden;
       }
 
-      canvas {
+      #canvas {
         display: block;
-        width:100%;
-        height: 100%
+        width: 100%;
+        height: 100%;
+      }
+
+      #canvas::before {
+        background-color: #fff;
+        content: "aaaa";
+        /* 疑似要素に必須 */
+        width: 100%;
+        /* 幅いっぱい */
+        height: 100%;
+        /* 高さいっぱい */
+        display: block;
+        /* 高さを指定するためにブロック要素にする */
+        background: linear-gradient(red 0, #fff 80%);
+        /* 徐々に透明にする */
+        position: absolute;
+        /*  */
+        top: 0;
+        left: 0;
       }
     </style>
   </head>
