@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>円周率（格子法）</title>
+		<style>
+			body {
+				text-align: center;
+				font-family: sans-serif;
+				background: #f5f5f5;
+			}
+
+			canvas {
+				border: 1px solid #ccc;
+				margin-top: 10px;
+			}
+			input[type="range"] {
+				width: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>円周率の近似（格子法）</h2>
+		<label>分割数: <span id="value">50</span></label><br>
+		<input type="range" id="slider" min="1" max="1000" value="1">
+		<p>π ≒ <span id="pi">---</span></p>
+		<canvas id="canvas" width="400" height="400"></canvas>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			const slider = document.getElementById("slider");
+			const valueText = document.getElementById("value");
+			const piText = document.getElementById("pi");
+
+			function draw(n) {
+				const size = canvas.width;
+				const cell = size / n;
+				let inside = 0;
+
+				ctx.clearRect(0, 0, size, size);
+
+				// 中心を(0,0)、範囲を[-1,1]に対応させる
+				for (let i = 0; i < n; i++) {
+					for (let j = 0; j < n; j++) {
+
+						// マス中心の座標
+						const x = (i + 0.5) / n * 2 - 1;
+						const y = (j + 0.5) / n * 2 - 1;
+
+						const r2 = x * x + y * y;
+
+						if (r2 <= 1) {
+							inside++;
+							ctx.fillStyle = "#4CAF50"; // 円内
+						} else {
+							ctx.fillStyle = "#EEEEEE"; // 円外
+						}
+
+						ctx.fillRect(
+							i * cell, 
+							j * cell, 
+							cell*0.9, 
+							cell*0.9);
+					}
+				}
+
+				const total = n * n;
+				const pi = (inside / total) * 4;
+
+				piText.textContent = pi.toFixed(6);
+				valueText.textContent = n;
+			}
+
+			slider.addEventListener("input",
+				() => {
+					draw(parseInt(slider.value));
+				}
+			);
+
+			// 初期描画
+			draw(parseInt(slider.value));
+		</script>
+	</body>
+</html>

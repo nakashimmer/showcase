@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>ローレンツアトラクタ</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../../sample.css">
+		<style>
+			body {
+				margin: 0;
+				background: black;
+				color: white;
+				text-align: center;
+			}
+
+			canvas {
+				display: block;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>ローレンツアトラクタ</h1>
+		<div id="wrap">
+			<h3>ρを変えると形が変わる</h3>
+			<input type="range" id="rhoSlider" min="0" max="50" step="0.1" value="28">
+			<span id="rhoValue">28</span>
+			<canvas id="canvas" width="600" height="600"></canvas>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			const sigma = 10;
+			let rho = 28;
+			const beta = 8 / 3;
+
+			let x, y, z;
+			let avgX = 0, avgZ = 0;
+
+			const dt = 0.01;
+			const scale = 8;
+			const alpha = 0.01;
+
+			let steps = 0;
+
+			function reset() {
+				x = 0.01;
+				y = 0;
+				z = 0;
+
+				avgX = 0;
+				avgZ = 0;
+				steps = 0;
+
+				ctx.fillStyle = "black";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			}
+
+			const slider = document.getElementById("rhoSlider");
+			const valueText = document.getElementById("rhoValue");
+
+			slider.addEventListener("input", () => {
+				rho = parseFloat(slider.value);
+				valueText.textContent = rho;
+				reset();
+			});
+
+			function step() {
+				const dx = sigma * (y - x);
+				const dy = x * (rho - z) - y;
+				const dz = x * y - beta * z;
+
+				x += dx * dt;
+				y += dy * dt;
+				z += dz * dt;
+
+				// 平均更新（x,z）
+				avgX = (1 - alpha) * avgX + alpha * x;
+				avgZ = (1 - alpha) * avgZ + alpha * z;
+
+				steps++;
+			}
+
+			function draw() {
+				for (let i = 0; i < 200; i++) {
+					step();
+
+					// 最初は描かない（安定させる）
+					if (steps < 1000) continue;
+
+					const cx = x - avgX;
+					const cz = z - avgZ;
+
+					const px = canvas.width / 2 + cx * scale;
+					const py = canvas.height / 2 - cz * scale;
+
+					// 画面外は描かない
+					if (px < 0 || px >= canvas.width || py < 0 || py >= canvas.height) continue;
+
+					const hue = (x + y + z) * 10 % 360;
+					ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+
+					ctx.fillRect(px, py, 1, 1);
+				}
+
+				requestAnimationFrame(draw);
+			}
+
+			reset();
+			draw();
+		</script>
+	</body>
+</html>
