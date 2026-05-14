@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>n角形ジェネレーター</title>
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			body {
+				font-family: sans-serif;
+				text-align: center;
+				background: #f0f0f0;
+			}
+
+			canvas {
+				background: white;
+				border: 1px solid #ccc;
+				margin-top: 20px;
+			}
+
+			.controls {
+				margin-top: 20px;
+			}
+
+			#label {
+				font-size: 1.3em;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>n角形ジェネレーター</h1>
+		<div id="wrap">
+			<div class="controls">
+				<input type="range" id="sides" min="0" max="30" step="0.1" value="4">
+				<span id="label">4角形</span>
+			</div>
+			<canvas id="canvas" width="500" height="500"></canvas>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			const slider = document.getElementById("sides");
+			const label = document.getElementById("label");
+
+			function drawPolygon(value) {
+
+				const n = Number(value);
+
+				label.textContent =
+					`${n.toFixed(1)}角形　`+(360/n).toFixed(2) +"°曲がる";
+
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				// 1未満は描画しない
+				if (n < 1) {
+					return;
+				}
+
+				// Canvas中心
+				const canvasCenterX = canvas.width / 2;
+				const canvasCenterY = canvas.height / 2;
+
+				// 単位円を拡大
+				const scale = 180;
+
+				/*
+						n が整数でなくても、
+						「360度を n 等分する」
+						と考えて描画する。
+		
+						例:
+						n = 4
+		
+						360 / 4 = 90度
+		
+						90度ずつ進み、
+						最初の点へ戻るまで線を引く。
+				*/
+
+				const visited = new Set();
+
+				ctx.beginPath();
+
+				let index = 0;
+
+				while (true) {
+
+					const angle =
+						2 * Math.PI * index / n;
+
+					// 単位円上の座標
+					const x = Math.sin(angle);
+					const y = Math.cos(angle);
+
+					// Canvas座標へ変換
+					const canvasX =
+						canvasCenterX + x * scale;
+
+					const canvasY =
+						canvasCenterY - y * scale;
+
+					const key =
+						`${x.toFixed(2)},${y.toFixed(2)}`;
+
+					// 同じ点へ戻ったら終了
+					if (visited.has(key)) {
+						break;
+					}
+
+					visited.add(key);
+
+					if (index === 0) {
+						ctx.moveTo(canvasX, canvasY);
+					} else {
+						ctx.lineTo(canvasX, canvasY);
+					}
+
+					index++;
+
+					// 安全装置
+					if (index > 500) {
+						break;
+					}
+				}
+
+				ctx.closePath();
+
+				ctx.fillStyle = "#88ccff";
+				ctx.fill();
+
+				ctx.lineWidth = 3;
+				ctx.strokeStyle = "#003366";
+				ctx.stroke();
+			}
+
+			slider.addEventListener("input", () => {
+				drawPolygon(slider.value);
+			});
+
+			drawPolygon(slider.value);
+
+		</script>
+	</body>
+</html>

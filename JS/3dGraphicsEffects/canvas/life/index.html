@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>ライフゲーム</title>
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			body {
+				background: #111;
+				color: white;
+				text-align: center;
+				font-family: sans-serif;
+			}
+
+			canvas {
+				background: black;
+				border: 1px solid #666;
+				margin-top: 10px;
+			}
+
+			button {
+				margin: 5px;
+				padding: 10px 20px;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>ライフゲーム</h1>
+		<div id="wrap">
+			<button onclick="startGame()">開始</button>
+			<button onclick="stopGame()">停止</button>
+			<button onclick="randomize()">ランダム</button>
+			<button onclick="clearGrid()">クリア</button>
+			<br>
+			<canvas id="gameCanvas"></canvas>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		<script>
+
+			const canvas = document.getElementById("gameCanvas");
+			const ctx = canvas.getContext("2d");
+
+			const cellSize = 10;
+			const cols = 80;
+			const rows = 60;
+
+			canvas.width = cols * cellSize;
+			canvas.height = rows * cellSize;
+
+			let grid = [];
+			let running = false;
+			let timer;
+
+			// 初期化
+			function createGrid() {
+				grid = [];
+
+				for (let y = 0; y < rows; y++) {
+
+					let row = [];
+
+					for (let x = 0; x < cols; x++) {
+						row.push(0);
+					}
+
+					grid.push(row);
+				}
+			}
+
+			// 描画
+			function drawGrid() {
+
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+				for (let y = 0; y < rows; y++) {
+
+					for (let x = 0; x < cols; x++) {
+
+						if (grid[y][x] === 1) {
+							ctx.fillStyle = "lime";
+						} else {
+							ctx.fillStyle = "#222";
+						}
+
+						ctx.fillRect(
+							x * cellSize,
+							y * cellSize,
+							cellSize - 1,
+							cellSize - 1
+						);
+					}
+				}
+			}
+
+			// 次世代計算
+			function nextGeneration() {
+
+				let newGrid = [];
+
+				for (let y = 0; y < rows; y++) {
+
+					let newRow = [];
+
+					for (let x = 0; x < cols; x++) {
+
+						let neighbors = countNeighbors(x, y);
+
+						let state = grid[y][x];
+
+						// ルール
+						if (state === 1) {
+
+							if (neighbors < 2 || neighbors > 3) {
+								newRow.push(0);
+							} else {
+								newRow.push(1);
+							}
+
+						} else {
+
+							if (neighbors === 3) {
+								newRow.push(1);
+							} else {
+								newRow.push(0);
+							}
+						}
+					}
+
+					newGrid.push(newRow);
+				}
+
+				grid = newGrid;
+			}
+
+			// 周囲の生存数
+			function countNeighbors(x, y) {
+
+				let count = 0;
+
+				for (let dy = -1; dy <= 1; dy++) {
+
+					for (let dx = -1; dx <= 1; dx++) {
+
+						if (dx === 0 && dy === 0) continue;
+
+						let nx = (x + dx + cols) % cols;
+						let ny = (y + dy + rows) % rows;
+
+						if (
+							nx >= 0 &&
+							nx < cols &&
+							ny >= 0 &&
+							ny < rows
+						) {
+							count += grid[ny][nx];
+						}
+					}
+				}
+
+				return count;
+			}
+
+			// 更新ループ
+			function update() {
+
+				nextGeneration();
+				drawGrid();
+			}
+
+			// 開始
+			function startGame() {
+
+				if (!running) {
+					running = true;
+					timer = setInterval(update, 100);
+				}
+			}
+
+			// 停止
+			function stopGame() {
+
+				running = false;
+				clearInterval(timer);
+			}
+
+			// ランダム配置
+			function randomize() {
+
+				for (let y = 0; y < rows; y++) {
+
+					for (let x = 0; x < cols; x++) {
+
+						grid[y][x] = Math.random() > 0.7 ? 1 : 0;
+					}
+				}
+
+				drawGrid();
+			}
+
+			// クリア
+			function clearGrid() {
+
+				createGrid();
+				drawGrid();
+			}
+
+			// クリックで編集
+			canvas.addEventListener("click", function (event) {
+
+				const rect = canvas.getBoundingClientRect();
+
+				const x = Math.floor(
+					(event.clientX - rect.left) / cellSize
+				);
+
+				const y = Math.floor(
+					(event.clientY - rect.top) / cellSize
+				);
+
+				grid[y][x] = grid[y][x] ? 0 : 1;
+
+				drawGrid();
+			});
+
+			// 初期化
+			createGrid();
+			drawGrid();
+
+		</script>
+	</body>
+</html>

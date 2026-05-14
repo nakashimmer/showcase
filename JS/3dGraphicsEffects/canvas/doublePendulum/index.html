@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>二重振り子</title>
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			style>body {
+				margin: 0;
+				overflow: hidden;
+				background: black;
+			}
+
+			canvas {
+				display: block;
+				width:100%;
+			
+			}
+		</style>
+	</head>
+	<body>
+		<h1>二重振り子</h1>
+		<div id="wrap">
+			<canvas id="canvas"></canvas>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+
+			const cx = canvas.width / 2;
+			const cy = 200;
+
+			// 長さ
+			const r1 = 200;
+			const r2 = 200;
+
+			// 質量
+			const m1 = 20;
+			const m2 = 20;
+
+			// 重力
+			const g = 1;
+
+			// 初期角度
+			let a1 = Math.PI / 2;
+			let a2 = Math.PI / 2;
+
+			// 角速度
+			let a1_v = 0;
+			let a2_v = 0;
+
+			// 軌跡保存
+			let trail = [];
+
+			function draw() {
+
+				ctx.fillStyle = "rgba(0,0,0,0.2)";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+				// 加速度計算
+
+				let num1 = -g * (2 * m1 + m2) * Math.sin(a1);
+				let num2 = -m2 * g * Math.sin(a1 - 2 * a2);
+				let num3 = -2 * Math.sin(a1 - a2) * m2;
+				let num4 = a2_v * a2_v * r2 +
+					a1_v * a1_v * r1 * Math.cos(a1 - a2);
+
+				let den = r1 * (2 * m1 + m2 - m2 * Math.cos(2 * a1 - 2 * a2));
+
+				let a1_a = (num1 + num2 + num3 * num4) / den;
+
+				num1 = 2 * Math.sin(a1 - a2);
+
+				num2 = a1_v * a1_v * r1 * (m1 + m2);
+
+				num3 = g * (m1 + m2) * Math.cos(a1);
+
+				num4 = a2_v * a2_v * r2 * m2 * Math.cos(a1 - a2);
+
+				den = r2 * (2 * m1 + m2 - m2 * Math.cos(2 * a1 - 2 * a2));
+
+				let a2_a = (num1 * (num2 + num3 + num4)) / den;
+
+				// 座標計算
+
+				let x1 = cx + r1 * Math.sin(a1);
+				let y1 = cy + r1 * Math.cos(a1);
+
+				let x2 = x1 + r2 * Math.sin(a2);
+				let y2 = y1 + r2 * Math.cos(a2);
+
+				// 軌跡
+
+				trail.push({ x: x2, y: y2 });
+
+				if (trail.length > 1000) {
+					trail.shift();
+				}
+
+				// 軌跡描画
+
+				ctx.beginPath();
+
+				for (let i = 0; i < trail.length; i++) {
+
+					let p = trail[i];
+
+					if (i === 0) {
+						ctx.moveTo(p.x, p.y);
+					} else {
+						ctx.lineTo(p.x, p.y);
+					}
+				}
+
+				ctx.strokeStyle = "cyan";
+				ctx.stroke();
+
+				// 棒
+
+				ctx.beginPath();
+				ctx.moveTo(cx, cy);
+				ctx.lineTo(x1, y1);
+				ctx.lineTo(x2, y2);
+
+				ctx.strokeStyle = "white";
+				ctx.lineWidth = 2;
+				ctx.stroke();
+
+				// 質点
+
+				ctx.beginPath();
+				ctx.arc(x1, y1, m1, 0, Math.PI * 2);
+
+				ctx.fillStyle = "orange";
+				ctx.fill();
+
+				ctx.beginPath();
+				ctx.arc(x2, y2, m2, 0, Math.PI * 2);
+
+				ctx.fillStyle = "lime";
+				ctx.fill();
+
+				// 更新
+
+				a1_v += a1_a;
+				a2_v += a2_a;
+
+				a1 += a1_v;
+				a2 += a2_v;
+
+				// 少し減衰
+
+				a1_v *= 0.999;
+				a2_v *= 0.999;
+
+				requestAnimationFrame(draw);
+			}
+
+			draw();
+
+		</script>
+	</body>
+</html>
