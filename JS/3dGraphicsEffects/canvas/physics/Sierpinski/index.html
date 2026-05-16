@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>3次元 シェルピンスキー・ギャスケット</title>
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			html,
+			body {
+				margin: 0;
+				overflow: hidden;
+				background: black;
+			}
+
+			canvas {
+				display: block;
+				width:100%;
+			}
+
+			#info {
+				position: absolute;
+				top: 10px;
+				left: 10px;
+				color: white;
+				background: rgba(0, 0, 0, 0.5);
+				padding: 10px;
+				border-radius: 8px;
+				font-family: sans-serif;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>3次元 シェルピンスキー・ギャスケット</h1>
+		<div id="wrap">
+		<canvas id="canvas"></canvas>
+		<div id="info">深さ5（非常に細かい）<br> ドラッグ：回転<br> ホイール：ズーム </div>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		<script>
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			let w, h;
+
+			function resize() {
+				w = canvas.width = window.innerWidth;
+				h = canvas.height = window.innerHeight;
+			}
+			window.addEventListener("resize", resize);
+			resize();
+
+
+			// ===================================
+			// ベクトル
+			// ===================================
+			class Vec3 {
+				constructor(x, y, z) {
+					this.x = x;
+					this.y = y;
+					this.z = z;
+				}
+			}
+
+
+			// ===================================
+			// 回転
+			// ===================================
+			function rotateX(p, a) {
+
+				const c = Math.cos(a);
+				const s = Math.sin(a);
+
+				return new Vec3(
+					p.x,
+					p.y * c - p.z * s,
+					p.y * s + p.z * c
+				);
+			}
+
+			function rotateY(p, a) {
+
+				const c = Math.cos(a);
+				const s = Math.sin(a);
+
+				return new Vec3(
+					p.x * c + p.z * s,
+					p.y,
+					-p.x * s + p.z * c
+				);
+			}
+
+
+			// ===================================
+			// 射影
+			// ===================================
+			function project(p) {
+
+				const fov = 900;
+
+				const scale =
+					fov / (fov + p.z + zoom);
+
+				return {
+					x: p.x * scale + w / 2,
+					y: p.y * scale + h / 2
+				};
+			}
+
+
+			// ===================================
+			// 四面体描画
+			// ===================================
+			function drawTetra(vs, color) {
+
+				const pts = vs.map(v => {
+
+					let p = rotateX(v, angleX);
+					p = rotateY(p, angleY);
+
+					return project(p);
+				});
+
+				const edges = [
+					[0, 1],
+					[0, 2],
+					[0, 3],
+					[1, 2],
+					[1, 3],
+					[2, 3]
+				];
+
+				ctx.strokeStyle = color;
+				ctx.lineWidth = 0.5;
+
+				for (const [a, b] of edges) {
+
+					ctx.beginPath();
+
+					ctx.moveTo(
+						pts[a].x,
+						pts[a].y
+					);
+
+					ctx.lineTo(
+						pts[b].x,
+						pts[b].y
+					);
+
+					ctx.stroke();
+				}
+			}
+
+
+			// ===================================
+			// フラクタル生成
+			// ===================================
+			const tetrahedrons = [];
+
+			function midpoint(a, b) {
+
+				return new Vec3(
+					(a.x + b.x) / 2,
+					(a.y + b.y) / 2,
+					(a.z + b.z) / 2
+				);
+			}
+
+			function sierpinski(v0, v1, v2, v3, depth) {
+
+				if (depth === 0) {
+
+					tetrahedrons.push([
+						v0, v1, v2, v3
+					]);
+
+					return;
+				}
+
+				const m01 = midpoint(v0, v1);
+				const m02 = midpoint(v0, v2);
+				const m03 = midpoint(v0, v3);
+
+				const m12 = midpoint(v1, v2);
+				const m13 = midpoint(v1, v3);
+				const m23 = midpoint(v2, v3);
+
+				sierpinski(
+					v0, m01, m02, m03,
+					depth - 1
+				);
+
+				sierpinski(
+					m01, v1, m12, m13,
+					depth - 1
+				);
+
+				sierpinski(
+					m02, m12, v2, m23,
+					depth - 1
+				);
+
+				sierpinski(
+					m03, m13, m23, v3,
+					depth - 1
+				);
+			}
+
+
+			// ===================================
+			// 初期四面体
+			// ===================================
+			const size = 420;
+
+			const v0 =
+				new Vec3(0, -size, 0);
+
+			const v1 =
+				new Vec3(-size, size, -size);
+
+			const v2 =
+				new Vec3(size, size, -size);
+
+			const v3 =
+				new Vec3(0, size, size);
+
+
+			// ===================================
+			// 非常に細かい
+			// 深さ5
+			// ===================================
+			sierpinski(
+				v0, v1, v2, v3,
+				5
+			);
+
+
+			// ===================================
+			// 操作
+			// ===================================
+			let angleX = 0.6;
+			let angleY = 0.7;
+			let zoom = 700;
+
+			let dragging = false;
+			let lastX = 0;
+			let lastY = 0;
+
+			canvas.addEventListener("mousedown", e => {
+
+				dragging = true;
+
+				lastX = e.clientX;
+				lastY = e.clientY;
+			});
+
+			window.addEventListener("mouseup", () => {
+
+				dragging = false;
+			});
+
+			window.addEventListener("mousemove", e => {
+
+				if (!dragging) return;
+
+				const dx =
+					e.clientX - lastX;
+
+				const dy =
+					e.clientY - lastY;
+
+				angleY += dx * 0.01;
+				angleX += dy * 0.01;
+
+				lastX = e.clientX;
+				lastY = e.clientY;
+			});
+
+			canvas.addEventListener("wheel", e => {
+
+				zoom += e.deltaY * 0.5;
+			});
+
+
+			// ===================================
+			// 描画
+			// ===================================
+			function animate() {
+
+				ctx.fillStyle = "black";
+				ctx.fillRect(0, 0, w, h);
+
+				angleY += 0.002;
+
+				tetrahedrons.forEach((tetra, i) => {
+
+					const hue =
+						(i * 0.8) % 360;
+
+					drawTetra(
+						tetra,
+						`hsl(${hue},100%,75%)`
+					);
+				});
+
+				requestAnimationFrame(
+					animate
+				);
+			}
+
+			animate();
+
+		</script>
+	</body>
+</html>
