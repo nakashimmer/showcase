@@ -8,15 +8,22 @@
 		<link rel="stylesheet" href="../../../../../sample.css">
 		<style>
 			#wrap{background-color:black;}
+			#relative{position: relative;height:300px;}
+			#relative *{position: absolute;}
 			#canvas{display:block;border:1px solid gray;}
 			#range{width:100px;}
+			#point{color:white;left:10px;top:10px;font-size:1.5em;}
 		</style>
 	</head>
 	<body>
 		<h1>放物線</h1>
 		<div id="wrap">
-			<canvas id="canvas" width="800" height="300"></canvas>
+			<div id="relative">
+				<canvas id="canvas" width="800" height="300"></canvas>
+				<p id="point">得点</p>
+			</div>
 			<p><input type="range" id="range" max="500" value="150" step="1"></p>
+			
 		</div>
 		<footer>
 			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
@@ -27,6 +34,7 @@
 
 			const RANGE = document.getElementById("range");
 			const CANVAS = document.getElementById("canvas");
+			const POINT = document.getElementById("point");
 			const CTX = CANVAS.getContext("2d");
 			const SOUND = new Audio("pon.mp3");
 			
@@ -51,10 +59,13 @@
 			let bound=0;
 			let t;
 			let timer;
+			let point = 0;
+
 			
 			//⑩canvasをonclickしてスタート
 			CANVAS.addEventListener("click",()=>{
 				BALL.x = 0;
+				BALL.y = 0;
 				dx = Number(RANGE.value);						
 				t = 0;												//時間
 				bound = 0;										//バウンドの回数
@@ -72,6 +83,7 @@
 				CTX.fillStyle="yellow";
 				CTX.fillRect(500,0,50,10);
 
+
 				//③白の丸を描画=======
 				CTX.globalAlpha=1;
 				CTX.beginPath();
@@ -85,12 +97,16 @@
 				BALL.y = V*t-1/2*G*t*t;				//物を上に打ち上げた時の位置の公式でyを算出
 				t += INTERVAL;								//時間を加算
 
+				console.log(point);
 				/* ⑫衝突判定 */
 				if(BALL.y<0){
 					t=0;
 					bound++;
 					if(500<BALL.x && BALL.x<550 && bound==1){
 						SOUND.play();
+						point++;
+						POINT.innerHTML = "得点：" + point;
+
 					}
 				}
 			}
