@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>ローレンツアトラクタ</title>
+		<meta name=viewport content="width=device-width">
+		<link rel="stylesheet" href="../../../../../sample.css">
+		<style>
+			body {
+				margin: 0;
+				background: black;
+				color: white;
+				text-align: center;
+			}
+
+			canvas {
+				display: block;
+				margin: 0 auto;
+				width: 600px;
+				height: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>ローレンツ系</h1>
+		<div id="wrap">
+		<h3> ρ を変更（1〜24.74で固定点へ収束） </h3>
+		<input id="rhoSlider" type="range" min="0" max="40" step="0.1" value="10">
+		<span id="rhoValue">10</span>
+		<br><br>
+		<canvas id="canvas" width="1000" height="1300">
+		</canvas>
+
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+
+		<script>
+
+			const canvas =
+				document.getElementById("canvas");
+
+			const ctx =
+				canvas.getContext("2d");
+
+			const sigma = 10;
+			const beta = 8 / 3;
+
+			let rho = 10;
+
+			let x, y, z;
+
+			let prevX;
+			let prevZ;
+
+			const dt = 0.005;
+
+			const scale = 12;
+
+			let steps = 0;
+
+			function reset() {
+
+				x = 0.1;
+				y = 0;
+				z = 0;
+
+				prevX = x;
+				prevZ = z;
+
+				steps = 0;
+
+				ctx.fillStyle = "black";
+				ctx.fillRect(
+					0,
+					0,
+					canvas.width,
+					canvas.height
+				);
+
+			}
+
+			const slider =
+				document.getElementById(
+					"rhoSlider"
+				);
+
+			const value =
+				document.getElementById(
+					"rhoValue"
+				);
+
+			slider.addEventListener(
+				"input",
+				() => {
+
+					rho =
+						Number(
+							slider.value
+						);
+
+					value.textContent = rho;
+
+					reset();
+
+				});
+
+			function step() {
+
+				const dx =
+					sigma * (y - x);
+
+				const dy =
+					x * (rho - z) - y;
+
+				const dz =
+					x * y - beta * z;
+
+				x += dx * dt;
+				y += dy * dt;
+				z += dz * dt;
+
+				steps++;
+
+			}
+
+			function toScreenX(v) {
+
+				return (
+					canvas.width / 2 +
+					v * scale
+				);
+
+			}
+
+			function toScreenY(v) {
+
+				return (
+					canvas.height / 2 -
+					(v - 15) * scale
+				);
+
+			}
+
+			function drawFixedPoint() {
+
+				if (
+					rho <= 1 ||
+					rho >= 24.74
+				) {
+					return;
+				}
+
+				const fp =
+					Math.sqrt(
+						beta *
+						(rho - 1)
+					);
+
+				ctx.fillStyle =
+					"red";
+
+				for (
+					const s of
+					[-1, 1]
+				) {
+
+					ctx.beginPath();
+
+					ctx.arc(
+
+						toScreenX(
+							s * fp
+						),
+
+						toScreenY(
+							rho - 1
+						),
+
+						6,
+
+						0,
+
+						Math.PI * 2
+
+					);
+
+					ctx.fill();
+
+				}
+
+			}
+
+			function draw() {
+
+				requestAnimationFrame(
+					draw
+				);
+
+				ctx.fillStyle =
+					"rgba(0,0,0,0.03)";
+
+				ctx.fillRect(
+					0,
+					0,
+					canvas.width,
+					canvas.height
+				);
+
+				drawFixedPoint();
+
+				for (
+					let i = 0;
+					i < 100;
+					i++
+				) {
+
+					const oldX = x;
+					const oldZ = z;
+
+					step();
+
+					if (
+						steps < 300
+					) {
+						continue;
+					}
+
+					const px =
+						toScreenX(
+							oldX
+						);
+
+					const py =
+						toScreenY(
+							oldZ
+						);
+
+					const nx =
+						toScreenX(
+							x
+						);
+
+					const ny =
+						toScreenY(
+							z
+						);
+
+					const hue =
+						(
+							(
+								x + y + z
+							) * 10 +
+							360
+						) % 360;
+
+					ctx.strokeStyle =
+						`hsl(
+			${hue},
+			100%,
+			60%
+		)`;
+
+					ctx.beginPath();
+
+					ctx.moveTo(
+						px,
+						py
+					);
+
+					ctx.lineTo(
+						nx,
+						ny
+					);
+
+					ctx.stroke();
+
+				}
+
+			}
+
+			reset();
+
+			draw();
+
+		</script>
+	</body>
+</html>
