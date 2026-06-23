@@ -7,112 +7,163 @@
 		<title>二重振り子</title>
 		<link rel="stylesheet" href="../../../../sample.css">
 		<style>
-			style>body {
-				margin: 0;
-				overflow: hidden;
-				background: black;
+			body {
+				font-family: sans-serif;
+				text-align: center;
+				background: #f4f4f4;
+			}
+
+			.controls {
+				margin: 20px;
+			}
+
+			.container {
+				display: flex;
+				justify-content: center;
+				gap: 30px;
 			}
 
 			canvas {
-				display: block;
-				width:100%;
-			
+				background: white;
+				border: 1px solid #999;
 			}
 		</style>
 	</head>
 	<body>
 		<h1>二重振り子</h1>
 		<div id="wrap">
-			<canvas id="canvas"></canvas>
+			<div class="controls"> 初期値の差（度） <input id="delta" type="number" step="0.000001" value="0.0001" style="width:120px">
+				<button onclick="resetSimulation()"> 開始 </button>
+			</div>
+			<p> 左：120°<br> 右：120° + 入力値 </p>
+			<div class="container">
+				<canvas id="left" width="500" height="600"></canvas>
+				<canvas id="right" width="500" height="600"></canvas>
+			</div>
 		</div>
 		<footer>
 			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
 			</p>
 		</footer>
 		<script>
-			const canvas = document.getElementById("canvas");
-			const ctx = canvas.getContext("2d");
+	
+		const g = 9.81;
 
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
+		// 高速化
+		const dt = 0.04;
 
-			const cx = canvas.width / 2;
-			const cy = 200;
+		// 1フレームで何回計算するか
+		const SPEED = 8;
 
-			// 長さ
-			const r1 = 200;
-			const r2 = 200;
+		class DoublePendulum {
 
-			// 質量
-			const m1 = 20;
-			const m2 = 20;
+			constructor(t1, t2) {
 
-			// 重力
-			const g = 1;
+				this.m1 = 1;
+				this.m2 = 1;
 
-			// 初期角度
-			let a1 = Math.PI / 2;
-			let a2 = Math.PI / 2;
+				this.l1 = 140;
+				this.l2 = 140;
 
-			// 角速度
-			let a1_v = 0;
-			let a2_v = 0;
+				this.theta1 = t1;
+				this.theta2 = t2;
 
-			// 軌跡保存
-			let trail = [];
+				this.omega1 = 0;
+				this.omega2 = 0;
 
-			function draw() {
+				this.trace = [];
+			}
 
-				ctx.fillStyle = "rgba(0,0,0,0.2)";
-				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			update() {
 
-				// 加速度計算
+				const m1 = this.m1;
+				const m2 = this.m2;
 
-				let num1 = -g * (2 * m1 + m2) * Math.sin(a1);
-				let num2 = -m2 * g * Math.sin(a1 - 2 * a2);
-				let num3 = -2 * Math.sin(a1 - a2) * m2;
-				let num4 = a2_v * a2_v * r2 +
-					a1_v * a1_v * r1 * Math.cos(a1 - a2);
+				const l1 = this.l1;
+				const l2 = this.l2;
 
-				let den = r1 * (2 * m1 + m2 - m2 * Math.cos(2 * a1 - 2 * a2));
+				const t1 = this.theta1;
+				const t2 = this.theta2;
 
-				let a1_a = (num1 + num2 + num3 * num4) / den;
+				const w1 = this.omega1;
+				const w2 = this.omega2;
 
-				num1 = 2 * Math.sin(a1 - a2);
+				const a1 =
+					(
+						-g * (2 * m1 + m2) * Math.sin(t1)
+						- m2 * g * Math.sin(t1 - 2 * t2)
+						- 2 * Math.sin(t1 - t2) * m2 *
+						(
+							w2 * w2 * l2 +
+							w1 * w1 * l1 * Math.cos(t1 - t2)
+						)
+					)
+					/
+					(
+						l1 *
+						(
+							2 * m1 + m2 -
+							m2 * Math.cos(2 * t1 - 2 * t2)
+						)
+					);
 
-				num2 = a1_v * a1_v * r1 * (m1 + m2);
+				const a2 =
+					(
+						2 * Math.sin(t1 - t2)
+						*
+						(
+							w1 * w1 * l1 * (m1 + m2)
+							+
+							g * (m1 + m2) * Math.cos(t1)
+							+
+							w2 * w2 * l2 * m2 * Math.cos(t1 - t2)
+						)
+					)
+					/
+					(
+						l2 *
+						(
+							2 * m1 + m2 -
+							m2 * Math.cos(2 * t1 - 2 * t2)
+						)
+					);
 
-				num3 = g * (m1 + m2) * Math.cos(a1);
+				this.omega1 += a1 * dt;
+				this.omega2 += a2 * dt;
 
-				num4 = a2_v * a2_v * r2 * m2 * Math.cos(a1 - a2);
+				this.theta1 += this.omega1 * dt;
+				this.theta2 += this.omega2 * dt;
+			}
 
-				den = r2 * (2 * m1 + m2 - m2 * Math.cos(2 * a1 - 2 * a2));
+			draw(ctx) {
 
-				let a2_a = (num1 * (num2 + num3 + num4)) / den;
+				const ox = 250;
+				const oy = 150;
 
-				// 座標計算
+				const x1 =
+					ox + this.l1 * Math.sin(this.theta1);
 
-				let x1 = cx + r1 * Math.sin(a1);
-				let y1 = cy + r1 * Math.cos(a1);
+				const y1 =
+					oy + this.l1 * Math.cos(this.theta1);
 
-				let x2 = x1 + r2 * Math.sin(a2);
-				let y2 = y1 + r2 * Math.cos(a2);
+				const x2 =
+					x1 + this.l2 * Math.sin(this.theta2);
 
-				// 軌跡
+				const y2 =
+					y1 + this.l2 * Math.cos(this.theta2);
 
-				trail.push({ x: x2, y: y2 });
+				this.trace.push({ x: x2, y: y2 });
 
-				if (trail.length > 1000) {
-					trail.shift();
+				if (this.trace.length > 3000) {
+					this.trace.shift();
 				}
 
-				// 軌跡描画
-
+				// 軌跡
 				ctx.beginPath();
 
-				for (let i = 0; i < trail.length; i++) {
+				for (let i = 0; i < this.trace.length; i++) {
 
-					let p = trail[i];
+					const p = this.trace[i];
 
 					if (i === 0) {
 						ctx.moveTo(p.x, p.y);
@@ -121,51 +172,89 @@
 					}
 				}
 
-				ctx.strokeStyle = "cyan";
+				ctx.strokeStyle =
+					"rgba(255,0,0,0.35)";
+				ctx.lineWidth = 1;
 				ctx.stroke();
 
 				// 棒
-
 				ctx.beginPath();
-				ctx.moveTo(cx, cy);
+				ctx.moveTo(ox, oy);
 				ctx.lineTo(x1, y1);
 				ctx.lineTo(x2, y2);
 
-				ctx.strokeStyle = "white";
+				ctx.strokeStyle = "black";
 				ctx.lineWidth = 2;
 				ctx.stroke();
 
-				// 質点
-
 				ctx.beginPath();
-				ctx.arc(x1, y1, m1, 0, Math.PI * 2);
-
-				ctx.fillStyle = "orange";
+				ctx.arc(x1, y1, 8, 0, Math.PI * 2);
+				ctx.fillStyle = "blue";
 				ctx.fill();
 
 				ctx.beginPath();
-				ctx.arc(x2, y2, m2, 0, Math.PI * 2);
-
-				ctx.fillStyle = "lime";
+				ctx.arc(x2, y2, 8, 0, Math.PI * 2);
+				ctx.fillStyle = "red";
 				ctx.fill();
+			}
+		}
 
-				// 更新
+		let p1;
+		let p2;
 
-				a1_v += a1_a;
-				a2_v += a2_a;
+		const ctxL =
+			document.getElementById("left")
+				.getContext("2d");
 
-				a1 += a1_v;
-				a2 += a2_v;
+		const ctxR =
+			document.getElementById("right")
+				.getContext("2d");
 
-				// 少し減衰
+		function resetSimulation() {
 
-				a1_v *= 0.999;
-				a2_v *= 0.999;
+			const delta =
+				parseFloat(
+					document.getElementById("delta").value
+				);
 
-				requestAnimationFrame(draw);
+			const base =
+				120 * Math.PI / 180;
+
+			p1 =
+				new DoublePendulum(
+					base,
+					base
+				);
+
+			p2 =
+				new DoublePendulum(
+					base + delta * Math.PI / 180,
+					base
+				);
+		}
+
+		function loop() {
+
+			requestAnimationFrame(loop);
+
+			if (!p1) return;
+
+			for (let i = 0; i < SPEED; i++) {
+
+				p1.update();
+				p2.update();
 			}
 
-			draw();
+			ctxL.clearRect(0, 0, 500, 600);
+			ctxR.clearRect(0, 0, 500, 600);
+
+			p1.draw(ctxL);
+			p2.draw(ctxR);
+		}
+
+		resetSimulation();
+		loop();
+
 
 		</script>
 	</body>
