@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		
 		<!-- Google Analytics -->
 		<script src="/showcase/ga.js"></script>
 		<meta charset="utf-8">
@@ -213,15 +212,12 @@
 
 					out += "<span class=code>" + m + "　" + "<span class=inner>" + c + "</span></span>";
 					output.innerHTML = out;
-
 					for (const s of m) {
 						await tone(s === "・" ? u : u * 3);
 						await sleep(u);
 					}
-
 					await sleep(u * 2);
 				}
-
 			};
 		</script>
 	</body>
