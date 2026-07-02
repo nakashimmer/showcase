@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<!-- Google Analytics -->
+		<script src="/showcase/ga.js"></script>
+		<meta charset="utf-8">
+		<title>二重振り子</title>
+		<link rel="stylesheet" href="../../../../sample.css">
+		<style>
+			*{
+				font-size:30px ;
+			}
+			#wrap {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 1em;
+			}
+
+			textarea {
+				width: 100%;
+				height: 120px;
+				margin: 0 auto;
+				display: block;
+			}
+
+			button {
+				padding: 0.5em 1em;
+				margin: 0em 1em;
+				border-radius: 20%;
+				background-color: pink;
+			}
+
+			#output {
+				margin-top: 1em;
+				font-family: monospace;
+				font-weight: bold;
+				font-size:1.5em;
+			}
+
+			#ctrl {
+				margin: 1em;
+			}
+			#i{
+				color:red;
+				font-size:1.5em;
+				text-indent:-1em;
+				display: inline-block;
+				font-weight: bold;
+				translate:-0em 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>モールス送信機</h1>
+		<div id="wrap">
+			<textarea id="txt">HELLO WORLD</textarea>
+			<div id="ctrl">
+				<p> 速度<input id="spd" type="range" min="5" max="30" value="15">
+					<span id="sv">15</span> WPM 
+					<button id="play">送信</button>
+				</p>
+			</div>
+			<p><span id="output"></span>
+			<span id="i"></span></p>
+		</div>
+		<footer>
+			<p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+			</p>
+		</footer>
+		<script>
+			const output = document.getElementById("output");
+			const i = document.getElementById("i");
+			const map = {
+				"A": "・ー",
+				"B": "ー・・・",
+				"C": "ー・ー・",
+				"D": "ー・・",
+				"E": "・",
+				"F": "・・ー・",
+				"G": "ーー・",
+				"H": "・・・・",
+				"I": "・・",
+				"J": "・ーーー",
+				"K": "ー・ー",
+				"L": "・ー・・",
+				"M": "ーー",
+				"N": "ー・",
+				"O": "ーーー",
+				"P": "・ーー・",
+				"Q": "ーー・ー",
+				"R": "・ー・",
+				"S": "・・・",
+				"T": "ー",
+				"U": "・・ー",
+				"V": "・・・ー",
+				"W": "・ーー",
+				"X": "ー・・ー",
+				"Y": "ー・ーー",
+				"Z": "ーー・・",
+				"0": "ーーーーー",
+				"1": "・ーーーー",
+				"2": "・・ーーー",
+				"3": "・・・ーー",
+				"4": "・・・・ー",
+				"5": "・・・・・",
+				"6": "ー・・・・",
+				"7": "ーー・・・",
+				"8": "ーーー・・",
+				"9": "ーーーー・",
+				" ": "/",
+				".": "・ー・ー・ー",
+				",": "ーー・・ーー",
+				"?": "・・ーー・・",
+				"'": "・ーーー・・",
+				"!": "ー・ー・ーー",
+				"/": "ー・・ー・",
+				"(": "ー・ーー・",
+				")": "ー・ーー・ー",
+				"&": "・ー・・・",
+				":": "ーーー・・・",
+				";": "ー・ー・ー・",
+				"=": "ー・・・ー",
+				"+": "・ー・ー・",
+				"-": "ー・・・・ー",
+				"_": "・・ーー・ー",
+				"\"": "・ー・・ーー・",
+				"$": "・・・ー・・ー",
+				"@": "・ーー・ー・"
+			};
+			let ctx, osc, gain;
+			function sleep(ms) {
+				return new Promise(r => setTimeout(r, ms))
+			}
+
+			async function init() {
+				if (!ctx) {
+					ctx = new (window.AudioContext || window.webkitAudioContext)();
+					osc = ctx.createOscillator();
+					gain = ctx.createGain();
+					osc.frequency.value = 700;
+					gain.gain.value = 0;
+					osc.connect(gain);
+					gain.connect(ctx.destination);
+					osc.start();
+				}
+				if (ctx.state === "suspended") {
+					await ctx.resume();
+				}
+			}
+			async function tone(ms) {
+				gain.gain.setTargetAtTime(0.2, ctx.currentTime, 0.002);
+				await sleep(ms);
+				gain.gain.setTargetAtTime(0, ctx.currentTime, 0.002);
+			}
+			spd.oninput = () => sv.textContent = spd.value;
+			play.onclick = async () => {
+
+				await init();
+
+				let u = 1200 / Number(spd.value);
+				let out = "";
+
+				output.innerHTML = "";
+				
+				for (const c of txt.value.toUpperCase()) {
+					i.innerHTML = c;
+					if (c === " ") {
+						out += "<br> ";
+						output.innerHTML = out;
+						await sleep(u * 7);
+						continue;
+					}
+
+					let m = map[c];
+					if (!m) continue;
+
+					out += m + "　";
+					output.innerHTML = out;
+
+					for (const s of m) {
+						await tone(s === "・" ? u : u * 3);
+						await sleep(u);
+					}
+
+					await sleep(u * 2);
+				}
+
+			};
+		</script>
+	</body>
+</html>
