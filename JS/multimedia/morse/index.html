@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="../../../../sample.css">
 		<style>
 			* {
-				font-size: 30px;
+				font-size: 20px;
 			}
 
 			#wrap {
@@ -20,10 +20,14 @@
 			}
 
 			textarea {
-				width: 100%;
+				width: calc(100% - 1em);
 				height: 120px;
 				margin: 0 auto;
 				display: block;
+				font-size: 1.5em;
+				padding: 0.5em;
+				border-radius: 1em;
+				;
 			}
 
 			button {
@@ -44,36 +48,27 @@
 				margin: 1em;
 			}
 
-			#i {
-				color: red;
-				font-size: 1.5em;
-				text-indent: -1em;
+			.inner {
 				display: inline-block;
 				font-weight: bold;
-				translate: -0em 1em;
+				translate: -1em 1em;
 			}
 
 			.code {
 				font-family: monospace;
 				font-weight: bold;
 				font-size: 1em;
-				
 			}
 
 			.code:last-of-type {
 				color: red;
 			}
-			#codearea{
+
+			#codearea {
 				background-color: #f0f0f0;
-				height:60%;
-				overflow: hidden;
-				position: relative;
-			}
-			#inner{
-				position: absolute;
-				bottom: 0em;
-				overflow: hidden;
-				padding-bottom:2em;
+				padding: 1em 1em 4em 1em;
+				border-radius: 1em;
+				;
 			}
 
 			footer {
@@ -86,15 +81,20 @@
 		<div id="wrap">
 			<textarea id="txt">HELLO WORLD</textarea>
 			<div id="ctrl">
-				<p> 速度<input id="spd" type="range" min="5" max="30" value="15">
-					<span id="sv">15</span> WPM <button id="play">送信</button>
+				<p> 速度：<input id="spd" type="range" min="5" max="30" value="15">
+					<span id="sv">15</span> WPM 
+					音色： <select id="toneValue">
+						<option value="square">矩形波</option>
+						<option value="sine" selected>正弦波</option>
+						<option value="triangle">三角波</option>
+						<option value="sawtooth">のこぎり波</option>
+					</select>
+					<button id="play">送信</button>
 				</p>
 			</div>
 			<div id="codearea">
-				<div id="inner">
 				<span id="output"></span>
 				<span id="i"></span>
-				</div>
 			</div>
 		</div>
 		<footer>
@@ -104,6 +104,7 @@
 		<script>
 			const output = document.getElementById("output");
 			const i = document.getElementById("i");
+			const toneValue = document.getElementById("toneValue");
 			const map = {
 				"A": "・ー",
 				"B": "ー・・・",
@@ -142,6 +143,7 @@
 				"8": "ーーー・・",
 				"9": "ーーーー・",
 				" ": "/",
+				"¥n": "/",
 				".": "・ー・ー・ー",
 				",": "ーー・・ーー",
 				"?": "・・ーー・・",
@@ -173,6 +175,7 @@
 					gain = ctx.createGain();
 					osc.frequency.value = 700;
 					gain.gain.value = 0;
+
 					osc.connect(gain);
 					gain.connect(ctx.destination);
 					osc.start();
@@ -197,7 +200,7 @@
 				output.innerHTML = "";
 
 				for (const c of txt.value.toUpperCase()) {
-					i.innerHTML = c;
+					osc.type = toneValue.value;
 					if (c === " ") {
 						out += "<br> ";
 						output.innerHTML = out;
@@ -208,7 +211,7 @@
 					let m = map[c];
 					if (!m) continue;
 
-					out += "<span class=code>" + m + "　" + "</span>";
+					out += "<span class=code>" + m + "　" + "<span class=inner>" + c + "</span></span>";
 					output.innerHTML = out;
 
 					for (const s of m) {
