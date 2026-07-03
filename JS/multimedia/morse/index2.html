@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Google Analytics -->
+        <script src="/showcase/ga.js"></script>
+        <meta charset="utf-8">
+        <title>モールス送信練習アプリ</title>
+        <link rel="stylesheet" href="../../../sample.css">
+        <meta charset="utf-8">
+        <style>
+            #btn1 {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: black;
+                color: white;
+                font-size: 16px;
+                box-shadow: 10px 10px 10px gray;
+            }
+            #btn1::before {
+                content: "";
+                position: absolute;
+                display: block;
+                width:100px;
+                height:100px;
+                top:-85px;
+                left:50px;
+                background-color: black;
+        
+            }
+            #btn1:active {
+                box-shadow: 10px 10px 30px gray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>モールス送信練習アプリ</h1>
+        <div id="wrap">
+            <p><button id="btn1">ここを押すか、<br>スペースキーを押す</button></p>
+        </div> 
+        <footer> <p><small>(C)<a href="https://www.facebook.com/NakashimaShunji/">なかしまぁ先生</a></small>
+        </p>
+        </footer>
+        <script>
+            const btn1 = document.getElementById("btn1");
+
+            let hz = 440;
+            let tone = "sine";
+            let volume = 1;
+
+            const ac = new AudioContext();
+            const vcg = ac.createGain();
+            vcg.connect(ac.destination);
+
+            let vco = null;
+            let playing = false;
+
+            function startSound() {
+                if (playing) return;
+                playing = true;
+
+                if (ac.state === "suspended") {
+                    ac.resume();
+                }
+
+                vco = ac.createOscillator();
+                vco.type = tone;
+                vco.frequency.value = hz;
+
+                vco.connect(vcg);
+
+                const now = ac.currentTime;
+
+                // クリックノイズ防止（フェードイン）
+                vcg.gain.cancelScheduledValues(now);
+                vcg.gain.setValueAtTime(0, now);
+                vcg.gain.linearRampToValueAtTime(volume, now + 0.01);
+
+                vco.start(now);
+            }
+
+            function stopSound() {
+                if (!playing) return;
+                playing = false;
+
+                const now = ac.currentTime;
+
+                // クリックノイズ防止（フェードアウト）
+                vcg.gain.cancelScheduledValues(now);
+                vcg.gain.setValueAtTime(vcg.gain.value, now);
+                vcg.gain.linearRampToValueAtTime(0, now + 0.01);
+
+                vco.stop(now + 0.01);
+            }
+
+            // マウス操作
+            btn1.addEventListener("mousedown", startSound);
+            btn1.addEventListener("mouseup", stopSound);
+            btn1.addEventListener("mouseleave", stopSound);
+
+            // スペースキー操作
+            document.addEventListener("keydown", (e) => {
+                if (e.code === "Space") {
+                    e.preventDefault();   // ページスクロール防止
+                    startSound();
+                }
+            });
+
+            document.addEventListener("keyup", (e) => {
+                if (e.code === "Space") {
+                    e.preventDefault();
+                    stopSound();
+                }
+            });
+        </script>
+    </body>
+</html>
