@@ -13,8 +13,7 @@
 
 			#wrap {
 				max-width: 800px;
-				margin: 0 auto;
-				bottom: 0;
+				margin: 0 auto -0.3em auto;
 				padding: 1em;
 				position: relative;
 			}
@@ -66,9 +65,9 @@
 
 			#codearea {
 				background-color: #f0f0f0;
-				padding: 1em 1em 4em 1em;
+				padding: 0em 1em 4em 1em;
 				border-radius: 1em;
-				;
+				
 			}
 
 			footer {
@@ -79,7 +78,9 @@
 	<body>
 		<h1>モールス送信機</h1>
 		<div id="wrap">
-			<textarea id="txt">HELLO WORLD</textarea>
+			<textarea id="txt">CQCQCQ DE JA1QSO JA1QSO K 
+TNX FB QSO HPE CU AGN 73 
+			</textarea>
 			<div id="ctrl">
 				<p> 速度：<input id="spd" type="range" min="5" max="30" value="15">
 					<span id="sv">15</span> WPM 音色： <select id="toneValue">
@@ -104,6 +105,7 @@
 			const output = document.getElementById("output");
 			const i = document.getElementById("i");
 			const toneValue = document.getElementById("toneValue");
+			const codearea = document.getElementById("codearea");
 			const map = {
 				"A": "・ー",
 				"B": "ー・・・",
@@ -198,14 +200,18 @@
 
 				output.innerHTML = "";
 
-				for (const c of txt.value.toUpperCase()) {
+				const txtValue = " "+txt.value.toUpperCase();
+				for (const c of txtValue) {
 					osc.type = toneValue.value;
 					if (c === " ") {
 						out += "<br> ";
 						output.innerHTML = out;
 						await sleep(u * 7);
+						
 						continue;
 					}
+
+					codearea.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
 					let m = map[c];
 					if (!m) continue;
