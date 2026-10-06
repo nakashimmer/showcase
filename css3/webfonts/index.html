@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Fonts 日本語 WebFont サンプル</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Hachi+Maru+Pop&family=Rampart+One&family=Stick&family=Zen+Maru+Gothic&display=swap"
+      rel="stylesheet">
+    <!-- 日本語フォント一覧（Google Fonts 日本語フィルタ対応） -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+JP&family=BIZ+UDPGothic&family=BIZ+UDGothic&family=BIZ+UDPMincho&family=BIZ+UDMincho&family=IBM+Plex+Sans+JP&family=M+PLUS+1&family=M+PLUS+1+Code&family=M+PLUS+1p&family=M+PLUS+2&family=M+PLUS+Rounded+1c&family=Murecho&family=Kosugi&family=Kosugi+Maru&family=Zen+Kaku+Gothic+New&family=Zen+Kaku+Gothic+Antique&family=Zen+Maru+Gothic&family=Zen+Kurenaido&family=Zen+Antique&family=Zen+Antique+Soft&family=Zen+Old+Mincho&family=Sawarabi+Gothic&family=Sawarabi+Mincho&family=Shippori+Antique&family=Shippori+Antique+B1&family=Shippori+Mincho&family=Shippori+Mincho+B1&family=Kaisei+Decol&family=Kaisei+HarunoUmi&family=Kaisei+Opti&family=Kaisei+Tokumin&family=Hina+Mincho&family=Kiwi+Maru&family=Klee+One&family=Yomogi&family=Yuji+Boku&family=Yuji+Mai&family=Yuji+Syuku&family=New+Tegomin&family=Dela+Gothic+One&family=DotGothic16&family=Hachi+Maru+Pop&family=Mochiy+Pop+One&family=Mochiy+Pop+P+One&family=Potta+One&family=Rampart+One&family=Reggae+One&family=RocknRoll+One&family=Stick&family=Train+One&family=Yusei+Magic&family=WDXL+Lubrifont+JP+N&display=swap"
+      rel="stylesheet">
+    <style>
+      /* =========================================================
+       基本設定
+       ========================================================= */
+      :root {
+        --bg: #f6f7fb;
+        --surface: #ffffff;
+        --text: #222;
+        --muted: #697386;
+        --line: #e4e7ec;
+        --accent: #315efb;
+        --accent-light: #eef3ff;
+        --code-bg: #1e2430;
+        --shadow: 0 12px 35px rgba(30, 42, 70, .08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        font-family:
+          system-ui, -apple-system, BlinkMacSystemFont,
+          "Helvetica Neue", "Hiragino Kaku Gothic ProN",
+          "Yu Gothic", YuGothic, Meiryo, sans-serif;
+        line-height: 1.8;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      #gallery a {
+        color: black;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      /* =========================================================
+       ヘッダー
+       ========================================================= */
+      header {
+        padding: 72px 0 64px;
+        color: #fff;
+        background:
+          radial-gradient(circle at 15% 20%, rgba(255, 255, 255, .18), transparent 30%),
+          radial-gradient(circle at 85% 10%, rgba(255, 255, 255, .12), transparent 25%),
+          linear-gradient(135deg, #1d2754, #315efb 55%, #6d5dfc);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        font-size: .85rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        opacity: .8;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1.15;
+        letter-spacing: -.03em;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin: 24px 0 0;
+        font-size: 1.08rem;
+        opacity: .94;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .nav a {
+        display: inline-block;
+        padding: 8px 14px;
+        border: 1px solid rgba(255, 255, 255, .28);
+        border-radius: 999px;
+        color: #fff;
+        text-decoration: none;
+        background: rgba(255, 255, 255, .10);
+        backdrop-filter: blur(8px);
+      }
+
+      /* =========================================================
+       WebFont 解説
+       ========================================================= */
+      main {
+        padding: 54px 0 80px;
+      }
+
+      .intro {
+        display: grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 28px;
+        margin-bottom: 56px;
+      }
+
+      .panel {
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .panel h2,
+      .panel h3 {
+        margin-top: 0;
+        line-height: 1.35;
+      }
+
+      .panel code {
+        padding: 2px 6px;
+        border-radius: 5px;
+        background: #f0f2f6;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .api-box {
+        padding: 18px;
+        overflow-x: auto;
+        border-radius: 12px;
+        background: var(--code-bg);
+        color: #f4f6fa;
+        font: .9rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      /* =========================================================
+       ツールバー
+       ========================================================= */
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 0 0 24px;
+        padding: 16px 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .toolbar label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+
+      .toolbar input {
+        width: min(300px, 35vw);
+      }
+
+      #sizeValue {
+        min-width: 55px;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* =========================================================
+       フォントカード
+       ========================================================= */
+      .font-card {
+        margin-bottom: 42px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .font-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 26px 30px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .font-number {
+        color: var(--accent);
+        font-size: .8rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+      }
+
+      .font-name {
+        margin: 4px 0 0;
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        line-height: 1.2;
+      }
+
+      .font-name-en {
+        color: var(--muted);
+        font-size: .95rem;
+        font-weight: 500;
+      }
+
+      .font-link {
+        white-space: nowrap;
+        font-size: .9rem;
+      }
+
+      .specimen {
+        position: relative;
+        padding: 42px 30px 46px;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, #fff 0%, #f8f9fd 100%);
+      }
+
+      .specimen::before {
+        content: "Aa あ";
+        position: absolute;
+        right: 20px;
+        bottom: -45px;
+        color: rgba(49, 94, 251, .055);
+        font-size: 12rem;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .sample {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-size: var(--sample-size, 54px);
+        line-height: 1.45;
+      }
+
+      .sample-en {
+        margin: 10px 0 0;
+        color: #555;
+        font-size: calc(var(--sample-size, 54px) * .42);
+        line-height: 1.5;
+      }
+
+      .zen {
+        font-family: "Zen Maru Gothic", sans-serif;
+      }
+
+      .dela {
+        font-family: "Dela Gothic One", sans-serif;
+      }
+
+      .hachi {
+        font-family: "Hachi Maru Pop", cursive, sans-serif;
+      }
+
+      .rampart {
+        font-family: "Rampart One", sans-serif;
+      }
+
+      .stick {
+        font-family: "Stick", sans-serif;
+      }
+
+      .info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        padding: 30px;
+      }
+
+      .info h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      .description {
+        margin: 0;
+      }
+
+      .description-en {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: .93rem;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4px 14px;
+        margin: 0;
+        font-size: .9rem;
+      }
+
+      .meta dt {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .meta dd {
+        margin: 0;
+      }
+
+      /* =========================================================
+       ソースコード
+       ========================================================= */
+      .source {
+        padding: 0 30px 30px;
+      }
+
+      .source-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 10px;
+      }
+
+      .source-title h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .copy-btn {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 6px 11px;
+        color: #333;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .copy-btn:hover {
+        background: #f3f5f9;
+      }
+
+      pre {
+        margin: 0 0 18px;
+        padding: 20px;
+        overflow-x: auto;
+        border-radius: 12px;
+        background: var(--code-bg);
+        color: #e9edf5;
+        font: .86rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .keyword {
+        color: #9cdcfe;
+      }
+
+      .string {
+        color: #ce9178;
+      }
+
+      .comment {
+        color: #6a9955;
+      }
+
+      /* =========================================================
+       ライセンス
+       ========================================================= */
+      .license {
+        margin-top: 56px;
+      }
+
+      .license h2 {
+        margin-top: 0;
+      }
+
+      .license-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .license-item {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .license-item strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      footer {
+        padding: 35px 0 50px;
+        color: var(--muted);
+        font-size: .85rem;
+        text-align: center;
+      }
+
+      /* =========================================================
+       日本語フォント・ギャラリー
+       ========================================================= */
+      .gallery-intro {
+        margin: 60px 0 22px;
+      }
+
+      .gallery-intro h2 {
+        margin-bottom: 8px;
+      }
+
+      .gallery-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .filter-btn {
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: #333;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-light);
+      }
+
+      .font-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .gallery-card {
+        min-width: 0;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 6px 20px rgba(30, 42, 70, .05);
+      }
+
+      .gallery-card[hidden] {
+        display: none;
+      }
+
+      .gallery-category {
+        display: inline-block;
+        margin-bottom: 12px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        color: var(--accent);
+        background: var(--accent-light);
+        font-size: .72rem;
+        font-weight: 700;
+      }
+
+      .gallery-name {
+        margin: 0 0 12px;
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+
+      .gallery-sample {
+        margin: 0;
+        overflow-wrap: anywhere;
+        font-size: 28px;
+        line-height: 1.45;
+      }
+
+      .gallery-code {
+        margin-top: 12px;
+        color: var(--muted);
+        font: .75rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      @media (max-width: 900px) {
+        .font-gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      /* =========================================================
+       レスポンシブ
+       ========================================================= */
+      @media (max-width: 760px) {
+        .container {
+          width: min(100% - 24px, 1120px);
+        }
+
+        header {
+          padding: 48px 0;
+        }
+
+        .intro,
+        .info,
+        .license-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .panel,
+        .info,
+        .source {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        .font-header {
+          display: block;
+          padding: 22px 20px;
+        }
+
+        .font-link {
+          display: inline-block;
+          margin-top: 10px;
+        }
+
+        .specimen {
+          padding: 34px 20px 38px;
+        }
+
+        .toolbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .toolbar input {
+          width: 100%;
+        }
+
+        article a {
+          color: black;
+          text-decoration: none important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <p class="eyebrow">Japanese WebFont Sample</p>
+        <h1>Google Fonts<br>日本語 WebFont サンプル</h1>
+        <p class="lead"> Google Fontsで利用できる日本語フォントを、Webページ上で実際に表示しながら紹介します。 フォント名だけでなく、HTML・CSSによる指定方法も確認できます。 </p>
+        <nav class="nav" aria-label="ページ内メニュー">
+          <a href="#about">WebFontとは</a>
+          <a href="#samples">厳選フォント</a>
+          <a href="#gallery">フォントギャラリー</a>
+          <a href="#license">ライセンス</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <section id="about" class="intro">
+          <div class="panel">
+            <h2>WebFontとは？</h2>
+            <p> WebFont（ウェブフォント）は、Webページからフォントを読み込み、 利用者のパソコンやスマートフォンに同じフォントがインストールされていなくても、 指定したフォントで文字を表示できる仕組みです。
+            </p>
+            <p> Google Fontsでは、HTMLの <code>&lt;link&gt;</code> でCSS APIを読み込み、CSSの <code>font-family</code>
+              で利用するフォントを指定できます。 </p>
+            <p> なお、指定したフォントが利用できない場合に備えて、 <code>sans-serif</code> などのフォールバックフォントも指定するのが基本です。 </p>
+          </div>
+          <div class="panel">
+            <h3>基本的な使い方</h3>
+            <div class="api-box">&lt;link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&amp;display=swap"&gt; .sample {
+              font-family: "Zen Maru Gothic", sans-serif; }</div>
+          </div>
+        </section>
+        <section id="samples">
+          <h2>なかしまぁの選んだ厳選フォント</h2>
+          <div class="toolbar">
+            <label for="fontSize"> サンプル文字サイズ <input id="fontSize" type="range" min="28" max="96" value="54">
+              <span id="sizeValue">54px</span>
+            </label>
+            <span>表示を変えて書体の違いを比べてみよう</span>
+          </div>
+          <!-- =====================================================
+           01 Zen Maru Gothic
+           ===================================================== -->
+          <article class="font-card">
+            <div class="font-header">
+              <div>
+                <div class="font-number">01 / MARU GOTHIC</div>
+                <h2 class="font-name">Zen Maru Gothic <span class="font-name-en">ぜんまるゴシック</span></h2>
+              </div>
+              <a class="font-link" href="https://fonts.google.com/specimen/Zen+Maru+Gothic" target="_blank"
+                rel="noopener">Google Fonts ↗</a>
+            </div>
+            <div class="specimen">
+              <p class="sample zen">Webをもっと楽しく。こんにちは、東京！</p>
+              <p class="sample-en zen">Making the Web more enjoyable.</p>
+            </div>
+            <div class="info">
+              <div>
+                <h3>日本語 / Japanese</h3>
+                <p class="description"> 丸みを帯びたやわらかなゴシック体。角を深く丸めたデザインによって、 親しみやすく自然な印象を与えます。本文から見出しまで幅広く使いやすい書体です。 </p>
+                <p class="description-en"> A rounded sans-serif typeface with soft, natural forms. Its rounded corners
+                  create a friendly and approachable impression. </p>
+              </div>
+              <div>
+                <h3>書体情報</h3>
+                <dl class="meta">
+                  <dt>分類</dt>
+                  <dd>Sans Serif / Rounded</dd>
+                  <dt>デザイナー</dt>
+                  <dd>Yoshimichi Ohira</dd>
+                  <dt>ライセンス</dt>
+                  <dd>SIL Open Font License 1.1</dd>
+                  <dt>著作権</dt>
+                  <dd>Copyright 2021 The Zen Maru Gothic Project Authors</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="source">
+              <div class="source-title">
+                <h3>HTML / CSS</h3>
+                <button class="copy-btn" type="button" data-copy="code-zen">コードをコピー</button>
+              </div>
+              <pre id="code-zen">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&amp;display=swap" rel="stylesheet"&gt;
+
+&lt;p class="sample"&gt;Webをもっと楽しく。こんにちは、東京！&lt;/p&gt;
+
+&lt;style&gt;
+.sample {
+  font-family: "Zen Maru Gothic", sans-serif;
+}
+&lt;/style&gt;</pre>
+            </div>
+          </article>
+          <!-- =====================================================
+           02 Dela Gothic One
+           ===================================================== -->
+          <article class="font-card">
+            <div class="font-header">
+              <div>
+                <div class="font-number">02 / DISPLAY GOTHIC</div>
+                <h2 class="font-name">Dela Gothic One <span class="font-name-en">デラゴシック</span></h2>
+              </div>
+              <a class="font-link" href="https://fonts.google.com/specimen/Dela+Gothic+One" target="_blank"
+                rel="noopener">Google Fonts ↗</a>
+            </div>
+            <div class="specimen">
+              <p class="sample dela">アイデアを、もっと大胆に！</p>
+              <p class="sample-en dela">Make your ideas bold!</p>
+            </div>
+            <div class="info">
+              <div>
+                <h3>日本語 / Japanese</h3>
+                <p class="description"> 太く力強いゴシック体。どっしりとした存在感があり、 タイトルやポスターなど、強いインパクトを与えたい場面に向いています。 </p>
+                <p class="description-en"> A very bold Gothic display typeface with a strong, solid presence. It works
+                  especially well for headlines, posters, and attention-grabbing designs. </p>
+              </div>
+              <div>
+                <h3>書体情報</h3>
+                <dl class="meta">
+                  <dt>分類</dt>
+                  <dd>Sans Serif / Display</dd>
+                  <dt>デザイナー</dt>
+                  <dd>artakana</dd>
+                  <dt>ライセンス</dt>
+                  <dd>SIL Open Font License 1.1</dd>
+                  <dt>著作権</dt>
+                  <dd>Copyright 2020 The Dela Gothic Project Authors</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="source">
+              <div class="source-title">
+                <h3>HTML / CSS</h3>
+                <button class="copy-btn" type="button" data-copy="code-dela">コードをコピー</button>
+              </div>
+              <pre id="code-dela">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt; 
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;display=swap" rel="stylesheet"&gt;
+
+&lt;p class="sample"&gt;アイデアを、もっと大胆に！&lt;/p&gt;
+
+&lt;style&gt;
+.sample {
+  font-family: "Dela Gothic One", sans-serif;
+}
+&lt;/style&gt;</pre>
+            </div>
+          </article>
+          <!-- =====================================================
+           03 Hachi Maru Pop
+           ===================================================== -->
+          <article class="font-card">
+            <div class="font-header">
+              <div>
+                <div class="font-number">03 / HANDWRITING</div>
+                <h2 class="font-name">Hachi Maru Pop <span class="font-name-en">はちまるポップ</span></h2>
+              </div>
+              <a class="font-link" href="https://fonts.google.com/specimen/Hachi+Maru+Pop" target="_blank"
+                rel="noopener">Google Fonts ↗</a>
+            </div>
+            <div class="specimen">
+              <p class="sample hachi">手書きの楽しさを、Webにも。</p>
+              <p class="sample-en hachi">Bring the joy of handwriting to the Web.</p>
+            </div>
+            <div class="info">
+              <div>
+                <h3>日本語 / Japanese</h3>
+                <p class="description"> 手書き感のある、やさしく親しみやすいポップ体。 きちんと整いすぎない文字の表情が、親近感や楽しさを演出します。 </p>
+                <p class="description-en"> A friendly handwritten display typeface with a casual and playful character.
+                  Its hand-drawn appearance adds warmth and personality to a design. </p>
+              </div>
+              <div>
+                <h3>書体情報</h3>
+                <dl class="meta">
+                  <dt>分類</dt>
+                  <dd>Handwriting / Display</dd>
+                  <dt>デザイナー</dt>
+                  <dd>Nonty</dd>
+                  <dt>ライセンス</dt>
+                  <dd>SIL Open Font License 1.1</dd>
+                  <dt>著作権</dt>
+                  <dd>Copyright 2020 The Hachi Maru Pop Project Authors</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="source">
+              <div class="source-title">
+                <h3>HTML / CSS</h3>
+                <button class="copy-btn" type="button" data-copy="code-hachi">コードをコピー</button>
+              </div>
+              <pre id="code-hachi">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&amp;display=swap" rel="stylesheet"&gt;
+
+&lt;p class="sample"&gt;手書きの楽しさを、Webにも。&lt;/p&gt;
+
+&lt;style&gt;
+.sample {
+  font-family: "Hachi Maru Pop", cursive, sans-serif;
+}
+&lt;/style&gt;</pre>
+            </div>
+          </article>
+          <!-- =====================================================
+           04 Rampart One
+           ===================================================== -->
+          <article class="font-card">
+            <div class="font-header">
+              <div>
+                <div class="font-number">04 / DISPLAY</div>
+                <h2 class="font-name">Rampart One <span class="font-name-en">ランパート</span></h2>
+              </div>
+              <a class="font-link" href="https://fonts.google.com/specimen/Rampart+One" target="_blank"
+                rel="noopener">Google Fonts ↗</a>
+            </div>
+            <div class="specimen">
+              <p class="sample rampart">文字そのものを、デザインに。</p>
+              <p class="sample-en rampart">Let the letters become the design.</p>
+            </div>
+            <div class="info">
+              <div>
+                <h3>日本語 / Japanese</h3>
+                <p class="description"> 輪郭を活かした特徴的なディスプレイ書体。 文字の内部に生まれる空間が印象的で、見出しやタイトルなど、 文字自体をデザイン要素として見せたい場合に適しています。
+                </p>
+                <p class="description-en"> A distinctive display typeface built around outlined forms. The internal
+                  spaces of the letters create a striking visual character, making it suitable for headlines and titles.
+                </p>
+              </div>
+              <div>
+                <h3>書体情報</h3>
+                <dl class="meta">
+                  <dt>分類</dt>
+                  <dd>Sans Serif / Display</dd>
+                  <dt>デザイナー</dt>
+                  <dd>Fontworks Inc.</dd>
+                  <dt>ライセンス</dt>
+                  <dd>SIL Open Font License 1.1</dd>
+                  <dt>著作権</dt>
+                  <dd>Copyright 2020 The Rampart Project Authors</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="source">
+              <div class="source-title">
+                <h3>HTML / CSS</h3>
+                <button class="copy-btn" type="button" data-copy="code-rampart">コードをコピー</button>
+              </div>
+              <pre id="code-rampart">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt; 
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Rampart+One&amp;display=swap" rel="stylesheet"&gt;
+
+&lt;p class="sample"&gt;文字そのものを、デザインに。&lt;/p&gt;
+
+&lt;style&gt;
+.sample {
+  font-family: "Rampart One", sans-serif;
+}
+&lt;/style&gt;</pre>
+            </div>
+          </article>
+          <!-- =====================================================
+           05 Stick
+           ===================================================== -->
+          <article class="font-card">
+            <div class="font-header">
+              <div>
+                <div class="font-number">05 / STENCIL POP</div>
+                <h2 class="font-name">Stick <span class="font-name-en">ステッキ</span></h2>
+              </div>
+              <a class="font-link" href="https://fonts.google.com/specimen/Stick" target="_blank" rel="noopener">Google
+                Fonts ↗</a>
+            </div>
+            <div class="specimen">
+              <p class="sample stick">まっすぐ、軽やかに、楽しく。</p>
+              <p class="sample-en stick">Straight, light, and playful.</p>
+            </div>
+            <div class="info">
+              <div>
+                <h3>日本語 / Japanese</h3>
+                <p class="description"> 直線的な線を組み合わせた、かわいらしくポップな書体。 ステンシルのような雰囲気もあり、自然・アウトドア系のデザインや カジュアルなコンテンツにもよく似合います。
+                </p>
+                <p class="description-en"> A cute and playful typeface built from straight lines. It also has a
+                  stencil-like character and works well for casual, outdoor, and creative designs. </p>
+              </div>
+              <div>
+                <h3>書体情報</h3>
+                <dl class="meta">
+                  <dt>分類</dt>
+                  <dd>Sans Serif / Display</dd>
+                  <dt>デザイナー</dt>
+                  <dd>Fontworks Inc.</dd>
+                  <dt>ライセンス</dt>
+                  <dd>SIL Open Font License 1.1</dd>
+                  <dt>著作権</dt>
+                  <dd>Copyright 2020 The Stick Project Authors</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="source">
+              <div class="source-title">
+                <h3>HTML / CSS</h3>
+                <button class="copy-btn" type="button" data-copy="code-stick">コードをコピー</button>
+              </div>
+              <pre id="code-stick">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt; 
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Stick&amp;display=swap" rel="stylesheet"&gt;
+
+&lt;p class="sample"&gt;まっすぐ、軽やかに、楽しく。&lt;/p&gt;
+
+&lt;style&gt;
+.sample {
+  font-family: "Stick", sans-serif;
+}
+&lt;/style&gt;</pre>
+            </div>
+          </article>
+        </section>
+        <section id="gallery" class="gallery-intro">
+          <h2>日本語フォント・ギャラリー</h2>
+          <p> Google Fontsの日本語フォントを一覧で見比べることができます。 下の分類をクリックすると、書体の種類を絞り込めます。 </p>
+          <div class="gallery-tools" aria-label="フォント分類">
+            <button class="filter-btn active" type="button" data-filter="all">すべて</button>
+            <button class="filter-btn" type="button" data-filter="ゴシック">ゴシック</button>
+            <button class="filter-btn" type="button" data-filter="明朝">明朝</button>
+            <button class="filter-btn" type="button" data-filter="丸ゴシック">丸ゴシック</button>
+            <button class="filter-btn" type="button" data-filter="手書き">手書き・筆文字</button>
+            <button class="filter-btn" type="button" data-filter="デザイン">デザイン・ポップ</button>
+          </div>
+          <div class="font-gallery">
+            <a href="https://fonts.google.com/noto/specimen/Noto+Sans+JP?query=Noto+Sans+Japanese">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Noto Sans Japanese</h3>
+                <p class="gallery-sample" style="font-family: &quot;Noto Sans JP&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Noto Sans JP";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/noto/specimen/Noto+Serif+JP?query=Noto+Serif+Japanese">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Noto Serif Japanese</h3>
+                <p class="gallery-sample" style="font-family: &quot;Noto Serif JP&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Noto Serif JP";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/BIZ+UDPGothic?query=BIZ+UDPGothic">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">BIZ UDPGothic</h3>
+                <p class="gallery-sample" style="font-family: &quot;BIZ UDPGothic&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "BIZ UDPGothic";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/BIZ+UDGothic?query=BIZ+UDGothic">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">BIZ UDGothic</h3>
+                <p class="gallery-sample" style="font-family: &quot;BIZ UDGothic&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "BIZ UDGothic";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/BIZ+UDMincho?query=BIZ+UDMincho">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">BIZ UDPMincho</h3>
+                <p class="gallery-sample" style="font-family: &quot;BIZ UDPMincho&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "BIZ UDPMincho";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/BIZ+UDMincho?query=BIZ+UDMincho">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">BIZ UDMincho</h3>
+                <p class="gallery-sample" style="font-family: &quot;BIZ UDMincho&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "BIZ UDMincho";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/IBM+Plex+Sans+JP?query=IBM+Plex+Sans+JP">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">IBM Plex Sans JP</h3>
+                <p class="gallery-sample" style="font-family: &quot;IBM Plex Sans JP&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "IBM Plex Sans JP";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/M+PLUS+1?query=M+PLUS+1">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">M PLUS 1</h3>
+                <p class="gallery-sample" style="font-family: &quot;M PLUS 1&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                <div class="gallery-code">font-family: "M PLUS 1";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/M+PLUS+1+Code?query=M+PLUS+1">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">M PLUS 1 Code</h3>
+                <p class="gallery-sample" style="font-family: &quot;M PLUS 1 Code&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "M PLUS 1 Code";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/M+PLUS+1p?query=M+PLUS+1">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">M PLUS 1p</h3>
+                <p class="gallery-sample" style="font-family: &quot;M PLUS 1p&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                <div class="gallery-code">font-family: "M PLUS 1p";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/M+PLUS+2?query=M+PLUS+2">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">M PLUS 2</h3>
+                <p class="gallery-sample" style="font-family: &quot;M PLUS 2&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                <div class="gallery-code">font-family: "M PLUS 2";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/M+PLUS+Rounded+1c?query=M+PLUS+Rounded+1c">
+              <article class="gallery-card" data-category="丸ゴシック">
+                <span class="gallery-category">丸ゴシック</span>
+                <h3 class="gallery-name">M PLUS Rounded 1c</h3>
+                <p class="gallery-sample" style="font-family: &quot;M PLUS Rounded 1c&quot;, sans-serif;">あいうえお　日本語
+                  WebFont</p>
+                <div class="gallery-code">font-family: "M PLUS Rounded 1c";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Murecho?query=Murecho">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Murecho</h3>
+                <p class="gallery-sample" style="font-family: &quot;Murecho&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                <div class="gallery-code">font-family: "Murecho";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Kosugi?query=Kosugi">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Kosugi</h3>
+                <p class="gallery-sample" style="font-family: &quot;Kosugi&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                <div class="gallery-code">font-family: "Kosugi";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Kosugi+Maru?query=Kosugi+Maru">
+              <article class="gallery-card" data-category="丸ゴシック">
+                <span class="gallery-category">丸ゴシック</span>
+                <h3 class="gallery-name">Kosugi Maru</h3>
+                <p class="gallery-sample" style="font-family: &quot;Kosugi Maru&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Kosugi Maru";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Kaku+Gothic+New?query=Zen+Kaku+Gothic+New">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Zen Kaku Gothic New</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Kaku Gothic New&quot;, sans-serif;">あいうえお　日本語
+                  WebFont</p>
+                <div class="gallery-code">font-family: "Zen Kaku Gothic New";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Kaku+Gothic+Antique?query=Zen+Kaku+Gothic+Antique">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Zen Kaku Gothic Antique</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Kaku Gothic Antique&quot;, sans-serif;">
+                  あいうえお　日本語 WebFont </p>
+                <div class="gallery-code">font-family: "Zen Kaku Gothic Antique";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Maru+Gothic?query=Zen+Maru+Gothic">
+              <article class="gallery-card" data-category="丸ゴシック">
+                <span class="gallery-category">丸ゴシック</span>
+                <h3 class="gallery-name">Zen Maru Gothic</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Maru Gothic&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Zen Maru Gothic";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Kurenaido?query=Zen+Kurenaido">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Zen Kurenaido</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Kurenaido&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Zen Kurenaido";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Antique?query=Zen+Antique">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Zen Antique</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Antique&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Zen Antique";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Antique+Soft?query=Zen+Antique+Soft">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Zen Antique Soft</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Antique Soft&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Zen Antique Soft";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Zen+Old+Mincho?query=Zen+Old+Mincho">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Zen Old Mincho</h3>
+                <p class="gallery-sample" style="font-family: &quot;Zen Old Mincho&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Zen Old Mincho";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Sawarabi+Gothic?query=Sawarabi+Gothic">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Sawarabi Gothic</h3>
+                <p class="gallery-sample" style="font-family: &quot;Sawarabi Gothic&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Sawarabi Gothic";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Sawarabi+Mincho?query=Sawarabi+Mincho">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Sawarabi Mincho</h3>
+                <p class="gallery-sample" style="font-family: &quot;Sawarabi Mincho&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Sawarabi Mincho";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Shippori+Antique?query=Shippori+Antique">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Shippori Antique</h3>
+                <p class="gallery-sample" style="font-family: &quot;Shippori Antique&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Shippori Antique";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Shippori+Antique+B1?query=Shippori+Antique+B1">
+              <article class="gallery-card" data-category="ゴシック">
+                <span class="gallery-category">ゴシック</span>
+                <h3 class="gallery-name">Shippori Antique B1</h3>
+                <p class="gallery-sample" style="font-family: &quot;Shippori Antique B1&quot;, sans-serif;">あいうえお　日本語
+                  WebFont</p>
+                <div class="gallery-code">font-family: "Shippori Antique B1";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Shippori+Mincho?query=Shippori+Mincho">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Shippori Mincho</h3>
+                <p class="gallery-sample" style="font-family: &quot;Shippori Mincho&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Shippori Mincho";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Shippori+Mincho+B1?query=Shippori+Mincho+B1">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Shippori Mincho B1</h3>
+                <p class="gallery-sample" style="font-family: &quot;Shippori Mincho B1&quot;, sans-serif;">あいうえお　日本語
+                  WebFont</p>
+                <div class="gallery-code">font-family: "Shippori Mincho B1";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Kaisei+Decol?query=Kaisei+Decol">
+              <article class="gallery-card" data-category="明朝・デザイン">
+                <span class="gallery-category">明朝・デザイン</span>
+                <h3 class="gallery-name">Kaisei Decol</h3>
+                <p class="gallery-sample" style="font-family: &quot;Kaisei Decol&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Kaisei Decol";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Kaisei+HarunoUmi?query=Kaisei+HarunoUmi">
+              <article class="gallery-card" data-category="明朝">
+                <span class="gallery-category">明朝</span>
+                <h3 class="gallery-name">Kaisei HarunoUmi</h3>
+                <p class="gallery-sample" style="font-family: &quot;Kaisei HarunoUmi&quot;, sans-serif;">あいうえお　日本語
+                  WebFont </p>
+                <div class="gallery-code">font-family: "Kaisei HarunoUmi";</div>
+              </article>
+            </a>
+            <a href="https://fonts.google.com/specimen/Kaisei+Opti?query=Kaisei+Opti">
+              <article class="gallery-card" data-category="明朝・デザイン">
+                <span class="gallery-category">明朝・デザイン</span>
+                <h3 class="gallery-name">Kaisei Opti</h3>
+                <p class="gallery-sample" style="font-family: &quot;Kaisei Opti&quot;, sans-serif;">あいうえお　日本語 WebFont
+                </p>
+                <div class="gallery-code">font-family: "Kaisei Opti";</div>
+              </article>
+              <a href="https://fonts.google.com/specimen/Kaisei+Tokumin?query=Kaisei+Tokumin">
+                <article class="gallery-card" data-category="明朝">
+                  <span class="gallery-category">明朝</span>
+                  <h3 class="gallery-name">Kaisei Tokumin</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Kaisei Tokumin&quot;, sans-serif;">あいうえお　日本語
+                    WebFont </p>
+                  <div class="gallery-code">font-family: "Kaisei Tokumin";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Hina+Mincho?query=Hina+Mincho">
+                <article class="gallery-card" data-category="明朝">
+                  <span class="gallery-category">明朝</span>
+                  <h3 class="gallery-name">Hina Mincho</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Hina Mincho&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Hina Mincho";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Kiwi+Maru?query=Kiwi+Maru">
+                <article class="gallery-card" data-category="丸ゴシック">
+                  <span class="gallery-category">丸ゴシック</span>
+                  <h3 class="gallery-name">Kiwi Maru</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Kiwi Maru&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Kiwi Maru";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Klee+One?query=Klee+One">
+                <article class="gallery-card" data-category="手書き">
+                  <span class="gallery-category">手書き</span>
+                  <h3 class="gallery-name">Klee One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Klee One&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                  <div class="gallery-code">font-family: "Klee One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Yomogi?query=Yomogi">
+                <article class="gallery-card" data-category="手書き">
+                  <span class="gallery-category">手書き</span>
+                  <h3 class="gallery-name">Yomogi</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Yomogi&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                  <div class="gallery-code">font-family: "Yomogi";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Yuji+Mai?query=Yuji+Mai">
+                <article class="gallery-card" data-category="筆文字">
+                  <span class="gallery-category">筆文字</span>
+                  <h3 class="gallery-name">Yuji Boku</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Yuji Boku&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Yuji Boku";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Yuji+Syuku?query=Yuji+Syuku">
+                <article class="gallery-card" data-category="筆文字">
+                  <span class="gallery-category">筆文字</span>
+                  <h3 class="gallery-name">Yuji Mai</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Yuji Mai&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                  <div class="gallery-code">font-family: "Yuji Mai";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Yuji+Syuku?query=Yuji+Syuku">
+                <article class="gallery-card" data-category="筆文字">
+                  <span class="gallery-category">筆文字</span>
+                  <h3 class="gallery-name">Yuji Syuku</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Yuji Syuku&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Yuji Syuku";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Yuji+Mai?query=Yuji+Mai">
+                <article class="gallery-card" data-category="明朝・デザイン">
+                  <span class="gallery-category">明朝・デザイン</span>
+                  <h3 class="gallery-name">New Tegomin</h3>
+                  <p class="gallery-sample" style="font-family: &quot;New Tegomin&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "New Tegomin";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Dela+Gothic+One?query=Dela+Gothic+One">
+                <article class="gallery-card" data-category="ゴシック・デザイン">
+                  <span class="gallery-category">ゴシック・デザイン</span>
+                  <h3 class="gallery-name">Dela Gothic One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Dela Gothic One&quot;, sans-serif;">あいうえお　日本語
+                    WebFont </p>
+                  <div class="gallery-code">font-family: "Dela Gothic One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/DotGothic16?query=DotGothic16">
+                <article class="gallery-card" data-category="ゴシック・デザイン">
+                  <span class="gallery-category">ゴシック・デザイン</span>
+                  <h3 class="gallery-name">DotGothic16</h3>
+                  <p class="gallery-sample" style="font-family: &quot;DotGothic16&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "DotGothic16";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Hachi+Maru+Pop?query=Hachi+Maru+Pop">
+                <article class="gallery-card" data-category="手書き・ポップ">
+                  <span class="gallery-category">手書き・ポップ</span>
+                  <h3 class="gallery-name">Hachi Maru Pop</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Hachi Maru Pop&quot;, sans-serif;">あいうえお　日本語
+                    WebFont </p>
+                  <div class="gallery-code">font-family: "Hachi Maru Pop";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Mochiy+Pop+One?query=Mochiy+Pop+One">
+                <article class="gallery-card" data-category="ポップ">
+                  <span class="gallery-category">ポップ</span>
+                  <h3 class="gallery-name">Mochiy Pop One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Mochiy Pop One&quot;, sans-serif;">あいうえお　日本語
+                    WebFont </p>
+                  <div class="gallery-code">font-family: "Mochiy Pop One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Potta+One?query=Potta+One">
+                <article class="gallery-card" data-category="ポップ">
+                  <span class="gallery-category">ポップ</span>
+                  <h3 class="gallery-name">Mochiy Pop P One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Mochiy Pop P One&quot;, sans-serif;">あいうえお　日本語
+                    WebFont </p>
+                  <div class="gallery-code">font-family: "Mochiy Pop P One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Potta+One?query=Potta+One">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">Potta One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Potta One&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Potta One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Rampart+One?query=Rampart+One">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">Rampart One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Rampart One&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Rampart One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Reggae+One?query=Reggae+One">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">Reggae One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Reggae One&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Reggae One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/RocknRoll+One?query=RocknRoll+One">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">RocknRoll One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;RocknRoll One&quot;, sans-serif;">あいうえお　日本語
+                    WebFont </p>
+                  <div class="gallery-code">font-family: "RocknRoll One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Stick?query=Stick">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">Stick</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Stick&quot;, sans-serif;">あいうえお　日本語 WebFont</p>
+                  <div class="gallery-code">font-family: "Stick";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Train+One?query=Train+One">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">Train One</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Train One&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Train One";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/Yusei+Magic?query=Yusei+Magic">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">Yusei Magic</h3>
+                  <p class="gallery-sample" style="font-family: &quot;Yusei Magic&quot;, sans-serif;">あいうえお　日本語 WebFont
+                  </p>
+                  <div class="gallery-code">font-family: "Yusei Magic";</div>
+                </article>
+              </a>
+              <a href="https://fonts.google.com/specimen/WDXL+Lubrifont+JP+N?query=WDXL+Lubrifont+JP+N">
+                <article class="gallery-card" data-category="デザイン">
+                  <span class="gallery-category">デザイン</span>
+                  <h3 class="gallery-name">WDXL Lubrifont JP N</h3>
+                  <p class="gallery-sample" style="font-family: &quot;WDXL Lubrifont JP N&quot;, sans-serif;">あいうえお　日本語
+                    WebFont</p>
+                  <div class="gallery-code">font-family: "WDXL Lubrifont JP N";</div>
+                </article>
+              </a>
+          </div>
+          <p style="margin-top:18px; color:var(--muted); font-size:.86rem;"> ※ フォントの掲載対象は、Google
+            Fontsの日本語フィルタを基準に、現在利用が確認できる日本語フォントを整理したものです。 Google Fontsの提供状況・名称・仕様は変更される場合があります。 </p>
+        </section>
+        <!-- =======================================================
+         ライセンス
+         ======================================================= -->
+        <section id="license" class="license">
+          <div class="panel">
+            <h2>ライセンスと著作権表示</h2>
+            <p> Google Fontsで提供されるフォントはオープンソースライセンスで公開されており、 今回掲載している5書体はいずれも <strong>SIL Open Font License 1.1</strong>
+              です。 実際にフォントを配布・改変する場合は、各フォントに付属するライセンスと 著作権表示を確認してください。 </p>
+            <div class="license-grid">
+              <div class="license-item">
+                <strong>Zen Maru Gothic</strong> Copyright 2021 The Zen Maru Gothic Project Authors
+              </div>
+              <div class="license-item">
+                <strong>Dela Gothic One</strong> Copyright 2020 The Dela Gothic Project Authors
+              </div>
+              <div class="license-item">
+                <strong>Hachi Maru Pop</strong> Copyright 2020 The Hachi Maru Pop Project Authors
+              </div>
+              <div class="license-item">
+                <strong>Rampart One</strong> Copyright 2020 The Rampart Project Authors
+              </div>
+              <div class="license-item">
+                <strong>Stick</strong> Copyright 2020 The Stick Project Authors
+              </div>
+            </div>
+            <p style="margin-bottom:0;">
+              <small> Google Fonts: <a href="https://fonts.google.com/" target="_blank"
+                  rel="noopener">fonts.google.com</a> ／ Google Fonts CSS API: <a
+                  href="https://developers.google.com/fonts/docs/css2" target="_blank" rel="noopener">CSS API</a>
+              </small>
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <div class="container"> Google Fonts Japanese WebFont Sample </div>
+      <small>Copyright © なかしまぁ先生</small>
+    </footer>
+    <script>
+      // サンプル文字サイズを一括変更
+      const slider = document.getElementById("fontSize");
+      const sizeValue = document.getElementById("sizeValue");
+
+      slider.addEventListener("input", () => {
+        const size = slider.value + "px";
+        document.documentElement.style.setProperty("--sample-size", size);
+        sizeValue.textContent = size;
+      });
+
+      // コードコピー
+      document.querySelectorAll(".copy-btn").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const target = document.getElementById(button.dataset.copy);
+          const text = target.textContent;
+
+          try {
+            await navigator.clipboard.writeText(text);
+            const original = button.textContent;
+            button.textContent = "コピーしました！";
+            setTimeout(() => {
+              button.textContent = original;
+            }, 1500);
+          } catch (error) {
+            button.textContent = "コピーできませんでした";
+            setTimeout(() => {
+              button.textContent = "コードをコピー";
+            }, 1500);
+          }
+        });
+      });
+
+      // 日本語フォント・ギャラリーの分類フィルター
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const galleryCards = document.querySelectorAll(".gallery-card");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          button.classList.add("active");
+
+          const filter = button.dataset.filter;
+
+          galleryCards.forEach((card) => {
+            card.hidden = filter !== "all" && !card.dataset.category.includes(filter);
+          });
+        });
+      });
+
+    </script>
+  </body>
+</html>
