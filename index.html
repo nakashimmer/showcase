@@ -17,155 +17,126 @@
 		<meta property="og:description" content="HTML5の見本(マークアップやCSS3、JavaSCriptと各種API)を掲載しています。" />
 		<meta property="og:image" content="image.png" />
 		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				font-size: 16px;
-				font-family: sans-serif;
-				text-decoration: none;
-				color: #333;
+			/* Google Fonts の読み込み */
+			@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+			:root {
+				--primary-color: #2563eb;
+				/* メインカラー：鮮やかなブルー */
+				--primary-hover: #1d4ed8;
+				--bg-color: #f8fafc;
+				/* 背景色：明るいグレー */
+				--card-bg: #ffffff;
+				/* カード背景：白 */
+				--text-main: #0f172a;
+				/* タイトル等 */
+				--text-sub: #475569;
+				/* 説明文 */
+				--border-color: #e2e8f0;
+				--radius: 12px;
+				/* カードの角丸 */
+				--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+				--shadow-hover: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
 			}
 
+			/* 全体ベース設定 */
 			body {
-				background-color: #666;
+				font-family: 'Inter', 'Noto Sans JP', sans-serif;
+				background-color: var(--bg-color);
+				color: var(--text-main);
+				line-height: 1.6;
+				margin: 0;
+				padding: 40px 24px;
 			}
 
-			#wrap {
-				max-width: 800px;
-				margin: 0 auto;
+			/* コンテナ幅制限 */
+			body>* {
+				max-width: 1000px;
+				margin-left: auto;
+				margin-right: auto;
 			}
 
-			header,
-			footer {
+			/* 見出しデザイン */
+			h1 {
+				font-size: 2.25rem;
+				font-weight: 700;
 				text-align: center;
-			}
-
-			footer * {
-				color: white;
-			}
-
-			header h1 {
-				font-size: 2em;
-				line-height: 5em;
-				color: white;
+				margin-bottom: 48px;
+				color: var(--text-main);
+				letter-spacing: -0.02em;
 			}
 
 			h2 {
-				font-size: 1.2em;
-				padding: 0.3em;
-				color: white;
-			}
-
-			main>section {
-				margin-bottom: 30px;
-			}
-
-			section>section {
-				margin-bottom: 0px;
-			}
-
-			ol,
-			ul {
-				list-style: none;
-			}
-
-			ol>li {
-				padding: 0.2em;
-				border: 1px solid #aaa;
-				border-bottom: none;
-				background-color: #fff;
-			}
-
-			ol>li:last-of-type {
-				border-bottom: 1px solid #aaa;
-			}
-
-			/*カウンタ*/
-			main {
-				counter-reset: ctr1;
-			}
-
-			h2:before {
-				counter-increment: ctr1;
-				content: counter(ctr1)". ";
-			}
-
-			h2 {
-				counter-reset: ctr2;
-			}
-
-			h3:before {
-				counter-increment: ctr2;
-				content: counter(ctr1)"-" counter(ctr2)". ";
+				font-size: 1.5rem;
+				font-weight: 700;
+				margin-top: 48px;
+				margin-bottom: 24px;
+				padding-bottom: 8px;
+				border-bottom: 2px solid var(--border-color);
+				color: var(--primary-color);
 			}
 
 			h3 {
-				counter-reset: ctr4;
+				font-size: 1.25rem;
+				font-weight: 600;
+				margin-top: 36px;
+				margin-bottom: 20px;
+				color: var(--text-main);
 			}
 
-			h4:before {
-				counter-increment: ctr4;
-				content: counter(ctr4)". ";
-			}
-
+			/* --------------------------------------------------
+   リストをカード型グリッドに変える重要CSS
+-------------------------------------------------- */
 			ol {
-				counter-reset: ctr4;
+				list-style: none;
+				/* デフォルトの番号を消す */
+				padding: 0;
+				margin: 0 0 32px 0;
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+				/* スマホ〜PCで自動折り返し */
+				gap: 16px;
+				/* カード同士の間隔 */
 			}
 
-			li:before {
-				counter-increment: ctr4;
-				content: counter(ctr4) ". ";
-			}
-
-			main>section>section {
-				background-color: #ccc;
+			/* 1つひとつのカードアイテム */
+			ol li {
+				background-color: var(--card-bg);
+				border: 1px solid var(--border-color);
+				border-radius: var(--radius);
+				padding: 20px;
+				box-shadow: var(--shadow);
+				transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 				display: flex;
-				border-bottom: 1px solid gray;
-				padding: 0.5em;
+				flex-direction: column;
 			}
 
-			main>section>section>h3 {
-				flex: 1;
+			/* ホバー時のカード浮き上がり効果 */
+			ol li:hover {
+				transform: translateY(-4px);
+				box-shadow: var(--shadow-hover);
+				border-color: var(--primary-color);
 			}
 
-			main>section>section>ol {
-				flex: 3;
+			/* カード内のタイトルリンク */
+			ol li a {
+				color: var(--primary-color);
+				text-decoration: none;
+				font-weight: 700;
+				font-size: 1.05rem;
+				margin-bottom: 8px;
+				display: inline-block;
 			}
 
-			.js>h3 {
-				flex: 1;
-			}
-
-			.js>div {
-				flex: 3;
-			}
-
-			ol>li {
-				display: flex;
-			}
-
-			ol>li>a {
-				flex: 1;
-			}
-
-			ol>li>p {
-				flex: 2;
-			}
-
-			a {
+			ol li a:hover {
+				color: var(--primary-hover);
 				text-decoration: underline;
 			}
 
-			@media(max-width:800px) {
-
-				main>section>section,
-				ol>li {
-					display: block;
-				}
-
-				ol>li>p {
-					margin-left: 2em;
-				}
+			/* 説明テキスト */
+			ol li {
+				color: var(--text-sub);
+				font-size: 0.9rem;
 			}
 		</style>
 	</head>
