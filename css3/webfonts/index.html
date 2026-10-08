@@ -123,13 +123,6 @@
         padding: 54px 0 80px;
       }
 
-      .intro {
-        display: grid;
-        grid-template-columns: 1.2fr .8fr;
-        gap: 28px;
-        margin-bottom: 56px;
-      }
-
       .panel {
         padding: 30px;
         border: 1px solid var(--line);
@@ -509,7 +502,7 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .intro .panel {
+        .panel {
           width: calc(100vw - 24px);
         }
       }
@@ -526,7 +519,6 @@
           padding: 48px 0;
         }
 
-        .intro,
         .info,
         .license-grid {
           grid-template-columns: 1fr;
@@ -577,18 +569,18 @@
         <h1>Google Fonts<br>日本語 WebFont サンプル</h1>
         <p class="lead"> Google Fontsで利用できる日本語フォントを、Webページ上で実際に表示しながら紹介します。 フォント名だけでなく、HTML・CSSによる指定方法も確認できます。 </p>
         <nav class="nav" aria-label="ページ内メニュー">
-          <a href="#about">WebFontとは</a>
-          <a href="#samples">厳選フォント</a>
-          <a href="#gallery">フォントギャラリー</a>
-          <a href="#license">ライセンス</a>
+          <a href="#about">1.WebFontとは</a>
+          <a href="#samples">2.厳選フォント</a>
+          <a href="#gallery">3.フォントギャラリー</a>
+          <a href="#license">4.ライセンス</a>
         </nav>
       </div>
     </header>
     <main>
       <div class="container">
-        <section id="about" class="intro">
+        <section id="about">
           <div class="panel">
-            <h2>WebFontとは？</h2>
+            <h2>1.WebFontとは？</h2>
             <p> WebFont（ウェブフォント）は、Webページからフォントを読み込み、 利用者のパソコンやスマートフォンに同じフォントがインストールされていなくても、 指定したフォントで文字を表示できる仕組みです。
             </p>
             <p> Google Fontsでは、HTMLの <code>&lt;link&gt;</code> でCSS APIを読み込み、CSSの <code>font-family</code>
@@ -607,7 +599,7 @@
           </div>
         </section>
         <section id="samples">
-          <h2>なかしまぁ先生の選んだ厳選フォント</h2>
+          <h2>2.なかしまぁ先生の選んだ厳選フォント</h2>
           <div class="toolbar">
             <label for="fontSize"> サンプル文字サイズ <input id="fontSize" type="range" min="28" max="96" value="54">
               <span id="sizeValue">54px</span>
@@ -894,7 +886,7 @@
           </article>
         </section>
         <section id="gallery" class="gallery-intro">
-          <h2>日本語フォント・ギャラリー</h2>
+          <h2>3.日本語フォント・ギャラリー</h2>
           <p> Google Fontsの日本語フォントを一覧で見比べることができます。 下の分類をクリックすると、書体の種類を絞り込めます。 </p>
           <div class="gallery-tools" aria-label="フォント分類">
             <button class="filter-btn active" type="button" data-filter="all">すべて</button>
@@ -1381,7 +1373,7 @@
          ======================================================= -->
         <section id="license" class="license">
           <div class="panel">
-            <h2>ライセンスと著作権表示</h2>
+            <h2>4.ライセンスと著作権表示</h2>
             <p> Google Fontsで提供されるフォントはオープンソースライセンスで公開されており、 今回掲載している5書体はいずれも <strong>SIL Open Font License 1.1</strong>
               です。 実際にフォントを配布・改変する場合は、各フォントに付属するライセンスと 著作権表示を確認してください。 </p>
             <div class="license-grid">
